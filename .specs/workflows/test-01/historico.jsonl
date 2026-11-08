@@ -124,3 +124,15 @@
 {"em":1794150608081,"nivel":"passo","texto":"Verificar ponto de partida","etapa":6,"passo":"partida"}
 {"em":1794150608087,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":6,"passo":"partida"}
 {"em":1794150608091,"nivel":"passo","texto":"Commit da proposta","etapa":6,"passo":"commitProposta"}
+{"em":1794150608443,"nivel":"ok","texto":"839f758 · 5 arquivo(s) · docs(test-01): proposta da etapa 6 · Erros, validação e CORS","etapa":6,"passo":"commitProposta"}
+{"em":1794150608450,"nivel":"ok","texto":"Commit da proposta: ok · 839f758 · 5 arquivo(s)","etapa":6,"passo":"commitProposta"}
+{"em":1794150608454,"nivel":"passo","texto":"Aplicar a spec","etapa":6,"passo":"aplicar"}
+{"em":1794150608458,"nivel":"info","texto":"proposta antecipada da etapa 7 em paralelo","etapa":6,"passo":"aplicar"}
+{"em":1794150693895,"nivel":"ok","texto":"proposta antecipada da etapa 7 pronta","etapa":6,"passo":"aplicar"}
+{"em":1794150917082,"nivel":"ok","texto":"Aplicar a spec: ok · 14/14 tarefas · 2 sessão(ões)","etapa":6,"passo":"aplicar"}
+{"em":1794150917087,"nivel":"passo","texto":"Verificar a mudança","etapa":6,"passo":"verificar"}
+{"em":1794150917097,"nivel":"info","texto":"Verificar a mudança: pulado · sem verificações configuradas","etapa":6,"passo":"verificar"}
+{"em":1794150917103,"nivel":"passo","texto":"Arquivar a spec","etapa":6,"passo":"arquivar"}
+{"em":1794150917111,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\06-erros-validacao-cors → .specs\\workflows\\test-01\\specs\\arquivo\\06-erros-validacao-cors","etapa":6,"passo":"arquivar"}
+{"em":1794150917116,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\06-erros-validacao-cors","etapa":6,"passo":"arquivar"}
+{"em":1794150917122,"nivel":"passo","texto":"Commit da entrega","etapa":6,"passo":"commitEntrega"}

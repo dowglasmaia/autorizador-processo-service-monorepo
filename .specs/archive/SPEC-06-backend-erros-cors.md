@@ -36,4 +36,4 @@ Implementar o kit transversal: `GlobalExceptionHandler` único (RFC 9457 + `code
 - Definition of Done: todos os `code` de `API_CONTRACTS.md` §3 cobertos por teste executado.
 
 ## 6. Resultado
-_Preencher ao concluir._
+Concluída em 2026-11-08. `BusinessRuleException`, `GlobalExceptionHandler` (problem+json com `code`, `timestamp`, `errors[]`) e `CorsConfig` (allowlist por `CORS_ALLOWED_ORIGINS`, `http://localhost:4200` no perfil `local`) entregues. 11 testes `@WebMvcTest` cobrem `VALIDACAO_INVALIDA`, `CORPO_INVALIDO`, `PARAMETRO_INVALIDO`, `ERRO_INTERNO`, negócio 403/404, 404 genérico e preflight CORS (permitido/negado 403). `./mvnw verify`: 48 testes, BUILD SUCCESS (Docker disponível); grep de `printStackTrace|getStackTrace` vazio. Rastro: `.specs/workflows/test-01/specs/06-erros-validacao-cors/`.
