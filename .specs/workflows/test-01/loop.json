@@ -4542,7 +4542,187 @@
           "descricao": "Executa a SPEC-31: roda os golden cases de `tools/parity/` contra a nova API e documenta diferenças aceitas.\nReferências: SPEC-02.\nLimite: divergência inesperada vira correção, não exceção.",
           "spec": "26-paridade-baseline",
           "specPronta": false,
-          "status": "pendente"
+          "status": "entregue",
+          "entregueEm": "2026-11-08T20:05:43.072Z",
+          "iteracao": 26,
+          "duracaoMs": 279001,
+          "custo": 1.1832546000000002,
+          "passos": [
+            {
+              "id": "propor",
+              "situacao": "ok",
+              "duracaoMs": 42766,
+              "custo": 0.2744351,
+              "tentativas": 1,
+              "detalhe": "16 tarefas"
+            },
+            {
+              "id": "partida",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "commitProposta",
+              "situacao": "ok",
+              "duracaoMs": 397,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "d5670b5 · 5 arquivo(s)"
+            },
+            {
+              "id": "aplicar",
+              "situacao": "aviso",
+              "duracaoMs": 235834,
+              "custo": 0.9088195000000001,
+              "tentativas": 1,
+              "detalhe": "recuperado",
+              "recuperacoes": [
+                {
+                  "numero": 1,
+                  "erro": ".specs\\workflows\\test-01\\specs\\26-paridade-baseline/tarefas.md não tem tarefas",
+                  "resolvida": true,
+                  "custo": 0.24116420000000005,
+                  "em": "2026-11-08T20:05:10.634Z",
+                  "causa": "A etapa 26 arquivou a própria spec com `git mv` para `.specs/archive/` durante o \"Aplicar a spec\". A checagem do devkit lê `tarefas.md` na pasta original, que já não existia, e por isso apontou \"não tem tarefas\". Também sobrava a tarefa 5.4 sem marcar.",
+                  "oQueFez": "Devolvi a pasta com `git mv` de `.specs/archive/26-paridade-baseline` para `.specs/workflows/test-01/specs/26-paridade-baseline`. Marquei a 5.4 como `- [x]` e anotei que o arquivamento fica com o passo de arquivar do devkit. Agora há 16 tarefas, todas marcadas. Não mexi no `SPEC-31-paridade-baseline.md`, que continua em `.specs/archive/`. Não rodei a checagem do devkit, só contei as tarefas com `grep`.",
+                  "precisaPessoa": false
+                }
+              ]
+            },
+            {
+              "id": "verificar",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "arquivar",
+              "situacao": "ok",
+              "duracaoMs": 4,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\26-paridade-baseline"
+            },
+            {
+              "id": "commitEntrega",
+              "situacao": "ok",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1
+            }
+          ],
+          "sessoes": [
+            {
+              "rotulo": "propor-26",
+              "passo": "propor",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2744351,
+              "turnos": 7,
+              "duracaoMs": 42748,
+              "inicio": 1794168031581,
+              "fim": 1794168074338,
+              "tokens": {
+                "entrada": 12,
+                "saida": 2448,
+                "cacheCriacao": 56467,
+                "cacheLeitura": 240631
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "antecipar-27",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.23330199999999998,
+              "turnos": 7,
+              "duracaoMs": 67922,
+              "inicio": 1794168074799,
+              "fim": 1794168142731,
+              "tokens": {
+                "entrada": 12,
+                "saida": 4783,
+                "cacheCriacao": 40166,
+                "cacheLeitura": 247840
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-26-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.37985730000000006,
+              "turnos": 16,
+              "duracaoMs": 145020,
+              "inicio": 1794168076127,
+              "fim": 1794168221157,
+              "tokens": {
+                "entrada": 28,
+                "saida": 8969,
+                "cacheCriacao": 53535,
+                "cacheLeitura": 759713
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-26-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.28779800000000005,
+              "turnos": 11,
+              "duracaoMs": 89453,
+              "inicio": 1794168221163,
+              "fim": 1794168310623,
+              "tokens": {
+                "entrada": 22,
+                "saida": 5159,
+                "cacheCriacao": 45154,
+                "cacheLeitura": 555480
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "recuperar-aplicar-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2411642,
+              "turnos": 7,
+              "duracaoMs": 32243,
+              "inicio": 1794168310745,
+              "fim": 1794168342998,
+              "tokens": {
+                "entrada": 12,
+                "saida": 1954,
+                "cacheCriacao": 49681,
+                "cacheLeitura": 228762
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            }
+          ]
         },
         {
           "numero": 27,
@@ -4597,7 +4777,7 @@
     "etapa": 26,
     "inicio": "2026-11-08T20:00:31.563Z",
     "commitInicial": "7ed701b5b9c4e7e998c1622d48a0809a268312d0",
-    "passoAtual": 2,
+    "passoAtual": 6,
     "passos": [
       {
         "id": "propor",
@@ -4617,62 +4797,78 @@
       },
       {
         "id": "commitProposta",
+        "situacao": "ok",
+        "duracaoMs": 397,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "d5670b5 · 5 arquivo(s)"
+      },
+      {
+        "id": "aplicar",
+        "situacao": "aviso",
+        "duracaoMs": 235834,
+        "custo": 0.9088195000000001,
+        "tentativas": 1,
+        "recuperacoes": [
+          {
+            "numero": 1,
+            "erro": ".specs\\workflows\\test-01\\specs\\26-paridade-baseline/tarefas.md não tem tarefas",
+            "resolvida": true,
+            "custo": 0.24116420000000005,
+            "em": "2026-11-08T20:05:10.634Z",
+            "causa": "A etapa 26 arquivou a própria spec com `git mv` para `.specs/archive/` durante o \"Aplicar a spec\". A checagem do devkit lê `tarefas.md` na pasta original, que já não existia, e por isso apontou \"não tem tarefas\". Também sobrava a tarefa 5.4 sem marcar.",
+            "oQueFez": "Devolvi a pasta com `git mv` de `.specs/archive/26-paridade-baseline` para `.specs/workflows/test-01/specs/26-paridade-baseline`. Marquei a 5.4 como `- [x]` e anotei que o arquivamento fica com o passo de arquivar do devkit. Agora há 16 tarefas, todas marcadas. Não mexi no `SPEC-31-paridade-baseline.md`, que continua em `.specs/archive/`. Não rodei a checagem do devkit, só contei as tarefas com `grep`.",
+            "precisaPessoa": false
+          }
+        ],
+        "detalhe": "recuperado"
+      },
+      {
+        "id": "verificar",
+        "situacao": "pulado",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "arquivar",
+        "situacao": "ok",
+        "duracaoMs": 4,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\26-paridade-baseline"
+      },
+      {
+        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
-      },
-      {
-        "id": "aplicar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "verificar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "arquivar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
       }
     ],
     "titulo": "Revisa a spec de paridade com o baseline (SPEC-31) contra a base entregue",
     "comparacao": "A pasta da etapa 26 já tinha proposta.md e tarefas.md (17 tarefas em 5 grupos), escritos antes da etapa 25. Revisei os dois contra o estado atual e mantive o escopo da SPEC-31.\ntools/parity/ (README, cases.json, replay.mjs) existe, mas não há RELATORIO.md. A pasta .specs/06-execution-plan/ continua inexistente.\nA etapa 25 está entregue e arquivada. O Docker 29.9.2 está disponível, mas só existe o binário docker-compose, sem o plugin `docker compose`. Registrei o fallback e a tarefa 1.2 agora confere isso.\nO perfil local é o padrão da API, então a seed (1234, 4567, 6789) já chega pelo Compose. O .env descartável segue o padrão da etapa 25.\nSegue a ressalva da SPEC-31: os casos B01 e B02 já têm DIV no cases.json. A proposta trata isso lendo o aceite pela decisão de negócio, e o job de CI fica para a SPEC-40. Nenhum código da aplicação foi alterado."
   },
   "totais": {
-    "duracaoMs": 19344384,
-    "custo": 50.473644300000004,
+    "duracaoMs": 19580619,
+    "custo": 51.615765800000005,
     "execucoes": 2,
     "iteracoes": 26,
     "entregues": 25,
-    "sessoes": 135,
-    "turnos": 1827,
+    "sessoes": 139,
+    "turnos": 1868,
     "verificacoes": 0,
     "correcoes": 0,
-    "recuperacoes": 6,
-    "recuperacoesResolvidas": 5,
+    "recuperacoes": 7,
+    "recuperacoesResolvidas": 6,
     "falhas": 0,
-    "commits": 50,
+    "commits": 51,
     "tokens": {
-      "entrada": 2786,
-      "saida": 1206708,
-      "cacheCriacao": 7388508,
-      "cacheLeitura": 83950529
+      "entrada": 2860,
+      "saida": 1227573,
+      "cacheCriacao": 7577044,
+      "cacheLeitura": 85742324
     }
   },
   "ultimaExecucao": {

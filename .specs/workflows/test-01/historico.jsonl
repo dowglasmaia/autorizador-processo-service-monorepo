@@ -582,3 +582,18 @@
 {"em":1794168074359,"nivel":"passo","texto":"Verificar ponto de partida","etapa":26,"passo":"partida"}
 {"em":1794168074371,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":26,"passo":"partida"}
 {"em":1794168074377,"nivel":"passo","texto":"Commit da proposta","etapa":26,"passo":"commitProposta"}
+{"em":1794168074774,"nivel":"ok","texto":"d5670b5 · 5 arquivo(s) · docs(test-01): proposta da etapa 26 · Paridade com o baseline","etapa":26,"passo":"commitProposta"}
+{"em":1794168074784,"nivel":"ok","texto":"Commit da proposta: ok · d5670b5 · 5 arquivo(s)","etapa":26,"passo":"commitProposta"}
+{"em":1794168074791,"nivel":"passo","texto":"Aplicar a spec","etapa":26,"passo":"aplicar"}
+{"em":1794168074797,"nivel":"info","texto":"proposta antecipada da etapa 27 em paralelo","etapa":26,"passo":"aplicar"}
+{"em":1794168142739,"nivel":"ok","texto":"proposta antecipada da etapa 27 pronta","etapa":26,"passo":"aplicar"}
+{"em":1794168310630,"nivel":"aviso","texto":"a sessão terminou sem marcar tarefas (1 de 2 continuações)","etapa":26,"passo":"aplicar"}
+{"em":1794168310631,"nivel":"erro","texto":"Aplicar a spec: .specs\\workflows\\test-01\\specs\\26-paridade-baseline/tarefas.md não tem tarefas","etapa":26,"passo":"aplicar"}
+{"em":1794168310633,"nivel":"passo","texto":"Recuperação 1 · Aplicar a spec","etapa":26,"passo":"aplicar"}
+{"em":1794168343015,"nivel":"ok","texto":"recuperação 1 resolveu: A etapa 26 arquivou a própria spec com `git mv` para `.specs/archive/` durante o \"Aplicar a spec\". A checagem do devkit lê `tarefas.md` na pasta original, que já não existia, e por isso apontou \"não tem tarefas\". Também sobrava a tarefa 5.4 sem marcar.","etapa":26,"passo":"aplicar"}
+{"em":1794168343023,"nivel":"passo","texto":"Verificar a mudança","etapa":26,"passo":"verificar"}
+{"em":1794168343035,"nivel":"info","texto":"Verificar a mudança: pulado · sem verificações configuradas","etapa":26,"passo":"verificar"}
+{"em":1794168343042,"nivel":"passo","texto":"Arquivar a spec","etapa":26,"passo":"arquivar"}
+{"em":1794168343052,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\26-paridade-baseline → .specs\\workflows\\test-01\\specs\\arquivo\\26-paridade-baseline","etapa":26,"passo":"arquivar"}
+{"em":1794168343058,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\26-paridade-baseline","etapa":26,"passo":"arquivar"}
+{"em":1794168343066,"nivel":"passo","texto":"Commit da entrega","etapa":26,"passo":"commitEntrega"}

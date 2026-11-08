@@ -12,6 +12,7 @@ Provar que a nova API (`api-autorizador-processo`) preserva o comportamento da v
 - A SPEC-31 cita "nova DIV" e "B01, B02, B04, B09–B11, B15 IDÊNTICO quanto à decisão de negócio", mas no `cases.json` esses casos já têm DIV (ex.: B01 DIV-07, B02 DIV-03). A classificação deve distinguir decisão de negócio idêntica de forma divergente aprovada.
 
 - Etapa 25 entregue: Playwright em `app-autorizador-processo/e2e` sobe o projeto Compose `e2e` com `.env` descartável em `e2e/.tmp` (ignorado pelo git). A máquina só tem o binário `docker-compose` v5.6.1 (sem o plugin `docker compose`); Docker 29.9.2 está disponível. O perfil `local` é o padrão da API, então a seed já chega pelo Compose.
+- **Execução do lote 1:** porta 8080 ocupada por outro projeto na máquina; usada API_PORT=18080 e Postgres 15433 no projeto `paridade` (env em /tmp, fora do repositório). `.specs/06-execution-plan/` não existe (desvio registrado). Resultado: 22/23 OK; B03 falha por caso desatualizado (SPEC-12 exige `nome`/`categoria`), a corrigir na etapa 4. O ambiente `paridade` foi derrubado (`down -v`) ao fim do lote; a etapa 4 deve subi-lo de novo.
 
 ## Escopo
 1. Subir `postgres` e `api` com seed local (projeto Compose descartável, `.env` de teste, segredos fora do git) e rodar `replay.mjs --target v1` autenticado.
@@ -36,3 +37,8 @@ Provar que a nova API (`api-autorizador-processo`) preserva o comportamento da v
 - **Compose:** usar `docker compose` ou, na falta do plugin, `docker-compose`, com as mesmas opções. Porta da API publicada em `API_PORT` (8080).
 - **Ambiente:** projeto Compose próprio (`-p paridade`) com credenciais de teste geradas na hora, no mesmo estilo da etapa 25.
 - **T4 (job de CI)** adiada para a SPEC-40, por ser fora desta etapa no plano.
+
+## Evidência (lote 2)
+- 3.3: `RELATORIO.md` traz reprodução e leitura do aceite. 4.1: B03 completado com `nome`/`categoria` (contrato SPEC-12); `replay.mjs` remove 9997. 4.2: n/a. 4.3: ambiente `paridade` recriado (porta 18080, 8080 ocupada), `23/23 OK`, exit 0. 5.1: dispensado, sem alteração de código da API. 5.2: `down -v`; 0 contêineres e 0 volumes `paridade`. 5.3: README atualizado; job `paridade` fica para a SPEC-40.
+- Observação: segunda execução sem recriar a base dá 18/23 (base suja); a validação oficial exige base nova.
+- Desvios: `.specs/06-execution-plan/` inexistente; `tools/parity/RELATORIO.md` e `cases.json`/`replay.mjs` alterados fora da API.

@@ -110,7 +110,7 @@
         "requisicao": {
           "metodo": "POST",
           "caminho": "/api/v1/procedimentos",
-          "corpo": { "numProcedimento": 9998, "sexos": ["M", "F"], "idades": [18] }
+          "corpo": { "numProcedimento": 9998, "nome": "Procedimento de teste 2", "categoria": "CONSULTAS", "sexos": ["M", "F"], "idades": [18] }
         },
         "resposta": { "status": 201, "estavel": { "numProcedimento": 9998 } }
       },

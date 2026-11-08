@@ -191,7 +191,7 @@ async function main() {
       console.warn(`AVISO: a base não está limpa (esperado só a semente ${base.semente.numeros}; ` +
         `GET ${listagem} -> ${r.status} ${resumir(numeros ?? r.texto)}).`);
       console.warn(v1
-        ? '       Remova os procedimentos de teste (9999, 9998) ou recrie a base.'
+        ? '       Remova os procedimentos de teste (9999, 9998, 9997) ou recrie a base.'
         : '       A original usa H2 em memória e não tem remoção: reinicie o contêiner e rode de novo.');
     }
   } catch (e) {
@@ -218,7 +218,7 @@ async function main() {
 
   // Limpeza própria (v1): remove os números criados pelos casos, ignorando falhas (a rota pode não existir).
   if (v1) {
-    for (const n of [9999, 9998]) {
+    for (const n of [9999, 9998, 9997]) {
       await chamar(args.baseUrl, { metodo: 'DELETE', caminho: `/api/v1/procedimentos/${n}` }, token).catch(() => {});
     }
   }

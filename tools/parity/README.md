@@ -39,7 +39,7 @@ podem vir de `PARITY_EMAIL`/`PARITY_SENHA`. Saída `0` = todos OK; `1` = falha d
 
 Os casos rodam na ordem do campo `ordem`; B06, B07 e B12 ficam por último porque sujam a base.
 Antes de executar, o script confere a semente; se a base não estiver limpa, avisa e sai com `1`
-(na original, reinicie o contêiner). Na v1 ele tenta remover os procedimentos 9999 e 9998 ao final.
+(na original, reinicie o contêiner). Na v1 ele tenta remover os procedimentos 9999, 9998 e 9997 ao final.
 
 ## Política de divergências (DIV)
 
@@ -68,3 +68,15 @@ B07 (DIV-02) · 500      · 500    · OK
 ```
 
 Repetindo sem reiniciar o contêiner: `AVISO: a base não está limpa ...`, B01/B02/B06 em FALHA e saída `1`.
+
+## Uso contra a v1 (`api-autorizador-processo`)
+
+```bash
+# .env descartável (fora do git): API_PORT, POSTGRES_PASSWORD, JWT_SECRET, AUTH_BOOTSTRAP_EMAIL, AUTH_BOOTSTRAP_SENHA
+docker compose -p paridade --env-file <arquivo.env> up -d --build --wait postgres api   # ou docker-compose
+node tools/parity/replay.mjs --target v1 --base-url http://localhost:<API_PORT> --email <e> --senha <s>
+docker compose -p paridade --env-file <arquivo.env> down -v
+```
+
+Sempre rode em base recém-criada (o perfil `local` traz a seed 1234, 4567, 6789). O resultado da SPEC-31 está em `RELATORIO.md`.
+O job `paridade` do pipeline de CI **fica para a SPEC-40**; aqui só o comando acima está documentado.
