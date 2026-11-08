@@ -159,6 +159,17 @@ class ArchitectureTest {
                     BASE + ".autorizacao.infrastructure..", BASE + ".procedimento.api..",
                     BASE + ".procedimento.infrastructure..");
 
+    /** SPEC-09: painel é módulo de leitura (sem domínio próprio); a aplicação não toca persistência, gerados nem adaptadores. */
+    @ArchTest
+    static final ArchRule painel_application_sem_infraestrutura_nem_api = noClasses()
+            .that().resideInAPackage(BASE + ".painel.application..")
+            .should().dependOnClassesThat().resideInAnyPackage(
+                    "jakarta.persistence..", "org.hibernate..", "org.springframework.jdbc..",
+                    "org.springframework.data..", BASE + ".generated..", BASE + ".painel.api..",
+                    BASE + ".painel.infrastructure..", BASE + ".autorizacao.infrastructure..",
+                    BASE + ".autorizacao.api..", BASE + ".procedimento.infrastructure..",
+                    BASE + ".procedimento.api..");
+
     /** Regra 8: controllers sem Repository e sem entidade/domínio. */
     @ArchTest
     static final ArchRule controllers_sem_repository = noClasses()
