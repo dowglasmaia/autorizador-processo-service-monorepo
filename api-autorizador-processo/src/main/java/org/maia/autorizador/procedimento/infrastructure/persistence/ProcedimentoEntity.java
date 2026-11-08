@@ -82,14 +82,14 @@ class ProcedimentoEntity {
     @CollectionTable(name = "procedimento_sexo", joinColumns = @JoinColumn(name = "procedimento_id"))
     @Column(name = "sexo", nullable = false, length = 1)
     @Enumerated(EnumType.STRING)
-    @BatchSize(size = 50)
+    @BatchSize(size = 200)
     private Set<Sexo> sexos = new HashSet<>();
 
     @ElementCollection
     @CollectionTable(name = "procedimento_idade", joinColumns = @JoinColumn(name = "procedimento_id"))
     @Column(name = "idade", nullable = false)
     @JdbcTypeCode(SqlTypes.SMALLINT)
-    @BatchSize(size = 50)
+    @BatchSize(size = 200)
     private Set<Integer> idades = new HashSet<>();
 
     protected ProcedimentoEntity() {

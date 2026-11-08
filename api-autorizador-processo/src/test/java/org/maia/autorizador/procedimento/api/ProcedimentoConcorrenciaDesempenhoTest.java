@@ -99,10 +99,32 @@ class ProcedimentoConcorrenciaDesempenhoTest extends IntegrationTestBase {
         }
     }
 
+    /** Regressão da etapa 30: com @BatchSize(200) a contagem não cresce nem na página máxima (200 itens). */
+    @Test
+    void listagemNaPaginaMaximaMantemAMesmaContagemDeSql() throws Exception {
+        Statistics estatisticas = emf.unwrap(SessionFactory.class).getStatistics();
+        estatisticas.setStatisticsEnabled(true);
+        try {
+            var jdbc = new org.springframework.jdbc.core.JdbcTemplate(dataSource);
+            jdbc.update("insert into procedimento (numero_procedimento) select g from generate_series(20000, 20249) g");
+            jdbc.update("insert into procedimento_sexo (procedimento_id, sexo) select id, 'M' from procedimento where numero_procedimento >= 20000");
+            jdbc.update("insert into procedimento_idade (procedimento_id, idade) select id, 10 from procedimento where numero_procedimento >= 20000");
+            long comPaginaCheia = sqlDaListagem(estatisticas, 200);
+            // página + count + sexos + idades (em lote); sem N+1 mesmo na página máxima
+            assertThat(comPaginaCheia).as("sem N+1 na página de 200 itens").isEqualTo(4);
+        } finally {
+            estatisticas.setStatisticsEnabled(false);
+        }
+    }
+
     private long sqlDaListagem(Statistics estatisticas) throws Exception {
+        return sqlDaListagem(estatisticas, 50);
+    }
+
+    private long sqlDaListagem(Statistics estatisticas, int tamanho) throws Exception {
         estatisticas.clear();
         mvc.perform(get(BASE).header(HttpHeaders.AUTHORIZATION, JwtTestSupport.cabecalhoBearer(1L, "t@ex.com"))
-                .param("size", "50")).andExpect(status().isOk());
+                .param("size", String.valueOf(tamanho))).andExpect(status().isOk());
         return estatisticas.getPrepareStatementCount();
     }
 }

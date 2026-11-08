@@ -5224,7 +5224,175 @@
           "descricao": "Executa a SPEC-42: smoke de desempenho e dimensionamento básico no ambiente do Compose.\nReferências: `NON_FUNCTIONAL_REQUIREMENTS.md`.\nLimite: sem testes de carga pesados.",
           "spec": "30-smoke-desempenho",
           "specPronta": false,
-          "status": "pendente"
+          "status": "entregue",
+          "entregueEm": "2026-11-08T21:06:12.842Z",
+          "iteracao": 30,
+          "duracaoMs": 1232027,
+          "custo": 1.6331790999999998,
+          "passos": [
+            {
+              "id": "propor",
+              "situacao": "ok",
+              "duracaoMs": 48988,
+              "custo": 0.23378229999999997,
+              "tentativas": 1,
+              "detalhe": "18 tarefas"
+            },
+            {
+              "id": "partida",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "commitProposta",
+              "situacao": "ok",
+              "duracaoMs": 632,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "fafb1e1 · 5 arquivo(s)"
+            },
+            {
+              "id": "aplicar",
+              "situacao": "ok",
+              "duracaoMs": 1182404,
+              "custo": 1.3993967999999999,
+              "tentativas": 1,
+              "detalhe": "18/18 tarefas · 3 sessão(ões)"
+            },
+            {
+              "id": "verificar",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "arquivar",
+              "situacao": "ok",
+              "duracaoMs": 3,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\30-smoke-desempenho"
+            },
+            {
+              "id": "commitEntrega",
+              "situacao": "ok",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1
+            }
+          ],
+          "sessoes": [
+            {
+              "rotulo": "propor-30",
+              "passo": "propor",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.23378229999999997,
+              "turnos": 8,
+              "duracaoMs": 48969,
+              "inicio": 1794170740691,
+              "fim": 1794170789670,
+              "tokens": {
+                "entrada": 14,
+                "saida": 3151,
+                "cacheCriacao": 42700,
+                "cacheLeitura": 314443
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "antecipar-31",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.23139929999999997,
+              "turnos": 6,
+              "duracaoMs": 56656,
+              "inicio": 1794170790376,
+              "fim": 1794170847042,
+              "tokens": {
+                "entrada": 8,
+                "saida": 5128,
+                "cacheCriacao": 41199,
+                "cacheLeitura": 153073
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-30-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.4400217,
+              "turnos": 18,
+              "duracaoMs": 469022,
+              "inicio": 1794170791725,
+              "fim": 1794171260756,
+              "tokens": {
+                "entrada": 26,
+                "saida": 13652,
+                "cacheCriacao": 57223,
+                "cacheLeitura": 745577
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-30-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.7251227,
+              "turnos": 24,
+              "duracaoMs": 542278,
+              "inicio": 1794171260763,
+              "fim": 1794171803050,
+              "tokens": {
+                "entrada": 48,
+                "saida": 22194,
+                "cacheCriacao": 82455,
+                "cacheLeitura": 1732667
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-30-3",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.23425240000000003,
+              "turnos": 11,
+              "duracaoMs": 169703,
+              "inicio": 1794171803057,
+              "fim": 1794171972770,
+              "tokens": {
+                "entrada": 18,
+                "saida": 2923,
+                "cacheCriacao": 40927,
+                "cacheLeitura": 412784
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            }
+          ]
         },
         {
           "numero": 31,
@@ -5243,7 +5411,7 @@
     "etapa": 30,
     "inicio": "2026-11-08T20:45:40.669Z",
     "commitInicial": "c98a1c7e1ade2ca511c6fd03c9357fa8ea2cfee0",
-    "passoAtual": 2,
+    "passoAtual": 6,
     "passos": [
       {
         "id": "propor",
@@ -5263,62 +5431,66 @@
       },
       {
         "id": "commitProposta",
+        "situacao": "ok",
+        "duracaoMs": 632,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "fafb1e1 · 5 arquivo(s)"
+      },
+      {
+        "id": "aplicar",
+        "situacao": "ok",
+        "duracaoMs": 1182404,
+        "custo": 1.3993967999999999,
+        "tentativas": 1,
+        "detalhe": "18/18 tarefas · 3 sessão(ões)"
+      },
+      {
+        "id": "verificar",
+        "situacao": "pulado",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "arquivar",
+        "situacao": "ok",
+        "duracaoMs": 3,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\30-smoke-desempenho"
+      },
+      {
+        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
-      },
-      {
-        "id": "aplicar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "verificar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "arquivar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
       }
     ],
     "titulo": "Revisa a spec de smoke de desempenho (SPEC-42) contra a base entregue",
     "comparacao": "A pasta já tinha proposta.md e tarefas.md antecipados, com 18 tarefas em 7 grupos. Revisei os dois contra o código atual em vez de recriar.\nA etapa 29 já está entregue (SPEC-41 arquivada). Confirmei o limitador de login em memória (5 falhas em 15 min), o `limit_req` do login no Nginx, o `client_max_body_size` e o gzip. A carga precisa evitar esses limites: faz um único login e reutiliza o token.\n`tools/security/sondagem.sh` já existe e sobe um Compose descartável com limpeza em `trap`. Passei a usar esse padrão em `tools/perf/` e registrei a decisão como [REVISAR]. `tools/perf/` ainda não existe.\nConfirmei que as migrations vão até a V4, que `DATABASE_DESIGN.md` está em `.specs/01-architecture/` e que `PERFORMANCE_REPORT.md` não existe. `.specs/06-execution-plan/` continua inexistente, desvio já registrado. Não alterei código da aplicação."
   },
   "totais": {
-    "duracaoMs": 22026297,
-    "custo": 57.8093066,
+    "duracaoMs": 23209336,
+    "custo": 59.440102700000004,
     "execucoes": 2,
     "iteracoes": 30,
     "entregues": 29,
-    "sessoes": 153,
-    "turnos": 2074,
+    "sessoes": 157,
+    "turnos": 2133,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 7,
     "recuperacoesResolvidas": 6,
     "falhas": 0,
-    "commits": 58,
+    "commits": 59,
     "tokens": {
-      "entrada": 3218,
-      "saida": 1394237,
-      "cacheCriacao": 8401460,
-      "cacheLeitura": 98027532
+      "entrada": 3318,
+      "saida": 1438134,
+      "cacheCriacao": 8623264,
+      "cacheLeitura": 101071633
     }
   },
   "ultimaExecucao": {

@@ -68,7 +68,7 @@ o Objetivo e ter todas as specs executadas sem invervenção humana e com o refe
 27. **Desvio de contrato** · `27-contract-drift-check` · ✔ 88af7fa — Executa a SPEC-32: verificação de que os tipos regenerados são idênticos aos versionados e de que as respostas reais respeitam o contrato. Referências: SPEC-05 e SPEC-16. Limite: sem mudar o contrato.
 28. **CI por projeto** · `28-ci-por-projeto` · ✔ 1d9043f — Executa a SPEC-40: `backend-ci.yml`, `frontend-ci.yml` e `integracao-ci.yml`, cada um disparado só por mudança no próprio caminho. Referências: `.github/workflows`. Limite: sem deploy.
 29. **Segurança e hardening** · `29-seguranca-hardening` · ✔ c98a1c7 — Executa a SPEC-41: revisão de segurança, cabeçalhos, segredos, limites de requisição e dependências. Referências: `SECURITY_REQUIREMENTS.md`. Limite: correções dentro do escopo da spec.
-30. **Smoke de desempenho** · `30-smoke-desempenho` · · — Executa a SPEC-42: smoke de desempenho e dimensionamento básico no ambiente do Compose. Referências: `NON_FUNCTIONAL_REQUIREMENTS.md`. Limite: sem testes de carga pesados.
+30. **Smoke de desempenho** · `30-smoke-desempenho` · ✔ — Executa a SPEC-42: smoke de desempenho e dimensionamento básico no ambiente do Compose. Referências: `NON_FUNCTIONAL_REQUIREMENTS.md`. Limite: sem testes de carga pesados.
 31. **Finalização e aceite** · `31-finalizacao-documentacao` · · — Executa a SPEC-43: README do monorepo, documentação final, conferência dos critérios de aceite globais e arquivamento de todas as specs. Referências: `.specs/INDEX.md`. Limite: sem código novo de negócio.
 
 ## Fora do escopo

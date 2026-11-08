@@ -673,3 +673,15 @@
 {"em":1794170789690,"nivel":"passo","texto":"Verificar ponto de partida","etapa":30,"passo":"partida"}
 {"em":1794170789704,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":30,"passo":"partida"}
 {"em":1794170789712,"nivel":"passo","texto":"Commit da proposta","etapa":30,"passo":"commitProposta"}
+{"em":1794170790345,"nivel":"ok","texto":"fafb1e1 · 5 arquivo(s) · docs(test-01): proposta da etapa 30 · Smoke de desempenho","etapa":30,"passo":"commitProposta"}
+{"em":1794170790357,"nivel":"ok","texto":"Commit da proposta: ok · fafb1e1 · 5 arquivo(s)","etapa":30,"passo":"commitProposta"}
+{"em":1794170790365,"nivel":"passo","texto":"Aplicar a spec","etapa":30,"passo":"aplicar"}
+{"em":1794170790373,"nivel":"info","texto":"proposta antecipada da etapa 31 em paralelo","etapa":30,"passo":"aplicar"}
+{"em":1794170847051,"nivel":"aviso","texto":"proposta antecipada da etapa 31 descartada: a proposta antecipada terminou incompleta","etapa":30,"passo":"aplicar"}
+{"em":1794171972783,"nivel":"ok","texto":"Aplicar a spec: ok · 18/18 tarefas · 3 sessão(ões)","etapa":30,"passo":"aplicar"}
+{"em":1794171972791,"nivel":"passo","texto":"Verificar a mudança","etapa":30,"passo":"verificar"}
+{"em":1794171972803,"nivel":"info","texto":"Verificar a mudança: pulado · sem verificações configuradas","etapa":30,"passo":"verificar"}
+{"em":1794171972810,"nivel":"passo","texto":"Arquivar a spec","etapa":30,"passo":"arquivar"}
+{"em":1794171972820,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\30-smoke-desempenho → .specs\\workflows\\test-01\\specs\\arquivo\\30-smoke-desempenho","etapa":30,"passo":"arquivar"}
+{"em":1794171972827,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\30-smoke-desempenho","etapa":30,"passo":"arquivar"}
+{"em":1794171972835,"nivel":"passo","texto":"Commit da entrega","etapa":30,"passo":"commitEntrega"}

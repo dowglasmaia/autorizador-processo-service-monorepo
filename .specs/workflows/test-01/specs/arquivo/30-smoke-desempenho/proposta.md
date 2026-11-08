@@ -40,3 +40,32 @@ Etapa 30 de 31 · Fase 4 · derivada da `SPEC-42` (`.specs/05-quality/SPEC-42-pe
 - **Dados sintéticos por SQL (`generate_series`) via `docker compose exec postgres psql`**, e não pela API, para não acionar o limitador de login; `POST /autorizacoes` é medido pela API. **[REVISAR]**
 - Metas só são alteradas se a medição justificar, com o ajuste registrado no relatório e em `NON_FUNCTIONAL_REQUIREMENTS.md`.
 - Desvio registrado: pasta `.specs/06-execution-plan/` inexistente.
+
+## Evidência do lote 1 (tarefas 1.1 a 3.3)
+- **Desvio:** `.specs/06-execution-plan/` não existe; usados `.specs/05-quality/` (SPEC-42, NFR) e `.specs/01-architecture/DATABASE_DESIGN.md` (§3).
+- **Etapa 29 conferida:** `app-autorizador-processo/nginx/limites.conf.template`, `limit_req` só em `/auth/login` e `LimitadorTentativasAdapter`. A carga faz **1 login** e fala direto com a API (porta 18091), sem Nginx. Docker 29.9.2 disponível.
+- **Criado:** `tools/perf/` (`perf.sh`, `dados.sql`, `carga.mjs`, `README.md`). Compose descartável `smoke-desempenho` (portas 18091/15441, perfil `prod`, segredos aleatórios), `down -v` em `trap`; confirmado 0 contêineres restantes.
+- **Dados (2.1/2.2):** `generate_series`; contagens 1000 | 10000 e idem após reexecução (idempotente).
+- **Baseline (3.2)** — 20 conexões, 60 s, 5 s de aquecimento, sem erros; máquina 16 CPU / 12 GB no Docker, gerador de carga e API na mesma máquina; páginas de 20 itens, banco e API em contêineres:
+
+| Endpoint | req | rps | p50 | p95 | p99 |
+|---|---|---|---|---|---|
+| GET /procedimentos | 44866 | 747,6 | 23,8 ms | 48,3 ms | 69,5 ms |
+| GET /autorizacoes | 33831 | 563,6 | 34,1 ms | 54,1 ms | 69,0 ms |
+| GET /painel/resumo | 31228 | 520,2 | 37,1 ms | 54,7 ms | 68,5 ms |
+| POST /autorizacoes | 36027 | 600,3 | 31,8 ms | 48,2 ms | 64,2 ms |
+
+- **Comparação com NFR-02 (3.3):** p95 ≤ 200 ms **passa** em `GET /procedimentos` (48,3 ms) e `POST /autorizacoes` (48,2 ms); os demais também ficam abaixo. Taxa de erro 0 %. O POST roda por último e acrescenta ~36 mil linhas ao final, sem afetar as leituras já medidas.
+- **Decisão [REVISAR]:** o `POST` retorna 201 mesmo quando a autorização é negada (`permitido=false`), por isso a taxa de erro conta só status ≠ 201.
+
+## Evidência do lote 2 (tarefas 4.1 a 7.1)
+- **4.1/6.x (NFR-03):** o modo `perf.sh consultas` conta SQL pelo log do PostgreSQL. Antes, `GET /procedimentos` ia de 4 a 12 SQL (size 5→200) e `GET /autorizacoes` de 5 a 11, por causa de `@BatchSize(50)` nas coleções `sexos`/`idades`. Ajuste: `@BatchSize(200)` (= tamanho máximo de página); depois, 4 e 5 constantes. Teste de regressão novo em `ProcedimentoConcorrenciaDesempenhoTest`; os testes de desempenho de listagem passam.
+- **4.2:** `EXPLAIN (ANALYZE, BUFFERS)` das listas e do painel registrados no relatório; todas < 3 ms, nenhum índice (sem V5).
+- **5.1:** bundle inicial 542,5 kB bruto / 131,3 kB gzip (meta 250 kB). **5.2:** Lighthouse 13.6.0 via `npx` + Chrome local contra o Nginx do Compose (`perf.sh web`): LCP 0,6–0,7 s.
+- **7.1:** `.specs/05-quality/PERFORMANCE_REPORT.md` escrito; metas do `NON_FUNCTIONAL_REQUIREMENTS.md` mantidas.
+- Nenhum contêiner restante (`docker ps -a --filter name=smoke-desempenho` = 0).
+
+### Decisões adicionais do lote 2
+- Contagem de SQL pelo log do Postgres (`log_statement=all`, só no Compose descartável) em vez de `pg_stat_statements`, que exigiria alterar o `compose.yaml`. **[REVISAR]**
+- `@BatchSize` 50→200 tratado como "menor ajuste" para NFR-03, pois a contagem não era constante acima de 50 itens, mesmo sem falha de latência. **[REVISAR]**
+- LCP medido só em `/login` (rota sem sessão). **[REVISAR]**
