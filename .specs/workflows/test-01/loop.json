@@ -1358,7 +1358,175 @@
           "descricao": "Executa a SPEC-07: módulo `procedimento` em Hexagonal Pragmática, com paridade com a versão original.\nReferências: skill `java-spring-create-module` e golden cases.\nLimite: sem o catálogo estendido.",
           "spec": "08-modulo-procedimento",
           "specPronta": false,
-          "status": "pendente"
+          "status": "entregue",
+          "entregueEm": "2026-11-08T16:01:35.250Z",
+          "iteracao": 8,
+          "duracaoMs": 1275765,
+          "custo": 2.6624208,
+          "passos": [
+            {
+              "id": "propor",
+              "situacao": "ok",
+              "duracaoMs": 50148,
+              "custo": 0.2375142,
+              "tentativas": 1,
+              "detalhe": "22 tarefas"
+            },
+            {
+              "id": "partida",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "commitProposta",
+              "situacao": "ok",
+              "duracaoMs": 428,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "0fd6216 · 5 arquivo(s)"
+            },
+            {
+              "id": "aplicar",
+              "situacao": "ok",
+              "duracaoMs": 1225181,
+              "custo": 2.4249066,
+              "tentativas": 1,
+              "detalhe": "22/22 tarefas · 3 sessão(ões)"
+            },
+            {
+              "id": "verificar",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "arquivar",
+              "situacao": "ok",
+              "duracaoMs": 8,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\08-modulo-procedimento"
+            },
+            {
+              "id": "commitEntrega",
+              "situacao": "ok",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1
+            }
+          ],
+          "sessoes": [
+            {
+              "rotulo": "propor-08",
+              "passo": "propor",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2375142,
+              "turnos": 7,
+              "duracaoMs": 50129,
+              "inicio": 1794152419362,
+              "fim": 1794152469501,
+              "tokens": {
+                "entrada": 12,
+                "saida": 2987,
+                "cacheCriacao": 45146,
+                "cacheLeitura": 270362
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "antecipar-09",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.36407590000000006,
+              "turnos": 10,
+              "duracaoMs": 102262,
+              "inicio": 1794152469988,
+              "fim": 1794152572260,
+              "tokens": {
+                "entrada": 16,
+                "saida": 10434,
+                "cacheCriacao": 54912,
+                "cacheLeitura": 400559
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-08-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.6011835000000001,
+              "turnos": 24,
+              "duracaoMs": 203941,
+              "inicio": 1794152471394,
+              "fim": 1794152675346,
+              "tokens": {
+                "entrada": 32,
+                "saida": 19329,
+                "cacheCriacao": 74842,
+                "cacheLeitura": 1084615
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-08-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 1.2706100999999999,
+              "turnos": 39,
+              "duracaoMs": 499778,
+              "inicio": 1794152675352,
+              "fim": 1794153175139,
+              "tokens": {
+                "entrada": 50,
+                "saida": 45624,
+                "cacheCriacao": 138204,
+                "cacheLeitura": 2614541
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-08-3",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.553113,
+              "turnos": 30,
+              "duracaoMs": 520000,
+              "inicio": 1794153175147,
+              "fim": 1794153695159,
+              "tokens": {
+                "entrada": 52,
+                "saida": 10756,
+                "cacheCriacao": 70972,
+                "cacheLeitura": 1615610
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            }
+          ]
         },
         {
           "numero": 9,
@@ -1585,7 +1753,7 @@
     "etapa": 8,
     "inicio": "2026-11-08T15:40:19.348Z",
     "commitInicial": "786e7aafc4d81374371bb3f635ff9ee982c2cb95",
-    "passoAtual": 2,
+    "passoAtual": 6,
     "passos": [
       {
         "id": "propor",
@@ -1605,62 +1773,66 @@
       },
       {
         "id": "commitProposta",
+        "situacao": "ok",
+        "duracaoMs": 428,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "0fd6216 · 5 arquivo(s)"
+      },
+      {
+        "id": "aplicar",
+        "situacao": "ok",
+        "duracaoMs": 1225181,
+        "custo": 2.4249066,
+        "tentativas": 1,
+        "detalhe": "22/22 tarefas · 3 sessão(ões)"
+      },
+      {
+        "id": "verificar",
+        "situacao": "pulado",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "arquivar",
+        "situacao": "ok",
+        "duracaoMs": 8,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\08-modulo-procedimento"
+      },
+      {
+        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
-      },
-      {
-        "id": "aplicar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "verificar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "arquivar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
       }
     ],
     "titulo": "Propõe a spec do módulo procedimento (cadastro, listagem e consulta com paridade) no back…",
     "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md`, escritos antes da etapa 7. Revisei os dois contra o código atual.\nA etapa 7 entregou o módulo `autenticacao`, o `SecurityConfig`, a migração `V3`, o `401` em `responses.yaml` e o `JwtTestSupport`. A `VarreduraSegurancaTest` já cobrirá as rotas novas. Atualizei o ponto de partida com isso.\nAinda não existe nenhum pacote de feature `procedimento`, e o contrato `procedimento.yaml` está pronto. `tools/parity` existe. `.specs/06-execution-plan/` continua ausente (desvio a registrar).\nAchei um resíduo que o rascunho não previa: `src/test/java/spike/auditoria/SpikeProcedimento` mapeia a tabela `procedimento` com `@Audited`. Duas entidades na mesma tabela conflitariam com a entidade real. Acrescentei o risco, uma decisão e a tarefa 4.3 para removê-lo.\nFicaram 23 tarefas, dentro do limite de 30. O escopo segue sem o catálogo estendido, conforme o plano. Não alterei código da aplicação."
   },
   "totais": {
-    "duracaoMs": 3775560,
-    "custo": 15.3601794,
+    "duracaoMs": 5001177,
+    "custo": 18.1491619,
     "execucoes": 2,
     "iteracoes": 8,
     "entregues": 7,
-    "sessoes": 47,
-    "turnos": 536,
+    "sessoes": 51,
+    "turnos": 639,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 5,
     "recuperacoesResolvidas": 4,
     "falhas": 0,
-    "commits": 14,
+    "commits": 15,
     "tokens": {
-      "entrada": 780,
-      "saida": 345208,
-      "cacheCriacao": 2323422,
-      "cacheLeitura": 21609440
+      "entrada": 930,
+      "saida": 431351,
+      "cacheCriacao": 2662352,
+      "cacheLeitura": 27324765
     }
   },
   "ultimaExecucao": {

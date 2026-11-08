@@ -112,6 +112,15 @@ public class GlobalExceptionHandler {
                 "CORPO_INVALIDO", request, List.of());
     }
 
+    /**
+     * Invariante de domínio ou parâmetro fora do permitido que o contrato não barrou (ex.: {@code sort} inválido):
+     * é entrada inválida do cliente, não falha interna.
+     */
+    @ExceptionHandler(IllegalArgumentException.class)
+    ResponseEntity<ProblemDetail> argumentoInvalido(IllegalArgumentException ex, HttpServletRequest request) {
+        return validacaoInvalida(request, List.of(violacao("requisicao", ex.getMessage())));
+    }
+
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     ResponseEntity<ProblemDetail> parametroComTipoInvalido(MethodArgumentTypeMismatchException ex,
             HttpServletRequest request) {

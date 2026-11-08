@@ -132,6 +132,15 @@ class ArchitectureTest {
                     "org.springframework..", "jakarta.persistence..", "com.fasterxml.jackson..", "tools.jackson..",
                     BASE + ".shared..");
 
+    /** SPEC-08: o domínio de procedimento é Java puro (sem framework, gerados, api nem infraestrutura; só usa shared.error). */
+    @ArchTest
+    static final ArchRule procedimento_domain_sem_framework = noClasses()
+            .that().resideInAPackage(BASE + ".procedimento.domain..")
+            .should().dependOnClassesThat().resideInAnyPackage(
+                    "org.springframework..", "jakarta.persistence..", "com.fasterxml.jackson..", "tools.jackson..",
+                    "org.hibernate..", BASE + ".generated..", BASE + ".procedimento.api..",
+                    BASE + ".procedimento.infrastructure..");
+
     /** Regra 8: controllers sem Repository e sem entidade/domínio. */
     @ArchTest
     static final ArchRule controllers_sem_repository = noClasses()

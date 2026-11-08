@@ -4,6 +4,7 @@ Conjunto de especificações (Spec-Driven Development) para modernizar o **Autor
 
 ## Status do conjunto
 - **SPEC-01 (monorepo): concluída** em 2026-11-08 — tag `v0-original` criada, protótipo em `design/prototype/`, `.gitignore` e `README.md` do monorepo atualizados. Spec arquivada em `archive/01-estrutura-monorepo/`.
+- **SPEC-07 (módulo procedimento): concluída** em 2026-11-08 — `./mvnw verify` verde (138 testes), replay procedimento 8/8, 0 violações de arquitetura. Arquivada em `archive/SPEC-07-modulo-procedimento.md`.
 - SPEC-02 em diante: pendentes. Os projetos `api-autorizador-processo` e `app-autorizador-processo` ainda não existem.
 - Observação: a pasta `06-execution-plan/` citada abaixo não existe; a evidência de execução fica em `tarefas.md` de cada spec.
 

@@ -182,3 +182,15 @@
 {"em":1794152469518,"nivel":"passo","texto":"Verificar ponto de partida","etapa":8,"passo":"partida"}
 {"em":1794152469528,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":8,"passo":"partida"}
 {"em":1794152469533,"nivel":"passo","texto":"Commit da proposta","etapa":8,"passo":"commitProposta"}
+{"em":1794152469962,"nivel":"ok","texto":"0fd6216 · 5 arquivo(s) · docs(test-01): proposta da etapa 8 · Módulo procedimento","etapa":8,"passo":"commitProposta"}
+{"em":1794152469971,"nivel":"ok","texto":"Commit da proposta: ok · 0fd6216 · 5 arquivo(s)","etapa":8,"passo":"commitProposta"}
+{"em":1794152469978,"nivel":"passo","texto":"Aplicar a spec","etapa":8,"passo":"aplicar"}
+{"em":1794152469985,"nivel":"info","texto":"proposta antecipada da etapa 9 em paralelo","etapa":8,"passo":"aplicar"}
+{"em":1794152572266,"nivel":"ok","texto":"proposta antecipada da etapa 9 pronta","etapa":8,"passo":"aplicar"}
+{"em":1794153695171,"nivel":"ok","texto":"Aplicar a spec: ok · 22/22 tarefas · 3 sessão(ões)","etapa":8,"passo":"aplicar"}
+{"em":1794153695184,"nivel":"passo","texto":"Verificar a mudança","etapa":8,"passo":"verificar"}
+{"em":1794153695199,"nivel":"info","texto":"Verificar a mudança: pulado · sem verificações configuradas","etapa":8,"passo":"verificar"}
+{"em":1794153695208,"nivel":"passo","texto":"Arquivar a spec","etapa":8,"passo":"arquivar"}
+{"em":1794153695222,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\08-modulo-procedimento → .specs\\workflows\\test-01\\specs\\arquivo\\08-modulo-procedimento","etapa":8,"passo":"arquivar"}
+{"em":1794153695229,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\08-modulo-procedimento","etapa":8,"passo":"arquivar"}
+{"em":1794153695240,"nivel":"passo","texto":"Commit da entrega","etapa":8,"passo":"commitEntrega"}
