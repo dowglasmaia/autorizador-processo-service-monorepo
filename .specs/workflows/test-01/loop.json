@@ -3647,7 +3647,175 @@
           "descricao": "Executa a SPEC-18: formulário de solicitação com seletor de procedimento e exibição do resultado.\nReferências: SPEC-08 e protótipo.\nLimite: sem histórico.",
           "spec": "21-feature-solicitar-autorizacao",
           "specPronta": false,
-          "status": "pendente"
+          "status": "entregue",
+          "entregueEm": "2026-11-08T18:38:51.082Z",
+          "iteracao": 21,
+          "duracaoMs": 439876,
+          "custo": 1.6732322999999998,
+          "passos": [
+            {
+              "id": "propor",
+              "situacao": "ok",
+              "duracaoMs": 54547,
+              "custo": 0.23695570000000002,
+              "tentativas": 1,
+              "detalhe": "23 tarefas"
+            },
+            {
+              "id": "partida",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "commitProposta",
+              "situacao": "ok",
+              "duracaoMs": 429,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "c676997 · 5 arquivo(s)"
+            },
+            {
+              "id": "aplicar",
+              "situacao": "ok",
+              "duracaoMs": 384896,
+              "custo": 1.4362765999999998,
+              "tentativas": 1,
+              "detalhe": "23/23 tarefas · 3 sessão(ões)"
+            },
+            {
+              "id": "verificar",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "arquivar",
+              "situacao": "ok",
+              "duracaoMs": 4,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\21-feature-solicitar-autorizacao"
+            },
+            {
+              "id": "commitEntrega",
+              "situacao": "ok",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1
+            }
+          ],
+          "sessoes": [
+            {
+              "rotulo": "propor-21",
+              "passo": "propor",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.23695570000000002,
+              "turnos": 9,
+              "duracaoMs": 54532,
+              "inicio": 1794162691106,
+              "fim": 1794162745645,
+              "tokens": {
+                "entrada": 14,
+                "saida": 3052,
+                "cacheCriacao": 43560,
+                "cacheLeitura": 321677
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "antecipar-22",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.24863679999999996,
+              "turnos": 7,
+              "duracaoMs": 64275,
+              "inicio": 1794162746130,
+              "fim": 1794162810415,
+              "tokens": {
+                "entrada": 12,
+                "saida": 4169,
+                "cacheCriacao": 45208,
+                "cacheLeitura": 260908
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-21-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.4816523,
+              "turnos": 27,
+              "duracaoMs": 140884,
+              "inicio": 1794162747903,
+              "fim": 1794162888796,
+              "tokens": {
+                "entrada": 22,
+                "saida": 15465,
+                "cacheCriacao": 65256,
+                "cacheLeitura": 659343
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-21-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.5044300999999999,
+              "turnos": 16,
+              "duracaoMs": 129669,
+              "inicio": 1794162888801,
+              "fim": 1794163018479,
+              "tokens": {
+                "entrada": 26,
+                "saida": 14067,
+                "cacheCriacao": 70367,
+                "cacheLeitura": 822401
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-21-3",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.45019419999999993,
+              "turnos": 20,
+              "duracaoMs": 112523,
+              "inicio": 1794163018486,
+              "fim": 1794163131019,
+              "tokens": {
+                "entrada": 28,
+                "saida": 10781,
+                "cacheCriacao": 64045,
+                "cacheLeitura": 861482
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            }
+          ]
         },
         {
           "numero": 22,
@@ -3752,7 +3920,7 @@
     "etapa": 21,
     "inicio": "2026-11-08T18:31:31.091Z",
     "commitInicial": "e0a76a813fb3a1931fc39194d68fbfc14b137d9c",
-    "passoAtual": 2,
+    "passoAtual": 6,
     "passos": [
       {
         "id": "propor",
@@ -3772,62 +3940,66 @@
       },
       {
         "id": "commitProposta",
+        "situacao": "ok",
+        "duracaoMs": 429,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "c676997 · 5 arquivo(s)"
+      },
+      {
+        "id": "aplicar",
+        "situacao": "ok",
+        "duracaoMs": 384896,
+        "custo": 1.4362765999999998,
+        "tentativas": 1,
+        "detalhe": "23/23 tarefas · 3 sessão(ões)"
+      },
+      {
+        "id": "verificar",
+        "situacao": "pulado",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "arquivar",
+        "situacao": "ok",
+        "duracaoMs": 4,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\21-feature-solicitar-autorizacao"
+      },
+      {
+        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
-      },
-      {
-        "id": "aplicar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "verificar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "arquivar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
       }
     ],
     "titulo": "Revisa a spec da tela solicitar autorização (SPEC-18) contra a base entregue",
     "comparacao": "A pasta da etapa já tinha proposta.md e tarefas.md escritos antecipadamente; revisei os dois contra o código atual e não recriei nada.\nSegundo o código, `SegmentedChoice` já existe em `shared/ui/chip`, então a spec passou a reaproveitá-lo em vez de criar um componente local.\n`ProcedimentosService` (etapa 20) fixa `size=20` e guarda estado da tela de procedimentos, então não serve ao seletor com `size=200`. A feature terá um método de leitura próprio em `autorizacao.service.ts`.\n`features/solicitar` ainda é esqueleto, `core/sessao` não existe e o link `/solicitar?numero=` já sai da tela de procedimentos. `resultadoNegocio()` e os tipos gerados estão prontos.\nAs tarefas continuam em 6 grupos e cerca de 24 itens, dentro do limite de 4 a 30. Os 3 itens `[REVISAR]` ficam na proposta. A pasta `.specs/06-execution-plan/` continua inexistente."
   },
   "totais": {
-    "duracaoMs": 14017172,
-    "custo": 40.8586186,
+    "duracaoMs": 14402501,
+    "custo": 42.543532,
     "execucoes": 2,
     "iteracoes": 21,
     "entregues": 20,
-    "sessoes": 110,
-    "turnos": 1458,
+    "sessoes": 114,
+    "turnos": 1528,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 6,
     "recuperacoesResolvidas": 5,
     "falhas": 0,
-    "commits": 40,
+    "commits": 41,
     "tokens": {
-      "entrada": 2202,
-      "saida": 990184,
-      "cacheCriacao": 5970042,
-      "cacheLeitura": 66202992
+      "entrada": 2290,
+      "saida": 1034666,
+      "cacheCriacao": 6214918,
+      "cacheLeitura": 68807126
     }
   },
   "ultimaExecucao": {

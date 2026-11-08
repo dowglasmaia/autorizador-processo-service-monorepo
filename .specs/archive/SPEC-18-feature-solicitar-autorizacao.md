@@ -40,4 +40,9 @@ Implementar o fluxo central do produto conforme a tela do protótipo: escolher p
 - Definition of Done: operação `solicitarAutorizacao` coberta; negativa tratada como resultado; acessibilidade do resultado verificada.
 
 ## 6. Resultado
-_Preencher ao concluir._
+✅ 2026-11-08 — Concluída na etapa 21 do loop `test-01`.
+- Entregue em `app-autorizador-processo/src/app/features/solicitar/` (rota lazy, `data-access/autorizacao.service.ts`, `formulario-solicitacao.ts`, `pages/solicitar-page.ts`, `doc.md`, testes ao lado), `core/sessao/sessao-solicitacoes.ts` e teste do `SegmentedChoice`.
+- Erros: `PROCEDIMENTO_NAO_ENCONTRADO` (erro no seletor e recarga da lista), `VALIDACAO_INVALIDA` por campo, rede/servidor em modal "Tentar novamente" com formulário preservado.
+- Verificação: `npm run lint`, `npm run build` e `npm test` verdes (161 testes), sem `any`.
+- Desvios: a pasta `.specs/06-execution-plan/` citada no índice não existe (ignorada); execução contra `docker compose` fica para a SPEC-30.
+- Decisões detalhadas: `.specs/workflows/test-01/specs/21-feature-solicitar-autorizacao/proposta.md`.

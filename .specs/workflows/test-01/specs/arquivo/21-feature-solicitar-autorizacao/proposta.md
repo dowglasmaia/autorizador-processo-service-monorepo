@@ -48,3 +48,11 @@ Entregar `/solicitar`: escolher o procedimento, informar idade e sexo, solicitar
 - **Contadores:** apenas signals em memória, perdidos ao recarregar a página, conforme ADR-11.
 - **Execução contra o Compose:** adiada para a SPEC-30; aqui valem testes com `HttpTestingController`. [REVISAR]
 - **Limite de idade 0..150**, alinhado ao backend.
+- **Formulário (lote 1):** `formulario-solicitacao.ts` expõe `criarFormularioSolicitacao()` (FormGroup tipado) e `OPCOES_SEXO`; o `sexo` é `FormControl<string>` (`''` = não escolhido) porque o `SegmentedChoice` trabalha com `string`, e a idade é validada como inteira por validador próprio.
+- **SegmentedChoice:** já tinha `role="group"`, `aria-pressed` e botões nativos (teclado); nenhum ajuste no componente, só o teste `shared/ui/segmented-choice.spec.ts`.
+- **Rota (1.2):** `solicitar.routes.ts` já estava com rota lazy e título corretos desde a etapa 18; mantida sem alteração.
+- **Página (lote 2):** `pages/solicitar-page.ts` reúne formulário, seletor, `?numero=`, Limpar, validações e painel de resultado. O `?numero=` só pré-seleciona se o número existir na lista carregada (lido de `snapshot.queryParamMap`, sem reagir a mudanças posteriores).
+- **Animação:** keyframes `aparecer` e token `--animate-aparecer` em `styles.scss`; a classe usa `motion-reduce:animate-none` (além da regra global de `prefers-reduced-motion`).
+- **Erros do envio:** no lote 2 o `error` apenas libera o botão; `PROCEDIMENTO_NAO_ENCONTRADO`, `VALIDACAO_INVALIDA` e modal de rede ficam para as tarefas 5.x. Testes do componente ficam para 6.1.
+- **Erros (lote 3):** `PROCEDIMENTO_NAO_ENCONTRADO` limpa a seleção, mostra a mensagem do backend no seletor e recarrega a lista; `VALIDACAO_INVALIDA` mapeia `campos` (`numProcedimento`, `idade`, `sexo`) e mostra os demais em mensagem geral; rede/servidor abre o `ErrorDialogService` com "Tentar novamente" que reenvia o formulário preservado. Padrão copiado da tela de cadastro de procedimentos.
+- **Execução contra o Compose:** não realizada (SPEC-30); verificação por `HttpTestingController`. Desvio de `06-execution-plan` registrado na SPEC-18 arquivada.
