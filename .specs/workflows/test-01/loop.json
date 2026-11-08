@@ -1,0 +1,407 @@
+{
+  "formato": 1,
+  "nome": "test-01",
+  "titulo": "Refatoração do backend e criação completa do frontend do Autorizador",
+  "criadoEm": "2026-11-08T14:16:30.455Z",
+  "status": "executando",
+  "origem": "objetivo",
+  "objetivo": "o Objetivo e ter todas as specs executadas sem invervenção humana e com o refectory do backend e a criação do front por compelto.",
+  "config": {
+    "escopo": [],
+    "prefixoCommit": "feat(autorizador)",
+    "verificacoes": [],
+    "regras": "## Fonte de verdade\n- Cada etapa executa **uma spec já escrita** em `.specs/` (a SPEC-NN indicada na descrição). A spec da iteração deve ser derivada dela: mantenha objetivo, escopo, tarefas e critérios de aceitação; apenas divida tarefas se passar de ~30. **Não invente requisitos.**\n- Leitura obrigatória antes de cada etapa: `.specs/INDEX.md`, `.specs/memory/produto.md`, `.specs/memory/contexto-tecnico.md`, `.specs/shared/como-executar.md` e a spec da etapa (com as dependências que ela cita). A pasta `.specs/06-execution-plan/` citada no índice **não existe**; ignore a referência e registre o desvio na evidência.\n- Ao concluir, siga `como-executar.md`: evidência curta por tarefa, resumo e `git mv` da spec para `.specs/archive/`.\n\n## Arquitetura e stack (decisões já tomadas)\n- Monorepo: `api-autorizador-processo/` (Spring Boot 4.1.2, Java 25, Maven Wrapper, PostgreSQL 16, Flyway, Testcontainers, sem H2) e `app-autorizador-processo/` (Angular 21, TypeScript estrito, Tailwind, standalone, zoneless, Signals, Reactive Forms tipados). `compose.yaml` e `.env.example` na raiz.\n- Backend em Hexagonal Pragmática, pacote por funcionalidade (`procedimento`, `autorizacao`, `painel`, `shared`), contrato OpenAPI 3.1 primeiro (`src/main/resources/openapi/`), erros RFC 9457, JWT com e-mail e senha. **ArchUnit é obrigatório** (`ArchitectureTest`).\n- O frontend consome tipos **gerados** do OpenAPI e não duplica DTOs. O design vem do protótipo em `Sistema Autorizador com Dashboard/` (depois movido para `.specs/design/prototype/`) e da SPEC-15.\n- Use as skills do projeto: `java-spring-scaffold`, `java-spring-create-module`, `java-persistence-performance`, `openapi-rest-contract`, `java-modern-engineering`, `angular-frontend-scaffold`, `angular-module-scaffold`, `angular-tailwind-ui-specialist`. A skill de scaffold nunca escreve em diretório existente: gere o projeto novo e depois ajuste.\n- Ambiente: JDK 25.0.2 em `C:\\jdk-25.0.2` (defina `JAVA_HOME` e `PATH`), Node 24, Docker 29, Windows com Git Bash. O contrato OpenAPI continua exigindo aprovação, que neste loop já está dada pelas specs; não altere contrato além do que a spec descreve.\n\n## Convenções\n- **Nenhum nome \"legado/legacy\"** no código do backend (use \"versão original\" apenas em documentação). O código antigo da raiz fica preservado pela tag `v0-original` (SPEC-01) e só é removido depois do baseline (SPEC-03).\n- Dockerfile próprio e CI independente por projeto, disparado só por mudança no próprio caminho (SPEC-10, 13, 40).\n- Segredos nunca versionados; só `.env.example`. Mensagens, textos de UI, commits e documentação em português.\n- Cada etapa deve deixar o repositório compilando e com os testes do que já existe passando. Sem `--no-verify` e sem testes desabilitados para passar.\n- Não há verificações automáticas configuradas no devkit porque os projetos novos ainda não existem. **Cada etapa deve rodar por conta própria** o build, os testes e o lint do(s) projeto(s) que tocar (`./mvnw verify` em `api-autorizador-processo`; `npm run lint`, `npm run build` e `npm test` em `app-autorizador-processo`) e corrigir as falhas antes de concluir.\n- Etapas que dependem de Docker (Testcontainers, Compose, e2e): se o Docker não estiver disponível, registre bloqueio na tarefa afetada, siga com as independentes e não marque como concluída sem executar.",
+    "foraDoEscopo": "- Novas funcionalidades além das specs (papéis/perfis de usuário, multi-tenant, cadastro de usuários, recuperação de senha).\n- Deploy em nuvem, infraestrutura como código e publicação de imagens em registry.\n- Alterar o histórico git ou a tag `v0-original` depois de criada.\n- Reescrever o protótipo HTML (`Sistema Autorizador com Dashboard/`); ele só é movido e consultado como referência de design.\n- Migração de dados reais de produção: a SPEC-50 é condicional e só roda se houver base de origem acessível; caso contrário, registre como não aplicável.\n- Qualquer app mobile.",
+    "antecipar": true,
+    "limites": {},
+    "modelo": "claude-sonnet-5-5",
+    "esforco": "medium"
+  },
+  "fases": [
+    {
+      "nome": "Fase 1 — Fundações do monorepo e do backend",
+      "etapas": [
+        {
+          "numero": 1,
+          "titulo": "Estrutura do monorepo",
+          "assunto": "estrutura-monorepo",
+          "descricao": "Executa a SPEC-01: tag `v0-original`, `.gitignore` raiz, pastas de destino e movimentação do protótipo para `.specs/design/prototype/`.\nReferências: `01-architecture/MONOREPO_STRUCTURE.md`.\nLimite: não gera os projetos ainda e não remove o código antigo.",
+          "spec": "01-estrutura-monorepo",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 2,
+          "titulo": "Baseline golden cases",
+          "assunto": "baseline-golden-cases",
+          "descricao": "Executa a SPEC-02: casos executáveis em `tools/parity/` (cases.json e replay.mjs) obtidos rodando a versão original da tag `v0-original` em contêiner JDK 8.\nReferências: `BASELINE_COMPORTAMENTO_ORIGINAL.md`.\nLimite: sem alterar a API original.",
+          "spec": "02-baseline-golden-cases",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 3,
+          "titulo": "Fundação do backend",
+          "assunto": "fundacao-backend",
+          "descricao": "Executa a SPEC-03: gera `api-autorizador-processo` (Java 25, Spring Boot 4.1.2, Modulith, ArchUnit) e remove o código antigo da raiz depois do baseline.\nReferências: `TARGET_ARCHITECTURE.md` e `DECISIONS.md`.\nLimite: sem regras de negócio.",
+          "spec": "03-fundacao-backend",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 4,
+          "titulo": "Fundação do banco",
+          "assunto": "fundacao-banco",
+          "descricao": "Executa a SPEC-04: PostgreSQL 16, Flyway, migrações iniciais, auditoria e Testcontainers.\nReferências: `DATABASE_DESIGN.md` e a skill `java-persistence-performance`.\nLimite: sem módulos de negócio.",
+          "spec": "04-fundacao-banco",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 5,
+          "titulo": "Contrato OpenAPI v1",
+          "assunto": "contrato-openapi-v1",
+          "descricao": "Executa a SPEC-05: contratos OpenAPI 3.1 por módulo (procedimento, autorizacao, painel) e erros comuns, com geração das interfaces.\nReferências: `API_CONTRACTS.md` e a skill `openapi-rest-contract`.\nLimite: sem implementação dos casos de uso.",
+          "spec": "05-contrato-openapi-v1",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 6,
+          "titulo": "Erros, validação e CORS",
+          "assunto": "erros-validacao-cors",
+          "descricao": "Executa a SPEC-06: tratamento global de erros RFC 9457, validação e CORS.\nReferências: `SECURITY_REQUIREMENTS.md`.\nLimite: não implementa autenticação.",
+          "spec": "06-erros-validacao-cors",
+          "specPronta": false,
+          "status": "pendente"
+        }
+      ]
+    },
+    {
+      "nome": "Fase 2 — Módulos do backend refatorado",
+      "etapas": [
+        {
+          "numero": 7,
+          "titulo": "Autenticação JWT no backend",
+          "assunto": "autenticacao-jwt-backend",
+          "descricao": "Executa a SPEC-22: login por e-mail e senha, emissão e validação de JWT (HS256) e proteção de todas as rotas, exceto login e health.\nReferências: `SECURITY_REQUIREMENTS.md`.\nLimite: sem papéis e sem cadastro de usuários.",
+          "spec": "07-autenticacao-jwt-backend",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 8,
+          "titulo": "Módulo procedimento",
+          "assunto": "modulo-procedimento",
+          "descricao": "Executa a SPEC-07: módulo `procedimento` em Hexagonal Pragmática, com paridade com a versão original.\nReferências: skill `java-spring-create-module` e golden cases.\nLimite: sem o catálogo estendido.",
+          "spec": "08-modulo-procedimento",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 9,
+          "titulo": "Catálogo estendido",
+          "assunto": "catalogo-estendido",
+          "descricao": "Executa a SPEC-12: campos de cadastro do protótipo no procedimento (nova feature NEW-01), com migração e contrato atualizado.\nReferências: o protótipo em `.specs/design/prototype/`.\nLimite: só o módulo procedimento.",
+          "spec": "09-catalogo-estendido",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 10,
+          "titulo": "Módulo autorizacao",
+          "assunto": "modulo-autorizacao",
+          "descricao": "Executa a SPEC-08: solicitar autorização com critérios de idade e sexo e consulta do histórico.\nReferências: `FUNCTIONAL_TRACEABILITY.md`.\nLimite: sem o painel.",
+          "spec": "10-modulo-autorizacao",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 11,
+          "titulo": "Módulo painel",
+          "assunto": "modulo-painel",
+          "descricao": "Executa a SPEC-09: resumo agregado do painel (NEW-02), com consultas eficientes.\nReferências: protótipo e skill `java-persistence-performance`.\nLimite: somente leitura.",
+          "spec": "11-modulo-painel",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 12,
+          "titulo": "Config e observabilidade",
+          "assunto": "config-observabilidade",
+          "descricao": "Executa a SPEC-11: perfis de configuração, health, logs e métricas básicas.\nReferências: `NON_FUNCTIONAL_REQUIREMENTS.md`.\nLimite: sem stack externa de monitoramento.",
+          "spec": "12-config-observabilidade",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 13,
+          "titulo": "Docker Compose do backend",
+          "assunto": "compose-backend",
+          "descricao": "Executa a SPEC-10: Dockerfile da API (`eclipse-temurin:25`) e ajuste do `compose.yaml` e do `.env.example` com PostgreSQL e API.\nReferências: `compose.yaml` já existente.\nLimite: o serviço do frontend é tratado na SPEC-13.",
+          "spec": "13-compose-backend",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 14,
+          "titulo": "Migração de dados condicional",
+          "assunto": "migracao-dados-condicional",
+          "descricao": "Executa a SPEC-50 apenas se houver base de origem acessível; caso contrário, registra como não aplicável com evidência e a arquiva.\nReferências: SPEC-50.\nLimite: nunca versionar dados reais.",
+          "spec": "14-migracao-dados-condicional",
+          "specPronta": false,
+          "status": "pendente"
+        }
+      ]
+    },
+    {
+      "nome": "Fase 3 — Frontend Angular completo",
+      "etapas": [
+        {
+          "numero": 15,
+          "titulo": "Fundação do frontend",
+          "assunto": "fundacao-frontend",
+          "descricao": "Executa a SPEC-14: gera `app-autorizador-processo` (Angular 21, Tailwind, modo estrito, porta fixa) com a skill `angular-frontend-scaffold`.\nReferências: `TARGET_ARCHITECTURE.md`.\nLimite: apenas o shell mínimo.",
+          "spec": "15-fundacao-frontend",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 16,
+          "titulo": "Design system e layout",
+          "assunto": "design-system-layout",
+          "descricao": "Executa a SPEC-15: tokens derivados do protótipo, componentes base e shell de navegação.\nReferências: `design/DESIGN_SYSTEM_DISCOVERY.md` e a skill `angular-tailwind-ui-specialist`.\nLimite: sem telas de negócio.",
+          "spec": "16-design-system-layout",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 17,
+          "titulo": "Núcleo HTTP e tipos",
+          "assunto": "nucleo-http-tipos",
+          "descricao": "Executa a SPEC-16: tipos gerados do OpenAPI, interceptors e mapeamento de erros RFC 9457.\nReferências: contrato em `api-autorizador-processo/src/main/resources/openapi/`.\nLimite: sem DTOs duplicados à mão.",
+          "spec": "17-nucleo-http-tipos",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 18,
+          "titulo": "Login no frontend",
+          "assunto": "login-frontend",
+          "descricao": "Executa a SPEC-23: tela de login, guarda de rotas, armazenamento do token e logout.\nReferências: SPEC-22 e o design system.\nLimite: sem cadastro e sem recuperação de senha.",
+          "spec": "18-login-frontend",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 19,
+          "titulo": "Contêiner Nginx do frontend",
+          "assunto": "container-nginx-frontend",
+          "descricao": "Executa a SPEC-13: Dockerfile do frontend com Nginx, proxy de `/api/` e inclusão do serviço `app` no `compose.yaml`.\nReferências: `compose.yaml`.\nLimite: sem pipeline de CI.",
+          "spec": "19-container-nginx-frontend",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 20,
+          "titulo": "Tela de procedimentos",
+          "assunto": "feature-procedimentos",
+          "descricao": "Executa a SPEC-17: lista e cadastro em 4 etapas, com o catálogo estendido.\nReferências: skill `angular-module-scaffold` e protótipo.\nLimite: sem solicitação de autorização.",
+          "spec": "20-feature-procedimentos",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 21,
+          "titulo": "Tela solicitar autorização",
+          "assunto": "feature-solicitar-autorizacao",
+          "descricao": "Executa a SPEC-18: formulário de solicitação com seletor de procedimento e exibição do resultado.\nReferências: SPEC-08 e protótipo.\nLimite: sem histórico.",
+          "spec": "21-feature-solicitar-autorizacao",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 22,
+          "titulo": "Tela de autorizações",
+          "assunto": "feature-autorizacoes",
+          "descricao": "Executa a SPEC-19: histórico de autorizações com filtros e paginação.\nReferências: SPEC-08 e protótipo.\nLimite: somente leitura.",
+          "spec": "22-feature-autorizacoes",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 23,
+          "titulo": "Tela do painel",
+          "assunto": "feature-painel",
+          "descricao": "Executa a SPEC-20: painel com indicadores e gráficos, usando o resumo do backend e os contadores de sessão.\nReferências: SPEC-09 e protótipo.\nLimite: sem novos endpoints.",
+          "spec": "23-feature-painel",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 24,
+          "titulo": "Microcopy e acessibilidade",
+          "assunto": "microcopy-acessibilidade",
+          "descricao": "Executa a SPEC-21: revisão de textos, estados vazios e de erro, foco, contraste e navegação por teclado (WCAG 2.1 AA).\nReferências: todas as telas.\nLimite: sem novas funcionalidades.",
+          "spec": "24-microcopy-acessibilidade",
+          "specPronta": false,
+          "status": "pendente"
+        }
+      ]
+    },
+    {
+      "nome": "Fase 4 — Integração, qualidade e finalização",
+      "etapas": [
+        {
+          "numero": 25,
+          "titulo": "Testes e2e do ambiente",
+          "assunto": "e2e-ambiente-completo",
+          "descricao": "Executa a SPEC-30: testes ponta a ponta contra o ambiente completo do Compose, cobrindo login e os fluxos principais.\nReferências: `TEST_STRATEGY.md`.\nLimite: sem alterar regras de negócio.",
+          "spec": "25-e2e-ambiente-completo",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 26,
+          "titulo": "Paridade com o baseline",
+          "assunto": "paridade-baseline",
+          "descricao": "Executa a SPEC-31: roda os golden cases de `tools/parity/` contra a nova API e documenta diferenças aceitas.\nReferências: SPEC-02.\nLimite: divergência inesperada vira correção, não exceção.",
+          "spec": "26-paridade-baseline",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 27,
+          "titulo": "Desvio de contrato",
+          "assunto": "contract-drift-check",
+          "descricao": "Executa a SPEC-32: verificação de que os tipos regenerados são idênticos aos versionados e de que as respostas reais respeitam o contrato.\nReferências: SPEC-05 e SPEC-16.\nLimite: sem mudar o contrato.",
+          "spec": "27-contract-drift-check",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 28,
+          "titulo": "CI por projeto",
+          "assunto": "ci-por-projeto",
+          "descricao": "Executa a SPEC-40: `backend-ci.yml`, `frontend-ci.yml` e `integracao-ci.yml`, cada um disparado só por mudança no próprio caminho.\nReferências: `.github/workflows`.\nLimite: sem deploy.",
+          "spec": "28-ci-por-projeto",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 29,
+          "titulo": "Segurança e hardening",
+          "assunto": "seguranca-hardening",
+          "descricao": "Executa a SPEC-41: revisão de segurança, cabeçalhos, segredos, limites de requisição e dependências.\nReferências: `SECURITY_REQUIREMENTS.md`.\nLimite: correções dentro do escopo da spec.",
+          "spec": "29-seguranca-hardening",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 30,
+          "titulo": "Smoke de desempenho",
+          "assunto": "smoke-desempenho",
+          "descricao": "Executa a SPEC-42: smoke de desempenho e dimensionamento básico no ambiente do Compose.\nReferências: `NON_FUNCTIONAL_REQUIREMENTS.md`.\nLimite: sem testes de carga pesados.",
+          "spec": "30-smoke-desempenho",
+          "specPronta": false,
+          "status": "pendente"
+        },
+        {
+          "numero": 31,
+          "titulo": "Finalização e aceite",
+          "assunto": "finalizacao-documentacao",
+          "descricao": "Executa a SPEC-43: README do monorepo, documentação final, conferência dos critérios de aceite globais e arquivamento de todas as specs.\nReferências: `.specs/INDEX.md`.\nLimite: sem código novo de negócio.",
+          "spec": "31-finalizacao-documentacao",
+          "specPronta": false,
+          "status": "pendente"
+        }
+      ]
+    }
+  ],
+  "iteracao": {
+    "numero": 1,
+    "etapa": 1,
+    "inicio": "2026-11-08T14:27:39.484Z",
+    "commitInicial": "71f43a737867e52a8a586063540c63a5c0caa326",
+    "passoAtual": 2,
+    "passos": [
+      {
+        "id": "propor",
+        "situacao": "ok",
+        "duracaoMs": 45847,
+        "custo": 0.29106879999999996,
+        "tentativas": 1,
+        "detalhe": "15 tarefas"
+      },
+      {
+        "id": "partida",
+        "situacao": "pulado",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "commitProposta",
+        "situacao": "rodando",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1
+      },
+      {
+        "id": "aplicar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "verificar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "arquivar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "commitEntrega",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      }
+    ],
+    "titulo": "Propõe a spec de estrutura do monorepo com tag v0-original e protótipo movido",
+    "comparacao": "A pasta da spec estava vazia, então criei `proposta.md` e `tarefas.md` do zero a partir da SPEC-01.\nNenhuma tag existe ainda e o protótipo continua na raiz, não rastreado. O `compose.yaml`, o `.env.example` e `.specs/` também estão não rastreados.\nO `.gitignore` atual cobre `target/`, `dist/` e IDEs, mas não `node_modules/`, `.angular/`, `.env` nem `*.log`. A spec inclui esses itens.\nO README atual é curto (funcionalidades, Swagger, H2 e LinkedIn). A spec o reescreve como README do monorepo e mantém os créditos.\n`.specs/06-execution-plan/` não existe, então a atualização de `STATE.md` da SPEC-01 foi substituída por evidência em `tarefas.md`.\n`.specs/design/` já tem `DESIGN_SYSTEM_DISCOVERY.md`, que deve ser preservado. O git não versiona pastas vazias, então as pastas de destino nascem nas etapas seguintes. Isso está registrado na proposta."
+  },
+  "totais": {
+    "duracaoMs": 45847,
+    "custo": 0.7429762,
+    "execucoes": 1,
+    "iteracoes": 1,
+    "entregues": 0,
+    "sessoes": 2,
+    "turnos": 12,
+    "verificacoes": 0,
+    "correcoes": 0,
+    "recuperacoes": 0,
+    "recuperacoesResolvidas": 0,
+    "falhas": 0,
+    "commits": 0,
+    "tokens": {
+      "entrada": 10,
+      "saida": 4556,
+      "cacheCriacao": 56514,
+      "cacheLeitura": 194328
+    }
+  },
+  "ultimaExecucao": {
+    "inicio": "2026-11-08T14:27:39.396Z"
+  }
+}

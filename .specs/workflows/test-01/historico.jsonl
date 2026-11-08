@@ -1,0 +1,7 @@
+{"em":1794148059401,"nivel":"info","texto":"vigia iniciado (pid 34620) · execução 1"}
+{"em":1794148059489,"nivel":"passo","texto":"Etapa 1 · Estrutura do monorepo (iteração 1)","etapa":1}
+{"em":1794148059490,"nivel":"passo","texto":"Propor a spec","etapa":1,"passo":"propor"}
+{"em":1794148105344,"nivel":"ok","texto":"Propor a spec: ok · 15 tarefas","etapa":1,"passo":"propor"}
+{"em":1794148105348,"nivel":"passo","texto":"Verificar ponto de partida","etapa":1,"passo":"partida"}
+{"em":1794148105355,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":1,"passo":"partida"}
+{"em":1794148105359,"nivel":"passo","texto":"Commit da proposta","etapa":1,"passo":"commitProposta"}
