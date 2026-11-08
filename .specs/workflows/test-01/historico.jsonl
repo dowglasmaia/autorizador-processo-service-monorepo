@@ -483,3 +483,13 @@
 {"em":1794163131064,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\21-feature-solicitar-autorizacao → .specs\\workflows\\test-01\\specs\\arquivo\\21-feature-solicitar-autorizacao","etapa":21,"passo":"arquivar"}
 {"em":1794163131070,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\21-feature-solicitar-autorizacao","etapa":21,"passo":"arquivar"}
 {"em":1794163131077,"nivel":"passo","texto":"Commit da entrega","etapa":21,"passo":"commitEntrega"}
+{"em":1794163131678,"nivel":"ok","texto":"eed534c · 20 arquivo(s) · feat(autorizador): Revisa a spec da tela solicitar autorização (SPEC-…","etapa":21,"passo":"commitEntrega"}
+{"em":1794163131696,"nivel":"ok","texto":"Commit da entrega: ok · eed534c · 20 arquivo(s)","etapa":21,"passo":"commitEntrega"}
+{"em":1794163131705,"nivel":"ok","texto":"Etapa 21 entregue · commit eed534c","etapa":21,"passo":"commitEntrega"}
+{"em":1794163131773,"nivel":"passo","texto":"Etapa 22 · Tela de autorizações (iteração 22)","etapa":22}
+{"em":1794163131775,"nivel":"passo","texto":"Propor a spec","etapa":22,"passo":"propor"}
+{"em":1794163131781,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":22,"passo":"propor"}
+{"em":1794163181180,"nivel":"ok","texto":"Propor a spec: ok · 12 tarefas","etapa":22,"passo":"propor"}
+{"em":1794163181187,"nivel":"passo","texto":"Verificar ponto de partida","etapa":22,"passo":"partida"}
+{"em":1794163181201,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":22,"passo":"partida"}
+{"em":1794163181207,"nivel":"passo","texto":"Commit da proposta","etapa":22,"passo":"commitProposta"}

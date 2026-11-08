@@ -3815,7 +3815,8 @@
               "origem": "provider",
               "esforco": "medium"
             }
-          ]
+          ],
+          "commit": "eed534c"
         },
         {
           "numero": 22,
@@ -3916,90 +3917,86 @@
     }
   ],
   "iteracao": {
-    "numero": 21,
-    "etapa": 21,
-    "inicio": "2026-11-08T18:31:31.091Z",
-    "commitInicial": "e0a76a813fb3a1931fc39194d68fbfc14b137d9c",
-    "passoAtual": 6,
+    "numero": 22,
+    "etapa": 22,
+    "inicio": "2026-11-08T18:38:51.767Z",
+    "commitInicial": "eed534c2e72374f6a1ac96a0e0b952fd94aa6a45",
+    "passoAtual": 2,
     "passos": [
       {
         "id": "propor",
         "situacao": "ok",
-        "duracaoMs": 54547,
-        "custo": 0.23695570000000002,
+        "duracaoMs": 49392,
+        "custo": 0.2531059,
         "tentativas": 1,
-        "detalhe": "23 tarefas"
+        "detalhe": "12 tarefas"
       },
       {
         "id": "partida",
         "situacao": "pulado",
-        "duracaoMs": 0,
+        "duracaoMs": 1,
         "custo": 0,
         "tentativas": 1,
         "detalhe": "sem verificações configuradas"
       },
       {
         "id": "commitProposta",
-        "situacao": "ok",
-        "duracaoMs": 429,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "c676997 · 5 arquivo(s)"
-      },
-      {
-        "id": "aplicar",
-        "situacao": "ok",
-        "duracaoMs": 384896,
-        "custo": 1.4362765999999998,
-        "tentativas": 1,
-        "detalhe": "23/23 tarefas · 3 sessão(ões)"
-      },
-      {
-        "id": "verificar",
-        "situacao": "pulado",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "arquivar",
-        "situacao": "ok",
-        "duracaoMs": 4,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\21-feature-solicitar-autorizacao"
-      },
-      {
-        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
+      },
+      {
+        "id": "aplicar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "verificar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "arquivar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "commitEntrega",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
       }
     ],
-    "titulo": "Revisa a spec da tela solicitar autorização (SPEC-18) contra a base entregue",
-    "comparacao": "A pasta da etapa já tinha proposta.md e tarefas.md escritos antecipadamente; revisei os dois contra o código atual e não recriei nada.\nSegundo o código, `SegmentedChoice` já existe em `shared/ui/chip`, então a spec passou a reaproveitá-lo em vez de criar um componente local.\n`ProcedimentosService` (etapa 20) fixa `size=20` e guarda estado da tela de procedimentos, então não serve ao seletor com `size=200`. A feature terá um método de leitura próprio em `autorizacao.service.ts`.\n`features/solicitar` ainda é esqueleto, `core/sessao` não existe e o link `/solicitar?numero=` já sai da tela de procedimentos. `resultadoNegocio()` e os tipos gerados estão prontos.\nAs tarefas continuam em 6 grupos e cerca de 24 itens, dentro do limite de 4 a 30. Os 3 itens `[REVISAR]` ficam na proposta. A pasta `.specs/06-execution-plan/` continua inexistente."
+    "titulo": "Revisa a spec da tela de autorizações (SPEC-19) contra a base entregue",
+    "comparacao": "A pasta já tinha `proposta.md` e `tarefas.md` antecipados, escritos antes da etapa 21. Revisei os dois contra o código e não recriei nada.\n`features/autorizacoes` continua só com a rota e uma página-esqueleto \"Em construção\". Não há serviço, `doc.md` nem testes.\nA etapa 21 já entregou o link \"Ver autorizações concedidas\" (`routerLink=\"/autorizacoes\"`) em `/solicitar`, então nada muda lá.\nCorrigi uma premissa: a tela de procedimentos não tem controle de paginação (só chama `carregar({ pagina: 0 })`). O controle Anterior/Próxima com `aria-live` será criado nesta etapa (tarefa 3.4) e não reaproveitado.\nOs tipos `AutorizacaoDto` e `PaginaAutorizacoes` já estão em `shared/api`. A spec registra, com [REVISAR], que o plano cita \"filtros\" mas a SPEC-19 e o contrato só trazem `page` e `size`.\nOs arquivos têm 21 tarefas em 4 grupos."
   },
   "totais": {
-    "duracaoMs": 14402501,
-    "custo": 42.543532,
+    "duracaoMs": 14452503,
+    "custo": 42.7966379,
     "execucoes": 2,
-    "iteracoes": 21,
-    "entregues": 20,
-    "sessoes": 114,
-    "turnos": 1528,
+    "iteracoes": 22,
+    "entregues": 21,
+    "sessoes": 115,
+    "turnos": 1537,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 6,
     "recuperacoesResolvidas": 5,
     "falhas": 0,
-    "commits": 41,
+    "commits": 42,
     "tokens": {
-      "entrada": 2290,
-      "saida": 1034666,
-      "cacheCriacao": 6214918,
-      "cacheLeitura": 68807126
+      "entrada": 2306,
+      "saida": 1038090,
+      "cacheCriacao": 6260157,
+      "cacheLeitura": 69185905
     }
   },
   "ultimaExecucao": {

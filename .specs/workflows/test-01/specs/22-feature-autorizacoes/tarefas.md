@@ -1,7 +1,7 @@
 # Tarefas — Tela de autorizações
 
 ## 1. Base do módulo
-- [ ] 1.1 Ler `INDEX.md`, memória, `como-executar.md`, SPEC-19 e o `angular-module-scaffold`; conferir o que a etapa 21 entregou e seguir o molde de `features/procedimentos`.
+- [ ] 1.1 Ler `INDEX.md`, memória, `como-executar.md`, SPEC-19 e o `angular-module-scaffold`; conferir que a etapa 21 já entregou o link em `/solicitar` e seguir o molde de `features/procedimentos`.
 - [ ] 1.2 Ajustar `autorizacoes.routes.ts` (rota lazy e título) e criar `doc.md` do módulo.
 
 ## 2. Dados e regras
@@ -13,7 +13,7 @@
 - [ ] 3.1 Implementar cabeçalho com kicker, nota "negativas não deixam rastro" e botão "Nova solicitação".
 - [ ] 3.2 Implementar tabela `DataTable` com ID, Procedimento (+nome), Regras, Status "Autorizado" e Data (`null` → "—").
 - [ ] 3.3 Implementar estados carregando, erro com nova tentativa e vazio com CTA "Solicitar a primeira".
-- [ ] 3.4 Implementar paginação por teclado com anúncio `aria-live`.
+- [ ] 3.4 Criar o controle de paginação Anterior/Próxima (botões desabilitados nos limites, operável por teclado) com "Página X de Y" em `aria-live`, e ligá-lo ao serviço.
 
 ## 4. Testes e verificação
 - [ ] 4.1 Testar o componente: 2 linhas em ordem, vazio, erro, `criadaEm` nulo e troca de página.
