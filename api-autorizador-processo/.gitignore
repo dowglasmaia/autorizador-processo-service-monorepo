@@ -1,0 +1,10 @@
+target/
+.mvn/wrapper/dists/
+.env
+.env.*
+!.env.example
+.idea/
+.vscode/
+*.iml
+*.log
+.DS_Store

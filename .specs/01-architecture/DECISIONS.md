@@ -27,7 +27,7 @@ Diferencia: **Fato** · **Inferência** · **Decisão** · **Recomendação** ·
 ## 2. Premissas
 | ID | Premissa | Impacto se falsa |
 |---|---|---|
-| PRM-01 | Versões vêm da matriz da skill (2026-10-10); não foram confirmadas na web nesta análise | SPEC-03 T1 reconfirma e ajusta `contexto-tecnico.md` |
+| PRM-01 | Versões vêm da matriz da skill (2026-10-10); não foram confirmadas na web nesta análise | SPEC-03 T1 reconfirma e ajusta `contexto-tecnico.md`. **Reconfirmado na etapa 3 (08/11/2026):** com `spring-boot-starter-parent` 4.1.2 (Spring 7.0.10), Spring Modulith 2.1.1 (BOM da matriz), Maven Wrapper 3.9.16 e OpenAPI Generator 7.26.0 (`useSpringBoot4`/`useJackson3`) o `./mvnw verify` do projeto gerado termina verde em JDK 25.0.2, e ArchUnit detecta Java 25.0.2. Única divergência: matriz da skill traz Boot 4.1.1; o `pom` gerado foi ajustado para 4.1.2 sem rebaixar |
 | PRM-02 | Não há dados de produção a migrar | SPEC-50 passa de condicional a obrigatória |
 | PRM-03 | Captura de tela com "Configurações" é variante antiga; vale o HTML | Nova spec de configurações |
 | PRM-04 | Docker disponível para Testcontainers e Compose | Testes de integração sem alternativa (sem H2) |

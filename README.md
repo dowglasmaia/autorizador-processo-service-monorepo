@@ -2,11 +2,11 @@
 
 Monorepo do **Autorizador de Procedimentos Médicos**: cadastro de procedimentos, solicitação e consulta de autorizações (com critérios de idade e sexo do paciente) e painel com indicadores.
 
-> 🚧 **Em construção.** O repositório está sendo modernizado por etapas, seguindo as especificações em [`.specs/`](.specs/INDEX.md). Os projetos novos (`api-autorizador-processo` e `app-autorizador-processo`) ainda não existem; o que está marcado como "em construção" abaixo nasce nas próximas etapas.
+> 🚧 **Em construção.** O repositório está sendo modernizado por etapas, seguindo as especificações em [`.specs/`](.specs/INDEX.md). O backend (`api-autorizador-processo`) já tem a fundação pronta (esqueleto, ArchUnit e Modulith); o frontend (`app-autorizador-processo`) ainda não existe. O que está marcado como "em construção" abaixo nasce nas próximas etapas.
 
 ## Visão
 
-- **Backend** (`api-autorizador-processo`): Spring Boot 4.1.2, Java 25, Maven Wrapper, PostgreSQL 16, Flyway, contrato OpenAPI 3.1, erros RFC 9457 e autenticação JWT por e-mail e senha. 🚧 em construção
+- **Backend** (`api-autorizador-processo`): Spring Boot 4.1.2, Java 25, Maven Wrapper, PostgreSQL 16, Flyway, contrato OpenAPI 3.1, erros RFC 9457 e autenticação JWT por e-mail e senha. Fundação pronta; funcionalidades em construção (veja [`api-autorizador-processo/README.md`](api-autorizador-processo/README.md))
 - **Frontend** (`app-autorizador-processo`): Angular 21, TypeScript estrito, Tailwind CSS, componentes standalone, Signals e formulários reativos tipados, consumindo tipos gerados do OpenAPI. 🚧 em construção
 - **Integração local**: Docker Compose com PostgreSQL, API e frontend. Cada projeto terá seu próprio Dockerfile e seu próprio CI.
 
@@ -14,7 +14,7 @@ Monorepo do **Autorizador de Procedimentos Médicos**: cadastro de procedimentos
 
 ```text
 .
-├─ api-autorizador-processo/   backend Spring Boot 4 · Java 25 · Maven            🚧 em construção
+├─ api-autorizador-processo/   backend Spring Boot 4 · Java 25 · Maven            fundação pronta
 ├─ app-autorizador-processo/   frontend Angular 21 · Tailwind                     🚧 em construção
 ├─ tools/parity/               casos e replay de paridade com a versão original   🚧 em construção
 ├─ .github/workflows/          CI independente por projeto                        🚧 em construção
@@ -23,7 +23,7 @@ Monorepo do **Autorizador de Procedimentos Médicos**: cadastro de procedimentos
 └─ .specs/                     especificações, memória do projeto e design
 ```
 
-Hoje a raiz ainda contém o código da **versão original** (`pom.xml`, `mvnw`, `.mvn/`, `src/`: Spring Boot 2.2.6 com banco H2). Ele fica preservado pela tag `v0-original` e será removido da raiz depois do baseline de comportamento. O protótipo de design está em `.specs/design/prototype/`.
+O código da **versão original** (Spring Boot 2.2.6 com banco H2) foi removido da raiz e fica preservado pela tag `v0-original`. O protótipo de design está em `.specs/design/prototype/`.
 
 ## Como subir com Compose
 
@@ -38,6 +38,14 @@ docker compose down               # parar (acrescente -v para apagar o volume do
 
 Quando completo, o frontend ficará em <http://localhost:4200> e a API em <http://localhost:8080>. Os testes de integração do backend usarão Testcontainers e não dependem do Compose. O arquivo `.env` não é versionado; só o `.env.example`.
 
+## Executar o backend novo
+
+```bash
+cd api-autorizador-processo
+./mvnw clean verify
+./mvnw spring-boot:run   # http://localhost:8080/actuator/health
+```
+
 ## Versão original
 
 A versão original da API (tag `v0-original`) oferece:
@@ -47,7 +55,7 @@ A versão original da API (tag `v0-original`) oferece:
 3. Autorizar a realização de procedimentos com critérios de validação por idade e sexo do paciente.
 4. Consultar procedimentos autorizados.
 
-Para executá-la, use o código da raiz (`./mvnw spring-boot:run`) e acesse `http://localhost:8080/swagger-ui.html`. Com `spring.profiles.active=test`, o console do H2 fica em `http://localhost:8080/h2-console`.
+Para executá-la, faça checkout da tag `v0-original` (`git checkout v0-original`), rode `./mvnw spring-boot:run` e acesse `http://localhost:8080/swagger-ui.html`. Com `spring.profiles.active=test`, o console do H2 fica em `http://localhost:8080/h2-console`.
 
 ## Especificações
 

@@ -55,3 +55,18 @@
 {"em":1794148858849,"nivel":"passo","texto":"Verificar ponto de partida","etapa":3,"passo":"partida"}
 {"em":1794148858855,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":3,"passo":"partida"}
 {"em":1794148858860,"nivel":"passo","texto":"Commit da proposta","etapa":3,"passo":"commitProposta"}
+{"em":1794148859205,"nivel":"ok","texto":"657755f · 4 arquivo(s) · docs(test-01): proposta da etapa 3 · Fundação do backend","etapa":3,"passo":"commitProposta"}
+{"em":1794148859212,"nivel":"ok","texto":"Commit da proposta: ok · 657755f · 4 arquivo(s)","etapa":3,"passo":"commitProposta"}
+{"em":1794148859216,"nivel":"passo","texto":"Aplicar a spec","etapa":3,"passo":"aplicar"}
+{"em":1794148859221,"nivel":"info","texto":"proposta antecipada da etapa 4 em paralelo","etapa":3,"passo":"aplicar"}
+{"em":1794148914195,"nivel":"ok","texto":"proposta antecipada da etapa 4 pronta","etapa":3,"passo":"aplicar"}
+{"em":1794149217253,"nivel":"aviso","texto":"a sessão terminou sem marcar tarefas (1 de 2 continuações)","etapa":3,"passo":"aplicar"}
+{"em":1794149217255,"nivel":"erro","texto":"Aplicar a spec: .specs\\workflows\\test-01\\specs\\03-fundacao-backend/tarefas.md não tem tarefas","etapa":3,"passo":"aplicar"}
+{"em":1794149217255,"nivel":"passo","texto":"Recuperação 1 · Aplicar a spec","etapa":3,"passo":"aplicar"}
+{"em":1794149244177,"nivel":"ok","texto":"recuperação 1 resolveu: O passo de aplicar já tinha arquivado a spec (movendo proposta.md e tarefas.md para .specs/archive/), então a pasta da spec ficou sem tarefas.md. O arquivamento é de um passo posterior.","etapa":3,"passo":"aplicar"}
+{"em":1794149244182,"nivel":"passo","texto":"Verificar a mudança","etapa":3,"passo":"verificar"}
+{"em":1794149244188,"nivel":"info","texto":"Verificar a mudança: pulado · sem verificações configuradas","etapa":3,"passo":"verificar"}
+{"em":1794149244193,"nivel":"passo","texto":"Arquivar a spec","etapa":3,"passo":"arquivar"}
+{"em":1794149244206,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\03-fundacao-backend → .specs\\workflows\\test-01\\specs\\arquivo\\03-fundacao-backend","etapa":3,"passo":"arquivar"}
+{"em":1794149244210,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\03-fundacao-backend","etapa":3,"passo":"arquivar"}
+{"em":1794149244214,"nivel":"passo","texto":"Commit da entrega","etapa":3,"passo":"commitEntrega"}
