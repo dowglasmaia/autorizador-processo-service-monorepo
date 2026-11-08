@@ -27,16 +27,25 @@ O código da **versão original** (Spring Boot 2.2.6 com banco H2) foi removido 
 
 ## Como subir com Compose
 
-> 🚧 Em construção: o `compose.yaml` já existe, mas as imagens da API e do frontend dependem de projetos e Dockerfiles que ainda não foram criados. Por enquanto só o banco pode ser iniciado.
+O `compose.yaml` sobe o PostgreSQL 16 e a API. O serviço `app` (frontend) **só existe a partir da etapa do frontend**: enquanto `app-autorizador-processo/` não existir, não use `docker compose up --build` sem nomear os serviços.
 
 ```bash
-cp .env.example .env              # opcional; todos os valores têm padrão de desenvolvimento
-docker compose up -d postgres     # somente o PostgreSQL 16 (disponível hoje)
-docker compose up -d --build      # ambiente completo: banco + API + front (em construção)
-docker compose down               # parar (acrescente -v para apagar o volume do banco)
+cp .env.example .env                                # valores de desenvolvimento; JWT_SECRET é obrigatório para a API
+docker compose up -d postgres                       # somente o PostgreSQL (para rodar a API fora do Docker)
+docker compose up -d --build postgres api           # banco + API (aguarda o banco ficar saudável)
+docker compose ps                                   # a API fica "healthy" em até ~90 s
+curl http://localhost:8080/actuator/health          # {"status":"UP"}
+docker compose down                                 # para e remove os contêineres; o volume postgres-data é preservado
+docker compose down -v                              # também apaga o volume (APAGA os dados do banco)
 ```
 
-Quando completo, o frontend ficará em <http://localhost:4200> e a API em <http://localhost:8080>. Os testes de integração do backend usarão Testcontainers e não dependem do Compose. O arquivo `.env` não é versionado; só o `.env.example`.
+| Serviço    | Porta padrão | Variável     |
+|------------|--------------|--------------|
+| PostgreSQL | 5432         | `POSTGRES_PORT` |
+| API        | 8080         | `API_PORT`   |
+| Frontend (`app`) | 4200   | `APP_PORT` (somente após a etapa do frontend) |
+
+Sem `JWT_SECRET` (mínimo de 32 bytes) o Compose recusa subir a API. O arquivo `.env` não é versionado; só o `.env.example`. Os testes de integração do backend usam Testcontainers e não dependem do Compose.
 
 ## Executar o backend novo
 

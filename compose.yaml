@@ -1,8 +1,9 @@
-# Ambiente completo (SPEC-10 §1; SPEC-13 §4): PostgreSQL + API + front.
-# Tudo:        docker compose up -d --build          (front em http://localhost:4200)
-# Só o banco:  docker compose up -d postgres         (para rodar a API/front na máquina, fora do Docker)
-# Parar:       docker compose down                   (acrescente -v para apagar também o volume do banco)
-# Variáveis:   copie .env.example para .env e ajuste (todas têm valor padrão para desenvolvimento).
+# Ambiente local em contêineres (SPEC-10 §1): PostgreSQL + API. O serviço `app` (front) só existe após a etapa do frontend (SPEC-13 do front).
+# Só o banco:   docker compose up -d postgres            (para rodar a API/front na máquina, fora do Docker)
+# Banco + API:  docker compose up -d --build postgres api  (exige JWT_SECRET no .env; API em http://localhost:8080)
+# Tudo:         docker compose up -d --build              (somente quando o frontend estiver criado)
+# Parar:        docker compose down                       (acrescente -v para apagar também o volume do banco)
+# Variáveis:    copie .env.example para .env e ajuste (valores do exemplo são SOMENTE de desenvolvimento).
 # Testes de integração NÃO dependem deste arquivo (usam Testcontainers).
 name: autorizador-processo
 
@@ -34,8 +35,21 @@ services:
       DB_PASSWORD: ${POSTGRES_PASSWORD:-autorizador}
       APP_ENV: ${APP_ENV:-local-docker}
       LOG_LEVEL_APP: ${LOG_LEVEL_APP:-INFO}
+      # Obrigatório (mínimo 32 bytes): sem ele o compose recusa subir.
+      JWT_SECRET: ${JWT_SECRET:?defina JWT_SECRET no .env}
+      JWT_TTL_MINUTOS: ${JWT_TTL_MINUTOS:-60}
+      AUTH_BOOTSTRAP_EMAIL: ${AUTH_BOOTSTRAP_EMAIL:-}
+      AUTH_BOOTSTRAP_SENHA: ${AUTH_BOOTSTRAP_SENHA:-}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:4200}
     ports:
       - "${API_PORT:-8080}:8080"
+    healthcheck:
+      # Readiness inclui o banco (etapa 12); curl é instalado na imagem de runtime.
+      test: ["CMD", "curl", "-fsS", "http://localhost:8080/actuator/health/readiness"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 40s
     depends_on:
       postgres:
         condition: service_healthy

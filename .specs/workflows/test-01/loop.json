@@ -2227,7 +2227,154 @@
           "descricao": "Executa a SPEC-10: Dockerfile da API (`eclipse-temurin:25`) e ajuste do `compose.yaml` e do `.env.example` com PostgreSQL e API.\nReferências: `compose.yaml` já existente.\nLimite: o serviço do frontend é tratado na SPEC-13.",
           "spec": "13-compose-backend",
           "specPronta": false,
-          "status": "pendente"
+          "status": "entregue",
+          "entregueEm": "2026-11-08T17:28:50.507Z",
+          "iteracao": 13,
+          "duracaoMs": 810955,
+          "custo": 0.9098628,
+          "passos": [
+            {
+              "id": "propor",
+              "situacao": "ok",
+              "duracaoMs": 42291,
+              "custo": 0.21982200000000002,
+              "tentativas": 1,
+              "detalhe": "14 tarefas"
+            },
+            {
+              "id": "partida",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "commitProposta",
+              "situacao": "ok",
+              "duracaoMs": 357,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "0f870bd · 5 arquivo(s)"
+            },
+            {
+              "id": "aplicar",
+              "situacao": "ok",
+              "duracaoMs": 768304,
+              "custo": 0.6900408,
+              "tentativas": 1,
+              "detalhe": "14/14 tarefas · 2 sessão(ões)"
+            },
+            {
+              "id": "verificar",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "arquivar",
+              "situacao": "ok",
+              "duracaoMs": 3,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\13-compose-backend"
+            },
+            {
+              "id": "commitEntrega",
+              "situacao": "ok",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1
+            }
+          ],
+          "sessoes": [
+            {
+              "rotulo": "propor-13",
+              "passo": "propor",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.21982200000000002,
+              "turnos": 6,
+              "duracaoMs": 42275,
+              "inicio": 1794158119463,
+              "fim": 1794158161748,
+              "tokens": {
+                "entrada": 10,
+                "saida": 2514,
+                "cacheCriacao": 43330,
+                "cacheLeitura": 213420
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "antecipar-14",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.24046060000000002,
+              "turnos": 11,
+              "duracaoMs": 64100,
+              "inicio": 1794158162152,
+              "fim": 1794158226261,
+              "tokens": {
+                "entrada": 12,
+                "saida": 4325,
+                "cacheCriacao": 42614,
+                "cacheLeitura": 267306
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-13-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2765077,
+              "turnos": 10,
+              "duracaoMs": 63567,
+              "inicio": 1794158163599,
+              "fim": 1794158227176,
+              "tokens": {
+                "entrada": 18,
+                "saida": 5255,
+                "cacheCriacao": 44674,
+                "cacheLeitura": 452257
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-13-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.41353309999999993,
+              "turnos": 19,
+              "duracaoMs": 703256,
+              "inicio": 1794158227182,
+              "fim": 1794158930448,
+              "tokens": {
+                "entrada": 36,
+                "saida": 8491,
+                "cacheCriacao": 56753,
+                "cacheLeitura": 1015391
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            }
+          ]
         },
         {
           "numero": 14,
@@ -2409,7 +2556,7 @@
     "etapa": 13,
     "inicio": "2026-11-08T17:15:19.447Z",
     "commitInicial": "c4de00d53af08aa9f0406746ad50061c8c9e7fd6",
-    "passoAtual": 2,
+    "passoAtual": 6,
     "passos": [
       {
         "id": "propor",
@@ -2429,62 +2576,66 @@
       },
       {
         "id": "commitProposta",
+        "situacao": "ok",
+        "duracaoMs": 357,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "0f870bd · 5 arquivo(s)"
+      },
+      {
+        "id": "aplicar",
+        "situacao": "ok",
+        "duracaoMs": 768304,
+        "custo": 0.6900408,
+        "tentativas": 1,
+        "detalhe": "14/14 tarefas · 2 sessão(ões)"
+      },
+      {
+        "id": "verificar",
+        "situacao": "pulado",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "arquivar",
+        "situacao": "ok",
+        "duracaoMs": 3,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\13-compose-backend"
+      },
+      {
+        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
-      },
-      {
-        "id": "aplicar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "verificar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "arquivar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
       }
     ],
     "titulo": "Propõe a spec do Docker Compose do backend (SPEC-10)",
     "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md` escritos antecipadamente. Revisei os dois contra o código atual em vez de recriá-los.\nO backend não tem `Dockerfile` nem `.dockerignore`. O serviço `api` do `compose.yaml` não define `healthcheck`, mas o `app` exige `api: service_healthy`. O `api` também não repassa `JWT_SECRET`, `JWT_TTL_MINUTOS`, `AUTH_BOOTSTRAP_*` nem `CORS_ALLOWED_ORIGINS`.\nA etapa 12 já entregou `SERVER_PORT` (padrão 8080), apenas `health,info` expostos e o grupo `readiness` (`readinessState,db`). Atualizei a proposta para o `healthcheck` usar `/actuator/health/readiness`, e a tarefa 2.1 para reconferir isso.\nO `.env.example` da raiz já tem as chaves, mas `JWT_SECRET` está vazio. O backend tem um `.env.example` próprio, que a proposta registra como ponto de coerência. O Docker 29.9.2 está disponível, então a verificação com Compose é viável.\nA spec mantém o serviço `app` fora do escopo (SPEC-13). São 14 tarefas em 4 grupos; as decisões marcadas [REVISAR] seguem na seção de decisões."
   },
   "totais": {
-    "duracaoMs": 9466604,
-    "custo": 27.636700399999995,
+    "duracaoMs": 10235268,
+    "custo": 28.567201799999992,
     "execucoes": 2,
     "iteracoes": 13,
     "entregues": 12,
-    "sessoes": 71,
-    "turnos": 984,
+    "sessoes": 74,
+    "turnos": 1024,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 5,
     "recuperacoesResolvidas": 4,
     "falhas": 0,
-    "commits": 24,
+    "commits": 25,
     "tokens": {
-      "entrada": 1446,
-      "saida": 671342,
-      "cacheCriacao": 3980969,
-      "cacheLeitura": 45446050
+      "entrada": 1512,
+      "saida": 689413,
+      "cacheCriacao": 4125010,
+      "cacheLeitura": 47181004
     }
   },
   "ultimaExecucao": {
