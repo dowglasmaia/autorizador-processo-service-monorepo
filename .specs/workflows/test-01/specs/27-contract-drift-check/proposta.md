@@ -1,21 +1,21 @@
 # Desvio de contrato
 
-Etapa 27 de 31 · Fase 4 · derivada da `SPEC-32` (`.specs/04-integration/SPEC-32-contract-drift-check.md`), com referências à `SPEC-05` (contrato v1) e à `SPEC-16` (núcleo HTTP e tipos). Escrita antecipadamente, enquanto a etapa 26 (paridade com o baseline) é implementada; será revisada contra o que ela entregar.
+Etapa 27 de 31 · Fase 4 · derivada da `SPEC-32` (`.specs/04-integration/SPEC-32-contract-drift-check.md`), com referências à `SPEC-05` (contrato v1) e à `SPEC-16` (núcleo HTTP e tipos). Escrita antecipadamente e revisada contra a base entregue pela etapa 26 (paridade com o baseline, SPEC-31 já arquivada).
 
 ## Objetivo
 Garantir que o frontend nunca fique defasado em relação ao OpenAPI: os tipos regenerados devem ser idênticos aos versionados e as respostas reais da API devem respeitar o contrato. Sem mudar o contrato.
 
-## Ponto de partida (conferido antes da etapa 26)
+## Ponto de partida (conferido após a etapa 26)
 - Contrato em `api-autorizador-processo/src/main/resources/openapi/` (`common/` e `modules/` com `auth`, `autorizacao`, `painel`, `procedimento`). Há **8 operações** (`autenticar`, `obterUsuarioAtual`, `cadastrarProcedimento`, `listarProcedimentos`, `obterProcedimento`, `solicitarAutorizacao`, `listarAutorizacoes`, `obterResumoPainel`), não as 6 citadas na SPEC-32; vale o contrato real.
-- Erros RFC 9457 com `code` em `common/responses.yaml` (`VALIDACAO_INVALIDA`, `CORPO_INVALIDO`, `PARAMETRO_INVALIDO`, `PROCEDIMENTO_DUPLICADO`, `AUTORIZACAO_NEGADA`, `PROCEDIMENTO_NAO_ENCONTRADO`, `CREDENCIAIS_INVALIDAS`, `ERRO_INTERNO`…); a lista exata é conferida na execução.
+- Erros RFC 9457 com `code` em `common/responses.yaml` (11 exemplos: `VALIDACAO_INVALIDA`, `CORPO_INVALIDO`, `PARAMETRO_INVALIDO`, `PROCEDIMENTO_DUPLICADO`, `AUTORIZACAO_NEGADA`, `PROCEDIMENTO_NAO_ENCONTRADO`, `ERRO_INTERNO`, `CREDENCIAIS_INVALIDAS`, `NAO_AUTENTICADO`, `SESSAO_EXPIRADA`, `MUITAS_TENTATIVAS`), não os 5 citados na SPEC-32; a lista exata é conferida na execução.
 - Geração de tipos já existe: `app-autorizador-processo/scripts/gerar-api-types.mjs` (`npm run api:types`) escreve `src/app/shared/api/api-types.ts` com `openapi-typescript`. Falta a verificação de desvio.
 - Backend tem testes `*ApiTest` por módulo (Testcontainers) e `ArchitectureTest`; não há validação das respostas contra o esquema OpenAPI.
-- Não existem `scripts/` na raiz, `.github/workflows` (CI é a etapa 28/SPEC-40) nem tag/branch base de contrato além da tag `v0-original` (código original, sem OpenAPI).
+- A raiz tem `README.md`, `compose.yaml` e `tools/parity/` (etapa 26), mas não `scripts/` nem `.github/workflows` (CI é a etapa 28/SPEC-40); não há tag/branch base de contrato além de `v0-original` (sem OpenAPI).
 - `.specs/06-execution-plan/` não existe; desvio registrado na evidência.
 
 ## Escopo
 1. `scripts/check-contract.mjs` na raiz: regenera os tipos em diretório temporário e compara com `api-types.ts` versionado; sai com código ≠ 0 apontando o arquivo divergente. Para reutilizar a geração sem duplicá-la, o gerador existente passa a aceitar um caminho de saída opcional (comportamento padrão inalterado).
-2. Teste de conformidade no backend: chama cada uma das 8 operações com a aplicação real (Testcontainers) e valida status e corpo contra o esquema do OpenAPI, cobrindo todos os `code` de erro do contrato. Preferência por validação via testes do backend; se for necessária biblioteca de validação de esquema (ex.: `swagger-request-validator`), justificá-la em `doc.md`/README.
+2. Teste de conformidade no backend: chama cada uma das 8 operações com a aplicação real (Testcontainers) e valida status e corpo contra o esquema do OpenAPI, cobrindo todos os `code` de erro do contrato (os 11 listados). Preferência por validação via testes do backend; se for necessária biblioteca de validação de esquema (ex.: `swagger-request-validator`), justificá-la em `doc.md`/README.
 3. Verificação de compatibilidade: comparar o contrato atual com uma referência base e falhar em mudança incompatível (remoção, renomeação, nova obrigatoriedade) dentro de `/api/v1`; mudanças aditivas passam. Referência base: cópia do contrato versionada no commit de entrega da etapa anterior (ver decisões).
 4. Documentar no `README.md` raiz como regenerar tipos e interpretar as falhas.
 
@@ -35,7 +35,7 @@ Garantir que o frontend nunca fique defasado em relação ao OpenAPI: os tipos r
 
 ## Decisões tomadas sem consulta
 - Conformidade de respostas feita no backend (opção prevista pela SPEC-32), evitando nova dependência no frontend. Biblioteca de validação só se inevitável. **[REVISAR]**
-- Referência base da compatibilidade: como não há tag do contrato v1, usa-se um instantâneo do contrato versionado em pasta própria (ex.: `tools/contract/baseline/`), atualizado conscientemente a cada mudança aditiva aprovada. Alternativa (comparar com branch/tag git) descartada por exigir histórico no CI. **[REVISAR]**
+- Referência base da compatibilidade: como não há tag do contrato v1, usa-se um instantâneo do contrato versionado em pasta própria (ex.: `tools/contract/baseline/`, ao lado de `tools/parity/`), atualizado conscientemente a cada mudança aditiva aprovada. Alternativa (comparar com branch/tag git) descartada por exigir histórico no CI. **[REVISAR]**
 - Comparação de compatibilidade implementada em script Node sem nova ferramenta (diff estrutural de paths, propriedades e `required` do YAML já resolvido); caso falte biblioteca de YAML, reutiliza-se a que o `openapi-typescript` já traz.
 - Número de operações segue o contrato real (8), não o texto da SPEC-32 (6).
 - Execução do script no CI fica para a SPEC-40 (etapa 28), conforme a SPEC.

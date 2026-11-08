@@ -10,7 +10,7 @@
 ## 3. Conformidade das respostas no backend
 - [ ] 3.1 Escolher e justificar o mecanismo de validação contra o esquema OpenAPI (preferir sem nova dependência).
 - [ ] 3.2 Criar teste de conformidade que chama as 8 operações com a aplicação real e valida status e corpo.
-- [ ] 3.3 Cobrir todos os `code` de erro do contrato (400, 401, 403, 404, 409, 500 conforme definidos).
+- [ ] 3.3 Cobrir todos os `code` de erro do contrato (os 11 definidos em `common/responses.yaml`: 400, 401, 403, 404, 409, 429, 500).
 - [ ] 3.4 Provar que o teste falha com uma resposta divergente (adulteração temporária) e reverter.
 
 ## 4. Compatibilidade do contrato

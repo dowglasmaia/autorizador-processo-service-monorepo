@@ -4722,7 +4722,8 @@
               "origem": "provider",
               "esforco": "medium"
             }
-          ]
+          ],
+          "commit": "5eb3e92"
         },
         {
           "numero": 27,
@@ -4773,19 +4774,19 @@
     }
   ],
   "iteracao": {
-    "numero": 26,
-    "etapa": 26,
-    "inicio": "2026-11-08T20:00:31.563Z",
-    "commitInicial": "7ed701b5b9c4e7e998c1622d48a0809a268312d0",
-    "passoAtual": 6,
+    "numero": 27,
+    "etapa": 27,
+    "inicio": "2026-11-08T20:05:43.733Z",
+    "commitInicial": "5eb3e92b258a0d555bb8d190b074f0bc3d3f787c",
+    "passoAtual": 2,
     "passos": [
       {
         "id": "propor",
         "situacao": "ok",
-        "duracaoMs": 42766,
-        "custo": 0.2744351,
+        "duracaoMs": 33889,
+        "custo": 0.20019720000000002,
         "tentativas": 1,
-        "detalhe": "16 tarefas"
+        "detalhe": "14 tarefas"
       },
       {
         "id": "partida",
@@ -4797,78 +4798,62 @@
       },
       {
         "id": "commitProposta",
-        "situacao": "ok",
-        "duracaoMs": 397,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "d5670b5 · 5 arquivo(s)"
-      },
-      {
-        "id": "aplicar",
-        "situacao": "aviso",
-        "duracaoMs": 235834,
-        "custo": 0.9088195000000001,
-        "tentativas": 1,
-        "recuperacoes": [
-          {
-            "numero": 1,
-            "erro": ".specs\\workflows\\test-01\\specs\\26-paridade-baseline/tarefas.md não tem tarefas",
-            "resolvida": true,
-            "custo": 0.24116420000000005,
-            "em": "2026-11-08T20:05:10.634Z",
-            "causa": "A etapa 26 arquivou a própria spec com `git mv` para `.specs/archive/` durante o \"Aplicar a spec\". A checagem do devkit lê `tarefas.md` na pasta original, que já não existia, e por isso apontou \"não tem tarefas\". Também sobrava a tarefa 5.4 sem marcar.",
-            "oQueFez": "Devolvi a pasta com `git mv` de `.specs/archive/26-paridade-baseline` para `.specs/workflows/test-01/specs/26-paridade-baseline`. Marquei a 5.4 como `- [x]` e anotei que o arquivamento fica com o passo de arquivar do devkit. Agora há 16 tarefas, todas marcadas. Não mexi no `SPEC-31-paridade-baseline.md`, que continua em `.specs/archive/`. Não rodei a checagem do devkit, só contei as tarefas com `grep`.",
-            "precisaPessoa": false
-          }
-        ],
-        "detalhe": "recuperado"
-      },
-      {
-        "id": "verificar",
-        "situacao": "pulado",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "arquivar",
-        "situacao": "ok",
-        "duracaoMs": 4,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\26-paridade-baseline"
-      },
-      {
-        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
+      },
+      {
+        "id": "aplicar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "verificar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "arquivar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "commitEntrega",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
       }
     ],
-    "titulo": "Revisa a spec de paridade com o baseline (SPEC-31) contra a base entregue",
-    "comparacao": "A pasta da etapa 26 já tinha proposta.md e tarefas.md (17 tarefas em 5 grupos), escritos antes da etapa 25. Revisei os dois contra o estado atual e mantive o escopo da SPEC-31.\ntools/parity/ (README, cases.json, replay.mjs) existe, mas não há RELATORIO.md. A pasta .specs/06-execution-plan/ continua inexistente.\nA etapa 25 está entregue e arquivada. O Docker 29.9.2 está disponível, mas só existe o binário docker-compose, sem o plugin `docker compose`. Registrei o fallback e a tarefa 1.2 agora confere isso.\nO perfil local é o padrão da API, então a seed (1234, 4567, 6789) já chega pelo Compose. O .env descartável segue o padrão da etapa 25.\nSegue a ressalva da SPEC-31: os casos B01 e B02 já têm DIV no cases.json. A proposta trata isso lendo o aceite pela decisão de negócio, e o job de CI fica para a SPEC-40. Nenhum código da aplicação foi alterado."
+    "titulo": "Revisa a spec de desvio de contrato (SPEC-32) contra a base entregue",
+    "comparacao": "A pasta da spec já tinha proposta.md e tarefas.md antecipados (20 tarefas em 5 grupos). Revisei e completei em vez de recriar.\nO contrato real tem 8 operações e 11 códigos de erro em common/responses.yaml. A SPEC-32 cita 6 operações e 5 códigos, então a proposta e as tarefas passaram a seguir o contrato real.\nJá existem o gerador app-autorizador-processo/scripts/gerar-api-types.mjs (npm run api:types), o README.md raiz e tools/parity/ da etapa 26. Faltam scripts/check-contract.mjs, a validação das respostas contra o esquema e a comparação de compatibilidade.\nNão há .github/workflows nem tag ou branch base do contrato (só v0-original, que não tem OpenAPI). Por isso a referência de compatibilidade é um instantâneo versionado, registrado como [REVISAR]. A integração ao CI fica para a etapa 28.\n.specs/06-execution-plan/ continua inexistente; o desvio entra na tarefa 1.1. Não alterei código da aplicação."
   },
   "totais": {
-    "duracaoMs": 19580619,
-    "custo": 51.615765800000005,
+    "duracaoMs": 19615075,
+    "custo": 51.815963,
     "execucoes": 2,
-    "iteracoes": 26,
-    "entregues": 25,
-    "sessoes": 139,
-    "turnos": 1868,
+    "iteracoes": 27,
+    "entregues": 26,
+    "sessoes": 140,
+    "turnos": 1875,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 7,
     "recuperacoesResolvidas": 6,
     "falhas": 0,
-    "commits": 51,
+    "commits": 52,
     "tokens": {
-      "entrada": 2860,
-      "saida": 1227573,
-      "cacheCriacao": 7577044,
-      "cacheLeitura": 85742324
+      "entrada": 2870,
+      "saida": 1229962,
+      "cacheCriacao": 7615941,
+      "cacheLeitura": 85949316
     }
   },
   "ultimaExecucao": {

@@ -597,3 +597,13 @@
 {"em":1794168343052,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\26-paridade-baseline → .specs\\workflows\\test-01\\specs\\arquivo\\26-paridade-baseline","etapa":26,"passo":"arquivar"}
 {"em":1794168343058,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\26-paridade-baseline","etapa":26,"passo":"arquivar"}
 {"em":1794168343066,"nivel":"passo","texto":"Commit da entrega","etapa":26,"passo":"commitEntrega"}
+{"em":1794168343629,"nivel":"ok","texto":"5eb3e92 · 13 arquivo(s) · feat(autorizador): Revisa a spec de paridade com o baseline (SPEC-31)…","etapa":26,"passo":"commitEntrega"}
+{"em":1794168343646,"nivel":"ok","texto":"Commit da entrega: ok · 5eb3e92 · 13 arquivo(s)","etapa":26,"passo":"commitEntrega"}
+{"em":1794168343661,"nivel":"ok","texto":"Etapa 26 entregue · commit 5eb3e92","etapa":26,"passo":"commitEntrega"}
+{"em":1794168343739,"nivel":"passo","texto":"Etapa 27 · Desvio de contrato (iteração 27)","etapa":27}
+{"em":1794168343741,"nivel":"passo","texto":"Propor a spec","etapa":27,"passo":"propor"}
+{"em":1794168343750,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":27,"passo":"propor"}
+{"em":1794168377644,"nivel":"ok","texto":"Propor a spec: ok · 14 tarefas","etapa":27,"passo":"propor"}
+{"em":1794168377651,"nivel":"passo","texto":"Verificar ponto de partida","etapa":27,"passo":"partida"}
+{"em":1794168377671,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":27,"passo":"partida"}
+{"em":1794168377678,"nivel":"passo","texto":"Commit da proposta","etapa":27,"passo":"commitProposta"}
