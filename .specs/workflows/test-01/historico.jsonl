@@ -348,3 +348,13 @@
 {"em":1794159762269,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\15-fundacao-frontend → .specs\\workflows\\test-01\\specs\\arquivo\\15-fundacao-frontend","etapa":15,"passo":"arquivar"}
 {"em":1794159762276,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\15-fundacao-frontend","etapa":15,"passo":"arquivar"}
 {"em":1794159762281,"nivel":"passo","texto":"Commit da entrega","etapa":15,"passo":"commitEntrega"}
+{"em":1794159763223,"nivel":"ok","texto":"16bc104 · 44 arquivo(s) · feat(autorizador): Propõe a spec da fundação do frontend Angular (SPE…","etapa":15,"passo":"commitEntrega"}
+{"em":1794159763247,"nivel":"ok","texto":"Commit da entrega: ok · 16bc104 · 44 arquivo(s)","etapa":15,"passo":"commitEntrega"}
+{"em":1794159763260,"nivel":"ok","texto":"Etapa 15 entregue · commit 16bc104","etapa":15,"passo":"commitEntrega"}
+{"em":1794159763336,"nivel":"passo","texto":"Etapa 16 · Design system e layout (iteração 16)","etapa":16}
+{"em":1794159763338,"nivel":"passo","texto":"Propor a spec","etapa":16,"passo":"propor"}
+{"em":1794159763343,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":16,"passo":"propor"}
+{"em":1794159800286,"nivel":"ok","texto":"Propor a spec: ok · 23 tarefas","etapa":16,"passo":"propor"}
+{"em":1794159800293,"nivel":"passo","texto":"Verificar ponto de partida","etapa":16,"passo":"partida"}
+{"em":1794159800304,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":16,"passo":"partida"}
+{"em":1794159800312,"nivel":"passo","texto":"Commit da proposta","etapa":16,"passo":"commitProposta"}

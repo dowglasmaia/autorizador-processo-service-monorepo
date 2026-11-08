@@ -2693,7 +2693,8 @@
               "origem": "provider",
               "esforco": "medium"
             }
-          ]
+          ],
+          "commit": "16bc104"
         },
         {
           "numero": 16,
@@ -2848,19 +2849,19 @@
     }
   ],
   "iteracao": {
-    "numero": 15,
-    "etapa": 15,
-    "inicio": "2026-11-08T17:32:41.725Z",
-    "commitInicial": "9423251e6602034787e43f4c46fd882fe14c2cb9",
-    "passoAtual": 6,
+    "numero": 16,
+    "etapa": 16,
+    "inicio": "2026-11-08T17:42:43.331Z",
+    "commitInicial": "16bc10491f6915964551a33c8fab93b70ce3c0c9",
+    "passoAtual": 2,
     "passos": [
       {
         "id": "propor",
         "situacao": "ok",
-        "duracaoMs": 39350,
-        "custo": 0.20215080000000002,
+        "duracaoMs": 36938,
+        "custo": 0.20260859999999997,
         "tentativas": 1,
-        "detalhe": "15 tarefas"
+        "detalhe": "23 tarefas"
       },
       {
         "id": "partida",
@@ -2872,66 +2873,62 @@
       },
       {
         "id": "commitProposta",
-        "situacao": "ok",
-        "duracaoMs": 849,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "df2188e · 4 arquivo(s)"
-      },
-      {
-        "id": "aplicar",
-        "situacao": "ok",
-        "duracaoMs": 560239,
-        "custo": 0.7549001,
-        "tentativas": 1,
-        "detalhe": "15/15 tarefas · 2 sessão(ões)"
-      },
-      {
-        "id": "verificar",
-        "situacao": "pulado",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "arquivar",
-        "situacao": "ok",
-        "duracaoMs": 4,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\15-fundacao-frontend"
-      },
-      {
-        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
+      },
+      {
+        "id": "aplicar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "verificar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "arquivar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "commitEntrega",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
       }
     ],
-    "titulo": "Propõe a spec da fundação do frontend Angular (SPEC-14)",
-    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md`, antecipados na etapa 14. Revisei os dois contra o repositório e mantive o escopo e as 15 tarefas, em 5 grupos.\n`app-autorizador-processo/` ainda não existe. A raiz tem só `api-autorizador-processo/`, `tools/`, `compose.yaml` e `README.md`, então o scaffold roda sem conflito. A etapa 14 (SPEC-50) foi arquivada sem tocar no frontend.\nO Node é v24.14.0, acima do mínimo de 20.19. A skill `angular-frontend-scaffold` tem `scaffold.mjs` e `validate.mjs`. A SPEC-14 continua em `.specs/03-frontend/`.\nO `.gitignore` da raiz já cobre `node_modules/` e `build/`, mas não vi `dist` do frontend; ficou como a tarefa 4.4. A pasta `06-execution-plan/` citada no `INDEX.md` não existe, e o desvio fica para a evidência da execução.\nSó atualizei o cabeçalho e a seção \"Decisões tomadas sem consulta\" da proposta. Nenhum código foi alterado."
+    "titulo": "Revisa a spec do design system e layout do frontend (SPEC-15) contra a base entregue",
+    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md`, escritos antes de a etapa 15 terminar. Revisei os dois contra o código atual.\nO `app-autorizador-processo/` agora existe: Angular 21.2, Tailwind 4.3 via PostCSS, Vitest e ESLint. O `styles.scss` só tem `@use 'tailwindcss'` e a fonte Inter provisória.\nNão há `layout/`, `shared/ui/`, Manrope nem Phosphor. Existem `core/http` (interceptor de erro), `features/home` provisória e `<main>` no `app.html`, que a etapa vai substituir pelo shell e pelas rotas lazy.\nCorrigi a numeração das specs sucessoras: login é a SPEC-23 e as telas vão da SPEC-17 à SPEC-20. O `ErrorDialog` não depende do `AppError` da SPEC-16.\nFicaram 23 tarefas em 5 grupos. Não alterei código da aplicação."
   },
   "totais": {
-    "duracaoMs": 11066462,
-    "custo": 30.695066099999995,
+    "duracaoMs": 11104355,
+    "custo": 30.897674699999996,
     "execucoes": 2,
-    "iteracoes": 15,
-    "entregues": 14,
-    "sessoes": 82,
-    "turnos": 1109,
+    "iteracoes": 16,
+    "entregues": 15,
+    "sessoes": 83,
+    "turnos": 1117,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 5,
     "recuperacoesResolvidas": 4,
     "falhas": 0,
-    "commits": 29,
+    "commits": 30,
     "tokens": {
-      "entrada": 1656,
-      "saida": 725853,
-      "cacheCriacao": 4476353,
-      "cacheLeitura": 50759047
+      "entrada": 1666,
+      "saida": 728592,
+      "cacheCriacao": 4515094,
+      "cacheLeitura": 50961393
     }
   },
   "ultimaExecucao": {

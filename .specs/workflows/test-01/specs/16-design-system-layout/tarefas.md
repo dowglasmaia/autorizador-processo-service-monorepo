@@ -2,7 +2,7 @@
 
 ## 1. Ponto de partida
 - [ ] 1.1 Ler `.specs/INDEX.md`, `memory/`, `shared/como-executar.md`, SPEC-15, `design/DESIGN_SYSTEM_DISCOVERY.md` e o protótipo; registrar o desvio da pasta `06-execution-plan/` inexistente.
-- [ ] 1.2 Conferir o que a etapa 15 entregou (estrutura de `app-autorizador-processo/`, Tailwind, lint, testes) e ajustar caminhos.
+- [ ] 1.2 Conferir a base da etapa 15 (Tailwind 4 via PostCSS, `core/http`, `features/home`, `app.html`) e planejar a substituição da home provisória.
 
 ## 2. Tokens, fontes e ícones
 - [ ] 2.1 Extrair do protótipo os valores efetivos (cores, rampas, raios, sidebar) e definir tokens semânticos em `src/styles.scss`.
@@ -23,7 +23,7 @@
 - [ ] 4.2 `ErrorDialog` ("Não foi possível carregar", Fechar/Tentar novamente).
 - [ ] 4.3 Serviço de status da API (`GET /actuator/health`; falha → "indisponível").
 - [ ] 4.4 `layout/Shell`: sidebar, gaveta e barra superior abaixo de `lg`, `<main>`, item ativo, foco visível.
-- [ ] 4.5 Rotas lazy `/painel`, `/procedimentos`, `/solicitar`, `/autorizacoes` com páginas-esqueleto e rota `**`.
+- [ ] 4.5 Remover `features/home`/`app-shell` provisórios; rotas lazy `/painel`, `/procedimentos`, `/solicitar`, `/autorizacoes` com páginas-esqueleto e rota `**`.
 - [ ] 4.6 Galeria `/_ds` apenas em desenvolvimento.
 
 ## 5. Testes e verificação

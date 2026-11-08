@@ -50,7 +50,7 @@ o Objetivo e ter todas as specs executadas sem invervenção humana e com o refe
 
 ## Fase 3 · Fase 3 — Frontend Angular completo
 
-15. **Fundação do frontend** · `15-fundacao-frontend` · ✔ — Executa a SPEC-14: gera `app-autorizador-processo` (Angular 21, Tailwind, modo estrito, porta fixa) com a skill `angular-frontend-scaffold`. Referências: `TARGET_ARCHITECTURE.md`. Limite: apenas o shell mínimo.
+15. **Fundação do frontend** · `15-fundacao-frontend` · ✔ 16bc104 — Executa a SPEC-14: gera `app-autorizador-processo` (Angular 21, Tailwind, modo estrito, porta fixa) com a skill `angular-frontend-scaffold`. Referências: `TARGET_ARCHITECTURE.md`. Limite: apenas o shell mínimo.
 16. **Design system e layout** · `16-design-system-layout` · · — Executa a SPEC-15: tokens derivados do protótipo, componentes base e shell de navegação. Referências: `design/DESIGN_SYSTEM_DISCOVERY.md` e a skill `angular-tailwind-ui-specialist`. Limite: sem telas de negócio.
 17. **Núcleo HTTP e tipos** · `17-nucleo-http-tipos` · · — Executa a SPEC-16: tipos gerados do OpenAPI, interceptors e mapeamento de erros RFC 9457. Referências: contrato em `api-autorizador-processo/src/main/resources/openapi/`. Limite: sem DTOs duplicados à mão.
 18. **Login no frontend** · `18-login-frontend` · · — Executa a SPEC-23: tela de login, guarda de rotas, armazenamento do token e logout. Referências: SPEC-22 e o design system. Limite: sem cadastro e sem recuperação de senha.
