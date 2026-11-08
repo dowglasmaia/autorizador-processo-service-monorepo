@@ -22,17 +22,27 @@ public final class Procedimento {
     private final Set<Sexo> sexos;
     private final Set<Integer> idades;
     private final Instant criadoEm;
+    private final DadosCatalogo catalogo;
 
-    private Procedimento(Long id, int numProcedimento, Set<Sexo> sexos, Set<Integer> idades, Instant criadoEm) {
+    private Procedimento(Long id, int numProcedimento, Set<Sexo> sexos, Set<Integer> idades, Instant criadoEm,
+            DadosCatalogo catalogo) {
         this.id = id;
         this.numProcedimento = numProcedimento;
         this.sexos = Collections.unmodifiableSet(sexos);
         this.idades = Collections.unmodifiableSet(idades);
         this.criadoEm = criadoEm;
+        this.catalogo = catalogo;
     }
 
     /** Novo procedimento, ainda sem identificador nem data (atribuídos na persistência). */
     public static Procedimento create(int numProcedimento, Collection<Sexo> sexos, Collection<Integer> idades) {
+        return create(numProcedimento, sexos, idades, DadosCatalogo.VAZIO);
+    }
+
+    /** Novo procedimento com os dados de catálogo (NEW-01), que não influenciam {@link #avaliar}. */
+    public static Procedimento create(int numProcedimento, Collection<Sexo> sexos, Collection<Integer> idades,
+            DadosCatalogo catalogo) {
+        Objects.requireNonNull(catalogo, "catalogo");
         if (numProcedimento < 1) {
             throw new IllegalArgumentException("O número do procedimento deve ser maior ou igual a 1.");
         }
@@ -55,15 +65,22 @@ public final class Procedimento {
                 throw new IllegalArgumentException("Idades duplicadas.");
             }
         }
-        return new Procedimento(null, numProcedimento, sexosOrdenados, idadesOrdenadas, null);
+        return new Procedimento(null, numProcedimento, sexosOrdenados, idadesOrdenadas, null, catalogo);
     }
 
     /** Reidrata um procedimento gravado (sem reaplicar a criação). */
     public static Procedimento restore(long id, int numProcedimento, Collection<Sexo> sexos,
             Collection<Integer> idades, Instant criadoEm) {
+        return restore(id, numProcedimento, sexos, idades, criadoEm, DadosCatalogo.VAZIO);
+    }
+
+    /** Reidrata um procedimento gravado com seus dados de catálogo (nulos nas linhas anteriores). */
+    public static Procedimento restore(long id, int numProcedimento, Collection<Sexo> sexos,
+            Collection<Integer> idades, Instant criadoEm, DadosCatalogo catalogo) {
         Set<Sexo> sexosOrdenados = EnumSet.noneOf(Sexo.class);
         sexosOrdenados.addAll(sexos);
-        return new Procedimento(id, numProcedimento, sexosOrdenados, new TreeSet<>(idades), criadoEm);
+        return new Procedimento(id, numProcedimento, sexosOrdenados, new TreeSet<>(idades), criadoEm,
+                catalogo == null ? DadosCatalogo.VAZIO : catalogo);
     }
 
     /** RN5–RN7: autoriza quando o sexo está entre os aceitos E a idade está entre as aceitas. */
@@ -98,5 +115,10 @@ public final class Procedimento {
     /** Nulo enquanto o procedimento não foi gravado. */
     public Instant criadoEm() {
         return criadoEm;
+    }
+
+    /** Dados informativos de catálogo; nunca nulo (campos nulos em procedimentos anteriores). */
+    public DadosCatalogo catalogo() {
+        return catalogo;
     }
 }

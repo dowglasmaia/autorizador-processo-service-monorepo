@@ -55,6 +55,6 @@ class SeedLocalTest {
 
         List<String> versoes = jdbc.queryForList(
                 "select version from flyway_schema_history order by installed_rank", String.class);
-        assertThat(versoes).containsExactly("1", "2", "3", "1000");
+        assertThat(versoes).containsExactly("1", "2", "3", "4", "1000");
     }
 }

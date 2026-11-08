@@ -51,7 +51,7 @@ class ProcedimentoConcorrenciaDesempenhoTest extends IntegrationTestBase {
     @Test
     void duasInsercoesSimultaneasDoMesmoNumeroGeramUm201EUm403() throws Exception {
         String token = JwtTestSupport.cabecalhoBearer(1L, "teste@ex.com");
-        String json = "{\"numProcedimento\":7777,\"sexos\":[\"M\"],\"idades\":[5]}";
+        String json = "{\"nome\":\"Proc\",\"categoria\":\"CONSULTAS\",\"numProcedimento\":7777,\"sexos\":[\"M\"],\"idades\":[5]}";
         int tentativas = 2;
         CountDownLatch largada = new CountDownLatch(1);
         ExecutorService pool = Executors.newFixedThreadPool(tentativas);
@@ -87,7 +87,7 @@ class ProcedimentoConcorrenciaDesempenhoTest extends IntegrationTestBase {
             for (int n = 100; n < 120; n++) {
                 mvc.perform(post(BASE).header(HttpHeaders.AUTHORIZATION, JwtTestSupport.cabecalhoBearer(1L, "t@ex.com"))
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"numProcedimento\":" + n + ",\"sexos\":[\"M\",\"F\"],\"idades\":[1,2,3]}"))
+                        .content("{\"nome\":\"Proc\",\"categoria\":\"CONSULTAS\",\"numProcedimento\":" + n + ",\"sexos\":[\"M\",\"F\"],\"idades\":[1,2,3]}"))
                         .andExpect(status().isCreated());
             }
             long comVinteETres = sqlDaListagem(estatisticas);

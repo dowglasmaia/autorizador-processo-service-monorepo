@@ -204,3 +204,15 @@
 {"em":1794153769178,"nivel":"passo","texto":"Verificar ponto de partida","etapa":9,"passo":"partida"}
 {"em":1794153769259,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":9,"passo":"partida"}
 {"em":1794153769268,"nivel":"passo","texto":"Commit da proposta","etapa":9,"passo":"commitProposta"}
+{"em":1794153771070,"nivel":"ok","texto":"e0c94f6 · 5 arquivo(s) · docs(test-01): proposta da etapa 9 · Catálogo estendido","etapa":9,"passo":"commitProposta"}
+{"em":1794153771091,"nivel":"ok","texto":"Commit da proposta: ok · e0c94f6 · 5 arquivo(s)","etapa":9,"passo":"commitProposta"}
+{"em":1794153771097,"nivel":"passo","texto":"Aplicar a spec","etapa":9,"passo":"aplicar"}
+{"em":1794153771105,"nivel":"info","texto":"proposta antecipada da etapa 10 em paralelo","etapa":9,"passo":"aplicar"}
+{"em":1794153897665,"nivel":"ok","texto":"proposta antecipada da etapa 10 pronta","etapa":9,"passo":"aplicar"}
+{"em":1794155019358,"nivel":"ok","texto":"Aplicar a spec: ok · 21/21 tarefas · 3 sessão(ões)","etapa":9,"passo":"aplicar"}
+{"em":1794155019365,"nivel":"passo","texto":"Verificar a mudança","etapa":9,"passo":"verificar"}
+{"em":1794155019375,"nivel":"info","texto":"Verificar a mudança: pulado · sem verificações configuradas","etapa":9,"passo":"verificar"}
+{"em":1794155019380,"nivel":"passo","texto":"Arquivar a spec","etapa":9,"passo":"arquivar"}
+{"em":1794155019389,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\09-catalogo-estendido → .specs\\workflows\\test-01\\specs\\arquivo\\09-catalogo-estendido","etapa":9,"passo":"arquivar"}
+{"em":1794155019396,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\09-catalogo-estendido","etapa":9,"passo":"arquivar"}
+{"em":1794155019401,"nivel":"passo","texto":"Commit da entrega","etapa":9,"passo":"commitEntrega"}

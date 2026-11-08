@@ -26,7 +26,7 @@ class ProcedimentoRepositoryFake implements ProcedimentoRepository {
             throw new ProcedimentoDuplicadoException(p.numProcedimento());
         }
         long id = proximoId++;
-        Procedimento salvo = Procedimento.restore(id, p.numProcedimento(), p.sexos(), p.idades(), Instant.now());
+        Procedimento salvo = Procedimento.restore(id, p.numProcedimento(), p.sexos(), p.idades(), Instant.now(), p.catalogo());
         porId.put(id, salvo);
         return salvo;
     }

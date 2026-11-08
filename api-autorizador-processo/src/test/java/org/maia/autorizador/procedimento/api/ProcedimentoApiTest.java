@@ -36,6 +36,9 @@ class ProcedimentoApiTest extends IntegrationTestBase {
     @Autowired
     DataSource dataSource;
 
+    @Autowired
+    org.maia.autorizador.procedimento.application.port.ProcedimentoRepository procedimentos;
+
     @BeforeEach
     void semear() {
         new ResourceDatabasePopulator(new ClassPathResource("db/seed/V1000__seed_local.sql"))
@@ -85,7 +88,7 @@ class ProcedimentoApiTest extends IntegrationTestBase {
 
     @Test
     void cadastroSeguidoDeConsultaDevolveOMesmoProcedimento() throws Exception {
-        String json = cadastrar("{\"numProcedimento\":9999,\"sexos\":[\"f\",\"M\"],\"idades\":[30,18]}")
+        String json = cadastrar("{\"nome\":\"Proc\",\"categoria\":\"CONSULTAS\",\"numProcedimento\":9999,\"sexos\":[\"f\",\"M\"],\"idades\":[30,18]}")
                 .andExpect(status().isCreated())
                 .andExpect(header().string("Location", org.hamcrest.Matchers.startsWith(BASE + "/")))
                 .andExpect(jsonPath("$.sexos[0]").value("M"))
@@ -105,18 +108,89 @@ class ProcedimentoApiTest extends IntegrationTestBase {
     }
 
     @Test
+    void cadastroEstendidoEConsultaDevolvemOsMesmosValores() throws Exception {
+        String json = cadastrar("""
+                {"numProcedimento":8888,"nome":"  Ressonância  ","codigoTuss":"40101010",
+                 "categoria":"EXAMES_IMAGEM","especialidade":"NEUROLOGIA","tipoCobertura":"REGRAS",
+                 "quantidadeMaxima":2,"periodo":"ANO","exigeAutorizacaoPrevia":true,
+                 "sexos":["F"],"idades":[40]}""")
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.nome").value("Ressonância"))
+                .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
+        int id = com.jayway.jsonpath.JsonPath.read(json, "$.id");
+
+        mvc.perform(comToken(get(BASE + "/" + id))).andExpect(status().isOk())
+                .andExpect(jsonPath("$.nome").value("Ressonância"))
+                .andExpect(jsonPath("$.codigoTuss").value("40101010"))
+                .andExpect(jsonPath("$.categoria").value("EXAMES_IMAGEM"))
+                .andExpect(jsonPath("$.especialidade").value("NEUROLOGIA"))
+                .andExpect(jsonPath("$.tipoCobertura").value("REGRAS"))
+                .andExpect(jsonPath("$.quantidadeMaxima").value(2))
+                .andExpect(jsonPath("$.periodo").value("ANO"))
+                .andExpect(jsonPath("$.exigeAutorizacaoPrevia").value(true))
+                .andExpect(jsonPath("$.exigeJustificativaMedica").value(false));
+        mvc.perform(comToken(get(BASE)).param("q", "8888")).andExpect(status().isOk())
+                .andExpect(jsonPath("$.itens[0].categoria").value("EXAMES_IMAGEM"))
+                .andExpect(jsonPath("$.itens[0].periodo").value("ANO"));
+    }
+
+    @Test
+    void padroesSaoAplicadosQuandoOmitidos() throws Exception {
+        cadastrar("{\"numProcedimento\":8889,\"nome\":\"Consulta\",\"categoria\":\"CONSULTAS\"}")
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.tipoCobertura").value("PLANO"))
+                .andExpect(jsonPath("$.exigeAutorizacaoPrevia").value(false))
+                .andExpect(jsonPath("$.exigeJustificativaMedica").value(false))
+                .andExpect(jsonPath("$.quantidadeMaxima").doesNotExist())
+                .andExpect(jsonPath("$.periodo").doesNotExist());
+    }
+
+    @Test
+    void camposInvalidosRetornam400ComErroPorCampoENadaEGravado() throws Exception {
+        cadastrar("{\"numProcedimento\":8890,\"categoria\":\"CONSULTAS\"}").andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value("VALIDACAO_INVALIDA"))
+                .andExpect(jsonPath("$.errors[0].campo").value("nome"));
+        cadastrar("{\"numProcedimento\":8890,\"nome\":\"x\"}").andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.errors[0].campo").value("categoria"));
+        cadastrar("{\"numProcedimento\":8890,\"nome\":\"x\",\"categoria\":\"CONSULTAS\",\"quantidadeMaxima\":2}")
+                .andExpect(status().isBadRequest()).andExpect(jsonPath("$.errors[0].campo").value("periodo"));
+        cadastrar("{\"numProcedimento\":8890,\"nome\":\"x\",\"categoria\":\"CONSULTAS\",\"periodo\":\"MES\"}")
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.errors[0].campo").value("quantidadeMaxima"));
+
+        assertThat(jdbc.queryForObject("select count(*) from procedimento", Integer.class)).isEqualTo(3);
+    }
+
+    @Test
+    void procedimentoDoSeedTemCamposNovosNulosEADecisaoSegueSoSexoEIdade() throws Exception {
+        mvc.perform(comToken(get(BASE)).param("q", "1234")).andExpect(status().isOk())
+                .andExpect(jsonPath("$.itens[0].nome").doesNotExist())
+                .andExpect(jsonPath("$.itens[0].categoria").doesNotExist())
+                .andExpect(jsonPath("$.itens[0].tipoCobertura").doesNotExist())
+                .andExpect(jsonPath("$.itens[0].exigeAutorizacaoPrevia").doesNotExist());
+
+        // O módulo autorizacao só chega na etapa 10; a regra de decisão é a do domínio, que ignora o catálogo.
+        var seed = procedimentos.buscarPorNumero(1234).orElseThrow();
+        assertThat(seed.catalogo()).isEqualTo(org.maia.autorizador.procedimento.domain.model.DadosCatalogo.VAZIO);
+        assertThat(seed.avaliar(10, org.maia.autorizador.procedimento.domain.model.Sexo.F)).isTrue();
+        assertThat(seed.avaliar(20, org.maia.autorizador.procedimento.domain.model.Sexo.F)).isTrue();
+        assertThat(seed.avaliar(10, org.maia.autorizador.procedimento.domain.model.Sexo.M)).isFalse();
+        assertThat(seed.avaliar(15, org.maia.autorizador.procedimento.domain.model.Sexo.F)).isFalse();
+    }
+
+    @Test
     void cadastroComListasVaziasEhAceito() throws Exception {
-        cadastrar("{\"numProcedimento\":55,\"sexos\":[],\"idades\":[]}").andExpect(status().isCreated())
+        cadastrar("{\"nome\":\"Proc\",\"categoria\":\"CONSULTAS\",\"numProcedimento\":55,\"sexos\":[],\"idades\":[]}").andExpect(status().isCreated())
                 .andExpect(jsonPath("$.sexos", hasSize(0)))
                 .andExpect(jsonPath("$.idades", hasSize(0)));
     }
 
     @Test
     void numeroRepetidoRetorna403DuplicadoESeedContinuaIntacto() throws Exception {
-        cadastrar("{\"numProcedimento\":1234,\"sexos\":[\"M\"],\"idades\":[1]}").andExpect(status().isForbidden())
+        cadastrar("{\"nome\":\"Proc\",\"categoria\":\"CONSULTAS\",\"numProcedimento\":1234,\"sexos\":[\"M\"],\"idades\":[1]}").andExpect(status().isForbidden())
                 .andExpect(jsonPath("$.code").value("PROCEDIMENTO_DUPLICADO"));
-        cadastrar("{\"numProcedimento\":9999}").andExpect(status().isCreated());
-        cadastrar("{\"numProcedimento\":9999}").andExpect(status().isForbidden())
+        cadastrar("{\"nome\":\"Proc\",\"categoria\":\"CONSULTAS\",\"numProcedimento\":9999}").andExpect(status().isCreated());
+        cadastrar("{\"nome\":\"Proc\",\"categoria\":\"CONSULTAS\",\"numProcedimento\":9999}").andExpect(status().isForbidden())
                 .andExpect(jsonPath("$.code").value("PROCEDIMENTO_DUPLICADO"));
 
         listar().andExpect(jsonPath("$.totalItens").value(4));

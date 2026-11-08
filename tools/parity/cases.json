@@ -75,7 +75,7 @@
         "requisicao": {
           "metodo": "POST",
           "caminho": "/api/v1/procedimentos",
-          "corpo": { "numProcedimento": 9999, "sexos": ["M", "F"], "idades": [18, 30] }
+          "corpo": { "numProcedimento": 9999, "nome": "Procedimento de teste", "categoria": "CONSULTAS", "sexos": ["M", "F"], "idades": [18, 30] }
         },
         "resposta": {
           "status": 201,
@@ -144,7 +144,7 @@
         "requisicao": {
           "metodo": "POST",
           "caminho": "/api/v1/procedimentos",
-          "corpo": { "numProcedimento": 9999, "sexos": ["M"], "idades": [1] }
+          "corpo": { "numProcedimento": 9999, "nome": "Procedimento de teste", "categoria": "CONSULTAS", "sexos": ["M"], "idades": [1] }
         },
         "resposta": { "status": 403, "estavel": { "code": "PROCEDIMENTO_DUPLICADO" } }
       },
@@ -546,6 +546,85 @@
           "status": 401,
           "estavel": { "code": "NAO_AUTENTICADO" },
           "cabecalhosPresentes": ["WWW-Authenticate"]
+        }
+      }
+    },
+    {
+      "id": "N01",
+      "grupo": "procedimento",
+      "ordem": 40,
+      "apenasV1": true,
+      "novo": true,
+      "feature": "NEW-01",
+      "descricao": "Dado um cadastro com nome, categoria, tipoCobertura REGRAS, quantidadeMaxima 2 e periodo ANO, quando envio, então recebo 201 e os campos de catálogo voltam na resposta (fora da paridade original).",
+      "mapeamentoV1": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/api/v1/procedimentos",
+          "corpo": {
+            "numProcedimento": 9997, "nome": "Ressonância magnética", "categoria": "EXAMES_IMAGEM",
+            "tipoCobertura": "REGRAS", "quantidadeMaxima": 2, "periodo": "ANO",
+            "sexos": ["M", "F"], "idades": [18, 30]
+          }
+        },
+        "resposta": {
+          "status": 201,
+          "estavel": {
+            "numProcedimento": 9997, "nome": "Ressonância magnética", "categoria": "EXAMES_IMAGEM",
+            "tipoCobertura": "REGRAS", "quantidadeMaxima": 2, "periodo": "ANO",
+            "exigeAutorizacaoPrevia": false, "exigeJustificativaMedica": false
+          },
+          "cabecalhosPresentes": ["Location"]
+        }
+      }
+    },
+    {
+      "id": "N02",
+      "grupo": "procedimento",
+      "ordem": 41,
+      "apenasV1": true,
+      "novo": true,
+      "feature": "NEW-01",
+      "descricao": "Dado um cadastro sem nome, quando envio, então recebo 400 VALIDACAO_INVALIDA (fora da paridade original).",
+      "mapeamentoV1": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/api/v1/procedimentos",
+          "corpo": { "numProcedimento": 9996, "categoria": "CONSULTAS", "sexos": ["M"], "idades": [10] }
+        },
+        "resposta": { "status": 400, "estavel": { "code": "VALIDACAO_INVALIDA" } }
+      }
+    },
+    {
+      "id": "N03",
+      "grupo": "procedimento",
+      "ordem": 42,
+      "apenasV1": true,
+      "novo": true,
+      "feature": "NEW-01",
+      "descricao": "Dado um cadastro com quantidadeMaxima 2 sem periodo, quando envio, então recebo 400 VALIDACAO_INVALIDA (fora da paridade original).",
+      "mapeamentoV1": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/api/v1/procedimentos",
+          "corpo": { "numProcedimento": 9995, "nome": "Consulta", "categoria": "CONSULTAS", "quantidadeMaxima": 2, "sexos": ["M"], "idades": [10] }
+        },
+        "resposta": { "status": 400, "estavel": { "code": "VALIDACAO_INVALIDA" } }
+      }
+    },
+    {
+      "id": "N04",
+      "grupo": "procedimento",
+      "ordem": 43,
+      "apenasV1": true,
+      "novo": true,
+      "feature": "NEW-01",
+      "descricao": "Dado o procedimento 1234 da semente, quando filtro a listagem por prefixo, então ele continua listado (os campos de catálogo são nulos nas linhas anteriores; o valor nulo é conferido em ProcedimentoApiTest).",
+      "mapeamentoV1": {
+        "requisicao": { "metodo": "GET", "caminho": "/api/v1/procedimentos", "query": { "q": "1234" } },
+        "resposta": {
+          "status": 200,
+          "conjuntos": { "itens[].numProcedimento": [1234] }
         }
       }
     }

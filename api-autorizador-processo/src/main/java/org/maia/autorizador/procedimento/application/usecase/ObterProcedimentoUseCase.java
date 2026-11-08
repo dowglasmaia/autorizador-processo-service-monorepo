@@ -3,11 +3,8 @@ package org.maia.autorizador.procedimento.application.usecase;
 import java.time.Instant;
 import java.util.List;
 import org.maia.autorizador.procedimento.application.port.ProcedimentoRepository;
-import java.time.Instant;
-import java.util.List;
 import org.maia.autorizador.procedimento.domain.exception.ProcedimentoNaoEncontradoException;
-import java.time.Instant;
-import java.util.List;
+import org.maia.autorizador.procedimento.domain.model.DadosCatalogo;
 import org.maia.autorizador.procedimento.domain.model.Procedimento;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,13 +14,39 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class ObterProcedimentoUseCase {
 
+    /**
+     * Dados de catálogo para as bordas, com os enums como texto (o nome do valor). Todos os campos podem ser nulos
+     * em procedimentos anteriores ao catálogo estendido.
+     */
+    public record Catalogo(String nome, String codigoTuss, String categoria, String especialidade,
+            String tipoCobertura, Integer quantidadeMaxima, String periodo, Boolean exigeAutorizacaoPrevia,
+            Boolean exigeJustificativaMedica) {
+
+        public static final Catalogo VAZIO = new Catalogo(null, null, null, null, null, null, null, null, null);
+
+        static Catalogo de(DadosCatalogo d) {
+            return new Catalogo(d.nome(), d.codigoTuss(), texto(d.categoria()), texto(d.especialidade()),
+                    texto(d.tipoCobertura()), d.quantidadeMaxima(), texto(d.periodo()),
+                    d.exigeAutorizacaoPrevia(), d.exigeJustificativaMedica());
+        }
+
+        private static String texto(Enum<?> valor) {
+            return valor == null ? null : valor.name();
+        }
+    }
+
     /** Visão do procedimento para as bordas: sexos na ordem M, F e idades em ordem crescente. */
     public record Resultado(long id, int numProcedimento, List<String> sexos, List<Integer> idades,
-            Instant criadoEm) {
+            Instant criadoEm, Catalogo catalogo) {
+
+        /** Sem dados de catálogo (procedimento anterior ao catálogo estendido). */
+        public Resultado(long id, int numProcedimento, List<String> sexos, List<Integer> idades, Instant criadoEm) {
+            this(id, numProcedimento, sexos, idades, criadoEm, Catalogo.VAZIO);
+        }
 
         public static Resultado de(Procedimento p) {
             return new Resultado(p.id(), p.numProcedimento(), p.sexos().stream().map(Enum::name).toList(),
-                    List.copyOf(p.idades()), p.criadoEm());
+                    List.copyOf(p.idades()), p.criadoEm(), Catalogo.de(p.catalogo()));
         }
     }
 

@@ -22,6 +22,7 @@ import org.maia.autorizador.procedimento.application.usecase.CadastrarProcedimen
 import org.maia.autorizador.procedimento.application.usecase.ListarProcedimentosUseCase;
 import org.maia.autorizador.procedimento.application.usecase.ListarProcedimentosUseCase.PaginaResultado;
 import org.maia.autorizador.procedimento.application.usecase.ObterProcedimentoUseCase;
+import org.maia.autorizador.procedimento.application.usecase.ObterProcedimentoUseCase.Catalogo;
 import org.maia.autorizador.procedimento.application.usecase.ObterProcedimentoUseCase.Resultado;
 import org.maia.autorizador.procedimento.domain.exception.ProcedimentoDuplicadoException;
 import org.maia.autorizador.procedimento.domain.exception.ProcedimentoNaoEncontradoException;
@@ -65,10 +66,10 @@ class ProcedimentoControllerTest {
 
     @Test
     void cadastroRetorna201ComCorpoELocation() throws Exception {
-        when(cadastrar.executar(eq(9999), any(), any()))
+        when(cadastrar.executar(eq(9999), any(), any(), any()))
                 .thenReturn(salvo(42, 9999, List.of("M", "F"), List.of(18, 30)));
 
-        postar("{\"numProcedimento\":9999,\"sexos\":[\"F\",\"M\"],\"idades\":[30,18]}")
+        postar("{\"nome\":\"Proc\",\"categoria\":\"CONSULTAS\",\"numProcedimento\":9999,\"sexos\":[\"F\",\"M\"],\"idades\":[30,18]}")
                 .andExpect(status().isCreated())
                 .andExpect(header().string("Location", "/api/v1/procedimentos/42"))
                 .andExpect(jsonPath("$.id").value(42))
@@ -82,17 +83,17 @@ class ProcedimentoControllerTest {
 
     @Test
     void sexosEmMinusculasSaoAceitos() throws Exception {
-        when(cadastrar.executar(eq(10), any(), any())).thenReturn(salvo(1, 10, List.of("M", "F"), List.of()));
+        when(cadastrar.executar(eq(10), any(), any(), any())).thenReturn(salvo(1, 10, List.of("M", "F"), List.of()));
 
-        postar("{\"numProcedimento\":10,\"sexos\":[\"m\",\"f\"],\"idades\":[]}").andExpect(status().isCreated());
-        verify(cadastrar).executar(eq(10), eq(List.of("M", "F")), any());
+        postar("{\"nome\":\"Proc\",\"categoria\":\"CONSULTAS\",\"numProcedimento\":10,\"sexos\":[\"m\",\"f\"],\"idades\":[]}").andExpect(status().isCreated());
+        verify(cadastrar).executar(eq(10), eq(List.of("M", "F")), any(), any());
     }
 
     @Test
     void listasAusentesOuVaziasSaoAceitas() throws Exception {
-        when(cadastrar.executar(eq(11), any(), any())).thenReturn(salvo(2, 11, List.of(), List.of()));
+        when(cadastrar.executar(eq(11), any(), any(), any())).thenReturn(salvo(2, 11, List.of(), List.of()));
 
-        postar("{\"numProcedimento\":11}").andExpect(status().isCreated())
+        postar("{\"nome\":\"Proc\",\"categoria\":\"CONSULTAS\",\"numProcedimento\":11}").andExpect(status().isCreated())
                 .andExpect(jsonPath("$.sexos").isEmpty()).andExpect(jsonPath("$.idades").isEmpty());
     }
 
@@ -114,11 +115,94 @@ class ProcedimentoControllerTest {
         verifyNoInteractions(cadastrar);
     }
 
+    private static final String BASE_JSON = "\"numProcedimento\":5,\"nome\":\"Eco\",\"categoria\":\"CONSULTAS\"";
+
+    @Test
+    void cadastroEstendidoMapeiaRequestEResponse() throws Exception {
+        var catalogo = new Catalogo("Eco", "123", "EXAMES_IMAGEM", "CARDIOLOGIA", "REGRAS", 2, "ANO", true,
+                false);
+        when(cadastrar.executar(eq(5), any(), any(), any())).thenReturn(new Resultado(7, 5, List.of(), List.of(),
+                Instant.parse("2026-01-02T03:04:05Z"), catalogo));
+
+        postar("{\"numProcedimento\":5,\"nome\":\" Eco \",\"codigoTuss\":\"123\",\"categoria\":\"EXAMES_IMAGEM\","
+                + "\"especialidade\":\"CARDIOLOGIA\",\"tipoCobertura\":\"REGRAS\",\"quantidadeMaxima\":2,"
+                + "\"periodo\":\"ANO\",\"exigeAutorizacaoPrevia\":true}")
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.nome").value("Eco"))
+                .andExpect(jsonPath("$.codigoTuss").value("123"))
+                .andExpect(jsonPath("$.categoria").value("EXAMES_IMAGEM"))
+                .andExpect(jsonPath("$.especialidade").value("CARDIOLOGIA"))
+                .andExpect(jsonPath("$.tipoCobertura").value("REGRAS"))
+                .andExpect(jsonPath("$.quantidadeMaxima").value(2))
+                .andExpect(jsonPath("$.periodo").value("ANO"))
+                .andExpect(jsonPath("$.exigeAutorizacaoPrevia").value(true))
+                .andExpect(jsonPath("$.exigeJustificativaMedica").value(false));
+        verify(cadastrar).executar(eq(5), any(), any(), eq(new Catalogo(" Eco ", "123",
+                "EXAMES_IMAGEM", "CARDIOLOGIA", "REGRAS", 2, "ANO", true, null)));
+    }
+
+    @Test
+    void getEListagemDevolvemCamposDeCatalogoENulosParaLinhasAntigas() throws Exception {
+        var catalogo = new Catalogo("Eco", null, "CONSULTAS", null, "PLANO", null, null, false, false);
+        var comCatalogo = new Resultado(1, 5, List.of(), List.of(), Instant.EPOCH, catalogo);
+        when(obter.executar(1)).thenReturn(comCatalogo);
+        when(listar.executar(any(), anyBoolean(), anyInt(), anyInt())).thenReturn(
+                new PaginaResultado(List.of(comCatalogo, salvo(2, 1234, List.of(), List.of())), 0, 20, 2, 1));
+
+        mvc.perform(get(BASE + "/1")).andExpect(status().isOk())
+                .andExpect(jsonPath("$.nome").value("Eco")).andExpect(jsonPath("$.categoria").value("CONSULTAS"));
+        mvc.perform(get(BASE)).andExpect(status().isOk())
+                .andExpect(jsonPath("$.itens[0].tipoCobertura").value("PLANO"))
+                .andExpect(jsonPath("$.itens[1].nome").doesNotExist())
+                .andExpect(jsonPath("$.itens[1].categoria").doesNotExist())
+                .andExpect(jsonPath("$.itens[1].exigeAutorizacaoPrevia").doesNotExist());
+    }
+
+    @Test
+    void nomeECategoriaSaoObrigatoriosComErroPorCampo() throws Exception {
+        postar("{\"numProcedimento\":5,\"categoria\":\"CONSULTAS\"}").andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value("VALIDACAO_INVALIDA"))
+                .andExpect(jsonPath("$.errors[0].campo").value("nome"));
+        postar("{\"numProcedimento\":5,\"nome\":\"Eco\"}").andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value("VALIDACAO_INVALIDA"))
+                .andExpect(jsonPath("$.errors[0].campo").value("categoria"));
+        postar("{\"numProcedimento\":5,\"nome\":\"\",\"categoria\":\"CONSULTAS\"}").andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.errors[0].campo").value("nome"));
+        postar("{\"numProcedimento\":5,\"nome\":\"   \",\"categoria\":\"CONSULTAS\"}")
+                .andExpect(status().isBadRequest()).andExpect(jsonPath("$.code").value("VALIDACAO_INVALIDA"))
+                .andExpect(jsonPath("$.errors[0].campo").value("nome"));
+        postar("{\"numProcedimento\":5,\"nome\":\"" + "a".repeat(201) + "\",\"categoria\":\"CONSULTAS\"}")
+                .andExpect(status().isBadRequest()).andExpect(jsonPath("$.errors[0].campo").value("nome"));
+        verifyNoInteractions(cadastrar);
+    }
+
+    @Test
+    void quantidadeMaximaEPeriodoDevemVirJuntos() throws Exception {
+        postar("{" + BASE_JSON + ",\"quantidadeMaxima\":2}").andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value("VALIDACAO_INVALIDA"))
+                .andExpect(jsonPath("$.errors[0].campo").value("periodo"));
+        postar("{" + BASE_JSON + ",\"periodo\":\"MES\"}").andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value("VALIDACAO_INVALIDA"))
+                .andExpect(jsonPath("$.errors[0].campo").value("quantidadeMaxima"));
+        postar("{" + BASE_JSON + ",\"quantidadeMaxima\":0,\"periodo\":\"MES\"}").andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.errors[0].campo").value("quantidadeMaxima"));
+        verifyNoInteractions(cadastrar);
+    }
+
+    @Test
+    void valoresForaDosEnumsRetornam400() throws Exception {
+        postar("{\"numProcedimento\":5,\"nome\":\"Eco\",\"categoria\":\"OUTRA\"}").andExpect(status().isBadRequest());
+        postar("{" + BASE_JSON + ",\"especialidade\":\"X\"}").andExpect(status().isBadRequest());
+        postar("{" + BASE_JSON + ",\"tipoCobertura\":\"X\"}").andExpect(status().isBadRequest());
+        postar("{" + BASE_JSON + ",\"quantidadeMaxima\":1,\"periodo\":\"SEMANA\"}").andExpect(status().isBadRequest());
+        verifyNoInteractions(cadastrar);
+    }
+
     @Test
     void duplicidadeRetorna403() throws Exception {
-        when(cadastrar.executar(eq(1234), any(), any())).thenThrow(new ProcedimentoDuplicadoException(1234));
+        when(cadastrar.executar(eq(1234), any(), any(), any())).thenThrow(new ProcedimentoDuplicadoException(1234));
 
-        postar("{\"numProcedimento\":1234}").andExpect(status().isForbidden())
+        postar("{\"nome\":\"Proc\",\"categoria\":\"CONSULTAS\",\"numProcedimento\":1234}").andExpect(status().isForbidden())
                 .andExpect(jsonPath("$.code").value("PROCEDIMENTO_DUPLICADO"));
     }
 

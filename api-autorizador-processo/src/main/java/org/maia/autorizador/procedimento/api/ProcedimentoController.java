@@ -7,12 +7,18 @@ import java.util.Objects;
 import java.util.Set;
 import org.maia.autorizador.generated.procedimento.api.ProcedimentosApi;
 import org.maia.autorizador.generated.procedimento.model.PaginaProcedimentos;
+import org.maia.autorizador.generated.procedimento.model.Categoria;
+import org.maia.autorizador.generated.procedimento.model.Especialidade;
+import org.maia.autorizador.generated.procedimento.model.Periodo;
 import org.maia.autorizador.generated.procedimento.model.Procedimento;
 import org.maia.autorizador.generated.procedimento.model.ProcedimentoRequest;
 import org.maia.autorizador.generated.procedimento.model.Sexo;
+import org.maia.autorizador.generated.procedimento.model.TipoCobertura;
 import org.maia.autorizador.procedimento.application.usecase.CadastrarProcedimentoUseCase;
 import org.maia.autorizador.procedimento.application.usecase.ListarProcedimentosUseCase;
 import org.maia.autorizador.procedimento.application.usecase.ObterProcedimentoUseCase;
+import org.maia.autorizador.procedimento.application.usecase.ObterProcedimentoUseCase.Catalogo;
+import org.maia.autorizador.shared.error.CampoInvalidoException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +54,7 @@ class ProcedimentoController implements ProcedimentosApi {
             throw new IllegalArgumentException("Sexos e idades não aceitam valores nulos.");
         }
         var criado = cadastrar.executar(corpo.getNumProcedimento(), sexos.stream().map(Sexo::getValue).toList(),
-                idades);
+                idades, paraCatalogo(corpo));
         return ResponseEntity.created(URI.create(PREFIXO_RECURSO + criado.id())).body(paraResposta(criado));
     }
 
@@ -77,9 +83,46 @@ class ProcedimentoController implements ProcedimentosApi {
                 "Ordenação inválida: use " + ORDEM_CRESCENTE + " ou " + ORDEM_DECRESCENTE + ".");
     }
 
+    /** Valida o que o Bean Validation não cobre e aponta o campo no erro. */
+    private static Catalogo paraCatalogo(ProcedimentoRequest corpo) {
+        if (corpo.getNome().isBlank()) {
+            throw new CampoInvalidoException("nome", "O nome deve ter de 1 a 200 caracteres.");
+        }
+        if (corpo.getQuantidadeMaxima() != null && corpo.getPeriodo() == null) {
+            throw new CampoInvalidoException("periodo", "Informe o período junto com a quantidade máxima.");
+        }
+        if (corpo.getQuantidadeMaxima() == null && corpo.getPeriodo() != null) {
+            throw new CampoInvalidoException("quantidadeMaxima",
+                    "Informe a quantidade máxima junto com o período.");
+        }
+        return new Catalogo(corpo.getNome(), corpo.getCodigoTuss(), texto(corpo.getCategoria()),
+                texto(corpo.getEspecialidade()), texto(corpo.getTipoCobertura()), corpo.getQuantidadeMaxima(),
+                texto(corpo.getPeriodo()), corpo.getExigeAutorizacaoPrevia(), corpo.getExigeJustificativaMedica());
+    }
+
+    /** Os enums gerados e os do módulo têm os mesmos nomes; a troca é feita pelo nome do valor. */
+    private static String texto(Enum<?> valor) {
+        return valor == null ? null : valor.name();
+    }
+
+    private static <E extends Enum<E>> E enumGerado(Class<E> tipo, String nome) {
+        return nome == null ? null : Enum.valueOf(tipo, nome);
+    }
+
     private static Procedimento paraResposta(ObterProcedimentoUseCase.Resultado r) {
         List<Sexo> sexos = r.sexos().stream().map(Sexo::fromValue).toList();
-        return new Procedimento(r.id(), r.numProcedimento(), sexos, r.idades(),
+        var resposta = new Procedimento(r.id(), r.numProcedimento(), sexos, r.idades(),
                 r.criadoEm().atOffset(ZoneOffset.UTC));
+        Catalogo c = r.catalogo();
+        resposta.setNome(c.nome());
+        resposta.setCodigoTuss(c.codigoTuss());
+        resposta.setCategoria(enumGerado(Categoria.class, c.categoria()));
+        resposta.setEspecialidade(enumGerado(Especialidade.class, c.especialidade()));
+        resposta.setTipoCobertura(enumGerado(TipoCobertura.class, c.tipoCobertura()));
+        resposta.setQuantidadeMaxima(c.quantidadeMaxima());
+        resposta.setPeriodo(enumGerado(Periodo.class, c.periodo()));
+        resposta.setExigeAutorizacaoPrevia(c.exigeAutorizacaoPrevia());
+        resposta.setExigeJustificativaMedica(c.exigeJustificativaMedica());
+        return resposta;
     }
 }

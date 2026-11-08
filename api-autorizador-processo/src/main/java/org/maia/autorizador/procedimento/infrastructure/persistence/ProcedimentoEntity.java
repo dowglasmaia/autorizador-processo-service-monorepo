@@ -20,7 +20,12 @@ import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.envers.Audited;
 import org.hibernate.type.SqlTypes;
+import org.maia.autorizador.procedimento.domain.model.Categoria;
+import org.maia.autorizador.procedimento.domain.model.DadosCatalogo;
+import org.maia.autorizador.procedimento.domain.model.Especialidade;
+import org.maia.autorizador.procedimento.domain.model.Periodo;
 import org.maia.autorizador.procedimento.domain.model.Sexo;
+import org.maia.autorizador.procedimento.domain.model.TipoCobertura;
 
 /**
  * Mapeamento JPA das tabelas {@code procedimento}, {@code procedimento_sexo} e {@code procedimento_idade} (V1).
@@ -42,6 +47,37 @@ class ProcedimentoEntity {
     @Column(name = "criado_em", nullable = false, updatable = false)
     private Instant criadoEm;
 
+    @Column(name = "nome", length = 200)
+    private String nome;
+
+    @Column(name = "codigo_tuss", length = 30)
+    private String codigoTuss;
+
+    @Column(name = "categoria", length = 30)
+    @Enumerated(EnumType.STRING)
+    private Categoria categoria;
+
+    @Column(name = "especialidade", length = 30)
+    @Enumerated(EnumType.STRING)
+    private Especialidade especialidade;
+
+    @Column(name = "tipo_cobertura", length = 20)
+    @Enumerated(EnumType.STRING)
+    private TipoCobertura tipoCobertura;
+
+    @Column(name = "quantidade_maxima")
+    private Integer quantidadeMaxima;
+
+    @Column(name = "periodo", length = 10)
+    @Enumerated(EnumType.STRING)
+    private Periodo periodo;
+
+    @Column(name = "exige_autorizacao_previa")
+    private Boolean exigeAutorizacaoPrevia;
+
+    @Column(name = "exige_justificativa_medica")
+    private Boolean exigeJustificativaMedica;
+
     @ElementCollection
     @CollectionTable(name = "procedimento_sexo", joinColumns = @JoinColumn(name = "procedimento_id"))
     @Column(name = "sexo", nullable = false, length = 1)
@@ -59,8 +95,18 @@ class ProcedimentoEntity {
     protected ProcedimentoEntity() {
     }
 
-    ProcedimentoEntity(int numeroProcedimento, Collection<Sexo> sexos, Collection<Integer> idades) {
+    ProcedimentoEntity(int numeroProcedimento, Collection<Sexo> sexos, Collection<Integer> idades,
+            DadosCatalogo catalogo) {
         this.numeroProcedimento = numeroProcedimento;
+        this.nome = catalogo.nome();
+        this.codigoTuss = catalogo.codigoTuss();
+        this.categoria = catalogo.categoria();
+        this.especialidade = catalogo.especialidade();
+        this.tipoCobertura = catalogo.tipoCobertura();
+        this.quantidadeMaxima = catalogo.quantidadeMaxima();
+        this.periodo = catalogo.periodo();
+        this.exigeAutorizacaoPrevia = catalogo.exigeAutorizacaoPrevia();
+        this.exigeJustificativaMedica = catalogo.exigeJustificativaMedica();
         this.sexos.addAll(sexos);
         this.idades.addAll(idades);
         // O PostgreSQL guarda microssegundos; truncar mantém o valor devolvido igual ao gravado.
@@ -77,6 +123,12 @@ class ProcedimentoEntity {
 
     Instant getCriadoEm() {
         return criadoEm;
+    }
+
+    /** Dados de catálogo; campos nulos nas linhas anteriores à V4. */
+    DadosCatalogo catalogo() {
+        return new DadosCatalogo(nome, codigoTuss, categoria, especialidade, tipoCobertura, quantidadeMaxima,
+                periodo, exigeAutorizacaoPrevia, exigeJustificativaMedica);
     }
 
     Set<Sexo> getSexos() {

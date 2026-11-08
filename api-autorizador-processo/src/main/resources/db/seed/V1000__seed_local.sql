@@ -1,5 +1,7 @@
 -- Dados de exemplo para o perfil local (carregado só via spring.flyway.locations do application-local.yml).
 -- 1234: F, idades 10 e 20 | 4567: M e F, idades 20 e 30 | 6789: M e F, idade 10.
+-- Catálogo estendido (V4): o protótipo não define nome/categoria para 1234, 4567 e 6789; por decisão da
+-- SPEC-12 (etapa 9) os campos novos ficam nulos aqui, como nas linhas anteriores ao catálogo.
 
 insert into procedimento (numero_procedimento) values (1234), (4567), (6789);
 

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.maia.autorizador.shared.error.BusinessRuleException;
+import org.maia.autorizador.shared.error.CampoInvalidoException;
 import org.maia.autorizador.shared.error.LimiteExcedidoException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -119,6 +120,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     ResponseEntity<ProblemDetail> argumentoInvalido(IllegalArgumentException ex, HttpServletRequest request) {
         return validacaoInvalida(request, List.of(violacao("requisicao", ex.getMessage())));
+    }
+
+    @ExceptionHandler(CampoInvalidoException.class)
+    ResponseEntity<ProblemDetail> campoInvalido(CampoInvalidoException ex, HttpServletRequest request) {
+        return validacaoInvalida(request, List.of(violacao(ex.getCampo(), ex.getMessage())));
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)

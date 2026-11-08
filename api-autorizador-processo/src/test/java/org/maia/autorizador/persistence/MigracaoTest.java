@@ -10,12 +10,12 @@ import org.maia.autorizador.support.IntegrationTestBase;
 class MigracaoTest extends IntegrationTestBase {
 
     @Test
-    void migracaoLimpaAplicaV1AV3ComSucesso() {
+    void migracaoLimpaAplicaV1AV4ComSucesso() {
         List<Map<String, Object>> historico = jdbc.queryForList(
                 "select version, success from flyway_schema_history order by installed_rank");
 
-        assertThat(historico).hasSize(3);
-        assertThat(historico).extracting(l -> l.get("version")).containsExactly("1", "2", "3");
+        assertThat(historico).hasSize(4);
+        assertThat(historico).extracting(l -> l.get("version")).containsExactly("1", "2", "3", "4");
         assertThat(historico).extracting(l -> l.get("success")).containsOnly(true);
     }
 }

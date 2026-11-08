@@ -32,7 +32,7 @@ class ProcedimentoRepositoryAdapter implements ProcedimentoRepository {
     @Override
     public Procedimento salvar(Procedimento procedimento) {
         var entidade = new ProcedimentoEntity(procedimento.numProcedimento(), procedimento.sexos(),
-                procedimento.idades());
+                procedimento.idades(), procedimento.catalogo());
         try {
             return paraDominio(jpa.saveAndFlush(entidade));
         } catch (DataIntegrityViolationException ex) {
@@ -71,6 +71,6 @@ class ProcedimentoRepositoryAdapter implements ProcedimentoRepository {
 
     private static Procedimento paraDominio(ProcedimentoEntity e) {
         return Procedimento.restore(e.getId(), e.getNumeroProcedimento(), e.getSexos(), e.getIdades(),
-                e.getCriadoEm());
+                e.getCriadoEm(), e.catalogo());
     }
 }

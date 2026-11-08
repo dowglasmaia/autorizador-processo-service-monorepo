@@ -9,7 +9,12 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.maia.autorizador.procedimento.domain.model.Categoria;
+import org.maia.autorizador.procedimento.domain.model.DadosCatalogo;
+import org.maia.autorizador.procedimento.domain.model.Especialidade;
+import org.maia.autorizador.procedimento.domain.model.Periodo;
 import org.maia.autorizador.procedimento.domain.model.Procedimento;
+import org.maia.autorizador.procedimento.domain.model.TipoCobertura;
 import org.maia.autorizador.procedimento.domain.model.Sexo;
 
 class ProcedimentoTest {
@@ -109,5 +114,111 @@ class ProcedimentoTest {
 
         assertThatThrownBy(() -> p.sexos().add(Sexo.F)).isInstanceOf(UnsupportedOperationException.class);
         assertThatThrownBy(() -> p.idades().add(2)).isInstanceOf(UnsupportedOperationException.class);
+    }
+
+    private static DadosCatalogo catalogo(String nome, Integer quantidade, Periodo periodo) {
+        return DadosCatalogo.validado(nome, "40101010", Categoria.CONSULTAS, Especialidade.CARDIOLOGIA,
+                TipoCobertura.REGRAS, quantidade, periodo, true, false);
+    }
+
+    @Test
+    void criaComDadosDeCatalogoEAparaONome() {
+        Procedimento p = Procedimento.create(1, List.of(Sexo.M), List.of(20),
+                catalogo("  Ressonância  ", 2, Periodo.ANO));
+
+        assertThat(p.catalogo().nome()).isEqualTo("Ressonância");
+        assertThat(p.catalogo().categoria()).isEqualTo(Categoria.CONSULTAS);
+        assertThat(p.catalogo().especialidade()).isEqualTo(Especialidade.CARDIOLOGIA);
+        assertThat(p.catalogo().tipoCobertura()).isEqualTo(TipoCobertura.REGRAS);
+        assertThat(p.catalogo().quantidadeMaxima()).isEqualTo(2);
+        assertThat(p.catalogo().periodo()).isEqualTo(Periodo.ANO);
+        assertThat(p.catalogo().exigeAutorizacaoPrevia()).isTrue();
+        assertThat(p.catalogo().exigeJustificativaMedica()).isFalse();
+    }
+
+    @Test
+    void semCatalogoOsCamposSaoNulos() {
+        DadosCatalogo vazio = Procedimento.create(1, List.of(), List.of()).catalogo();
+
+        assertThat(vazio).isEqualTo(DadosCatalogo.VAZIO);
+        assertThat(vazio.nome()).isNull();
+        assertThat(vazio.quantidadeMaxima()).isNull();
+    }
+
+    @Test
+    void aceitaNomeComOsLimitesDe1A200Caracteres() {
+        assertThat(catalogo("a", null, null).nome()).isEqualTo("a");
+        assertThat(catalogo("a".repeat(200), null, null).nome()).hasSize(200);
+        assertThat(catalogo(" " + "a".repeat(200) + " ", null, null).nome()).hasSize(200);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"", "   "})
+    void rejeitaNomeVazioAposTrim(String nome) {
+        assertThatThrownBy(() -> catalogo(nome, null, null)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void rejeitaNomeComMaisDe200Caracteres() {
+        assertThatThrownBy(() -> catalogo("a".repeat(201), null, null))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void quantidadeMaximaEPeriodoAndamJuntos() {
+        assertThatThrownBy(() -> catalogo("x", 2, null)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> catalogo("x", null, Periodo.MES)).isInstanceOf(IllegalArgumentException.class);
+        assertThat(catalogo("x", 3, Periodo.VIDA).periodo()).isEqualTo(Periodo.VIDA);
+        assertThat(catalogo("x", null, null).periodo()).isNull();
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, -1})
+    void rejeitaQuantidadeMaximaMenorQueUm(int quantidade) {
+        assertThatThrownBy(() -> catalogo("x", quantidade, Periodo.MES))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void rejeitaCodigoTussComMaisDe30Caracteres() {
+        assertThatThrownBy(() -> DadosCatalogo.validado("x", "1".repeat(31), null, null, null, null, null, null, null))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void enumsTemOsValoresDoContrato() {
+        assertThat(Categoria.values()).extracting(Enum::name).containsExactly("EXAMES_IMAGEM", "CONSULTAS",
+                "CIRURGIAS", "TERAPIAS", "EXAMES_LABORATORIAIS");
+        assertThat(Especialidade.values()).extracting(Enum::name).containsExactly("CARDIOLOGIA", "ORTOPEDIA",
+                "PEDIATRIA", "GINECOLOGIA", "NEUROLOGIA");
+        assertThat(TipoCobertura.values()).extracting(Enum::name).containsExactly("PLANO", "REGRAS", "NAO_COBERTO");
+        assertThat(Periodo.values()).extracting(Enum::name).containsExactly("MES", "ANO", "VIDA");
+    }
+
+    @Test
+    void restauraComCatalogo() {
+        Procedimento p = Procedimento.restore(7L, 99, Set.of(Sexo.M), Set.of(1), Instant.EPOCH,
+                catalogo("Eco", 1, Periodo.MES));
+
+        assertThat(p.catalogo().nome()).isEqualTo("Eco");
+        assertThat(Procedimento.restore(7L, 99, Set.of(), Set.of(), Instant.EPOCH).catalogo())
+                .isEqualTo(DadosCatalogo.VAZIO);
+    }
+
+    @Test
+    void avaliarIgnoraTodosOsCamposDeCatalogo() {
+        Procedimento sem = Procedimento.create(1, List.of(Sexo.F), List.of(40));
+        Procedimento com = Procedimento.create(1, List.of(Sexo.F), List.of(40),
+                DadosCatalogo.validado("Nome", "T", Categoria.CIRURGIAS, Especialidade.NEUROLOGIA,
+                        TipoCobertura.NAO_COBERTO, 1, Periodo.MES, true, true));
+
+        for (int idade : new int[] {39, 40, 41}) {
+            for (Sexo sexo : Sexo.values()) {
+                assertThat(com.avaliar(idade, sexo)).isEqualTo(sem.avaliar(idade, sexo));
+            }
+        }
+        assertThat(com.avaliar(40, Sexo.F)).isTrue();
+        assertThat(com.avaliar(40, "m")).isFalse();
+        assertThat(com.avaliar(41, Sexo.F)).isFalse();
     }
 }
