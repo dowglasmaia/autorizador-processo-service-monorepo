@@ -370,3 +370,13 @@
 {"em":1794160366794,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\16-design-system-layout → .specs\\workflows\\test-01\\specs\\arquivo\\16-design-system-layout","etapa":16,"passo":"arquivar"}
 {"em":1794160366800,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\16-design-system-layout","etapa":16,"passo":"arquivar"}
 {"em":1794160366805,"nivel":"passo","texto":"Commit da entrega","etapa":16,"passo":"commitEntrega"}
+{"em":1794160367533,"nivel":"ok","texto":"cb726d0 · 61 arquivo(s) · feat(autorizador): Revisa a spec do design system e layout do fronten…","etapa":16,"passo":"commitEntrega"}
+{"em":1794160367555,"nivel":"ok","texto":"Commit da entrega: ok · cb726d0 · 61 arquivo(s)","etapa":16,"passo":"commitEntrega"}
+{"em":1794160367566,"nivel":"ok","texto":"Etapa 16 entregue · commit cb726d0","etapa":16,"passo":"commitEntrega"}
+{"em":1794160367633,"nivel":"passo","texto":"Etapa 17 · Núcleo HTTP e tipos (iteração 17)","etapa":17}
+{"em":1794160367635,"nivel":"passo","texto":"Propor a spec","etapa":17,"passo":"propor"}
+{"em":1794160367642,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":17,"passo":"propor"}
+{"em":1794160406087,"nivel":"ok","texto":"Propor a spec: ok · 17 tarefas","etapa":17,"passo":"propor"}
+{"em":1794160406094,"nivel":"passo","texto":"Verificar ponto de partida","etapa":17,"passo":"partida"}
+{"em":1794160406104,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":17,"passo":"partida"}
+{"em":1794160406110,"nivel":"passo","texto":"Commit da proposta","etapa":17,"passo":"commitProposta"}

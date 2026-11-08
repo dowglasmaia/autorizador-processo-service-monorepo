@@ -3,13 +3,13 @@
 ## 1. Tipos gerados do contrato
 - [ ] 1.1 Adicionar `openapi-typescript` como devDependency e documentar a justificativa (ADR-08).
 - [ ] 1.2 Criar o script `npm run api:types` gerando `src/app/shared/api/api-types.ts` a partir de `api-autorizador-processo/src/main/resources/openapi/` (resolvendo `$ref`; bundle se necessário).
-- [ ] 1.3 Gerar e versionar `api-types.ts` com cabeçalho de arquivo gerado e exclusão no lint/prettier.
+- [ ] 1.3 Gerar e versionar `api-types.ts` com cabeçalho de arquivo gerado e exclusão no ESLint (`ignores`) e no Prettier (criar `.prettierignore`).
 - [ ] 1.4 Criar aliases de tipos em `shared/api` (reexportando do arquivo gerado, sem redefinir DTOs).
 
 ## 2. Erros da aplicação
 - [ ] 2.1 Criar `core/errors/app-error.ts` com `AppError` e `kind`.
 - [ ] 2.2 Implementar `mapProblem` por `code` cobrindo os 12 códigos do contrato, com reserva por status HTTP.
-- [ ] 2.3 Remover `ApiError`/`toApiError` provisórios da etapa 15.
+- [ ] 2.3 Remover `ApiError`/`toApiError`/`apiErrorInterceptor` provisórios da etapa 15 (usados só em `app.config.ts`).
 
 ## 3. Cliente HTTP e interceptor
 - [ ] 3.1 Criar `core/http/api-client.ts` com base `API_BASE_URL` e helpers `get/post` tipados.

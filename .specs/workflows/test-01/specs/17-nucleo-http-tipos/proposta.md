@@ -1,6 +1,6 @@
 # Núcleo HTTP e tipos
 
-Etapa 17 de 31 · Fase 3 · derivada da `SPEC-16` (`.specs/03-frontend/SPEC-16-core-http-erros-contrato.md`). Escrita antes da entrega da etapa 16 (design system); será revisada contra o que ela entregar.
+Etapa 17 de 31 · Fase 3 · derivada da `SPEC-16` (`.specs/03-frontend/SPEC-16-core-http-erros-contrato.md`). Revisada contra a base entregue pela etapa 16 (design system e layout).
 
 ## Objetivo
 Estabelecer a fronteira tipada com a API: tipos gerados do OpenAPI (somente tipos, sem DTOs à mão), cliente HTTP base com URL configurável, interceptor funcional que converte falhas em `AppError` mapeando `ProblemDetail.code`, e o `403 AUTORIZACAO_NEGADA` tratado como resultado de negócio (`negado`), não como erro.
@@ -10,7 +10,7 @@ Estabelecer a fronteira tipada com a API: tipos gerados do OpenAPI (somente tipo
 - `core/http/` já tem `api-base-url.token.ts` (`API_BASE_URL` ← `environment.apiBaseUrl`), `api-error.ts` (`ApiError {status, message}` provisório) e `api-error.interceptor.ts`, registrado em `app.config.ts`. Serão **substituídos/evoluídos** por `AppError` e `errorInterceptor`, sem manter dois tratamentos de erro.
 - Contrato em `api-autorizador-processo/src/main/resources/openapi/`: `common/responses.yaml` (`ProblemDetail`, `FieldViolation`), `common/security.yaml` e módulos `auth`, `autorizacao`, `painel`, `procedimento` (operações `autenticar`, `obterUsuarioAtual`, `solicitarAutorizacao`, `listarAutorizacoes`, `obterResumoPainel`, `listarProcedimentos`, `cadastrarProcedimento`, `obterProcedimento`), com `$ref` entre arquivos.
 - O enum `ProblemDetail.code` do contrato real tem **12 códigos**: `VALIDACAO_INVALIDA`, `CORPO_INVALIDO`, `PARAMETRO_INVALIDO`, `PROCEDIMENTO_DUPLICADO`, `AUTORIZACAO_NEGADA`, `PROCEDIMENTO_NAO_ENCONTRADO`, `ERRO_INTERNO`, `CREDENCIAIS_INVALIDAS`, `NAO_AUTENTICADO`, `SESSAO_EXPIRADA`, `ACESSO_NEGADO`, `MUITAS_TENTATIVAS`. A SPEC-16 cita só os 7 do catálogo de `API_CONTRACTS.md` §3; vale o contrato (a spec exige cobrir 100 % dos `code`).
-- Etapa 16 (em andamento por outra sessão) adiciona `shared/ui`, `layout`, `NotificationService`, `LoadingService` e `ErrorDialog` com texto simples; esta etapa não depende deles e não os altera, salvo registrar integração mínima se já existir.
+- Etapa 16 entregue: `shared/ui`, `layout/shell`, `core/feedback` (`NotificationService`, `LoadingService`, `ErrorDialog` com texto simples) e `core/api-status` (`ApiStatusService`, `GET /actuator/health` via `HttpClient`, que ignora o erro e marca "indisponível"). Esta etapa não altera `core/feedback`; `ApiError`/`apiErrorInterceptor` só são referenciados por `app.config.ts` (nenhuma outra feature os usa). Sem `.prettierignore`; o ESLint cobre `src/`, então o arquivo gerado precisa de exclusão.
 - A pasta `.specs/06-execution-plan/` citada no `INDEX.md` não existe; desvio a registrar na evidência.
 
 ## Escopo
@@ -39,4 +39,4 @@ Estabelecer a fronteira tipada com a API: tipos gerados do OpenAPI (somente tipo
 - **Substituição do interceptor provisório:** `ApiError`/`apiErrorInterceptor` da etapa 15 são removidos e os testes ajustados.
 - **Gerador:** `openapi-typescript` com bundle prévio dos `$ref` apenas se a resolução direta falhar; instalação das dependências é necessária nesta etapa e autorizada pela SPEC-16 (ADR-08). [REVISAR]
 - **Pasta `06-execution-plan/`:** inexistente; ignorada e registrada.
-- **Revisão pendente:** conferir contra a entrega da etapa 16 (estrutura de `core/`, `app.config.ts`).
+- **Revisão feita:** conferida contra a etapa 16; sem conflito. `ApiStatusService` continua válido (consome só o erro). O `status` HTTP real de cada `code` (ex.: `PROCEDIMENTO_DUPLICADO` em 403, conforme `procedimento.yaml`) vale sobre a tabela de classificação acima quando divergirem; `mapProblem` decide por `code` e usa o status só como reserva.
