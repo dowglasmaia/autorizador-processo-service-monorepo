@@ -2703,7 +2703,175 @@
           "descricao": "Executa a SPEC-15: tokens derivados do protótipo, componentes base e shell de navegação.\nReferências: `design/DESIGN_SYSTEM_DISCOVERY.md` e a skill `angular-tailwind-ui-specialist`.\nLimite: sem telas de negócio.",
           "spec": "16-design-system-layout",
           "specPronta": false,
-          "status": "pendente"
+          "status": "entregue",
+          "entregueEm": "2026-11-08T17:52:46.810Z",
+          "iteracao": 16,
+          "duracaoMs": 603363,
+          "custo": 2.0048799,
+          "passos": [
+            {
+              "id": "propor",
+              "situacao": "ok",
+              "duracaoMs": 36938,
+              "custo": 0.20260859999999997,
+              "tentativas": 1,
+              "detalhe": "23 tarefas"
+            },
+            {
+              "id": "partida",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "commitProposta",
+              "situacao": "ok",
+              "duracaoMs": 1401,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "f7f538f · 5 arquivo(s)"
+            },
+            {
+              "id": "aplicar",
+              "situacao": "ok",
+              "duracaoMs": 565021,
+              "custo": 1.8022713000000001,
+              "tentativas": 1,
+              "detalhe": "23/23 tarefas · 3 sessão(ões)"
+            },
+            {
+              "id": "verificar",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "arquivar",
+              "situacao": "ok",
+              "duracaoMs": 3,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\16-design-system-layout"
+            },
+            {
+              "id": "commitEntrega",
+              "situacao": "ok",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1
+            }
+          ],
+          "sessoes": [
+            {
+              "rotulo": "propor-16",
+              "passo": "propor",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.20260859999999997,
+              "turnos": 8,
+              "duracaoMs": 36921,
+              "inicio": 1794159763345,
+              "fim": 1794159800275,
+              "tokens": {
+                "entrada": 10,
+                "saida": 2739,
+                "cacheCriacao": 38741,
+                "cacheLeitura": 202346
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "antecipar-17",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.24677739999999998,
+              "turnos": 6,
+              "duracaoMs": 60099,
+              "inicio": 1794159801739,
+              "fim": 1794159861847,
+              "tokens": {
+                "entrada": 10,
+                "saida": 5051,
+                "cacheCriacao": 43918,
+                "cacheLeitura": 205754
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-16-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.5891777,
+              "turnos": 28,
+              "duracaoMs": 190225,
+              "inicio": 1794159803215,
+              "fim": 1794159993450,
+              "tokens": {
+                "entrada": 34,
+                "saida": 19977,
+                "cacheCriacao": 70349,
+                "cacheLeitura": 1079437
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-16-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.5234675,
+              "turnos": 23,
+              "duracaoMs": 165978,
+              "inicio": 1794159993455,
+              "fim": 1794160159440,
+              "tokens": {
+                "entrada": 26,
+                "saida": 20146,
+                "cacheCriacao": 61592,
+                "cacheLeitura": 755875
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-16-3",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.6896261000000001,
+              "turnos": 26,
+              "duracaoMs": 207298,
+              "inicio": 1794160159445,
+              "fim": 1794160366752,
+              "tokens": {
+                "entrada": 42,
+                "saida": 22343,
+                "cacheCriacao": 80434,
+                "cacheLeitura": 1443761
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            }
+          ]
         },
         {
           "numero": 17,
@@ -2853,7 +3021,7 @@
     "etapa": 16,
     "inicio": "2026-11-08T17:42:43.331Z",
     "commitInicial": "16bc10491f6915964551a33c8fab93b70ce3c0c9",
-    "passoAtual": 2,
+    "passoAtual": 6,
     "passos": [
       {
         "id": "propor",
@@ -2873,62 +3041,66 @@
       },
       {
         "id": "commitProposta",
+        "situacao": "ok",
+        "duracaoMs": 1401,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "f7f538f · 5 arquivo(s)"
+      },
+      {
+        "id": "aplicar",
+        "situacao": "ok",
+        "duracaoMs": 565021,
+        "custo": 1.8022713000000001,
+        "tentativas": 1,
+        "detalhe": "23/23 tarefas · 3 sessão(ões)"
+      },
+      {
+        "id": "verificar",
+        "situacao": "pulado",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "arquivar",
+        "situacao": "ok",
+        "duracaoMs": 3,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\16-design-system-layout"
+      },
+      {
+        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
-      },
-      {
-        "id": "aplicar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "verificar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "arquivar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
       }
     ],
     "titulo": "Revisa a spec do design system e layout do frontend (SPEC-15) contra a base entregue",
     "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md`, escritos antes de a etapa 15 terminar. Revisei os dois contra o código atual.\nO `app-autorizador-processo/` agora existe: Angular 21.2, Tailwind 4.3 via PostCSS, Vitest e ESLint. O `styles.scss` só tem `@use 'tailwindcss'` e a fonte Inter provisória.\nNão há `layout/`, `shared/ui/`, Manrope nem Phosphor. Existem `core/http` (interceptor de erro), `features/home` provisória e `<main>` no `app.html`, que a etapa vai substituir pelo shell e pelas rotas lazy.\nCorrigi a numeração das specs sucessoras: login é a SPEC-23 e as telas vão da SPEC-17 à SPEC-20. O `ErrorDialog` não depende do `AppError` da SPEC-16.\nFicaram 23 tarefas em 5 grupos. Não alterei código da aplicação."
   },
   "totais": {
-    "duracaoMs": 11104355,
-    "custo": 30.897674699999996,
+    "duracaoMs": 11670780,
+    "custo": 32.946723399999996,
     "execucoes": 2,
     "iteracoes": 16,
     "entregues": 15,
-    "sessoes": 83,
-    "turnos": 1117,
+    "sessoes": 87,
+    "turnos": 1200,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 5,
     "recuperacoesResolvidas": 4,
     "falhas": 0,
-    "commits": 30,
+    "commits": 31,
     "tokens": {
-      "entrada": 1666,
-      "saida": 728592,
-      "cacheCriacao": 4515094,
-      "cacheLeitura": 50961393
+      "entrada": 1778,
+      "saida": 796109,
+      "cacheCriacao": 4771387,
+      "cacheLeitura": 54446220
     }
   },
   "ultimaExecucao": {

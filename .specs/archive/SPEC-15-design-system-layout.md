@@ -42,4 +42,18 @@ Traduzir a identidade **efetiva** do protótipo (`Autorizador.dc.html`) em token
 - Definition of Done: tokens e componentes documentados; shell responsivo; a11y básica verificada; nenhuma cor literal em templates.
 
 ## 6. Resultado
-_Preencher ao concluir._
+**Status: concluída** em 2026-11-08 (etapa 16 do loop `test-01`).
+
+**Evidência por tarefa:**
+- T1: tokens em `src/styles.scss` (`@theme`), contrastes AA em `shared/ui/doc.md`; `tokens.spec.ts` com snapshot.
+- T2: Manrope (`@fontsource/manrope`) e Phosphor (`@phosphor-icons/web`) via npm; `app-icon`. `grep -rn "googleapis\|unpkg" src package.json angular.json` → vazio.
+- T3: componentes em `shared/ui` com specs (`ui-base.spec.ts`, `ui-componentes.spec.ts`: desabilitado, carregando, erro, `aria-pressed`, tabela/cartões, diálogo com Esc e retorno do foco).
+- T4: `layout/shell` (sidebar `lg+`, gaveta e barra superior abaixo de `lg`, item ativo com `aria-current`, status da API) — `shell.spec.ts`.
+- T5: `NotificationService`, `LoadingService`, `ErrorDialog`, `ApiStatusService` — `core-services.spec.ts`.
+- T6: rotas lazy `/painel`, `/procedimentos`, `/solicitar`, `/autorizacoes`, redirecionamento da raiz e `**` → "Página não encontrada"; `features/home` removida.
+- T7: 24 testes verdes. Em jsdom o Tailwind não é aplicado, então 320/768/1280 px foram verificados pelas classes de breakpoint e pelo comportamento da gaveta/teclado.
+- T8: galeria `/_ds` registrada só quando `environment.production` é falso.
+- Sem cores literais em templates/TS (`grep` por `#hex`/`rgb(` em `src/app` → vazio).
+- `npm run lint`, `npm run build` e `npm test` verdes.
+
+**Limitações:** sem verificação visual por capturas (sem navegador automatizado); o chunk da galeria ainda é gerado no build de produção, mas a rota não é registrada. Orçamento inicial do bundle elevado de 500 kB para 600 kB (aviso) por causa das fontes/ícones locais.

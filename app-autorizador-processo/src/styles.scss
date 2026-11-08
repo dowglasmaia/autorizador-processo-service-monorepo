@@ -1,9 +1,90 @@
 @use 'tailwindcss';
 
-:root {
-  font-family: Inter, system-ui, sans-serif;
+/*
+ * Tokens do Autorizador (valores efetivos do protótipo Autorizador.dc.html).
+ * Documentação e contrastes AA: src/app/shared/ui/doc.md
+ */
+@theme {
+  --font-sans: 'Manrope', system-ui, sans-serif;
+
+  --color-canvas: #f4fafa;
+  --color-surface: #ffffff;
+  --color-content: #0b2a2f;
+  --color-content-muted: #4a6666;
+  --color-divider: rgba(7, 70, 66, 0.14);
+
+  --color-accent: #0fa88c;
+  --color-accent-100: #e3f8f2;
+  --color-accent-200: #c6f0e5;
+  --color-accent-300: #8fe0cc;
+  --color-accent-400: #4fd0b5;
+  --color-accent-500: #15b89a;
+  --color-accent-600: #0a9780;
+  --color-accent-700: #077a69;
+  --color-accent-800: #065e52;
+  --color-accent-900: #04403a;
+
+  --color-accent-2: #e5604a;
+  --color-accent-2-100: #fff1ee;
+  --color-accent-2-200: #ffddd6;
+  --color-accent-2-300: #ffb9ab;
+  --color-accent-2-400: #ff8f7a;
+  --color-accent-2-500: #ec6a54;
+  --color-accent-2-600: #d44d38;
+  --color-accent-2-700: #aa3a2a;
+  --color-accent-2-800: #7c2a1f;
+
+  /* Erro/negação: tom 700 da rampa accent-2 (contraste AA com branco e com o fundo claro). */
+  --color-danger: #aa3a2a;
+  --color-danger-soft: #fff1ee;
+
+  --color-neutral-100: #f1f7f7;
+  --color-neutral-200: #e1eded;
+  --color-neutral-300: #cadada;
+  --color-neutral-400: #a9bfbf;
+  --color-neutral-500: #85a0a0;
+  --color-neutral-600: #648080;
+  --color-neutral-700: #4a6666;
+  --color-neutral-800: #2f4a4b;
+  --color-neutral-900: #14292d;
+
+  --color-sidebar-from: #03242b;
+  --color-sidebar-to: #021a20;
+  --color-sidebar-content: #c6f0e5;
+  --color-scrim: rgba(2, 26, 32, 0.55);
+
+  --radius-card: 20px;
+  --radius-input: 10px;
+  --radius-dialog: 22px;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 1px 2px rgba(7, 70, 66, 0.06), 0 8px 24px rgba(7, 70, 66, 0.06);
 }
 
-body {
-  margin: 0;
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    background-color: var(--color-canvas);
+    color: var(--color-content);
+  }
+
+  body {
+    margin: 0;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent-700);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }

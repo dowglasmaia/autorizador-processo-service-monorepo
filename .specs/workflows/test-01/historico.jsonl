@@ -358,3 +358,15 @@
 {"em":1794159800293,"nivel":"passo","texto":"Verificar ponto de partida","etapa":16,"passo":"partida"}
 {"em":1794159800304,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":16,"passo":"partida"}
 {"em":1794159800312,"nivel":"passo","texto":"Commit da proposta","etapa":16,"passo":"commitProposta"}
+{"em":1794159801715,"nivel":"ok","texto":"f7f538f · 5 arquivo(s) · docs(test-01): proposta da etapa 16 · Design system e layout","etapa":16,"passo":"commitProposta"}
+{"em":1794159801725,"nivel":"ok","texto":"Commit da proposta: ok · f7f538f · 5 arquivo(s)","etapa":16,"passo":"commitProposta"}
+{"em":1794159801731,"nivel":"passo","texto":"Aplicar a spec","etapa":16,"passo":"aplicar"}
+{"em":1794159801737,"nivel":"info","texto":"proposta antecipada da etapa 17 em paralelo","etapa":16,"passo":"aplicar"}
+{"em":1794159861855,"nivel":"ok","texto":"proposta antecipada da etapa 17 pronta","etapa":16,"passo":"aplicar"}
+{"em":1794160366762,"nivel":"ok","texto":"Aplicar a spec: ok · 23/23 tarefas · 3 sessão(ões)","etapa":16,"passo":"aplicar"}
+{"em":1794160366769,"nivel":"passo","texto":"Verificar a mudança","etapa":16,"passo":"verificar"}
+{"em":1794160366780,"nivel":"info","texto":"Verificar a mudança: pulado · sem verificações configuradas","etapa":16,"passo":"verificar"}
+{"em":1794160366786,"nivel":"passo","texto":"Arquivar a spec","etapa":16,"passo":"arquivar"}
+{"em":1794160366794,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\16-design-system-layout → .specs\\workflows\\test-01\\specs\\arquivo\\16-design-system-layout","etapa":16,"passo":"arquivar"}
+{"em":1794160366800,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\16-design-system-layout","etapa":16,"passo":"arquivar"}
+{"em":1794160366805,"nivel":"passo","texto":"Commit da entrega","etapa":16,"passo":"commitEntrega"}

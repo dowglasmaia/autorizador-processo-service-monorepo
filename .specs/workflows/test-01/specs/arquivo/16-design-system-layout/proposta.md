@@ -38,7 +38,19 @@ Traduzir a identidade efetiva do protótipo (`.specs/design/prototype/Autorizado
 - **Status da API:** o rodapé consulta `GET /actuator/health` pela origem relativa; em desenvolvimento sem Nginx, a falha resulta no estado "indisponível" (comportamento previsto na spec), sem proxy. [REVISAR]
 - **Ícones:** usar `@phosphor-icons/web` com componente `app-icon` fino, por manter fidelidade ao protótipo e evitar CDN. [REVISAR]
 - **Verificação visual:** sem navegador automatizado garantido, a verificação em 320/768/1280 px é feita por testes de componente e, se houver navegador disponível, capturas; caso contrário, registrar a limitação na evidência. [REVISAR]
+- **Lote 2 — Dialog:** o clique no fundo (scrim) não fecha o diálogo (Esc e botões fecham), para atender às regras de acessibilidade do lint sem elemento interativo extra.
+- **Lote 2 — Field:** `Field` recebe o erro como texto (`error`) e a diretiva `appFieldControl` liga `id`/`aria-*`; a tradução de erros do `FormControl` fica nas telas.
+- **Lote 2 — Teste/visual:** componentes novos ainda sem specs próprios (tarefa 5.1/5.2); este lote verificou lint, build e testes existentes.
 - **Galeria `/_ds`:** registrada apenas quando `isDevMode()`/ambiente de desenvolvimento, para não entrar no build de produção.
 - **Pasta `06-execution-plan/`:** inexistente; ignorada e registrada.
 - **Revisão feita:** proposta conferida contra a etapa 15 (ver ponto de partida); `features/home` e a fonte Inter provisória são substituídas por esta etapa.
 - **Numeração:** sucessoras corrigidas conforme os arquivos reais em `.specs/03-frontend/` (login é SPEC-23).
+- **Tokens (lote 1):** o protótipo não define cor de erro; `danger` = `accent-2-700` (`#aa3a2a`), pois branco sobre `accent-2` (`#e5604a`) dá 3,44:1 e branco sobre `accent` dá 3,00:1. O botão primário usa texto `content` sobre `accent` (5,05:1). Contrastes em `shared/ui/doc.md`. [REVISAR]
+- **Nomes dos tokens:** `canvas` (fundo `bg` do protótipo), `content`/`content-muted` (texto), por evitar `bg-bg`/`text-text`.
+- **Fontes/ícones:** CSS do Manrope (400–800) e do Phosphor duotone carregados pelo array `styles` do `angular.json` (evita `@import` Sass); dependências `@fontsource/manrope` e `@phosphor-icons/web` adicionadas, conforme a spec.
+- **Button:** seletor `button[app-button]` (atributo no `<button>` nativo) com `eslint-disable` pontual da regra de prefixo de componente.
+- **Lote 3 — Testes de largura:** jsdom não aplica Tailwind; 320/768/1280 px são verificados por classes de breakpoint e comportamento (gaveta, Esc, `aria-current`). Sem capturas visuais. [REVISAR]
+- **Lote 3 — Galeria:** controlada por `environment.production` (a rota não existe em produção; o chunk lazy ainda é emitido).
+- **Lote 3 — Rota raiz:** `''` redireciona para `/painel`; `**` mostra página "Página não encontrada" em vez de redirecionar.
+- **Lote 3 — Snapshot de tokens:** `tokens.spec.ts` lê `src/styles.scss` via `node:fs` (sem `@types/node`, com `@ts-expect-error`).
+- **Lote 3 — Orçamento:** aviso de bundle inicial passou de 500 kB para 600 kB em `angular.json` (506 kB com fontes/ícones locais). [REVISAR]

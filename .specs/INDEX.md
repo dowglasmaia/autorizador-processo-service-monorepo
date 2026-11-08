@@ -4,6 +4,7 @@ Conjunto de especificações (Spec-Driven Development) para modernizar o **Autor
 
 ## Status do conjunto
 - **SPEC-01 (monorepo): concluída** em 2026-11-08 — tag `v0-original` criada, protótipo em `design/prototype/`, `.gitignore` e `README.md` do monorepo atualizados. Spec arquivada em `archive/01-estrutura-monorepo/`.
+- **SPEC-15 (design system e layout): concluída** em 2026-11-08 — lint, build e 24 testes verdes. Arquivada em `archive/SPEC-15-design-system-layout.md`.
 - **SPEC-14 (fundação Angular): concluída** em 2026-11-08 — lint, build e 3 testes verdes, porta 4200 verificada. Arquivada em `archive/SPEC-14-angular-foundation.md`.
 - **SPEC-07 (módulo procedimento): concluída** em 2026-11-08 — `./mvnw verify` verde (138 testes), replay procedimento 8/8, 0 violações de arquitetura. Arquivada em `archive/SPEC-07-modulo-procedimento.md`.
 - SPEC-02 em diante: pendentes. Os projetos `api-autorizador-processo` e `app-autorizador-processo` ainda não existem.
@@ -24,7 +25,7 @@ Conjunto de especificações (Spec-Driven Development) para modernizar o **Autor
 | `00-product-discovery/` | `PRODUCT_CONTEXT`, `CURRENT_STATE_ANALYSIS`, `FUNCTIONAL_TRACEABILITY`, `BASELINE_COMPORTAMENTO_ORIGINAL` (executado) |
 | `01-architecture/` | `TARGET_ARCHITECTURE`, `MONOREPO_STRUCTURE`, `DATABASE_DESIGN`, `API_CONTRACTS`, `DECISIONS`, SPEC-01 |
 | `02-backend/` | SPEC-03..09, 11, 12, **22 (auth JWT)**, 50 (**não aplicável** — sem base de origem; arquivada em `archive/`) |
-| `03-frontend/` | SPEC-13, 15..21 (14 arquivada), **23 (login)** |
+| `03-frontend/` | SPEC-13, 16..21 (14 e 15 arquivadas), **23 (login)** |
 | `04-integration/` | SPEC-10, 30, 31, 32 |
 | `05-quality/` | `TEST_STRATEGY`, `SECURITY_REQUIREMENTS`, `NON_FUNCTIONAL_REQUIREMENTS`, SPEC-02, 40..43 |
 | `06-execution-plan/` | `SPEC-EXECUTION-PLAN` (SPEC-00), `EXECUTION_PLAN`, `STATE` |
