@@ -3982,7 +3982,154 @@
           "descricao": "Executa a SPEC-20: painel com indicadores e gráficos, usando o resumo do backend e os contadores de sessão.\nReferências: SPEC-09 e protótipo.\nLimite: sem novos endpoints.",
           "spec": "23-feature-painel",
           "specPronta": false,
-          "status": "pendente"
+          "status": "entregue",
+          "entregueEm": "2026-11-08T18:48:29.332Z",
+          "iteracao": 23,
+          "duracaoMs": 311670,
+          "custo": 1.2035984,
+          "passos": [
+            {
+              "id": "propor",
+              "situacao": "ok",
+              "duracaoMs": 45379,
+              "custo": 0.22602360000000002,
+              "tentativas": 1,
+              "detalhe": "16 tarefas"
+            },
+            {
+              "id": "partida",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "commitProposta",
+              "situacao": "ok",
+              "duracaoMs": 386,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "ba6dc0c · 5 arquivo(s)"
+            },
+            {
+              "id": "aplicar",
+              "situacao": "ok",
+              "duracaoMs": 265901,
+              "custo": 0.9775748,
+              "tentativas": 1,
+              "detalhe": "16/16 tarefas · 2 sessão(ões)"
+            },
+            {
+              "id": "verificar",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "arquivar",
+              "situacao": "ok",
+              "duracaoMs": 4,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\23-feature-painel"
+            },
+            {
+              "id": "commitEntrega",
+              "situacao": "ok",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1
+            }
+          ],
+          "sessoes": [
+            {
+              "rotulo": "propor-23",
+              "passo": "propor",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.22602360000000002,
+              "turnos": 9,
+              "duracaoMs": 45362,
+              "inicio": 1794163397554,
+              "fim": 1794163442925,
+              "tokens": {
+                "entrada": 14,
+                "saida": 2870,
+                "cacheCriacao": 41557,
+                "cacheLeitura": 310676
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "antecipar-24",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.23319020000000001,
+              "turnos": 6,
+              "duracaoMs": 51670,
+              "inicio": 1794163443376,
+              "fim": 1794163495055,
+              "tokens": {
+                "entrada": 10,
+                "saida": 4362,
+                "cacheCriacao": 42193,
+                "cacheLeitura": 207782
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-23-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.486067,
+              "turnos": 26,
+              "duracaoMs": 136353,
+              "inicio": 1794163444845,
+              "fim": 1794163581207,
+              "tokens": {
+                "entrada": 30,
+                "saida": 15324,
+                "cacheCriacao": 61509,
+                "cacheLeitura": 867310
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-23-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.4915078,
+              "turnos": 18,
+              "duracaoMs": 128047,
+              "inicio": 1794163581213,
+              "fim": 1794163709270,
+              "tokens": {
+                "entrada": 28,
+                "saida": 14973,
+                "cacheCriacao": 64540,
+                "cacheLeitura": 835618
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            }
+          ]
         },
         {
           "numero": 24,
@@ -4069,7 +4216,7 @@
     "etapa": 23,
     "inicio": "2026-11-08T18:43:17.536Z",
     "commitInicial": "6ed0b84982d61c2d680d818e0215161744d4061e",
-    "passoAtual": 2,
+    "passoAtual": 6,
     "passos": [
       {
         "id": "propor",
@@ -4089,62 +4236,66 @@
       },
       {
         "id": "commitProposta",
+        "situacao": "ok",
+        "duracaoMs": 386,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "ba6dc0c · 5 arquivo(s)"
+      },
+      {
+        "id": "aplicar",
+        "situacao": "ok",
+        "duracaoMs": 265901,
+        "custo": 0.9775748,
+        "tentativas": 1,
+        "detalhe": "16/16 tarefas · 2 sessão(ões)"
+      },
+      {
+        "id": "verificar",
+        "situacao": "pulado",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "arquivar",
+        "situacao": "ok",
+        "duracaoMs": 4,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\23-feature-painel"
+      },
+      {
+        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
-      },
-      {
-        "id": "aplicar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "verificar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "arquivar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
       }
     ],
     "titulo": "Revisa a spec da tela do painel (SPEC-20) contra a base entregue",
     "comparacao": "A pasta já tinha `proposta.md` e `tarefas.md` escritos antes da etapa 22. Revisei os dois contra o código atual e os mantive, com ajustes pontuais.\n`features/painel` ainda é só o esqueleto (\"Em construção\"). O contrato e os tipos de `ResumoPainel`, `CoberturaIdade` e `DistribuicaoSexos` já existem em `shared/api`, e `SessaoSolicitacoes` e `KpiCard` estão prontos para uso.\nA etapa 22 entregou a rota `/autorizacoes`, o `descreverRegras` e o padrão de serviço com signals (`AutorizacoesService`). Passei a reaproveitá-los na spec, na tarefa 1.1 e em `UltimasAutorizacoes`.\nO locale pt-BR não está registrado no app. A data por extenso passa a usar `Intl.DateTimeFormat` em função pura testável, no lugar de `DatePipe`.\nA tarefa 1.1 também confere se o tipo `Autorizacao` do painel é compatível com `AutorizacaoDto`. Nenhum código de aplicação foi alterado. A spec tem 16 tarefas, e a pasta `06-execution-plan` segue inexistente."
   },
   "totais": {
-    "duracaoMs": 14713906,
-    "custo": 43.9981059,
+    "duracaoMs": 14980197,
+    "custo": 45.2088709,
     "execucoes": 2,
     "iteracoes": 23,
     "entregues": 22,
-    "sessoes": 119,
-    "turnos": 1580,
+    "sessoes": 122,
+    "turnos": 1630,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 6,
     "recuperacoesResolvidas": 5,
     "falhas": 0,
-    "commits": 44,
+    "commits": 45,
     "tokens": {
-      "entrada": 2374,
-      "saida": 1064077,
-      "cacheCriacao": 6451921,
-      "cacheLeitura": 70929965
+      "entrada": 2442,
+      "saida": 1098736,
+      "cacheCriacao": 6620163,
+      "cacheLeitura": 72840675
     }
   },
   "ultimaExecucao": {

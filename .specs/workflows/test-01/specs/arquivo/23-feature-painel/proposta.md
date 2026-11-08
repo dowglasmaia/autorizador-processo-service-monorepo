@@ -45,3 +45,19 @@ Entregar `/painel` (rota padrão) alimentado por `obterResumoPainel`: cabeçalho
 - **Data por extenso:** `Intl.DateTimeFormat('pt-BR')` em função pura testável, pois o locale não está registrado no app (evita alterar a configuração global).
 - **Barras:** largura proporcional ao maior valor devolvido pelo servidor.
 - **Recarga:** o painel recarrega o resumo a cada entrada na rota (dados sempre atuais), sem cache. [REVISAR]
+- **Lote 1 — compatibilidade de tipos:** `Autorizacao` do contrato do painel tem os mesmos campos de `AutorizacaoDto` (id, procedimento, permitido, criadaEm nulo); `UltimasAutorizacoes` usa `AutorizacaoDto` e `descreverRegras` direto.
+- **Lote 1 — `calcularAprovacao` e `formatarDataExtenso`** ficam em `features/painel/calculos.ts` (funções puras, testadas em `calculos.spec.ts`). Aprovação 0/N → "0%".
+- **Lote 1 — Rosca** em SVG com `stroke-dasharray` (M = `accent-700`, F = `accent-2-700`); a página só carrega o resumo no lote seguinte (3.2/3.3), por isso o `PainelPage` atual traz apenas cabeçalho, hero e botão.
+
+## Evidência — lote 2
+- **3.2** `PainelPage` com 4 `KpiCard` (Procedimentos, Autorizações, Idades cobertas do servidor; Aprovação via `SessaoSolicitacoes` + `calcularAprovacao`, legenda "solicitações desta sessão").
+- **3.3** Esqueleto (`loading` nos KPIs, `app-skeleton` nas seções), erro com "Tentar novamente" (`EmptyState`) e vazio por seção.
+- **3.4** KPIs em `grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr))`; gráficos em `md:grid-cols-2` (empilhados abaixo de `md`); `motion-reduce:transition-none` nas barras.
+- **3.5** Tabela `sr-only` nas barras; rosca com `role="img"`, `aria-label` e legenda textual; tokens `accent-700`/`accent-2-700` sobre fundo claro (contraste AA assumido dos tokens do design system; sem medição automatizada).
+- **4.1–4.2** `painel.service.spec.ts`, `components/componentes.spec.ts`, `pages/painel-page.spec.ts` (seed 3/0/3/"—", barras 10→2/20→2/30→1, rosca M=2 F=3, vazio, 100%, erro e nova tentativa).
+- **4.3** `npm run lint` OK; `npm run build` OK; `npm test`: 30 arquivos, 188 testes passando.
+- **4.4** Desvio: a pasta `.specs/06-execution-plan/` citada no índice não existe (ignorada). Verificação contra o Compose e capturas ficam para a SPEC-30.
+
+## Decisões — lote 2
+- Ícones dos KPIs (`clipboard-text`, `check-circle`, `users`, `chart-pie`) e hints ("cadastrados", "concedidas", "faixas distintas") escolhidos sem referência no protótipo; microcopy será revisada na etapa 24.
+- Com erro, a página oculta KPIs e seções e mostra só o estado de erro. O KPI "Aprovação" não usa esqueleto (é local).
