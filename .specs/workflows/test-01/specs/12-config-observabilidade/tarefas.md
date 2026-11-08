@@ -14,7 +14,7 @@
 ## 3. Logs e correlação
 - [ ] 3.1 Verificar JSON ECS no perfil padrão e texto legível em `local`, com `requestId`, `traceId` e `spanId`.
 - [ ] 3.2 Revisar as chamadas de log (`git grep "log\."`) para garantir ausência de senha, token e e-mail sem máscara; corrigir o que houver.
-- [ ] 3.3 Registrar eventos de negócio (login, criação de autorização) com campos estruturados sem dado sensível, se ainda não existirem.
+- [ ] 3.3 Conferir que os eventos de negócio (login, autorização concedida/negada) já logados têm campos estruturados sem dado sensível; criar só o que faltar.
 - [ ] 3.4 Confirmar métricas Micrometer só internas (sem endpoint exposto, OTLP desligado).
 
 ## 4. Documentação da API

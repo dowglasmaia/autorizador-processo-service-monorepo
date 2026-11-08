@@ -1,11 +1,11 @@
 # Config e observabilidade
 
-Etapa 12 de 31 · Fase 2 · derivada da `SPEC-11` (`.specs/02-backend/SPEC-11-backend-config-observabilidade.md`). Proposta escrita antecipadamente, durante a etapa 11; será **revisada contra o que a etapa 11 (painel) entregar**.
+Etapa 12 de 31 · Fase 2 · derivada da `SPEC-11` (`.specs/02-backend/SPEC-11-backend-config-observabilidade.md`). Proposta escrita antecipadamente e **revisada contra o código após as etapas 10 e 11** (painel entregue, sem impacto em configuração/observabilidade).
 
 ## Objetivo
 Fechar a operação do backend: perfis (`local` e padrão/contêiner), variáveis de ambiente, health `liveness`/`readiness`, logs estruturados com correlação e métricas básicas, sem stack externa de monitoramento. Corrige D6 (sem health) e D9 (segredos versionados). Referências: NFR-01, NFR-07, NFR-08, SEC-07.
 
-## Ponto de partida (conferido no código antes da etapa 11)
+## Ponto de partida (conferido no código após a etapa 11)
 Boa parte já veio com o scaffold e com as etapas 4–10; esta etapa **audita, completa e prova com testes**, não recria.
 - `application.yml`: `DB_URL`, `DB_USERNAME`, `DB_PASSWORD`, `CORS_ALLOWED_ORIGINS`, `JWT_SECRET`, `JWT_TTL_MINUTOS`, `AUTH_BOOTSTRAP_*`, `APP_ENV`, `LOG_LEVEL_APP`, `LOG_LEVEL_ROOT` e `LOG_FORMAT` (padrão `ecs`) já existem. Falta `SERVER_PORT` (hoje `application-local.yml` usa `PORT`).
 - `management.endpoints.web.exposure.include` é `health,info,metrics`; a SPEC-11 manda expor só `health,info`. Não há grupos `liveness`/`readiness` explícitos nem `show-details`.
@@ -13,6 +13,7 @@ Boa parte já veio com o scaffold e com as etapas 4–10; esta etapa **audita, c
 - Tracing/OTLP: `spring-boot-starter-opentelemetry` no `pom.xml`, exportação desligada por padrão (`OTEL_EXPORT_ENABLED=false`); sem agente nem coletor.
 - Documentação da API: `SecurityConfig` já libera `/swagger-ui*` e `/v3/api-docs/**` só no perfil `local`, mas **não há dependência de UI** (springdoc) no `pom.xml` nem página servindo o contrato estático de `openapi/`.
 - `SecurityConfig` libera `/actuator/health/**`; o restante do actuator cai em `authenticated`. O `.env.example` da raiz traz as variáveis; o `README.md` do backend tem as seções "Variáveis de ambiente" e "Logs e observabilidade" a revisar.
+- Eventos de negócio já são logados com e-mail mascarado (`AutenticarUsuarioUseCase`, `UsuarioInicialRunner`) e ids de procedimento (`SolicitarAutorizacaoUseCase`); o `.env.example` não traz `SERVER_PORT` nem `LOG_LEVEL_ROOT`/`LOG_FORMAT`.
 - Não há teste de readiness com banco parado nem de formato JSON do log.
 - `.specs/06-execution-plan/` e `check-architecture.mjs` não existem (desvio; vale o `ArchitectureTest`).
 
@@ -50,3 +51,4 @@ Boa parte já veio com o scaffold e com as etapas 4–10; esta etapa **audita, c
 - `SERVER_PORT` passa a ser a variável da porta do processo; `API_PORT`/`APP_PORT` continuam sendo do Compose e não são lidas pela aplicação.
 - UI da API só em `local`, servindo o contrato estático; se a biblioteca for incompatível, usar página estática mínima e registrar na evidência.
 - O `traceId` permanece no log e em `X-Request-Id`; não entra no corpo RFC 9457 (contrato não muda nesta etapa).
+- A revisão pós-etapa 11 confirmou que o ponto de partida segue válido; a tarefa 3.3 virou verificação (eventos de negócio já existem) e só cria o que faltar.

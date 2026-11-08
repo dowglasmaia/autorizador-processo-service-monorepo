@@ -260,3 +260,13 @@
 {"em":1794156677105,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\11-modulo-painel → .specs\\workflows\\test-01\\specs\\arquivo\\11-modulo-painel","etapa":11,"passo":"arquivar"}
 {"em":1794156677111,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\11-modulo-painel","etapa":11,"passo":"arquivar"}
 {"em":1794156677117,"nivel":"passo","texto":"Commit da entrega","etapa":11,"passo":"commitEntrega"}
+{"em":1794156677728,"nivel":"ok","texto":"91cc31d · 20 arquivo(s) · feat(autorizador): Revisa a spec do módulo painel (SPEC-09) contra a …","etapa":11,"passo":"commitEntrega"}
+{"em":1794156677746,"nivel":"ok","texto":"Commit da entrega: ok · 91cc31d · 20 arquivo(s)","etapa":11,"passo":"commitEntrega"}
+{"em":1794156677757,"nivel":"ok","texto":"Etapa 11 entregue · commit 91cc31d","etapa":11,"passo":"commitEntrega"}
+{"em":1794156677831,"nivel":"passo","texto":"Etapa 12 · Config e observabilidade (iteração 12)","etapa":12}
+{"em":1794156677832,"nivel":"passo","texto":"Propor a spec","etapa":12,"passo":"propor"}
+{"em":1794156677838,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":12,"passo":"propor"}
+{"em":1794156718287,"nivel":"ok","texto":"Propor a spec: ok · 21 tarefas","etapa":12,"passo":"propor"}
+{"em":1794156718293,"nivel":"passo","texto":"Verificar ponto de partida","etapa":12,"passo":"partida"}
+{"em":1794156718304,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":12,"passo":"partida"}
+{"em":1794156718310,"nivel":"passo","texto":"Commit da proposta","etapa":12,"passo":"commitProposta"}

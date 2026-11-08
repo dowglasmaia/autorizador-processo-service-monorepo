@@ -2039,7 +2039,8 @@
               "origem": "provider",
               "esforco": "medium"
             }
-          ]
+          ],
+          "commit": "91cc31d"
         },
         {
           "numero": 12,
@@ -2235,19 +2236,19 @@
     }
   ],
   "iteracao": {
-    "numero": 11,
-    "etapa": 11,
-    "inicio": "2026-11-08T16:40:11.383Z",
-    "commitInicial": "6f3db70bae2dae1138e1e1df315f3fe497b45eb6",
-    "passoAtual": 6,
+    "numero": 12,
+    "etapa": 12,
+    "inicio": "2026-11-08T16:51:17.824Z",
+    "commitInicial": "91cc31d372cd768029b836ff3353992e5911156e",
+    "passoAtual": 2,
     "passos": [
       {
         "id": "propor",
         "situacao": "ok",
-        "duracaoMs": 55199,
-        "custo": 0.25304190000000004,
+        "duracaoMs": 40444,
+        "custo": 0.2091744,
         "tentativas": 1,
-        "detalhe": "16 tarefas"
+        "detalhe": "21 tarefas"
       },
       {
         "id": "partida",
@@ -2259,66 +2260,62 @@
       },
       {
         "id": "commitProposta",
-        "situacao": "ok",
-        "duracaoMs": 381,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "9f39c28 · 5 arquivo(s)"
-      },
-      {
-        "id": "aplicar",
-        "situacao": "ok",
-        "duracaoMs": 610057,
-        "custo": 1.0300383,
-        "tentativas": 1,
-        "detalhe": "16/16 tarefas · 2 sessão(ões)"
-      },
-      {
-        "id": "verificar",
-        "situacao": "pulado",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "arquivar",
-        "situacao": "ok",
-        "duracaoMs": 4,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\11-modulo-painel"
-      },
-      {
-        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
+      },
+      {
+        "id": "aplicar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "verificar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "arquivar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "commitEntrega",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
       }
     ],
-    "titulo": "Revisa a spec do módulo painel (SPEC-09) contra a entrega da etapa 10",
-    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md`, escritos antes da etapa 10. Revisei os dois contra o código atual em vez de recriar.\nO pacote `painel` ainda não existe no backend. O contrato `painel.yaml` está pronto, sem migração nova, e o `ArchitectureTest` já cita `.painel..`.\nA etapa 10 entregou `ListarAutorizacoesUseCase`, público e `readOnly`, que ordena do mais recente ao mais antigo e busca os procedimentos em lote. O mapeamento para o DTO gerado é `private static` no `AutorizacaoController`.\nPor isso a proposta passou a reutilizar `executar(0, 4)` e a montar o DTO num mapeador próprio de `painel`. Atualizei também o ponto de partida, os riscos, a ordenação e as tarefas 1.1, 3.3 e 4.1.\nA spec tem 14 tarefas em 6 grupos, dentro do limite de 4 a 30. Os desvios (`.specs/06-execution-plan/` e `check-architecture.mjs` ausentes) continuam registrados."
+    "titulo": "Revisa a spec de config e observabilidade (SPEC-11) contra a entrega da etapa 11",
+    "comparacao": "A pasta já tinha proposta.md e tarefas.md antecipados. Revisei os dois contra o código atual e os completei, sem recriar.\nConfirmei as lacunas da SPEC-11. O actuator expõe `health,info,metrics`. Não há grupos liveness/readiness nem show-details. A porta usa `PORT` em vez de `SERVER_PORT`. O `pom.xml` não tem springdoc, só a liberação no `SecurityConfig`. Faltam os testes de readiness com banco parado, de 404 da UI e de formato do log JSON.\nOs eventos de negócio já são logados com e-mail mascarado. Por isso a tarefa 3.3 passou a ser conferência.\nA etapa 11 (painel) não alterou configuração nem observabilidade. Atualizei a proposta com isso e com `SERVER_PORT`, `LOG_LEVEL_ROOT` e `LOG_FORMAT` ausentes do `.env.example`.\nA spec tem 21 tarefas em 6 grupos. A decisão [REVISAR] continua: `/actuator/metrics` não é exposto, para seguir a SPEC-11 e o limite de não usar stack externa."
   },
   "totais": {
-    "duracaoMs": 7982258,
-    "custo": 25.588001,
+    "duracaoMs": 8023321,
+    "custo": 25.797175399999997,
     "execucoes": 2,
-    "iteracoes": 11,
-    "entregues": 10,
-    "sessoes": 65,
-    "turnos": 909,
+    "iteracoes": 12,
+    "entregues": 11,
+    "sessoes": 66,
+    "turnos": 916,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 5,
     "recuperacoesResolvidas": 4,
     "falhas": 0,
-    "commits": 21,
+    "commits": 22,
     "tokens": {
-      "entrada": 1314,
-      "saida": 631358,
-      "cacheCriacao": 3665317,
-      "cacheLeitura": 41586176
+      "entrada": 1324,
+      "saida": 633566,
+      "cacheCriacao": 3706840,
+      "cacheLeitura": 41796000
     }
   },
   "ultimaExecucao": {
