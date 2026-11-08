@@ -92,3 +92,13 @@
 {"em":1794150042906,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\04-fundacao-banco → .specs\\workflows\\test-01\\specs\\arquivo\\04-fundacao-banco","etapa":4,"passo":"arquivar"}
 {"em":1794150042910,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\04-fundacao-banco","etapa":4,"passo":"arquivar"}
 {"em":1794150042914,"nivel":"passo","texto":"Commit da entrega","etapa":4,"passo":"commitEntrega"}
+{"em":1794150043989,"nivel":"ok","texto":"b485c9c · 28 arquivo(s) · feat(autorizador): Propõe a spec da fundação do banco com PostgreSQL …","etapa":4,"passo":"commitEntrega"}
+{"em":1794150044006,"nivel":"ok","texto":"Commit da entrega: ok · b485c9c · 28 arquivo(s)","etapa":4,"passo":"commitEntrega"}
+{"em":1794150044013,"nivel":"ok","texto":"Etapa 4 entregue · commit b485c9c","etapa":4,"passo":"commitEntrega"}
+{"em":1794150044073,"nivel":"passo","texto":"Etapa 5 · Contrato OpenAPI v1 (iteração 5)","etapa":5}
+{"em":1794150044074,"nivel":"passo","texto":"Propor a spec","etapa":5,"passo":"propor"}
+{"em":1794150044078,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":5,"passo":"propor"}
+{"em":1794150085464,"nivel":"ok","texto":"Propor a spec: ok · 19 tarefas","etapa":5,"passo":"propor"}
+{"em":1794150085468,"nivel":"passo","texto":"Verificar ponto de partida","etapa":5,"passo":"partida"}
+{"em":1794150085475,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":5,"passo":"partida"}
+{"em":1794150085478,"nivel":"passo","texto":"Commit da proposta","etapa":5,"passo":"commitProposta"}

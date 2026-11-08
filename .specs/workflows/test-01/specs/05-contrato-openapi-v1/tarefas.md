@@ -2,7 +2,7 @@
 
 ## 1. Preparação
 - [ ] 1.1 Ler `INDEX.md`, `memory/`, `shared/como-executar.md`, `API_CONTRACTS.md` §1–§3, `BASELINE_COMPORTAMENTO_ORIGINAL.md` e as referências `contract-conventions.md`, `modular-contracts.md`, `input-format.md` da skill `openapi-rest-contract`; registrar o desvio de `.specs/06-execution-plan/`
-- [ ] 1.2 Reconferir o `pom.xml` (entregue pela etapa 4) e `src/main/resources/openapi/`; configurar `JAVA_HOME=C:\jdk-25.0.2` (T1)
+- [ ] 1.2 Reconferir o `pom.xml` (já com as dependências da etapa 4) e `src/main/resources/openapi/`; configurar `JAVA_HOME=C:\jdk-25.0.2` (T1)
 - [ ] 1.3 Confirmar o layout `openapi/modules` + `openapi/common` e decidir o destino do `openapi.yaml` placeholder, registrando em decisões (T1)
 
 ## 2. Erros comuns
