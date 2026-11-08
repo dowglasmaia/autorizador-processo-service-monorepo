@@ -35,4 +35,13 @@ Importar, sem perda, procedimentos e autorizações da base original para o Post
 - Definition of Done: importação idempotente verificada, rejeições listadas, nenhum dado de origem alterado — ou spec cancelada com motivo aprovado.
 
 ## 6. Resultado
-_Preencher ao concluir._
+**Status: não aplicável — cancelada sem necessidade** (`como-executar.md` §2). Data: 2026-11-08 (etapa 14 do loop `test-01`).
+
+**Motivo:** a condição de início (base real da versão original com dados a preservar) não se verificou. O discovery já indicava ausência de dados de produção (dev `create-drop`; teste com H2 semeado) e a busca na etapa 14 não achou nenhuma origem acessível. Decisão tomada em modo automático, sem consulta ao responsável (T1); se existir uma base fora do repositório, reabrir esta spec. [REVISAR]
+
+**Evidência (comandos reproduzíveis, sem valores sensíveis):**
+- `find . ( -name node_modules -o -name .git -o -name target ) -prune -o ( -name '*.mv.db' -o -name '*.dump' -o -name '*.bak' -o -name '*.sql' ) -print` → apenas as migrations Flyway V1–V4 e `db/seed/V1000__seed_local.sql` do backend novo; nenhum dump ou base de origem.
+- `grep -nEi 'origem|mysql|h2|source_db|legacy' .env.example compose.yaml` → sem ocorrências.
+- `env | grep -Ei '^(ORIGEM|MYSQL|H2|SOURCE_DB)'` → nenhuma variável.
+
+**T2–T5:** não executadas (sem origem); `tools/importacao/` não foi criado. Nenhum dado, credencial ou dump foi versionado.

@@ -314,3 +314,15 @@
 {"em":1794158993000,"nivel":"passo","texto":"Verificar ponto de partida","etapa":14,"passo":"partida"}
 {"em":1794158993008,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":14,"passo":"partida"}
 {"em":1794158993013,"nivel":"passo","texto":"Commit da proposta","etapa":14,"passo":"commitProposta"}
+{"em":1794158993719,"nivel":"ok","texto":"1dd1822 · 5 arquivo(s) · docs(test-01): proposta da etapa 14 · Migração de dados condicional","etapa":14,"passo":"commitProposta"}
+{"em":1794158993728,"nivel":"ok","texto":"Commit da proposta: ok · 1dd1822 · 5 arquivo(s)","etapa":14,"passo":"commitProposta"}
+{"em":1794158993734,"nivel":"passo","texto":"Aplicar a spec","etapa":14,"passo":"aplicar"}
+{"em":1794158993741,"nivel":"info","texto":"proposta antecipada da etapa 15 em paralelo","etapa":14,"passo":"aplicar"}
+{"em":1794159049347,"nivel":"ok","texto":"proposta antecipada da etapa 15 pronta","etapa":14,"passo":"aplicar"}
+{"em":1794159160699,"nivel":"ok","texto":"Aplicar a spec: ok · 13/13 tarefas · 2 sessão(ões)","etapa":14,"passo":"aplicar"}
+{"em":1794159160705,"nivel":"passo","texto":"Verificar a mudança","etapa":14,"passo":"verificar"}
+{"em":1794159160716,"nivel":"info","texto":"Verificar a mudança: pulado · sem verificações configuradas","etapa":14,"passo":"verificar"}
+{"em":1794159160723,"nivel":"passo","texto":"Arquivar a spec","etapa":14,"passo":"arquivar"}
+{"em":1794159160733,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\14-migracao-dados-condicional → .specs\\workflows\\test-01\\specs\\arquivo\\14-migracao-dados-condicional","etapa":14,"passo":"arquivar"}
+{"em":1794159160739,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\14-migracao-dados-condicional","etapa":14,"passo":"arquivar"}
+{"em":1794159160745,"nivel":"passo","texto":"Commit da entrega","etapa":14,"passo":"commitEntrega"}

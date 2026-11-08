@@ -22,7 +22,7 @@ Conjunto de especificações (Spec-Driven Development) para modernizar o **Autor
 | `design/` | `DESIGN_SYSTEM_DISCOVERY.md` (preexistente; os pontos [INFERIDO] foram verificados em `00-…/BASELINE_COMPORTAMENTO_ORIGINAL.md`) e, após SPEC-01, `prototype/` |
 | `00-product-discovery/` | `PRODUCT_CONTEXT`, `CURRENT_STATE_ANALYSIS`, `FUNCTIONAL_TRACEABILITY`, `BASELINE_COMPORTAMENTO_ORIGINAL` (executado) |
 | `01-architecture/` | `TARGET_ARCHITECTURE`, `MONOREPO_STRUCTURE`, `DATABASE_DESIGN`, `API_CONTRACTS`, `DECISIONS`, SPEC-01 |
-| `02-backend/` | SPEC-03..09, 11, 12, **22 (auth JWT)**, 50 |
+| `02-backend/` | SPEC-03..09, 11, 12, **22 (auth JWT)**, 50 (**não aplicável** — sem base de origem; arquivada em `archive/`) |
 | `03-frontend/` | SPEC-13..21, **23 (login)** |
 | `04-integration/` | SPEC-10, 30, 31, 32 |
 | `05-quality/` | `TEST_STRATEGY`, `SECURITY_REQUIREMENTS`, `NON_FUNCTIONAL_REQUIREMENTS`, SPEC-02, 40..43 |

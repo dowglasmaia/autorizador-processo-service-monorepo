@@ -2384,7 +2384,154 @@
           "descricao": "Executa a SPEC-50 apenas se houver base de origem acessível; caso contrário, registra como não aplicável com evidência e a arquiva.\nReferências: SPEC-50.\nLimite: nunca versionar dados reais.",
           "spec": "14-migracao-dados-condicional",
           "specPronta": false,
-          "status": "pendente"
+          "status": "entregue",
+          "entregueEm": "2026-11-08T17:32:40.752Z",
+          "iteracao": 14,
+          "duracaoMs": 229564,
+          "custo": 0.7001263,
+          "passos": [
+            {
+              "id": "propor",
+              "situacao": "ok",
+              "duracaoMs": 61901,
+              "custo": 0.2300794,
+              "tentativas": 1,
+              "detalhe": "13 tarefas"
+            },
+            {
+              "id": "partida",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "commitProposta",
+              "situacao": "ok",
+              "duracaoMs": 707,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "1dd1822 · 5 arquivo(s)"
+            },
+            {
+              "id": "aplicar",
+              "situacao": "ok",
+              "duracaoMs": 166952,
+              "custo": 0.47004690000000005,
+              "tentativas": 1,
+              "detalhe": "13/13 tarefas · 2 sessão(ões)"
+            },
+            {
+              "id": "verificar",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "arquivar",
+              "situacao": "ok",
+              "duracaoMs": 4,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\14-migracao-dados-condicional"
+            },
+            {
+              "id": "commitEntrega",
+              "situacao": "ok",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1
+            }
+          ],
+          "sessoes": [
+            {
+              "rotulo": "propor-14",
+              "passo": "propor",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2300794,
+              "turnos": 9,
+              "duracaoMs": 61884,
+              "inicio": 1794158931093,
+              "fim": 1794158992986,
+              "tokens": {
+                "entrada": 16,
+                "saida": 3245,
+                "cacheCriacao": 40149,
+                "cacheLeitura": 370014
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "antecipar-15",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2378217,
+              "turnos": 7,
+              "duracaoMs": 55590,
+              "inicio": 1794158993743,
+              "fim": 1794159049343,
+              "tokens": {
+                "entrada": 12,
+                "saida": 4427,
+                "cacheCriacao": 41939,
+                "cacheLeitura": 257717
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-14-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.24617329999999998,
+              "turnos": 11,
+              "duracaoMs": 55556,
+              "inicio": 1794158995174,
+              "fim": 1794159050740,
+              "tokens": {
+                "entrada": 16,
+                "saida": 4002,
+                "cacheCriacao": 42272,
+                "cacheLeitura": 370333
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-14-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.22387360000000003,
+              "turnos": 8,
+              "duracaoMs": 109930,
+              "inicio": 1794159050747,
+              "fim": 1794159160687,
+              "tokens": {
+                "entrada": 12,
+                "saida": 2558,
+                "cacheCriacao": 42922,
+                "cacheLeitura": 265816
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            }
+          ]
         }
       ]
     },
@@ -2557,7 +2704,7 @@
     "etapa": 14,
     "inicio": "2026-11-08T17:28:51.078Z",
     "commitInicial": "ec1a9bc559b49a5650491907a5b5988140953bb4",
-    "passoAtual": 2,
+    "passoAtual": 6,
     "passos": [
       {
         "id": "propor",
@@ -2577,62 +2724,66 @@
       },
       {
         "id": "commitProposta",
+        "situacao": "ok",
+        "duracaoMs": 707,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "1dd1822 · 5 arquivo(s)"
+      },
+      {
+        "id": "aplicar",
+        "situacao": "ok",
+        "duracaoMs": 166952,
+        "custo": 0.47004690000000005,
+        "tentativas": 1,
+        "detalhe": "13/13 tarefas · 2 sessão(ões)"
+      },
+      {
+        "id": "verificar",
+        "situacao": "pulado",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "arquivar",
+        "situacao": "ok",
+        "duracaoMs": 4,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\14-migracao-dados-condicional"
+      },
+      {
+        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
-      },
-      {
-        "id": "aplicar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "verificar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "arquivar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
       }
     ],
     "titulo": "Revisa a spec da migração de dados condicional (SPEC-50) contra o estado atual",
     "comparacao": "A pasta da etapa já tinha `proposta.md` e `tarefas.md`, escritos antecipadamente na etapa 13. Revisei os dois contra o repositório e mantive a estrutura: 4 grupos e 13 tarefas, com o ramo A (não aplicável) como esperado e o ramo B condicionado a `aprovacao.md`.\nConfirmei que não há base de origem: nenhum `*.mv.db`, `*.dump` ou `*.bak`. Os únicos `.sql` são as migrations V1–V4 e o seed local. `tools/` só tem `parity/` e não existe `tools/importacao/`.\n`.env.example` e `compose.yaml` não têm variáveis de conexão com a origem. Não achei variáveis de ambiente com nomes de MySQL ou origem, e o Docker está disponível.\nAjustei dois pontos. A proposta agora registra que a revisão foi feita contra o código atual e inclui essas evidências. A tarefa 2.2 passou a apontar a linha `02-backend/` do `INDEX.md`, que é o único lugar onde a SPEC-50 aparece, porque o índice não tem tabela de status.\nA SPEC-50 segue com a seção \"Resultado\" em branco e fora de `.specs/archive/`, o que fica para a aplicação. Não mexi em código."
   },
   "totais": {
-    "duracaoMs": 10297660,
-    "custo": 28.797281199999993,
+    "duracaoMs": 10465323,
+    "custo": 29.505149799999995,
     "execucoes": 2,
     "iteracoes": 14,
     "entregues": 13,
-    "sessoes": 75,
-    "turnos": 1033,
+    "sessoes": 78,
+    "turnos": 1059,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 5,
     "recuperacoesResolvidas": 4,
     "falhas": 0,
-    "commits": 26,
+    "commits": 27,
     "tokens": {
-      "entrada": 1528,
-      "saida": 692658,
-      "cacheCriacao": 4165159,
-      "cacheLeitura": 47551018
+      "entrada": 1568,
+      "saida": 703645,
+      "cacheCriacao": 4292292,
+      "cacheLeitura": 48444884
     }
   },
   "ultimaExecucao": {

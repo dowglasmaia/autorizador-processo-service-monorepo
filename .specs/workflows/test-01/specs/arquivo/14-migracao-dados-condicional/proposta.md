@@ -37,3 +37,8 @@ Executar a SPEC-50 **somente se existir base de origem acessível** (MySQL/H2 da
 - **Ramo B condicionado a aprovação:** se a verificação inesperadamente achar uma base, não ler nem importar sem `aprovacao.md`, por envolver dados reais.
 - **Arquivamento da SPEC-50 sem implementação:** tratada como cancelada sem necessidade, conforme `como-executar.md` §2 (cancelamento com motivo). [REVISAR]
 - **Sem script placeholder:** não criar `tools/importacao/` vazio no ramo A, para não deixar código sem uso.
+- **Decisão do lote 1 (ramo A):** nenhuma base, dump, SQL de origem, variável de conexão ou configuração de origem encontrados (comandos e resultado na seção "Resultado" da SPEC-50). Ramo B não executado; `aprovacao.md` não criado. [REVISAR]
+- **Desvio:** a pasta `06-execution-plan/` citada no `INDEX.md` não existe; ignorada.
+- **Termo "legado/legacy" no backend:** as únicas ocorrências são a própria regra de proibição (`ArchitectureTest` regra 9 e `README.md`); nenhum pacote, classe ou código a usa.
+- **INDEX:** a linha de `02-backend/` já indica a SPEC-50 como arquivada em `archive/`; o `git mv` em si é a tarefa 4.2 (próximo lote).
+- **Lote 2:** tarefas 3.2–3.4 (ramo B) marcadas como não aplicáveis, sem criar `tools/importacao/`; `./mvnw verify` verde sem mudança de código; SPEC-50 arquivada com `git mv` em `.specs/archive/` (resumo na seção 6 da própria spec). [REVISAR]
