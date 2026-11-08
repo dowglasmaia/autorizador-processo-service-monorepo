@@ -549,3 +549,13 @@
 {"em":1794164211230,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\24-microcopy-acessibilidade → .specs\\workflows\\test-01\\specs\\arquivo\\24-microcopy-acessibilidade","etapa":24,"passo":"arquivar"}
 {"em":1794164211237,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\24-microcopy-acessibilidade","etapa":24,"passo":"arquivar"}
 {"em":1794164211242,"nivel":"passo","texto":"Commit da entrega","etapa":24,"passo":"commitEntrega"}
+{"em":1794164211898,"nivel":"ok","texto":"32fc645 · 33 arquivo(s) · feat(autorizador): Revisa a spec de microcopy e acessibilidade (SPEC-…","etapa":24,"passo":"commitEntrega"}
+{"em":1794164211924,"nivel":"ok","texto":"Commit da entrega: ok · 32fc645 · 33 arquivo(s)","etapa":24,"passo":"commitEntrega"}
+{"em":1794164211939,"nivel":"ok","texto":"Etapa 24 entregue · commit 32fc645","etapa":24,"passo":"commitEntrega"}
+{"em":1794164212014,"nivel":"passo","texto":"Etapa 25 · Testes e2e do ambiente (iteração 25)","etapa":25}
+{"em":1794164212015,"nivel":"passo","texto":"Propor a spec","etapa":25,"passo":"propor"}
+{"em":1794164212022,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":25,"passo":"propor"}
+{"em":1794164254761,"nivel":"ok","texto":"Propor a spec: ok · 25 tarefas","etapa":25,"passo":"propor"}
+{"em":1794164254768,"nivel":"passo","texto":"Verificar ponto de partida","etapa":25,"passo":"partida"}
+{"em":1794164254781,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":25,"passo":"partida"}
+{"em":1794164254788,"nivel":"passo","texto":"Commit da proposta","etapa":25,"passo":"commitProposta"}

@@ -8,7 +8,7 @@
 
 ## 2. Fixture de ambiente
 - [ ] 2.1 Criar o `.env` de teste descartável gerado em tempo de execução (usuário *bootstrap*, `JWT_SECRET`, TTL curto), sem segredos versionados.
-- [ ] 2.2 Criar override do Compose (`compose.e2e.yaml`) que ativa a seed na API sem tocar o `compose.yaml` principal.
+- [ ] 2.2 Confirmar que a seed (perfil `local` padrão) está ativa no Compose; só se não estiver, criar override mínimo `compose.e2e.yaml` sem tocar o `compose.yaml` principal.
 - [ ] 2.3 Implementar global setup: `docker compose -p e2e up -d --build`, espera por `healthy` de `api` e `app`.
 - [ ] 2.4 Implementar global teardown: `docker compose -p e2e down -v`, inclusive em caso de falha.
 - [ ] 2.5 Criar helpers: login via UI, geração de números únicos de procedimento e leitura da seed.

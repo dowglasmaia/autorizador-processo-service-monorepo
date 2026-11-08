@@ -4307,7 +4307,8 @@
               "origem": "provider",
               "esforco": "medium"
             }
-          ]
+          ],
+          "commit": "32fc645"
         }
       ]
     },
@@ -4381,19 +4382,19 @@
     }
   ],
   "iteracao": {
-    "numero": 24,
-    "etapa": 24,
-    "inicio": "2026-11-08T18:48:30.012Z",
-    "commitInicial": "877ac50bc11d80fd997db3b1787b732ae8a81c69",
-    "passoAtual": 6,
+    "numero": 25,
+    "etapa": 25,
+    "inicio": "2026-11-08T18:56:52.008Z",
+    "commitInicial": "32fc6456b387af7168ee9a4be1d6045afabd1109",
+    "passoAtual": 2,
     "passos": [
       {
         "id": "propor",
         "situacao": "ok",
-        "duracaoMs": 37555,
-        "custo": 0.20161869999999998,
+        "duracaoMs": 42734,
+        "custo": 0.2193777,
         "tentativas": 1,
-        "detalhe": "17 tarefas"
+        "detalhe": "25 tarefas"
       },
       {
         "id": "partida",
@@ -4405,66 +4406,62 @@
       },
       {
         "id": "commitProposta",
-        "situacao": "ok",
-        "duracaoMs": 400,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "3b9b707 · 5 arquivo(s)"
-      },
-      {
-        "id": "aplicar",
-        "situacao": "ok",
-        "duracaoMs": 463151,
-        "custo": 1.6668872000000001,
-        "tentativas": 1,
-        "detalhe": "17/17 tarefas · 3 sessão(ões)"
-      },
-      {
-        "id": "verificar",
-        "situacao": "pulado",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "arquivar",
-        "situacao": "ok",
-        "duracaoMs": 5,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\24-microcopy-acessibilidade"
-      },
-      {
-        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
+      },
+      {
+        "id": "aplicar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "verificar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "arquivar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "commitEntrega",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
       }
     ],
-    "titulo": "Revisa a spec de microcopy e acessibilidade (SPEC-21) contra a base entregue",
-    "comparacao": "A pasta da etapa já tinha `proposta.md` e `tarefas.md`, escritos antes da etapa 23. Revisei os dois contra o código atual em vez de recriá-los.\nO painel já existe em `features/painel`, com gráficos e `role=status`/`aria-label`. Ficam para a etapa 24 a alternativa textual dos gráficos e a migração dos textos para o catálogo.\nO shell já mostra o estado da API pelo `ApiStatusService`, sem \"perfil test\". A tarefa 2.2 virou conferência do texto e da grafia.\nAinda faltam `core/i18n/mensagens.ts` (só existe `mensagens-login.ts`) e `lang=\"pt-BR\"` (o `index.html` está com `lang=\"en\"`). Não há axe no `package.json`, e a spec decide fazer a verificação de a11y só com Vitest/DOM.\nO grep de termos proibidos já retorna vazio em `src`. Mantive 17 tarefas em 5 grupos, sem alterar o escopo, e registrei a revisão em \"Decisões tomadas sem consulta\"."
+    "titulo": "Revisa a spec dos testes e2e do ambiente (SPEC-30) contra a base entregue",
+    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md`, escritos antes da etapa 24. Revisei os dois contra o código atual e os mantive, com escopo, 25 tarefas e critérios de aceite.\nCorrigi uma premissa errada: a proposta dizia que a seed não chegava ao Compose. Mas `application.yml` define `spring.profiles.default: local`, o `compose.yaml` não define `SPRING_PROFILES_ACTIVE` e o `application-local.yml` inclui `db/seed` no Flyway. Então a seed já é carregada no Compose.\nPor isso o override `compose.e2e.yaml` virou contingência: a tarefa 2.2 agora só confirma a seed, e a decisão foi registrada como [REVISAR].\nConfirmei que não há Playwright, script `e2e` nem pasta `e2e/` no app, e que `.specs/06-execution-plan/` continua inexistente. O catálogo `core/i18n/mensagens.ts` existe e traz o texto \"Não foi possível carregar\", usado no cenário 7.\nNenhum código da aplicação foi alterado."
   },
   "totais": {
-    "duracaoMs": 15481880,
-    "custo": 47.3532975,
+    "duracaoMs": 15525283,
+    "custo": 47.5726752,
     "execucoes": 2,
-    "iteracoes": 24,
-    "entregues": 23,
-    "sessoes": 127,
-    "turnos": 1699,
+    "iteracoes": 25,
+    "entregues": 24,
+    "sessoes": 128,
+    "turnos": 1706,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 6,
     "recuperacoesResolvidas": 5,
     "falhas": 0,
-    "commits": 47,
+    "commits": 48,
     "tokens": {
-      "entrada": 2564,
-      "saida": 1148940,
-      "cacheCriacao": 6926629,
-      "cacheLeitura": 77003461
+      "entrada": 2576,
+      "saida": 1151492,
+      "cacheCriacao": 6968551,
+      "cacheLeitura": 77264918
     }
   },
   "ultimaExecucao": {
