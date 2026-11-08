@@ -4889,7 +4889,154 @@
           "descricao": "Executa a SPEC-40: `backend-ci.yml`, `frontend-ci.yml` e `integracao-ci.yml`, cada um disparado só por mudança no próprio caminho.\nReferências: `.github/workflows`.\nLimite: sem deploy.",
           "spec": "28-ci-por-projeto",
           "specPronta": false,
-          "status": "pendente"
+          "status": "entregue",
+          "entregueEm": "2026-11-08T20:21:54.893Z",
+          "iteracao": 28,
+          "duracaoMs": 338936,
+          "custo": 0.9064167,
+          "passos": [
+            {
+              "id": "propor",
+              "situacao": "ok",
+              "duracaoMs": 45362,
+              "custo": 0.2375408,
+              "tentativas": 1,
+              "detalhe": "16 tarefas"
+            },
+            {
+              "id": "partida",
+              "situacao": "pulado",
+              "duracaoMs": 1,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "commitProposta",
+              "situacao": "ok",
+              "duracaoMs": 402,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "04e865f · 5 arquivo(s)"
+            },
+            {
+              "id": "aplicar",
+              "situacao": "ok",
+              "duracaoMs": 293168,
+              "custo": 0.6688759,
+              "tentativas": 1,
+              "detalhe": "16/16 tarefas · 2 sessão(ões)"
+            },
+            {
+              "id": "verificar",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "arquivar",
+              "situacao": "ok",
+              "duracaoMs": 3,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\28-ci-por-projeto"
+            },
+            {
+              "id": "commitEntrega",
+              "situacao": "ok",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1
+            }
+          ],
+          "sessoes": [
+            {
+              "rotulo": "propor-28",
+              "passo": "propor",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2375408,
+              "turnos": 8,
+              "duracaoMs": 45344,
+              "inicio": 1794168975792,
+              "fim": 1794169021145,
+              "tokens": {
+                "entrada": 12,
+                "saida": 3359,
+                "cacheCriacao": 44351,
+                "cacheLeitura": 265228
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-28-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.27169649999999995,
+              "turnos": 7,
+              "duracaoMs": 51595,
+              "inicio": 1794169023049,
+              "fim": 1794169074654,
+              "tokens": {
+                "entrada": 14,
+                "saida": 5295,
+                "cacheCriacao": 46220,
+                "cacheLeitura": 338385
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "antecipar-29",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2679555,
+              "turnos": 13,
+              "duracaoMs": 68607,
+              "inicio": 1794169021613,
+              "fim": 1794169090229,
+              "tokens": {
+                "entrada": 14,
+                "saida": 6110,
+                "cacheCriacao": 43847,
+                "cacheLeitura": 314395
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-28-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.39717940000000007,
+              "turnos": 16,
+              "duracaoMs": 240104,
+              "inicio": 1794169074659,
+              "fim": 1794169314773,
+              "tokens": {
+                "entrada": 30,
+                "saida": 8763,
+                "cacheCriacao": 55589,
+                "cacheLeitura": 871334
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            }
+          ]
         },
         {
           "numero": 29,
@@ -4926,7 +5073,7 @@
     "etapa": 28,
     "inicio": "2026-11-08T20:16:15.776Z",
     "commitInicial": "88af7fa143d7fa8d2628ee57081bdfbb073a7066",
-    "passoAtual": 2,
+    "passoAtual": 6,
     "passos": [
       {
         "id": "propor",
@@ -4946,62 +5093,66 @@
       },
       {
         "id": "commitProposta",
+        "situacao": "ok",
+        "duracaoMs": 402,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "04e865f · 5 arquivo(s)"
+      },
+      {
+        "id": "aplicar",
+        "situacao": "ok",
+        "duracaoMs": 293168,
+        "custo": 0.6688759,
+        "tentativas": 1,
+        "detalhe": "16/16 tarefas · 2 sessão(ões)"
+      },
+      {
+        "id": "verificar",
+        "situacao": "pulado",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "arquivar",
+        "situacao": "ok",
+        "duracaoMs": 3,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\28-ci-por-projeto"
+      },
+      {
+        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
-      },
-      {
-        "id": "aplicar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "verificar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "arquivar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
       }
     ],
     "titulo": "Revisa a spec de CI por projeto (SPEC-40) contra a base entregue",
     "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md` escritos antes da etapa 27. Revisei e completei os dois em vez de recriar.\nNão existe `.github/` no repositório. Os dois Dockerfiles (backend e frontend), o `compose.yaml` e o `tools/parity/replay.mjs` existem. A pasta `.specs/06-execution-plan/` também não existe, e esse desvio fica registrado.\nA etapa 27 já entregou `scripts/check-contract.mjs` e `scripts/check-contract-compat.mjs`, que a spec antecipada tratava como pendentes. Atualizei o ponto de partida e fiz o job `check-contract` rodar os dois scripts. Também incluí `tools/contract/**` nos `paths` da integração e a tarefa de ajustar os trechos do README raiz (\"em construção\" e \"fica para a etapa de CI\").\nNo frontend, `lint`, `test`, `build` e `e2e` existem como scripts. O e2e sobe e derruba o Compose sozinho, com `.env` descartável. O CI precisa só de Node, Docker e do Playwright instalado.\nA spec tem 14 tarefas em 6 grupos, dentro do limite. `check-architecture.mjs` e `validate.mjs`, citados na SPEC-40, não existem. A arquitetura é coberta pelo `ArchitectureTest` dentro do `./mvnw verify`. Isso e a execução real no GitHub (pendente) estão em \"Decisões tomadas sem consulta\"."
   },
   "totais": {
-    "duracaoMs": 20258362,
-    "custo": 53.749877000000005,
+    "duracaoMs": 20551935,
+    "custo": 54.6867084,
     "execucoes": 2,
     "iteracoes": 28,
     "entregues": 27,
-    "sessoes": 144,
-    "turnos": 1937,
+    "sessoes": 147,
+    "turnos": 1973,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 7,
     "recuperacoesResolvidas": 6,
     "falhas": 0,
-    "commits": 54,
+    "commits": 55,
     "tokens": {
-      "entrada": 2976,
-      "saida": 1285788,
-      "cacheCriacao": 7870232,
-      "cacheLeitura": 89532096
+      "entrada": 3034,
+      "saida": 1305956,
+      "cacheCriacao": 8015888,
+      "cacheLeitura": 91056210
     }
   },
   "ultimaExecucao": {

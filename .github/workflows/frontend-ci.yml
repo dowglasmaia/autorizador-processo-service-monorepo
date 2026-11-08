@@ -1,0 +1,108 @@
+name: Frontend CI
+
+# Roda só quando o frontend muda. Sem deploy e sem publicação de imagens.
+on:
+  push:
+    paths:
+      - "app-autorizador-processo/**"
+      - ".github/workflows/frontend-ci.yml"
+  pull_request:
+    paths:
+      - "app-autorizador-processo/**"
+      - ".github/workflows/frontend-ci.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: frontend-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: app-autorizador-processo
+
+jobs:
+  instalar:
+    name: npm ci
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: app-autorizador-processo/package-lock.json
+      - run: npm ci
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: app-autorizador-processo/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+
+  test:
+    name: Testes
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: app-autorizador-processo/package-lock.json
+      - run: npm ci
+      - run: npm test
+
+  build:
+    name: Build de produção
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: app-autorizador-processo/package-lock.json
+      - run: npm ci
+      - run: npm run build
+
+  docker-build:
+    name: Imagem Docker do frontend (sem publicar)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: .
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - name: Build (push desabilitado)
+        run: docker build --tag app-autorizador-processo:ci app-autorizador-processo
+
+  auditoria-npm:
+    name: npm audit (dependências de produção)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: app-autorizador-processo/package-lock.json
+      - run: npm ci
+      - name: Auditoria (falha em severidade alta ou crítica)
+        run: npm audit --audit-level=high --omit=dev

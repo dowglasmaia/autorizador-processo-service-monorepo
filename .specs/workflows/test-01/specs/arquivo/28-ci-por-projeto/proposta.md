@@ -42,3 +42,19 @@ Dar a cada projeto seu próprio workflow de GitHub Actions, disparado só por mu
 - **Job `check-contract`:** os scripts existem (etapa 27); o job roda os dois, o de desvio e o de compatibilidade, e `tools/contract/**` entra nos `paths` da integração. O README raiz é atualizado para refletir que a execução no CI passa a existir.
 - **Docker/Compose:** usa `docker compose` no runner; localmente aceita-se `docker-compose` na falta do plugin.
 - **Execução real no GitHub** não é possível aqui: marcada como pendente, conforme `como-executar.md` §3.
+
+## Decisões do lote 1 (workflows de backend e frontend)
+- `.specs/06-execution-plan/` não existe (desvio registrado); `check-architecture.mjs`/`validate.mjs` também não: o job `verify` cobre `ArchitectureTest` e a geração do contrato via `./mvnw verify`.
+- `backend-ci.yml`: jobs `verify`, `docker-build`, `auditoria-maven` (`continue-on-error`, só `dependency:tree`) e `paridade` (senhas/JWT gerados com `openssl` em tempo de execução e mascarados; `up --wait postgres api`, `replay.mjs --target v1`, `down -v` sempre). Portas 18080/15432 para evitar conflito no runner. **[REVISAR]** a senha de bootstrap gerada assume que a política de senha aceita hex + `Aa1!`; não validado em execução real no GitHub.
+- `frontend-ci.yml`: jobs `instalar`, `lint`, `test`, `build`, cada um com seu `npm ci` e cache npm (Node 24), em paralelo. Os jobs de imagem Docker e `npm audit` (tarefa 3.3) ficam para o próximo lote.
+- Ações fixadas por tag major (`checkout@v4`, `setup-java@v4`, `setup-node@v4`, `setup-buildx-action@v3`). Sintaxe validada apenas como YAML; `actionlint` fica na tarefa 6.1.
+
+## Decisões do lote 2 e evidências
+- **3.3** `frontend-ci.yml` ganhou `docker-build` (sem push) e `auditoria-npm` (`npm audit --audit-level=high --omit=dev`, bloqueante). Local: `npm audit` = 0 vulnerabilidades.
+- **4.1/4.2** `integracao-ci.yml` criado: `paths` iguais em `push`/`pull_request`; jobs `check-contract` (`npm ci` no app, depois os dois scripts) e `e2e` (`npx playwright install --with-deps chromium` + `npm run e2e`; o global setup gera o `.env` descartável e sobe/derruba o Compose). Artefato `playwright-report` + `test-results` enviado só `if: failure()`.
+- **5.1** README raiz: badges (URLs relativas), seção "CI por projeto" com tabela de disparo e orientação de branch protection; removidos os "em construção" de `tools/parity` e `.github/workflows` e a frase "fica para a etapa de CI".
+- **6.1** `actionlint` (imagem Docker `rhysd/actionlint`) nos 3 workflows: sem erros (exit 0).
+- **6.2** Script local (js-yaml do app, glob → regex) confirmou: `push` = `pull_request` em cada workflow; backend não cita o app; frontend não cita api/tools; cenários de aceite: só `app-…/src` → frontend + integração; só `api-…/src` → backend + integração; só `compose.yaml` → integração. **Execução real no GitHub: pendente** (não há como disparar aqui).
+- **6.3** Local, sem falhas: `./mvnw verify` (239 testes, `ArchitectureTest` 23 ok, BUILD SUCCESS), `npm ci`, `npm run lint`, `npm test` (226 testes), `npm run build`, `check-contract.mjs`, `check-contract-compat.mjs`, `docker build` das duas imagens (imagens locais removidas depois). O job `paridade` e o `e2e` (Compose completo) não foram reexecutados nesta sessão; já foram validados nas etapas 25/26 e o e2e depende do runner do GitHub. **[REVISAR]** primeira execução real no GitHub.
+- **6.4** Spec `SPEC-40` movida com `git mv` para `.specs/archive/`. Desvio: `.specs/06-execution-plan/` não existe; `check-architecture.mjs`/`validate.mjs` não existem (cobertos pelo `./mvnw verify`).
+- Resumo: 3 workflows independentes entregues; Dockerfiles construídos por cada CI, sem publicação; sem segredos versionados.

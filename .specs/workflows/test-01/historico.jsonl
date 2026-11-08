@@ -629,3 +629,15 @@
 {"em":1794169021165,"nivel":"passo","texto":"Verificar ponto de partida","etapa":28,"passo":"partida"}
 {"em":1794169021177,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":28,"passo":"partida"}
 {"em":1794169021184,"nivel":"passo","texto":"Commit da proposta","etapa":28,"passo":"commitProposta"}
+{"em":1794169021587,"nivel":"ok","texto":"04e865f · 5 arquivo(s) · docs(test-01): proposta da etapa 28 · CI por projeto","etapa":28,"passo":"commitProposta"}
+{"em":1794169021598,"nivel":"ok","texto":"Commit da proposta: ok · 04e865f · 5 arquivo(s)","etapa":28,"passo":"commitProposta"}
+{"em":1794169021604,"nivel":"passo","texto":"Aplicar a spec","etapa":28,"passo":"aplicar"}
+{"em":1794169021611,"nivel":"info","texto":"proposta antecipada da etapa 29 em paralelo","etapa":28,"passo":"aplicar"}
+{"em":1794169090235,"nivel":"ok","texto":"proposta antecipada da etapa 29 pronta","etapa":28,"passo":"aplicar"}
+{"em":1794169314785,"nivel":"ok","texto":"Aplicar a spec: ok · 16/16 tarefas · 2 sessão(ões)","etapa":28,"passo":"aplicar"}
+{"em":1794169314793,"nivel":"passo","texto":"Verificar a mudança","etapa":28,"passo":"verificar"}
+{"em":1794169314859,"nivel":"info","texto":"Verificar a mudança: pulado · sem verificações configuradas","etapa":28,"passo":"verificar"}
+{"em":1794169314865,"nivel":"passo","texto":"Arquivar a spec","etapa":28,"passo":"arquivar"}
+{"em":1794169314872,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\28-ci-por-projeto → .specs\\workflows\\test-01\\specs\\arquivo\\28-ci-por-projeto","etapa":28,"passo":"arquivar"}
+{"em":1794169314878,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\28-ci-por-projeto","etapa":28,"passo":"arquivar"}
+{"em":1794169314886,"nivel":"passo","texto":"Commit da entrega","etapa":28,"passo":"commitEntrega"}

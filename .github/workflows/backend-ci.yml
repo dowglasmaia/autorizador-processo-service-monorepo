@@ -1,0 +1,113 @@
+name: Backend CI
+
+# Roda só quando o backend (ou a ferramenta de paridade) muda. Sem deploy e sem publicação de imagens.
+on:
+  push:
+    paths:
+      - "api-autorizador-processo/**"
+      - "tools/parity/**"
+      - ".github/workflows/backend-ci.yml"
+  pull_request:
+    paths:
+      - "api-autorizador-processo/**"
+      - "tools/parity/**"
+      - ".github/workflows/backend-ci.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: backend-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  # Inclui ArchitectureTest (arquitetura) e a geração de código a partir do OpenAPI (validação do contrato).
+  verify:
+    name: Build e testes (./mvnw verify)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: api-autorizador-processo
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "25"
+          cache: maven
+          cache-dependency-path: api-autorizador-processo/pom.xml
+      # Testcontainers usa o Docker do runner.
+      - name: ./mvnw verify
+        run: ./mvnw -B -ntp verify
+
+  docker-build:
+    name: Imagem Docker do backend (sem publicar)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - name: Build (push desabilitado)
+        run: docker build --tag api-autorizador-processo:ci api-autorizador-processo
+
+  auditoria-maven:
+    name: Auditoria de dependências Maven (não bloqueante)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    continue-on-error: true
+    defaults:
+      run:
+        working-directory: api-autorizador-processo
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "25"
+          cache: maven
+          cache-dependency-path: api-autorizador-processo/pom.xml
+      # Sem plugin de CVE no pom: lista a árvore de dependências para revisão (limitação registrada na spec).
+      - name: Árvore de dependências
+        run: ./mvnw -B -ntp dependency:tree
+
+  paridade:
+    name: Paridade com o baseline (Compose postgres + api)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      COMPOSE_PROJECT_NAME: paridade
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Gerar credenciais descartáveis
+        run: |
+          {
+            echo "API_PORT=18080"
+            echo "POSTGRES_PORT=15432"
+            echo "POSTGRES_PASSWORD=$(openssl rand -hex 16)"
+            echo "JWT_SECRET=$(openssl rand -base64 48 | tr -d '\n')"
+            echo "AUTH_BOOTSTRAP_EMAIL=paridade@ci.local"
+            echo "AUTH_BOOTSTRAP_SENHA=$(openssl rand -hex 12)Aa1!"
+          } > "$RUNNER_TEMP/paridade.env"
+          while IFS='=' read -r k v; do
+            case "$k" in
+              POSTGRES_PASSWORD|JWT_SECRET|AUTH_BOOTSTRAP_SENHA) echo "::add-mask::$v" ;;
+            esac
+          done < "$RUNNER_TEMP/paridade.env"
+      - name: Subir postgres e api
+        run: docker compose --env-file "$RUNNER_TEMP/paridade.env" up -d --build --wait postgres api
+      - name: Replay dos golden cases (v1)
+        run: |
+          set -a; . "$RUNNER_TEMP/paridade.env"; set +a
+          node tools/parity/replay.mjs --target v1 --base-url "http://localhost:${API_PORT}" \
+            --email "$AUTH_BOOTSTRAP_EMAIL" --senha "$AUTH_BOOTSTRAP_SENHA"
+      - name: Logs da API em caso de falha
+        if: failure()
+        run: docker compose --env-file "$RUNNER_TEMP/paridade.env" logs --no-color api postgres | tail -n 200
+      - name: Derrubar o ambiente
+        if: always()
+        run: docker compose --env-file "$RUNNER_TEMP/paridade.env" down -v

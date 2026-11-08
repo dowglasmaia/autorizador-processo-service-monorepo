@@ -1,0 +1,83 @@
+name: Integração CI
+
+# Valida a combinação dos projetos: contrato x tipos do frontend e e2e com Compose completo.
+# Sem deploy e sem publicação de imagens.
+on:
+  push:
+    paths:
+      - "api-autorizador-processo/**"
+      - "app-autorizador-processo/**"
+      - "compose.yaml"
+      - ".env.example"
+      - "scripts/check-contract*.mjs"
+      - "tools/contract/**"
+      - ".github/workflows/integracao-ci.yml"
+  pull_request:
+    paths:
+      - "api-autorizador-processo/**"
+      - "app-autorizador-processo/**"
+      - "compose.yaml"
+      - ".env.example"
+      - "scripts/check-contract*.mjs"
+      - "tools/contract/**"
+      - ".github/workflows/integracao-ci.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: integracao-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  check-contract:
+    name: Contrato (tipos e compatibilidade)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: app-autorizador-processo/package-lock.json
+      # Os dois scripts usam dependências instaladas pelo app (gerador de tipos e js-yaml).
+      - name: npm ci (app)
+        run: npm ci
+        working-directory: app-autorizador-processo
+      - name: Tipos do frontend em dia com o contrato
+        run: node scripts/check-contract.mjs
+      - name: Compatibilidade com o instantâneo base
+        run: node scripts/check-contract-compat.mjs
+
+  e2e:
+    name: e2e (Compose completo + Playwright)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: app-autorizador-processo
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: app-autorizador-processo/package-lock.json
+      - run: npm ci
+      - name: Instalar Chromium do Playwright
+        run: npx playwright install --with-deps chromium
+      # O global setup gera um .env descartável (senha e JWT_SECRET sorteados) e sobe/derruba o Compose.
+      - name: Executar e2e
+        run: npm run e2e
+      - name: Relatório do Playwright (somente em falha)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            app-autorizador-processo/playwright-report
+            app-autorizador-processo/test-results
+          retention-days: 7
+          if-no-files-found: ignore

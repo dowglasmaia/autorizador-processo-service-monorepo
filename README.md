@@ -1,5 +1,7 @@
 # Autorizador de Procedimentos Médicos
 
+![Backend CI](../../actions/workflows/backend-ci.yml/badge.svg) ![Frontend CI](../../actions/workflows/frontend-ci.yml/badge.svg) ![Integração CI](../../actions/workflows/integracao-ci.yml/badge.svg)
+
 Monorepo do **Autorizador de Procedimentos Médicos**: cadastro de procedimentos, solicitação e consulta de autorizações (com critérios de idade e sexo do paciente) e painel com indicadores.
 
 > 🚧 **Em construção.** O repositório está sendo modernizado por etapas, seguindo as especificações em [`.specs/`](.specs/INDEX.md). O backend (`api-autorizador-processo`) já tem a fundação pronta (esqueleto, ArchUnit e Modulith); o frontend (`app-autorizador-processo`) tem a fundação pronta (shell Angular 21, testes e lint). O que está marcado como "em construção" abaixo nasce nas próximas etapas.
@@ -16,8 +18,8 @@ Monorepo do **Autorizador de Procedimentos Médicos**: cadastro de procedimentos
 .
 ├─ api-autorizador-processo/   backend Spring Boot 4 · Java 25 · Maven            fundação pronta
 ├─ app-autorizador-processo/   frontend Angular 21 · Tailwind                     fundação pronta
-├─ tools/parity/               casos e replay de paridade com a versão original   🚧 em construção
-├─ .github/workflows/          CI independente por projeto                        🚧 em construção
+├─ tools/parity/               casos e replay de paridade com a versão original
+├─ .github/workflows/          CI independente por projeto (backend, frontend, integração)
 ├─ compose.yaml · .env.example integração local                                   (existentes; ajustados nas próximas etapas)
 ├─ README.md                   este arquivo
 └─ .specs/                     especificações, memória do projeto e design
@@ -80,7 +82,21 @@ node scripts/check-contract-compat.mjs                    # falha em remoção, 
 node scripts/check-contract-compat.mjs --atualizar-base   # após mudança aditiva aprovada: atualiza o instantâneo
 ```
 
-Mudanças aditivas (nova operação, propriedade opcional, novo valor de enum, nova resposta) passam. Uma quebra de compatibilidade exige nova versão da API (`/api/v2`), não a atualização do instantâneo. Depois de atualizar o instantâneo, regenere os tipos e versione tudo junto. A execução no CI fica para a etapa de CI por projeto.
+Mudanças aditivas (nova operação, propriedade opcional, novo valor de enum, nova resposta) passam. Uma quebra de compatibilidade exige nova versão da API (`/api/v2`), não a atualização do instantâneo. Depois de atualizar o instantâneo, regenere os tipos e versione tudo junto. No CI, as verificações 1 e 3 rodam no job `check-contract` do workflow de integração e a 2 roda dentro do `./mvnw verify` do Backend CI.
+
+## CI por projeto
+
+Cada projeto tem seu workflow em `.github/workflows/`, disparado só por mudança no próprio caminho (`push` e `pull_request`; todos aceitam também `workflow_dispatch`). Nada é publicado nem implantado, e nenhum segredo real é versionado: `JWT_SECRET` e senhas de e2e/paridade são gerados em tempo de execução.
+
+| Workflow | Dispara quando muda | Jobs |
+|----------|---------------------|------|
+| `backend-ci.yml` | `api-autorizador-processo/**`, `tools/parity/**` | `./mvnw verify` (inclui `ArchitectureTest` e geração do contrato), build da imagem Docker, auditoria Maven (não bloqueante, só lista a árvore), paridade com o baseline via Compose |
+| `frontend-ci.yml` | `app-autorizador-processo/**` | `npm ci`, lint, testes, build de produção, build da imagem Docker, `npm audit --audit-level=high --omit=dev` |
+| `integracao-ci.yml` | `compose.yaml`, `.env.example`, `scripts/check-contract*.mjs`, `tools/contract/**` e os dois projetos | `check-contract` (tipos e compatibilidade do contrato), `e2e` (Compose completo + Playwright; relatório como artefato só em falha) |
+
+O que roda quando: mudar só o frontend dispara Frontend CI e Integração CI; só o backend, Backend CI e Integração CI; só `compose.yaml`, apenas Integração CI.
+
+**Branch protection.** Um check de workflow com filtro de `paths` que não dispara fica "pendente" e bloqueia o merge se for marcado como obrigatório. Marque como obrigatórios só checks que sempre rodam, ou crie um job final agregador sem filtro de caminho; na dúvida, não marque os checks por projeto como obrigatórios.
 
 ## Versão original
 
