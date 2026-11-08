@@ -1882,7 +1882,8 @@
               "origem": "provider",
               "esforco": "medium"
             }
-          ]
+          ],
+          "commit": "6f3db70"
         },
         {
           "numero": 11,
@@ -2087,19 +2088,19 @@
     }
   ],
   "iteracao": {
-    "numero": 10,
-    "etapa": 10,
-    "inicio": "2026-11-08T16:23:40.429Z",
-    "commitInicial": "0b59ec662bae2b70e86719f2bd8ac07632b3975d",
-    "passoAtual": 6,
+    "numero": 11,
+    "etapa": 11,
+    "inicio": "2026-11-08T16:40:11.383Z",
+    "commitInicial": "6f3db70bae2dae1138e1e1df315f3fe497b45eb6",
+    "passoAtual": 2,
     "passos": [
       {
         "id": "propor",
         "situacao": "ok",
-        "duracaoMs": 75568,
-        "custo": 0.3901485,
+        "duracaoMs": 55199,
+        "custo": 0.25304190000000004,
         "tentativas": 1,
-        "detalhe": "20 tarefas"
+        "detalhe": "16 tarefas"
       },
       {
         "id": "partida",
@@ -2111,66 +2112,62 @@
       },
       {
         "id": "commitProposta",
-        "situacao": "ok",
-        "duracaoMs": 435,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "a5316ed · 5 arquivo(s)"
-      },
-      {
-        "id": "aplicar",
-        "situacao": "ok",
-        "duracaoMs": 914042,
-        "custo": 2.1395453,
-        "tentativas": 1,
-        "detalhe": "20/20 tarefas · 3 sessão(ões)"
-      },
-      {
-        "id": "verificar",
-        "situacao": "pulado",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "arquivar",
-        "situacao": "ok",
-        "duracaoMs": 3,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\10-modulo-autorizacao"
-      },
-      {
-        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
+      },
+      {
+        "id": "aplicar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "verificar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "arquivar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "commitEntrega",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
       }
     ],
-    "titulo": "Revisa a spec do módulo autorizacao (SPEC-08) contra as etapas 8 e 9",
-    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md`, escritos antes de a etapa 9 terminar. Revisei os dois contra o código entregue em vez de recriar.\nO pacote `autorizacao` ainda não existe. O contrato `autorizacao.yaml` e as tabelas `autorizacao` e `autorizacao_audit` (V1 e V2) já cobrem a etapa, então não há mudança de contrato nem migração nova.\n`ProcedimentoEntity` é pacote-privada e a porta `ProcedimentoRepository` não busca por vários ids. Por isso o `@ManyToOne` entre módulos não serve. Propus um acréscimo aditivo `buscarPorIds`/`porIds` em `procedimento` (tarefa 3.0), marcado [REVISAR] porque contraria o \"não alterar procedimento\" da SPEC-08. O motivo daquela restrição, o paralelismo com a SPEC-12, já caiu.\nO controller não pode usar `domain.model`, então a resposta deve ser montada a partir de `ObterProcedimentoUseCase.Resultado` e `Catalogo`. `Pagina` fica em `procedimento.domain.model`, então o módulo terá sua própria paginação.\nO `check-architecture.mjs` não existe, e a verificação equivalente é o `ArchitectureTest`. `.specs/06-execution-plan/` também não existe. Ambos estão registrados como desvios. A spec ficou com 20 tarefas."
+    "titulo": "Revisa a spec do módulo painel (SPEC-09) contra a entrega da etapa 10",
+    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md`, escritos antes da etapa 10. Revisei os dois contra o código atual em vez de recriar.\nO pacote `painel` ainda não existe no backend. O contrato `painel.yaml` está pronto, sem migração nova, e o `ArchitectureTest` já cita `.painel..`.\nA etapa 10 entregou `ListarAutorizacoesUseCase`, público e `readOnly`, que ordena do mais recente ao mais antigo e busca os procedimentos em lote. O mapeamento para o DTO gerado é `private static` no `AutorizacaoController`.\nPor isso a proposta passou a reutilizar `executar(0, 4)` e a montar o DTO num mapeador próprio de `painel`. Atualizei também o ponto de partida, os riscos, a ordenação e as tarefas 1.1, 3.3 e 4.1.\nA spec tem 14 tarefas em 6 grupos, dentro do limite de 4 a 30. Os desvios (`.specs/06-execution-plan/` e `check-architecture.mjs` ausentes) continuam registrados."
   },
   "totais": {
-    "duracaoMs": 7315894,
-    "custo": 23.9611173,
+    "duracaoMs": 7371816,
+    "custo": 24.2141592,
     "execucoes": 2,
-    "iteracoes": 10,
-    "entregues": 9,
-    "sessoes": 61,
-    "turnos": 847,
+    "iteracoes": 11,
+    "entregues": 10,
+    "sessoes": 62,
+    "turnos": 856,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 5,
     "recuperacoesResolvidas": 4,
     "falhas": 0,
-    "commits": 19,
+    "commits": 20,
     "tokens": {
-      "entrada": 1228,
-      "saida": 590370,
-      "cacheCriacao": 3426834,
-      "cacheLeitura": 38957179
+      "entrada": 1242,
+      "saida": 594220,
+      "cacheCriacao": 3472368,
+      "cacheLeitura": 39280958
     }
   },
   "ultimaExecucao": {

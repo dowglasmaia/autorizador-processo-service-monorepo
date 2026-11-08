@@ -238,3 +238,13 @@
 {"em":1794156010563,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\10-modulo-autorizacao → .specs\\workflows\\test-01\\specs\\arquivo\\10-modulo-autorizacao","etapa":10,"passo":"arquivar"}
 {"em":1794156010568,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\10-modulo-autorizacao","etapa":10,"passo":"arquivar"}
 {"em":1794156010572,"nivel":"passo","texto":"Commit da entrega","etapa":10,"passo":"commitEntrega"}
+{"em":1794156011279,"nivel":"ok","texto":"6f3db70 · 34 arquivo(s) · feat(autorizador): Revisa a spec do módulo autorizacao (SPEC-08) cont…","etapa":10,"passo":"commitEntrega"}
+{"em":1794156011305,"nivel":"ok","texto":"Commit da entrega: ok · 6f3db70 · 34 arquivo(s)","etapa":10,"passo":"commitEntrega"}
+{"em":1794156011316,"nivel":"ok","texto":"Etapa 10 entregue · commit 6f3db70","etapa":10,"passo":"commitEntrega"}
+{"em":1794156011388,"nivel":"passo","texto":"Etapa 11 · Módulo painel (iteração 11)","etapa":11}
+{"em":1794156011389,"nivel":"passo","texto":"Propor a spec","etapa":11,"passo":"propor"}
+{"em":1794156011396,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":11,"passo":"propor"}
+{"em":1794156066597,"nivel":"ok","texto":"Propor a spec: ok · 16 tarefas","etapa":11,"passo":"propor"}
+{"em":1794156066601,"nivel":"passo","texto":"Verificar ponto de partida","etapa":11,"passo":"partida"}
+{"em":1794156066609,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":11,"passo":"partida"}
+{"em":1794156066613,"nivel":"passo","texto":"Commit da proposta","etapa":11,"passo":"commitProposta"}
