@@ -449,3 +449,15 @@
 {"em":1794162171039,"nivel":"passo","texto":"Verificar ponto de partida","etapa":20,"passo":"partida"}
 {"em":1794162171115,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":20,"passo":"partida"}
 {"em":1794162171121,"nivel":"passo","texto":"Commit da proposta","etapa":20,"passo":"commitProposta"}
+{"em":1794162172991,"nivel":"ok","texto":"08eada0 · 5 arquivo(s) · docs(test-01): proposta da etapa 20 · Tela de procedimentos","etapa":20,"passo":"commitProposta"}
+{"em":1794162172999,"nivel":"ok","texto":"Commit da proposta: ok · 08eada0 · 5 arquivo(s)","etapa":20,"passo":"commitProposta"}
+{"em":1794162173004,"nivel":"passo","texto":"Aplicar a spec","etapa":20,"passo":"aplicar"}
+{"em":1794162173008,"nivel":"info","texto":"proposta antecipada da etapa 21 em paralelo","etapa":20,"passo":"aplicar"}
+{"em":1794162244132,"nivel":"ok","texto":"proposta antecipada da etapa 21 pronta","etapa":20,"passo":"aplicar"}
+{"em":1794162690381,"nivel":"ok","texto":"Aplicar a spec: ok · 25/25 tarefas · 4 sessão(ões)","etapa":20,"passo":"aplicar"}
+{"em":1794162690388,"nivel":"passo","texto":"Verificar a mudança","etapa":20,"passo":"verificar"}
+{"em":1794162690400,"nivel":"info","texto":"Verificar a mudança: pulado · sem verificações configuradas","etapa":20,"passo":"verificar"}
+{"em":1794162690407,"nivel":"passo","texto":"Arquivar a spec","etapa":20,"passo":"arquivar"}
+{"em":1794162690415,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\20-feature-procedimentos → .specs\\workflows\\test-01\\specs\\arquivo\\20-feature-procedimentos","etapa":20,"passo":"arquivar"}
+{"em":1794162690422,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\20-feature-procedimentos","etapa":20,"passo":"arquivar"}
+{"em":1794162690429,"nivel":"passo","texto":"Commit da entrega","etapa":20,"passo":"commitEntrega"}

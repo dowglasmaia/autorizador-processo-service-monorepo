@@ -3448,7 +3448,196 @@
           "descricao": "Executa a SPEC-17: lista e cadastro em 4 etapas, com o catálogo estendido.\nReferências: skill `angular-module-scaffold` e protótipo.\nLimite: sem solicitação de autorização.",
           "spec": "20-feature-procedimentos",
           "specPronta": false,
-          "status": "pendente"
+          "status": "entregue",
+          "entregueEm": "2026-11-08T18:31:30.435Z",
+          "iteracao": 20,
+          "duracaoMs": 552390,
+          "custo": 2.0619901,
+          "passos": [
+            {
+              "id": "propor",
+              "situacao": "ok",
+              "duracaoMs": 33150,
+              "custo": 0.2001773,
+              "tentativas": 1,
+              "detalhe": "25 tarefas"
+            },
+            {
+              "id": "partida",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "commitProposta",
+              "situacao": "ok",
+              "duracaoMs": 1868,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "08eada0 · 5 arquivo(s)"
+            },
+            {
+              "id": "aplicar",
+              "situacao": "ok",
+              "duracaoMs": 517368,
+              "custo": 1.8618128,
+              "tentativas": 1,
+              "detalhe": "25/25 tarefas · 4 sessão(ões)"
+            },
+            {
+              "id": "verificar",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "arquivar",
+              "situacao": "ok",
+              "duracaoMs": 4,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\20-feature-procedimentos"
+            },
+            {
+              "id": "commitEntrega",
+              "situacao": "ok",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1
+            }
+          ],
+          "sessoes": [
+            {
+              "rotulo": "propor-20",
+              "passo": "propor",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2001773,
+              "turnos": 7,
+              "duracaoMs": 33134,
+              "inicio": 1794162137881,
+              "fim": 1794162171022,
+              "tokens": {
+                "entrada": 12,
+                "saida": 1909,
+                "cacheCriacao": 38812,
+                "cacheLeitura": 258153
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "antecipar-21",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.31510059999999995,
+              "turnos": 9,
+              "duracaoMs": 71110,
+              "inicio": 1794162173010,
+              "fim": 1794162244126,
+              "tokens": {
+                "entrada": 14,
+                "saida": 8969,
+                "cacheCriacao": 48269,
+                "cacheLeitura": 323066
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-20-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.4604229,
+              "turnos": 17,
+              "duracaoMs": 122334,
+              "inicio": 1794162174198,
+              "fim": 1794162296540,
+              "tokens": {
+                "entrada": 20,
+                "saida": 14309,
+                "cacheCriacao": 64915,
+                "cacheLeitura": 576329
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-20-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.6051335,
+              "turnos": 15,
+              "duracaoMs": 173414,
+              "inicio": 1794162296545,
+              "fim": 1794162469969,
+              "tokens": {
+                "entrada": 26,
+                "saida": 22773,
+                "cacheCriacao": 73886,
+                "cacheLeitura": 818075
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-20-3",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.5844529,
+              "turnos": 16,
+              "duracaoMs": 183422,
+              "inicio": 1794162469974,
+              "fim": 1794162653402,
+              "tokens": {
+                "entrada": 30,
+                "saida": 18091,
+                "cacheCriacao": 75142,
+                "cacheLeitura": 1029149
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-20-4",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2118035,
+              "turnos": 8,
+              "duracaoMs": 36957,
+              "inicio": 1794162653407,
+              "fim": 1794162690370,
+              "tokens": {
+                "entrada": 12,
+                "saida": 2806,
+                "cacheCriacao": 39501,
+                "cacheLeitura": 257155
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            }
+          ]
         },
         {
           "numero": 21,
@@ -3562,7 +3751,7 @@
     "etapa": 20,
     "inicio": "2026-11-08T18:22:17.869Z",
     "commitInicial": "96e297d002e99cb500df8f529a86ec4c3bfac359",
-    "passoAtual": 2,
+    "passoAtual": 6,
     "passos": [
       {
         "id": "propor",
@@ -3582,62 +3771,66 @@
       },
       {
         "id": "commitProposta",
+        "situacao": "ok",
+        "duracaoMs": 1868,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "08eada0 · 5 arquivo(s)"
+      },
+      {
+        "id": "aplicar",
+        "situacao": "ok",
+        "duracaoMs": 517368,
+        "custo": 1.8618128,
+        "tentativas": 1,
+        "detalhe": "25/25 tarefas · 4 sessão(ões)"
+      },
+      {
+        "id": "verificar",
+        "situacao": "pulado",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "arquivar",
+        "situacao": "ok",
+        "duracaoMs": 4,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\20-feature-procedimentos"
+      },
+      {
+        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
-      },
-      {
-        "id": "aplicar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "verificar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "arquivar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
       }
     ],
     "titulo": "Revisa a spec da tela de procedimentos (SPEC-17) contra a base entregue",
     "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md`, escritos antes da etapa 19. Revisei os dois contra o código atual e os mantive.\nO front continua intacto: `features/procedimentos` só tem a rota `''` e uma página-esqueleto \"Em construção\", sem serviço, `doc.md` nem testes.\nOs tipos gerados (`ProcedimentoRequest`, `ProcedimentoDto`, `PaginaProcedimentos`), o núcleo HTTP, `shared/ui` e o `authGuard` em `app.routes.ts` já existem. `features/login` serve de modelo de estrutura.\nA etapa 19 (Nginx) não alterou código Angular. Troquei as menções a \"etapa 19 em curso\" por \"conferida\" e incluí a referência a `features/login` na tarefa 1.1.\nSão 7 grupos e 23 tarefas, dentro do limite. `.specs/06-execution-plan/` não existe, e a tarefa 7.3 registra esse desvio. Nada fora da pasta da spec foi alterado."
   },
   "totais": {
-    "duracaoMs": 13442818,
-    "custo": 38.44474949999999,
+    "duracaoMs": 13962058,
+    "custo": 40.6216629,
     "execucoes": 2,
     "iteracoes": 20,
     "entregues": 19,
-    "sessoes": 104,
-    "turnos": 1384,
+    "sessoes": 109,
+    "turnos": 1449,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 6,
     "recuperacoesResolvidas": 5,
     "falhas": 0,
-    "commits": 38,
+    "commits": 39,
     "tokens": {
-      "entrada": 2086,
-      "saida": 920184,
-      "cacheCriacao": 5624769,
-      "cacheLeitura": 62877541
+      "entrada": 2188,
+      "saida": 987132,
+      "cacheCriacao": 5926482,
+      "cacheLeitura": 65881315
     }
   },
   "ultimaExecucao": {

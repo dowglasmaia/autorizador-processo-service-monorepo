@@ -6,4 +6,10 @@ export const PROCEDIMENTOS_ROUTES: Routes = [
     title: 'Procedimentos · Autorizador',
     loadComponent: () => import('./pages/procedimentos-page').then((m) => m.ProcedimentosPage),
   },
+  {
+    path: 'novo',
+    title: 'Novo procedimento · Autorizador',
+    loadComponent: () =>
+      import('./pages/procedimento-novo-page').then((m) => m.ProcedimentoNovoPage),
+  },
 ];
