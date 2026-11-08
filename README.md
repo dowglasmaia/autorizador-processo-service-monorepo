@@ -27,13 +27,14 @@ O código da **versão original** (Spring Boot 2.2.6 com banco H2) foi removido 
 
 ## Como subir com Compose
 
-O `compose.yaml` sobe o PostgreSQL 16 e a API. O serviço `app` (frontend) **só existe a partir da etapa do frontend**: enquanto `app-autorizador-processo/` não existir, não use `docker compose up --build` sem nomear os serviços.
+O `compose.yaml` sobe o PostgreSQL 16, a API e o frontend (Nginx). O `app` só inicia depois que a API fica `healthy`.
 
 ```bash
 cp .env.example .env                                # valores de desenvolvimento; JWT_SECRET é obrigatório para a API
 docker compose up -d postgres                       # somente o PostgreSQL (para rodar a API fora do Docker)
 docker compose up -d --build postgres api           # banco + API (aguarda o banco ficar saudável)
-docker compose ps                                   # a API fica "healthy" em até ~90 s
+docker compose up -d --build                        # banco + API + frontend (http://localhost:4200)
+docker compose ps                                   # os 3 serviços ficam "healthy" em até ~90 s
 curl http://localhost:8080/actuator/health          # {"status":"UP"}
 docker compose down                                 # para e remove os contêineres; o volume postgres-data é preservado
 docker compose down -v                              # também apaga o volume (APAGA os dados do banco)
@@ -43,7 +44,9 @@ docker compose down -v                              # também apaga o volume (AP
 |------------|--------------|--------------|
 | PostgreSQL | 5432         | `POSTGRES_PORT` |
 | API        | 8080         | `API_PORT`   |
-| Frontend (`app`) | 4200   | `APP_PORT` (somente após a etapa do frontend) |
+| Frontend (`app`) | 4200   | `APP_PORT` (porta 8080 do contêiner) |
+
+O Nginx do frontend serve a SPA com fallback para `index.html`, repassa `/api/` para a API (mesma origem, sem CORS), expõe `/healthz` (healthcheck do contêiner) e somente `/actuator/health` do actuator (`/actuator/env` e demais retornam 404). Detalhes em [`app-autorizador-processo/README.md`](app-autorizador-processo/README.md#contêiner-nginx).
 
 Sem `JWT_SECRET` (mínimo de 32 bytes) o Compose recusa subir a API. O arquivo `.env` não é versionado; só o `.env.example`. Os testes de integração do backend usam Testcontainers e não dependem do Compose.
 

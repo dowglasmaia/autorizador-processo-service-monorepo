@@ -1,7 +1,7 @@
-# Ambiente local em contêineres (SPEC-10 §1): PostgreSQL + API. O serviço `app` (front) só existe após a etapa do frontend (SPEC-13 do front).
+# Ambiente local em contêineres: PostgreSQL + API + frontend (Nginx).
 # Só o banco:   docker compose up -d postgres            (para rodar a API/front na máquina, fora do Docker)
 # Banco + API:  docker compose up -d --build postgres api  (exige JWT_SECRET no .env; API em http://localhost:8080)
-# Tudo:         docker compose up -d --build              (somente quando o frontend estiver criado)
+# Tudo:         docker compose up -d --build              (exige JWT_SECRET no .env; front em http://localhost:4200, com proxy /api/ para a API)
 # Parar:        docker compose down                       (acrescente -v para apagar também o volume do banco)
 # Variáveis:    copie .env.example para .env e ajuste (valores do exemplo são SOMENTE de desenvolvimento).
 # Testes de integração NÃO dependem deste arquivo (usam Testcontainers).
@@ -59,7 +59,15 @@ services:
     build:
       context: ./app-autorizador-processo
     ports:
-      - "${APP_PORT:-4200}:80"
+      # O Nginx sem privilégios escuta em 8080 dentro do contêiner.
+      - "${APP_PORT:-4200}:8080"
+    healthcheck:
+      # 127.0.0.1 (e não localhost): em Alpine localhost resolve primeiro para ::1 e o Nginx escuta só em IPv4.
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
     depends_on:
       api:
         condition: service_healthy

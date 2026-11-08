@@ -42,3 +42,18 @@ src/environments/
 - **Logout:** menu do usuário no shell ("Sair"); também ocorre em `401` fora do login, com o aviso "Sua sessão expirou. Entre novamente.".
 - **Riscos aceitos:** token em `sessionStorage` é legível por XSS (cookie `HttpOnly` exigiria mudança no backend); sem refresh token (PEN-09/PEN-10); a validade real é sempre decidida pelo servidor.
 - Detalhes: `src/app/core/auth/doc.md` e `src/app/features/login/doc.md`.
+
+## Contêiner Nginx
+
+O `Dockerfile` é multi-stage: `node:24-alpine` roda `npm ci` e `npm run build`; a imagem final é `nginxinc/nginx-unprivileged:stable-alpine` (usuário não-root, sem Node/npm) e contém só o `browser/` e a configuração em `nginx/`.
+
+```bash
+docker build -t app-autorizador-processo .      # imagem isolada (precisa da API `api` na rede para o proxy)
+docker compose up -d --build                    # na raiz: banco + API + frontend em http://localhost:4200
+```
+
+- **Porta:** o Nginx escuta em `8080` dentro do contêiner; o Compose publica em `${APP_PORT:-4200}`.
+- **Proxy:** `/api/` → `http://api:8080` (mesma origem, sem CORS; 404 da API não cai no `index.html`). Rotas da SPA (`/procedimentos`, `/login`…) usam `try_files` com fallback para `index.html`.
+- **Healthcheck:** `GET /healthz` retorna `200 ok` (o Compose usa `wget` em `127.0.0.1`, pois `localhost` resolve para IPv6 na Alpine). `GET /actuator/health` repassa a saúde da API; os demais caminhos de `/actuator/` retornam 404.
+- **Cache:** `index.html` sem cache; `.js`/`.css`/fontes com hash em `immutable` por 1 ano; imagens e favicon com 1 hora.
+- **Cabeçalhos de segurança** (`nginx/security-headers.inc`, incluído em toda `location`): `X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options: DENY` e CSP `default-src 'self'` (com `style-src 'unsafe-inline'` e `script-src-attr 'unsafe-inline'` exigidos pelo build do Angular).

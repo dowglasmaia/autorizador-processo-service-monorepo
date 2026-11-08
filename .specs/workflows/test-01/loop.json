@@ -3270,7 +3270,175 @@
           "descricao": "Executa a SPEC-13: Dockerfile do frontend com Nginx, proxy de `/api/` e inclusão do serviço `app` no `compose.yaml`.\nReferências: `compose.yaml`.\nLimite: sem pipeline de CI.",
           "spec": "19-container-nginx-frontend",
           "specPronta": false,
-          "status": "pendente"
+          "status": "entregue",
+          "entregueEm": "2026-11-08T18:22:17.238Z",
+          "iteracao": 19,
+          "duracaoMs": 832314,
+          "custo": 1.0839603000000002,
+          "passos": [
+            {
+              "id": "propor",
+              "situacao": "ok",
+              "duracaoMs": 47351,
+              "custo": 0.22614520000000002,
+              "tentativas": 1,
+              "detalhe": "17 tarefas"
+            },
+            {
+              "id": "partida",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "commitProposta",
+              "situacao": "ok",
+              "duracaoMs": 1256,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "98acb33 · 4 arquivo(s)"
+            },
+            {
+              "id": "aplicar",
+              "situacao": "ok",
+              "duracaoMs": 783704,
+              "custo": 0.8578151000000002,
+              "tentativas": 1,
+              "detalhe": "17/17 tarefas · 3 sessão(ões)"
+            },
+            {
+              "id": "verificar",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "arquivar",
+              "situacao": "ok",
+              "duracaoMs": 3,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\19-container-nginx-frontend"
+            },
+            {
+              "id": "commitEntrega",
+              "situacao": "ok",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1
+            }
+          ],
+          "sessoes": [
+            {
+              "rotulo": "propor-19",
+              "passo": "propor",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.22614520000000002,
+              "turnos": 8,
+              "duracaoMs": 47335,
+              "inicio": 1794161304821,
+              "fim": 1794161352164,
+              "tokens": {
+                "entrada": 12,
+                "saida": 2702,
+                "cacheCriacao": 42965,
+                "cacheLeitura": 272412
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "antecipar-20",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2790971,
+              "turnos": 8,
+              "duracaoMs": 63937,
+              "inicio": 1794161353479,
+              "fim": 1794161417425,
+              "tokens": {
+                "entrada": 14,
+                "saida": 4924,
+                "cacheCriacao": 49275,
+                "cacheLeitura": 327291
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-19-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2601302,
+              "turnos": 7,
+              "duracaoMs": 174787,
+              "inicio": 1794161354930,
+              "fim": 1794161529727,
+              "tokens": {
+                "entrada": 14,
+                "saida": 5776,
+                "cacheCriacao": 42484,
+                "cacheLeitura": 324062
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-19-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.3890537000000001,
+              "turnos": 21,
+              "duracaoMs": 568468,
+              "inicio": 1794161529734,
+              "fim": 1794162098212,
+              "tokens": {
+                "entrada": 40,
+                "saida": 8318,
+                "cacheCriacao": 49553,
+                "cacheLeitura": 1075817
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-19-3",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2086312,
+              "turnos": 8,
+              "duracaoMs": 38949,
+              "inicio": 1794162098217,
+              "fim": 1794162137176,
+              "tokens": {
+                "entrada": 12,
+                "saida": 2424,
+                "cacheCriacao": 39441,
+                "cacheLeitura": 266032
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            }
+          ]
         },
         {
           "numero": 20,
@@ -3393,7 +3561,7 @@
     "etapa": 19,
     "inicio": "2026-11-08T18:08:24.806Z",
     "commitInicial": "122f9c0451e9adc95073bdd74e7cebc8104e3565",
-    "passoAtual": 2,
+    "passoAtual": 6,
     "passos": [
       {
         "id": "propor",
@@ -3413,62 +3581,66 @@
       },
       {
         "id": "commitProposta",
+        "situacao": "ok",
+        "duracaoMs": 1256,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "98acb33 · 4 arquivo(s)"
+      },
+      {
+        "id": "aplicar",
+        "situacao": "ok",
+        "duracaoMs": 783704,
+        "custo": 0.8578151000000002,
+        "tentativas": 1,
+        "detalhe": "17/17 tarefas · 3 sessão(ões)"
+      },
+      {
+        "id": "verificar",
+        "situacao": "pulado",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "arquivar",
+        "situacao": "ok",
+        "duracaoMs": 3,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\19-container-nginx-frontend"
+      },
+      {
+        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
-      },
-      {
-        "id": "aplicar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "verificar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "arquivar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
       }
     ],
     "titulo": "Revisa a spec do contêiner Nginx do frontend (SPEC-13) contra a base entregue",
     "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md` (17 tarefas em 5 grupos), escritos antes da etapa 18. Revisei e completei os dois, sem recriá-los.\nConferi no repositório que `app-autorizador-processo/` ainda não tem `Dockerfile`, `.dockerignore` nem `nginx/`. O build gera `dist/app-autorizador-processo/browser` com `index.html` e `chunk-*.js` com hash, sem SSR. O `apiBaseUrl` de produção continua `/api/v1`, relativo e sem CORS.\nO serviço `app` já existe no `compose.yaml`, mas sem `healthcheck`, e o comentário do cabeçalho está desatualizado. O `README.md` raiz ainda diz que o frontend não existe.\nO login da etapa 18 não mudou o build nem o `apiBaseUrl`. As rotas `login`, `painel`, `procedimentos`, `solicitar`, `autorizacoes` e `**` ficam cobertas pelo fallback `try_files`. O indicador de status da API chama `/actuator/health` com caminho relativo, então depende do proxy desse caminho no Nginx.\nAtualizei a proposta com esse ponto de partida e com uma decisão sobre o cache de arquivos sem hash, como `favicon.ico`. A `.specs/06-execution-plan/` continua inexistente e será registrada como desvio na evidência."
   },
   "totais": {
-    "duracaoMs": 12624156,
-    "custo": 37.107659999999996,
+    "duracaoMs": 13409119,
+    "custo": 38.24457219999999,
     "execucoes": 2,
     "iteracoes": 19,
     "entregues": 18,
-    "sessoes": 99,
-    "turnos": 1333,
+    "sessoes": 103,
+    "turnos": 1377,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 6,
     "recuperacoesResolvidas": 5,
     "falhas": 0,
-    "commits": 36,
+    "commits": 37,
     "tokens": {
-      "entrada": 1994,
-      "saida": 896833,
-      "cacheCriacao": 5405204,
-      "cacheLeitura": 60626186
+      "entrada": 2074,
+      "saida": 918275,
+      "cacheCriacao": 5585957,
+      "cacheLeitura": 62619388
     }
   },
   "ultimaExecucao": {

@@ -43,3 +43,20 @@ Empacotar o Angular em uma imagem Nginx sem Node que serve a SPA, faz proxy de `
 - **Healthcheck:** `wget -qO- http://localhost:8080/healthz` (a imagem Alpine inclui `wget`; `curl` não será instalado).
 - **Etapa 18 entregue:** conferido que o caminho de saída do build e o `apiBaseUrl` de produção (`/api/v1`) não mudaram; `/login` e demais rotas ficam cobertas pelo fallback. Nenhuma alteração de código Angular é prevista.
 - **Arquivos hash:** o cache `immutable` será aplicado por extensão (`.js`, `.css`, fontes) e `index.html` terá `no-cache`; `favicon.ico` e demais arquivos sem hash ficam com cache curto.
+- **Lote 1 — cabeçalhos em arquivo `security-headers.inc`:** como `add_header` não é herdado entre `location`s, os cabeçalhos ficam em `nginx/security-headers.inc` (extensão `.inc`, para não ser carregado como `*.conf` pelo Nginx) e são incluídos no `server` e em cada `location`. O Dockerfile copia os dois arquivos para `/etc/nginx/conf.d/`.
+- **Lote 1 — CSP:** `default-src 'self'` com `style-src 'unsafe-inline'` (estilos do Angular) e `script-src-attr 'unsafe-inline'` (o build de produção emite `onload` inline no `<link>` de CSS crítico). Ajuste a confirmar no navegador na verificação (4.4).
+- **Lote 1 — `/actuator/`:** além de `= /actuator/health` (só GET/HEAD), `location /actuator/` devolve 404 explícito; `/actuator/health/readiness` também não é exposto.
+- **Lote 1 — evidência:** `docker build` ok (Node 24-alpine → nginx-unprivileged, uid 101, sem node/npm), `nginx -t` ok com `--add-host api`. Imagem de teste removida.
+- **Lote 2 — healthcheck em `127.0.0.1`:** com `localhost` o `wget` falhava (Alpine resolve para `::1`; Nginx só escuta IPv4) e o `app` ficava `unhealthy`; o compose usa `http://127.0.0.1:8080/healthz`.
+- **Lote 2 — ambiente de verificação:** `docker compose` (plugin) não existe nesta máquina; usado `docker-compose` v5.6.1. Portas 5432/8080 já ocupadas por outro projeto e o volume `postgres-data` existente tinha migração com checksum divergente; a verificação usou `-p autz-verif` (volume novo) e portas alternativas (`POSTGRES_PORT=55432`, `API_PORT=58080`, `APP_PORT=54200`), sem tocar nos dados existentes. Tudo derrubado ao final (`down`).
+- **Lote 2 — evidência:** 3 serviços `healthy`; `/` e `/procedimentos` 200 HTML; `/api/v1/procedimentos` e `/api/inexistente` 401 `application/problem+json` vindos da API (sem fallback HTML); `/healthz` 200 `ok`; `/actuator/health` 200 (db UP); `/actuator/env` e `/actuator/health/readiness` 404. Cabeçalhos de segurança presentes em `/`, nos `.js` e em `/api/`; `index.html` `no-store`, `main-*.js` `immutable`. Imagem sem node/npm, uid 101. `npm run lint`, `build` e `test` (110 testes) ok. Verificação de CSP no navegador não executada (sem navegador).
+
+## Resumo e evidência
+- **Resultado:** imagem Nginx sem Node (`nginx-unprivileged`, uid 101) servindo a SPA, com proxy `/api/`, `/healthz`, `/actuator/health`, cabeçalhos de segurança, cache correto e `healthcheck` do `app` no Compose.
+- **Tarefas 1.x–2.x:** `Dockerfile`, `.dockerignore`, `nginx/default.conf` e `nginx/security-headers.inc` criados; `docker build` e `nginx -t` ok (lote 1).
+- **Tarefas 3.x:** `healthcheck` em `http://127.0.0.1:8080/healthz`, porta `${APP_PORT:-4200}:8080`, comentário do `compose.yaml` atualizado.
+- **Tarefas 4.x:** 3 serviços `healthy`; `/`, `/procedimentos`, `/api/*`, `/healthz`, `/actuator/health` e bloqueio de `/actuator/env` verificados com `curl`; `npm run lint`, `build` e `test` (110 testes) ok.
+- **Tarefa 5.1:** READMEs do frontend e da raiz atualizados.
+- **Desvio:** a pasta `.specs/06-execution-plan/` citada no `INDEX.md` não existe; ignorada.
+- **Limitação aceita:** ausência de CSP no console do navegador não foi verificada (sem navegador); conferido por análise do `index.html`.
+- **Arquivamento:** `SPEC-13` movida para `.specs/archive/` com `git mv`.
