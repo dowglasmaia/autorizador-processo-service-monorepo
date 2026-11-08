@@ -24,6 +24,8 @@ Diferencia: **Fato** · **Inferência** · **Decisão** · **Recomendação** ·
 | ADR-15 | Dockerfile próprio por projeto; **CI por projeto com `paths`** (`backend-ci`, `frontend-ci`) + `integracao-ci` separado | Instrução do responsável (2026-11-08): mudança só no front não dispara CI do back e vice-versa. Compromisso: a combinação só é testada no fluxo de integração |
 | ADR-14 | Seed de desenvolvimento só em `db/seed` (perfil `local`); jamais em `src/main/java` | Corrige D12 |
 
+**ADR-05 — resultado do spike (SPEC-04, 2026-11-08):** `hibernate-envers` 7.4.13 (BOM do Boot 4.1.2) funciona com Java 25 e PostgreSQL 16 (Testcontainers). Uma entidade descartável em `src/test` (`spike.auditoria`) com `@Audited`, mapeada para `procedimento`, gravou `revinfo` e `procedimento_audit` (`revtype = 0`) nas tabelas criadas pela `V2`. **Decisão: usar Envers; plano B (gatilhos) descartado.** Ajustes: `org.hibernate.envers.audit_table_suffix=_audit` em `spring.jpa.properties` e, como o Envers do Hibernate 7 gera a revisão pela sequência `revinfo_seq` (incremento 50) e não por identity, a `V2` cria `revinfo_seq` e `revinfo.rev` é `integer primary key`.
+
 ## 2. Premissas
 | ID | Premissa | Impacto se falsa |
 |---|---|---|
@@ -56,7 +58,7 @@ Diferencia: **Fato** · **Inferência** · **Decisão** · **Recomendação** ·
 ## 4. Riscos
 | Risco | Mitigação |
 |---|---|
-| Envers × Hibernate do Boot 4.1.2 | Spike em SPEC-04; plano B gatilhos |
+| Envers × Hibernate do Boot 4.1.2 | Spike em SPEC-04 **concluído (2026-11-08): Envers funciona** (ver ADR-05, resultado do spike); plano B por gatilhos não necessário |
 | JDK 25 ausente na máquina | Contêiner Maven Temurin 25 |
 | Divergência contrato × frontend | SPEC-32 + CI |
 | Perda de regra ao reescrever | Baseline executável (SPEC-02) + paridade (SPEC-31) |

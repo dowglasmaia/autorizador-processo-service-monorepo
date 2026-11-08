@@ -41,3 +41,9 @@ Introduzir PostgreSQL 16, Flyway, Testcontainers e a auditoria (RN10), com o esq
 
 ## 6. Resultado
 _Preencher ao concluir._
+
+## Resumo de conclusão (etapa 4 do loop `test-01`)
+- **Resultado:** PostgreSQL 16, Flyway (`V1__schema_base`, `V2__auditoria`), Testcontainers e Envers integrados em `api-autorizador-processo`; seed local `V1000__seed_local.sql`; classe-base de integração e limpeza de banco; testes de persistência.
+- **Validações:** `./mvnw verify` com BUILD SUCCESS (37 testes, ArchUnit e Modulith sem violações); app no perfil `local` com `select count(*) from procedimento` = 3; sem H2 no `pom.xml`; sem nome "legado/legacy" em código (as únicas ocorrências são a regra do `ArchitectureTest` e o texto do README que a descrevem).
+- **Spike do Envers:** passou (Hibernate 7.4.13, Java 25); `V2` ganhou `revinfo_seq` (ver ADR-05 em `DECISIONS.md`). Plano B não aplicado.
+- **Limitações aceitas:** `.specs/06-execution-plan/` não existe (referência do índice ignorada); verificação do perfil `local` feita na porta 5433 por conflito local na 5432.

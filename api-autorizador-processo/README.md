@@ -2,7 +2,7 @@
 
 Backend do **Autorizador de Procedimentos Médicos**: monólito modular em Java 25 e Spring Boot 4.1.2, com Hexagonal Pragmática (pacote por funcionalidade), contrato OpenAPI 3.1 primeiro e logs estruturados.
 
-> Estado atual (etapa 3, fundação): esqueleto sem funcionalidades de negócio. Persistência (PostgreSQL e Flyway), contrato, funcionalidades e autenticação JWT chegam nas próximas etapas.
+> Estado atual (etapa 4, fundação do banco): PostgreSQL 16, Flyway e auditoria (Envers) configurados, sem funcionalidades de negócio. Contrato, funcionalidades e autenticação JWT chegam nas próximas etapas.
 
 ## Stack
 
@@ -16,7 +16,7 @@ Backend do **Autorizador de Procedimentos Médicos**: monólito modular em Java 
 | Contrato | OpenAPI 3.1 + OpenAPI Generator 7.26.0 (`src/main/resources/openapi/`) |
 | Logs | Logback com JSON estruturado nativo do Spring Boot |
 | Observabilidade | Actuator, Micrometer, OpenTelemetry (OTLP, desligado por padrão) |
-| Banco (próximas etapas) | PostgreSQL 16, Flyway, Testcontainers (sem H2) |
+| Banco | PostgreSQL 16, Spring Data JPA, Flyway, Hibernate Envers, Testcontainers (sem H2) |
 | Testes | JUnit 5, Spring Boot Test, Mockito, ArchUnit, Modulith |
 
 ## Requisitos
@@ -32,16 +32,16 @@ Backend do **Autorizador de Procedimentos Médicos**: monólito modular em Java 
 ./mvnw spring-boot:run     # sobe a API em http://localhost:8080
 ```
 
-O perfil padrão é `local` (logs em texto legível). Verifique em `GET /actuator/health` (`UP`).
+O perfil padrão é `local` (logs em texto legível). Ele aponta para o PostgreSQL em `localhost:5432` (suba com `docker compose up -d postgres` na raiz, exportando `DB_PASSWORD` conforme o `.env.example`) e acrescenta `classpath:db/seed` ao Flyway, criando 3 procedimentos de exemplo. Fora do perfil `local` a seed nunca roda. Os testes de integração usam PostgreSQL 16 via Testcontainers e exigem Docker. Verifique em `GET /actuator/health` (`UP`).
 
 ## Variáveis de ambiente
 
-Copie `.env.example` e exporte o que precisar. Todas têm valor padrão, exceto as de banco, que passam a valer quando a persistência for adicionada.
+Copie `.env.example` e exporte o que precisar. Todas têm valor padrão, exceto `DB_PASSWORD`.
 
 | Variável | Padrão | Uso |
 |---|---|---|
-| `DB_URL` | `jdbc:postgresql://localhost:5432/autorizador` | URL JDBC do PostgreSQL (a partir da etapa de banco) |
-| `DB_USERNAME` | `autorizador` | Usuário do banco (a partir da etapa de banco) |
+| `DB_URL` | `jdbc:postgresql://localhost:5432/autorizador` | URL JDBC do PostgreSQL  |
+| `DB_USERNAME` | `autorizador` | Usuário do banco  |
 | `DB_PASSWORD` | sem padrão versionado | Senha do banco; nunca versionar |
 | `APP_ENV` | `production` | Nome do ambiente nos logs e na telemetria |
 | `LOG_LEVEL_APP` | `INFO` (`DEBUG` no perfil `local`) | Nível de log do pacote `org.maia.autorizador` |

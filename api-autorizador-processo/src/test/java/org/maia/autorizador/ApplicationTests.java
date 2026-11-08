@@ -1,10 +1,9 @@
 package org.maia.autorizador;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.maia.autorizador.support.IntegrationTestBase;
 
-@SpringBootTest
-class ApplicationTests {
+class ApplicationTests extends IntegrationTestBase {
     @Test
     void contextLoads() {
     }

@@ -7,11 +7,10 @@ import io.micrometer.tracing.Tracer;
 import org.junit.jupiter.api.Test;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.maia.autorizador.support.IntegrationTestBase;
 
 /** Guards the wiring every log line relies on: an active span puts traceId into the MDC. */
-@SpringBootTest
-class TracingCorrelationTests {
+class TracingCorrelationTests extends IntegrationTestBase {
     @Autowired
     Tracer tracer;
 

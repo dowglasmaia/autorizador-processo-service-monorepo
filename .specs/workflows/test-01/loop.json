@@ -640,7 +640,196 @@
           "descricao": "Executa a SPEC-04: PostgreSQL 16, Flyway, migrações iniciais, auditoria e Testcontainers.\nReferências: `DATABASE_DESIGN.md` e a skill `java-persistence-performance`.\nLimite: sem módulos de negócio.",
           "spec": "04-fundacao-banco",
           "specPronta": false,
-          "status": "pendente"
+          "status": "entregue",
+          "entregueEm": "2026-11-08T15:00:42.918Z",
+          "iteracao": 4,
+          "duracaoMs": 797917,
+          "custo": 1.7799815,
+          "passos": [
+            {
+              "id": "propor",
+              "situacao": "ok",
+              "duracaoMs": 43911,
+              "custo": 0.23399819999999996,
+              "tentativas": 1,
+              "detalhe": "26 tarefas"
+            },
+            {
+              "id": "partida",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "commitProposta",
+              "situacao": "ok",
+              "duracaoMs": 898,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "3f751f1 · 5 arquivo(s)"
+            },
+            {
+              "id": "aplicar",
+              "situacao": "ok",
+              "duracaoMs": 753105,
+              "custo": 1.5459833,
+              "tentativas": 1,
+              "detalhe": "26/26 tarefas · 4 sessão(ões)"
+            },
+            {
+              "id": "verificar",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "arquivar",
+              "situacao": "ok",
+              "duracaoMs": 3,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\04-fundacao-banco"
+            },
+            {
+              "id": "commitEntrega",
+              "situacao": "ok",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1
+            }
+          ],
+          "sessoes": [
+            {
+              "rotulo": "propor-04",
+              "passo": "propor",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.23399819999999996,
+              "turnos": 11,
+              "duracaoMs": 43900,
+              "inicio": 1794149244934,
+              "fim": 1794149288841,
+              "tokens": {
+                "entrada": 12,
+                "saida": 2916,
+                "cacheCriacao": 44649,
+                "cacheLeitura": 262182
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "antecipar-05",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.3585127,
+              "turnos": 9,
+              "duracaoMs": 91441,
+              "inicio": 1794149289777,
+              "fim": 1794149381225,
+              "tokens": {
+                "entrada": 14,
+                "saida": 9955,
+                "cacheCriacao": 56245,
+                "cacheLeitura": 339547
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-04-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.32100580000000006,
+              "turnos": 11,
+              "duracaoMs": 99639,
+              "inicio": 1794149291110,
+              "fim": 1794149390759,
+              "tokens": {
+                "entrada": 20,
+                "saida": 6268,
+                "cacheCriacao": 51112,
+                "cacheLeitura": 538378
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-04-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.4038354,
+              "turnos": 13,
+              "duracaoMs": 174762,
+              "inicio": 1794149390763,
+              "fim": 1794149565533,
+              "tokens": {
+                "entrada": 22,
+                "saida": 10322,
+                "cacheCriacao": 59088,
+                "cacheLeitura": 642194
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-04-3",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.6038294,
+              "turnos": 40,
+              "duracaoMs": 421329,
+              "inicio": 1794149565537,
+              "fim": 1794149986873,
+              "tokens": {
+                "entrada": 38,
+                "saida": 19063,
+                "cacheCriacao": 71475,
+                "cacheLeitura": 1272234
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-04-4",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2173127,
+              "turnos": 8,
+              "duracaoMs": 55992,
+              "inicio": 1794149986877,
+              "fim": 1794150042876,
+              "tokens": {
+                "entrada": 12,
+                "saida": 2855,
+                "cacheCriacao": 40682,
+                "cacheLeitura": 260107
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            }
+          ]
         },
         {
           "numero": 5,
@@ -908,7 +1097,7 @@
     "etapa": 4,
     "inicio": "2026-11-08T14:47:24.924Z",
     "commitInicial": "1ce3f2f9a3432902d544ed57700c58dc7d072e75",
-    "passoAtual": 2,
+    "passoAtual": 6,
     "passos": [
       {
         "id": "propor",
@@ -928,62 +1117,66 @@
       },
       {
         "id": "commitProposta",
+        "situacao": "ok",
+        "duracaoMs": 898,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "3f751f1 · 5 arquivo(s)"
+      },
+      {
+        "id": "aplicar",
+        "situacao": "ok",
+        "duracaoMs": 753105,
+        "custo": 1.5459833,
+        "tentativas": 1,
+        "detalhe": "26/26 tarefas · 4 sessão(ões)"
+      },
+      {
+        "id": "verificar",
+        "situacao": "pulado",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "arquivar",
+        "situacao": "ok",
+        "duracaoMs": 3,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\04-fundacao-banco"
+      },
+      {
+        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
-      },
-      {
-        "id": "aplicar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "verificar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "arquivar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
       }
     ],
     "titulo": "Propõe a spec da fundação do banco com PostgreSQL 16, Flyway, auditoria e Testcontainers",
     "comparacao": "A pasta da spec já tinha proposta.md e tarefas.md antecipados, escritos antes da etapa 3. Revisei os dois contra o código atual.\nAgora `api-autorizador-processo` existe (Boot 4.1.2, Java 25, Modulith, ArchUnit). Não tem datasource, JPA, Flyway, Testcontainers nem H2, e não existe `src/main/resources/db`.\nO perfil `local` já é o padrão (`spring.profiles.default: local`). O `.env.example` já tem as variáveis `DB_*`. O `compose.yaml` da raiz já tem `postgres:16-alpine`.\nO Docker 29.9.2 está disponível, então Testcontainers e o teste do perfil `local` são viáveis. `.specs/06-execution-plan/` continua inexistente, e esse desvio fica registrado.\nAtualizei o ponto de partida da proposta e as tarefas 1.2 e 5.3. Escopo, critérios e as 25 tarefas continuam os da SPEC-04, sem mexer em código da aplicação."
   },
   "totais": {
-    "duracaoMs": 1150170,
-    "custo": 5.4715693000000005,
+    "duracaoMs": 1904176,
+    "custo": 7.376065300000001,
     "execucoes": 1,
     "iteracoes": 4,
     "entregues": 3,
-    "sessoes": 19,
-    "turnos": 176,
+    "sessoes": 24,
+    "turnos": 257,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 3,
     "recuperacoesResolvidas": 3,
     "falhas": 0,
-    "commits": 6,
+    "commits": 7,
     "tokens": {
-      "entrada": 270,
-      "saida": 96651,
-      "cacheCriacao": 839948,
-      "cacheLeitura": 6928199
+      "entrada": 376,
+      "saida": 145114,
+      "cacheCriacao": 1118550,
+      "cacheLeitura": 9980659
     }
   },
   "ultimaExecucao": {
