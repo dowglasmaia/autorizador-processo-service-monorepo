@@ -1,7 +1,7 @@
 # Tarefas — Tela de procedimentos
 
 ## 1. Base do módulo
-- [ ] 1.1 Ler `INDEX.md`, memória, `como-executar.md`, SPEC-17 e o `angular-module-scaffold`; conferir o front após a etapa 19.
+- [ ] 1.1 Ler `INDEX.md`, memória, `como-executar.md`, SPEC-17 e o `angular-module-scaffold`; confirmar o front intacto após a etapa 19 e seguir a estrutura de `features/login`.
 - [ ] 1.2 Criar rotas lazy `''` e `novo` em `procedimentos.routes.ts` com títulos.
 - [ ] 1.3 Criar mapa de rótulos dos enums (categoria, especialidade, cobertura, período) sobre os tipos gerados.
 

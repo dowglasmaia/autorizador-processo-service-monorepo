@@ -1,17 +1,17 @@
 # Tela de procedimentos
 
-Etapa 20 de 31 · Fase 3 · derivada da `SPEC-17` (`.specs/03-frontend/SPEC-17-feature-procedimentos.md`). Escrita antes da entrega da etapa 19; será revisada contra o que ela entregar.
+Etapa 20 de 31 · Fase 3 · derivada da `SPEC-17` (`.specs/03-frontend/SPEC-17-feature-procedimentos.md`). Revisada após a entrega da etapa 19 (Nginx), conferida contra o código atual.
 
 ## Objetivo
 Entregar `/procedimentos` (lista) e `/procedimentos/novo` (cadastro em 4 etapas) com todos os campos do catálogo estendido persistidos pelo backend, no fluxo: cadastrar → voltar à lista com o novo item e toast.
 
-## Ponto de partida (conferido no repositório; etapa 19 ainda em curso)
+## Ponto de partida (conferido no repositório após a etapa 19)
 - `features/procedimentos/` tem só `procedimentos.routes.ts` (rota `''`, lazy) e `pages/procedimentos-page.ts`, uma página-esqueleto com `EmptyState` "Em construção". Não há serviço, `doc.md` nem testes.
 - `app.routes.ts` já protege `procedimentos` com `authGuard` (etapa 18), dentro do `Shell`.
 - Núcleo da etapa 17 disponível: `ApiClient`, `AppError` (`kind`, `code`, `campos`), `errorInterceptor`, `NotificationService`, `ErrorDialogService.show(msg, retry?)`, `LoadingService`; tipos gerados em `shared/api` (`ProcedimentoRequest`, `ProcedimentoDto`, `PaginaProcedimentos`).
 - `shared/ui` (etapa 16): Button, Field, Card, Chip, Tag, DataTable, Dialog, EmptyState, PageHeader, Skeleton, Icon.
 - Contrato: `listarProcedimentos` (paginado, `q` por prefixo de `numProcedimento`) e `cadastrarProcedimento` (`nome` e `categoria` obrigatórios; enums `Categoria`, `Especialidade`, `TipoCobertura`, `Periodo`, `Sexo`; campos do catálogo ausentes em registros antigos).
-- A etapa 19 (Nginx) não toca código Angular; espera-se nenhum impacto aqui. `.specs/06-execution-plan/` não existe; desvio a registrar na evidência.
+- A etapa 19 (Nginx) não tocou código Angular; `git status` limpo no front e sem impacto aqui. `features/login` (etapa 18) serve de referência de estrutura (`doc.md`, `.spec.ts` ao lado). `.specs/06-execution-plan/` não existe; desvio a registrar na evidência.
 
 ## Escopo
 1. Rotas lazy `''` e `novo` e `doc.md` do módulo (padrão `angular-module-scaffold`).
@@ -39,4 +39,4 @@ Entregar `/procedimentos` (lista) e `/procedimentos/novo` (cadastro em 4 etapas)
 - **Limite de idades 0..150**, alinhado ao backend (o protótipo usava 120), conforme a SPEC.
 - **Execução contra o Compose:** adiada para a SPEC-30; aqui valem testes automatizados com `HttpTestingController`; captura em 320/1280 px só se o ambiente permitir, registrando o resultado. [REVISAR]
 - **Estado:** formulário local ao componente; lista no serviço da funcionalidade, recarregada ao voltar do cadastro.
-- **Dependência da etapa 19:** nenhuma de código; a revisão confirmará que o front segue intacto.
+- **Dependência da etapa 19:** nenhuma de código; conferido que o front segue intacto.

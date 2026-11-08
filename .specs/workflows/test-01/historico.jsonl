@@ -439,3 +439,13 @@
 {"em":1794162137218,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\19-container-nginx-frontend → .specs\\workflows\\test-01\\specs\\arquivo\\19-container-nginx-frontend","etapa":19,"passo":"arquivar"}
 {"em":1794162137224,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\19-container-nginx-frontend","etapa":19,"passo":"arquivar"}
 {"em":1794162137231,"nivel":"passo","texto":"Commit da entrega","etapa":19,"passo":"commitEntrega"}
+{"em":1794162137778,"nivel":"ok","texto":"96e297d · 16 arquivo(s) · feat(autorizador): Revisa a spec do contêiner Nginx do frontend (SPEC…","etapa":19,"passo":"commitEntrega"}
+{"em":1794162137792,"nivel":"ok","texto":"Commit da entrega: ok · 96e297d · 16 arquivo(s)","etapa":19,"passo":"commitEntrega"}
+{"em":1794162137804,"nivel":"ok","texto":"Etapa 19 entregue · commit 96e297d","etapa":19,"passo":"commitEntrega"}
+{"em":1794162137874,"nivel":"passo","texto":"Etapa 20 · Tela de procedimentos (iteração 20)","etapa":20}
+{"em":1794162137875,"nivel":"passo","texto":"Propor a spec","etapa":20,"passo":"propor"}
+{"em":1794162137880,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":20,"passo":"propor"}
+{"em":1794162171034,"nivel":"ok","texto":"Propor a spec: ok · 25 tarefas","etapa":20,"passo":"propor"}
+{"em":1794162171039,"nivel":"passo","texto":"Verificar ponto de partida","etapa":20,"passo":"partida"}
+{"em":1794162171115,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":20,"passo":"partida"}
+{"em":1794162171121,"nivel":"passo","texto":"Commit da proposta","etapa":20,"passo":"commitProposta"}

@@ -3438,7 +3438,8 @@
               "origem": "provider",
               "esforco": "medium"
             }
-          ]
+          ],
+          "commit": "96e297d"
         },
         {
           "numero": 20,
@@ -3557,19 +3558,19 @@
     }
   ],
   "iteracao": {
-    "numero": 19,
-    "etapa": 19,
-    "inicio": "2026-11-08T18:08:24.806Z",
-    "commitInicial": "122f9c0451e9adc95073bdd74e7cebc8104e3565",
-    "passoAtual": 6,
+    "numero": 20,
+    "etapa": 20,
+    "inicio": "2026-11-08T18:22:17.869Z",
+    "commitInicial": "96e297d002e99cb500df8f529a86ec4c3bfac359",
+    "passoAtual": 2,
     "passos": [
       {
         "id": "propor",
         "situacao": "ok",
-        "duracaoMs": 47351,
-        "custo": 0.22614520000000002,
+        "duracaoMs": 33150,
+        "custo": 0.2001773,
         "tentativas": 1,
-        "detalhe": "17 tarefas"
+        "detalhe": "25 tarefas"
       },
       {
         "id": "partida",
@@ -3581,66 +3582,62 @@
       },
       {
         "id": "commitProposta",
-        "situacao": "ok",
-        "duracaoMs": 1256,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "98acb33 · 4 arquivo(s)"
-      },
-      {
-        "id": "aplicar",
-        "situacao": "ok",
-        "duracaoMs": 783704,
-        "custo": 0.8578151000000002,
-        "tentativas": 1,
-        "detalhe": "17/17 tarefas · 3 sessão(ões)"
-      },
-      {
-        "id": "verificar",
-        "situacao": "pulado",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "arquivar",
-        "situacao": "ok",
-        "duracaoMs": 3,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\19-container-nginx-frontend"
-      },
-      {
-        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
+      },
+      {
+        "id": "aplicar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "verificar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "arquivar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "commitEntrega",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
       }
     ],
-    "titulo": "Revisa a spec do contêiner Nginx do frontend (SPEC-13) contra a base entregue",
-    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md` (17 tarefas em 5 grupos), escritos antes da etapa 18. Revisei e completei os dois, sem recriá-los.\nConferi no repositório que `app-autorizador-processo/` ainda não tem `Dockerfile`, `.dockerignore` nem `nginx/`. O build gera `dist/app-autorizador-processo/browser` com `index.html` e `chunk-*.js` com hash, sem SSR. O `apiBaseUrl` de produção continua `/api/v1`, relativo e sem CORS.\nO serviço `app` já existe no `compose.yaml`, mas sem `healthcheck`, e o comentário do cabeçalho está desatualizado. O `README.md` raiz ainda diz que o frontend não existe.\nO login da etapa 18 não mudou o build nem o `apiBaseUrl`. As rotas `login`, `painel`, `procedimentos`, `solicitar`, `autorizacoes` e `**` ficam cobertas pelo fallback `try_files`. O indicador de status da API chama `/actuator/health` com caminho relativo, então depende do proxy desse caminho no Nginx.\nAtualizei a proposta com esse ponto de partida e com uma decisão sobre o cache de arquivos sem hash, como `favicon.ico`. A `.specs/06-execution-plan/` continua inexistente e será registrada como desvio na evidência."
+    "titulo": "Revisa a spec da tela de procedimentos (SPEC-17) contra a base entregue",
+    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md`, escritos antes da etapa 19. Revisei os dois contra o código atual e os mantive.\nO front continua intacto: `features/procedimentos` só tem a rota `''` e uma página-esqueleto \"Em construção\", sem serviço, `doc.md` nem testes.\nOs tipos gerados (`ProcedimentoRequest`, `ProcedimentoDto`, `PaginaProcedimentos`), o núcleo HTTP, `shared/ui` e o `authGuard` em `app.routes.ts` já existem. `features/login` serve de modelo de estrutura.\nA etapa 19 (Nginx) não alterou código Angular. Troquei as menções a \"etapa 19 em curso\" por \"conferida\" e incluí a referência a `features/login` na tarefa 1.1.\nSão 7 grupos e 23 tarefas, dentro do limite. `.specs/06-execution-plan/` não existe, e a tarefa 7.3 registra esse desvio. Nada fora da pasta da spec foi alterado."
   },
   "totais": {
-    "duracaoMs": 13409119,
-    "custo": 38.24457219999999,
+    "duracaoMs": 13442818,
+    "custo": 38.44474949999999,
     "execucoes": 2,
-    "iteracoes": 19,
-    "entregues": 18,
-    "sessoes": 103,
-    "turnos": 1377,
+    "iteracoes": 20,
+    "entregues": 19,
+    "sessoes": 104,
+    "turnos": 1384,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 6,
     "recuperacoesResolvidas": 5,
     "falhas": 0,
-    "commits": 37,
+    "commits": 38,
     "tokens": {
-      "entrada": 2074,
-      "saida": 918275,
-      "cacheCriacao": 5585957,
-      "cacheLeitura": 62619388
+      "entrada": 2086,
+      "saida": 920184,
+      "cacheCriacao": 5624769,
+      "cacheLeitura": 62877541
     }
   },
   "ultimaExecucao": {
