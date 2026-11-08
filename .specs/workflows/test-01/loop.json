@@ -1704,7 +1704,8 @@
               "origem": "provider",
               "esforco": "medium"
             }
-          ]
+          ],
+          "commit": "0b59ec6"
         },
         {
           "numero": 10,
@@ -1918,19 +1919,19 @@
     }
   ],
   "iteracao": {
-    "numero": 9,
-    "etapa": 9,
-    "inicio": "2026-11-08T16:01:37.699Z",
-    "commitInicial": "ddae3ff81d41a54095c295d9b754a248724060f9",
-    "passoAtual": 6,
+    "numero": 10,
+    "etapa": 10,
+    "inicio": "2026-11-08T16:23:40.429Z",
+    "commitInicial": "0b59ec662bae2b70e86719f2bd8ac07632b3975d",
+    "passoAtual": 2,
     "passos": [
       {
         "id": "propor",
         "situacao": "ok",
-        "duracaoMs": 71422,
-        "custo": 0.2097374,
+        "duracaoMs": 75568,
+        "custo": 0.3901485,
         "tentativas": 1,
-        "detalhe": "21 tarefas"
+        "detalhe": "20 tarefas"
       },
       {
         "id": "partida",
@@ -1942,66 +1943,62 @@
       },
       {
         "id": "commitProposta",
-        "situacao": "ok",
-        "duracaoMs": 1805,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "e0c94f6 · 5 arquivo(s)"
-      },
-      {
-        "id": "aplicar",
-        "situacao": "ok",
-        "duracaoMs": 1248249,
-        "custo": 2.3193107,
-        "tentativas": 1,
-        "detalhe": "21/21 tarefas · 3 sessão(ões)"
-      },
-      {
-        "id": "verificar",
-        "situacao": "pulado",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "arquivar",
-        "situacao": "ok",
-        "duracaoMs": 4,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\09-catalogo-estendido"
-      },
-      {
-        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
+      },
+      {
+        "id": "aplicar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "verificar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "arquivar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "commitEntrega",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
       }
     ],
-    "titulo": "Propõe a spec do catálogo estendido do procedimento (SPEC-12, NEW-01) no backend",
-    "comparacao": "A pasta da spec já tinha proposta.md e tarefas.md, escritos antes da etapa 8. Revisei os dois, sem recriar.\nA etapa 8 já entregou o módulo `procedimento` (domínio, casos de uso, entidade `@Audited`, adaptador, controller e testes). Troquei a \"premissa de módulo inexistente\" pelos nomes reais das classes.\nAs migrations existentes vão até V3, então V4 é a próxima. Na auditoria só `procedimento_audit` recebe as colunas novas.\n`tools/parity` existe e o protótipo está em `.specs/design/prototype/`. `.specs/06-execution-plan/` continua inexistente, desvio já registrado.\nAcrescentei o risco de mudar a assinatura de `Procedimento.create` e quebrar os testes da etapa 8. São 17 tarefas em 9 grupos, e o escopo segue a SPEC-12 sem inventar requisitos."
+    "titulo": "Revisa a spec do módulo autorizacao (SPEC-08) contra as etapas 8 e 9",
+    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md`, escritos antes de a etapa 9 terminar. Revisei os dois contra o código entregue em vez de recriar.\nO pacote `autorizacao` ainda não existe. O contrato `autorizacao.yaml` e as tabelas `autorizacao` e `autorizacao_audit` (V1 e V2) já cobrem a etapa, então não há mudança de contrato nem migração nova.\n`ProcedimentoEntity` é pacote-privada e a porta `ProcedimentoRepository` não busca por vários ids. Por isso o `@ManyToOne` entre módulos não serve. Propus um acréscimo aditivo `buscarPorIds`/`porIds` em `procedimento` (tarefa 3.0), marcado [REVISAR] porque contraria o \"não alterar procedimento\" da SPEC-08. O motivo daquela restrição, o paralelismo com a SPEC-12, já caiu.\nO controller não pode usar `domain.model`, então a resposta deve ser montada a partir de `ObterProcedimentoUseCase.Resultado` e `Catalogo`. `Pagina` fica em `procedimento.domain.model`, então o módulo terá sua própria paginação.\nO `check-architecture.mjs` não existe, e a verificação equivalente é o `ArchitectureTest`. `.specs/06-execution-plan/` também não existe. Ambos estão registrados como desvios. A spec ficou com 20 tarefas."
   },
   "totais": {
-    "duracaoMs": 6324902,
-    "custo": 21.076339600000004,
+    "duracaoMs": 6401414,
+    "custo": 21.466488100000003,
     "execucoes": 2,
-    "iteracoes": 9,
-    "entregues": 8,
-    "sessoes": 56,
-    "turnos": 745,
+    "iteracoes": 10,
+    "entregues": 9,
+    "sessoes": 57,
+    "turnos": 756,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 5,
     "recuperacoesResolvidas": 4,
     "falhas": 0,
-    "commits": 17,
+    "commits": 18,
     "tokens": {
-      "entrada": 1074,
-      "saida": 515365,
-      "cacheCriacao": 3037336,
-      "cacheLeitura": 33192902
+      "entrada": 1090,
+      "saida": 522306,
+      "cacheCriacao": 3106634,
+      "cacheLeitura": 33628047
     }
   },
   "ultimaExecucao": {

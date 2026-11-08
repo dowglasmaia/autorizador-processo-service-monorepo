@@ -1,8 +1,8 @@
 # Tarefas — Módulo autorizacao
 
 ## 1. Preparação
-- [ ] 1.1 Reconferir o que a etapa 9 entregou em `procedimento` (domínio, `Resultado`, contrato) e ler `API_CONTRACTS.md`, `PRODUCT_CONTEXT.md` §6–7 e baseline B09–B15; registrar a ausência de `.specs/06-execution-plan/`.
-- [ ] 1.2 Ler a skill `java-spring-create-module` e executar `scaffold-module.mjs --feature autorizacao --entity Autorizacao --style rich`; registrar as decisões D1–D6.
+- [ ] 1.1 Reconferir o que as etapas 8 e 9 entregaram em `procedimento` (`DadosCatalogo`, `Resultado`/`Catalogo`, porta, `ArchitectureTest`) e ler `API_CONTRACTS.md`, `PRODUCT_CONTEXT.md` §6–7 e baseline B09–B15; registrar a ausência de `.specs/06-execution-plan/`.
+- [ ] 1.2 Ler a skill `java-spring-create-module` e executar o scaffold do módulo (`--feature autorizacao --entity Autorizacao --style rich`) ou, se o script não existir, criar a estrutura à mão no padrão de `procedimento`; registrar as decisões D1–D6.
 
 ## 2. Domínio
 - [ ] 2.1 Escrever os testes do domínio antes da implementação (`conceder` sempre `permitido=true`, exceção de negativa).
@@ -10,6 +10,7 @@
 - [ ] 2.3 Criar `AutorizacaoNegadaException` (`AUTORIZACAO_NEGADA`, 403) sobre `BusinessRuleException`.
 
 ## 3. Casos de uso e porta
+- [ ] 3.0 Acrescentar, de forma aditiva, `ProcedimentoRepository.buscarPorIds`, seu adaptador (uma consulta) e `ObterProcedimentoUseCase.porIds`, com teste de que a regressão das etapas 8 e 9 segue verde.
 - [ ] 3.1 Definir a porta `AutorizacaoRepository` (salvar, listar página mais recentes primeiro).
 - [ ] 3.2 Implementar `SolicitarAutorizacaoUseCase` (`@Transactional`, sexo normalizado, negativa sem persistir, log sem dados do paciente).
 - [ ] 3.3 Implementar `ListarAutorizacoesUseCase` com paginação e procedimento carregado em lote.
@@ -21,7 +22,7 @@
 - [ ] 4.3 Testar a persistência com PostgreSQL (Testcontainers): ida e volta, duas autorizações do mesmo procedimento (RN11), nada gravado na negativa e auditoria da criação.
 
 ## 5. API
-- [ ] 5.1 Implementar `AutorizacaoController` sobre a interface gerada (`201` com corpo, `criadaEm` em UTC).
+- [ ] 5.1 Implementar `AutorizacaoController` sobre a interface gerada (`201` com corpo, `criadaEm` em UTC), montando o `Procedimento` gerado a partir de `Resultado`/`Catalogo`, sem usar `domain.model`.
 - [ ] 5.2 Testar com `@WebMvcTest`: `201`, `400` (sexo inválido, idade fora da faixa, JSON malformado), `403` e `404`; confirmar `401` sem token em `VarreduraSegurancaTest`.
 
 ## 6. Testes ponta a ponta e desempenho
@@ -29,6 +30,6 @@
 - [ ] 6.2 Medir o SQL por requisição de `GET /autorizacoes` com 3 e 23 itens (Hibernate Statistics), afirmar contagem constante e registrar.
 
 ## 7. Verificação e encerramento
-- [ ] 7.1 Estender o `ArchitectureTest` ao módulo, rodar `check-architecture.mjs` (0 violações) e conferir a ausência de "legado/legacy".
+- [ ] 7.1 Estender o `ArchitectureTest` ao módulo (domínio sem framework, controller sem `domain.model`), confirmar 0 violações (o `check-architecture.mjs` não existe) e conferir a ausência de "legado/legacy".
 - [ ] 7.2 Rodar `./mvnw verify` e corrigir as falhas; registrar bloqueio se o Docker faltar.
-- [ ] 7.3 Rodar o replay dos golden cases (`tools/parity/replay.mjs --only autorizacao`) e registrar as diferenças aceitas.
+- [ ] 7.3 Rodar o replay dos golden cases (`tools/parity/replay.mjs --only autorizacao`) se servidor e banco estiverem disponíveis; senão registrar como não executado e deixar para a SPEC-31.

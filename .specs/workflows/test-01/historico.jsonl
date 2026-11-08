@@ -216,3 +216,13 @@
 {"em":1794155019389,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\09-catalogo-estendido → .specs\\workflows\\test-01\\specs\\arquivo\\09-catalogo-estendido","etapa":9,"passo":"arquivar"}
 {"em":1794155019396,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\09-catalogo-estendido","etapa":9,"passo":"arquivar"}
 {"em":1794155019401,"nivel":"passo","texto":"Commit da entrega","etapa":9,"passo":"commitEntrega"}
+{"em":1794155020330,"nivel":"ok","texto":"0b59ec6 · 35 arquivo(s) · feat(autorizador): Propõe a spec do catálogo estendido do procediment…","etapa":9,"passo":"commitEntrega"}
+{"em":1794155020355,"nivel":"ok","texto":"Commit da entrega: ok · 0b59ec6 · 35 arquivo(s)","etapa":9,"passo":"commitEntrega"}
+{"em":1794155020367,"nivel":"ok","texto":"Etapa 9 entregue · commit 0b59ec6","etapa":9,"passo":"commitEntrega"}
+{"em":1794155020434,"nivel":"passo","texto":"Etapa 10 · Módulo autorizacao (iteração 10)","etapa":10}
+{"em":1794155020435,"nivel":"passo","texto":"Propor a spec","etapa":10,"passo":"propor"}
+{"em":1794155020441,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":10,"passo":"propor"}
+{"em":1794155096011,"nivel":"ok","texto":"Propor a spec: ok · 20 tarefas","etapa":10,"passo":"propor"}
+{"em":1794155096016,"nivel":"passo","texto":"Verificar ponto de partida","etapa":10,"passo":"partida"}
+{"em":1794155096023,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":10,"passo":"partida"}
+{"em":1794155096027,"nivel":"passo","texto":"Commit da proposta","etapa":10,"passo":"commitProposta"}
