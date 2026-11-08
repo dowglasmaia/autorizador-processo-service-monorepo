@@ -30,3 +30,18 @@
 {"em":1794148246549,"nivel":"passo","texto":"Verificar ponto de partida","etapa":2,"passo":"partida"}
 {"em":1794148246556,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":2,"passo":"partida"}
 {"em":1794148246559,"nivel":"passo","texto":"Commit da proposta","etapa":2,"passo":"commitProposta"}
+{"em":1794148246899,"nivel":"ok","texto":"4dd0343 · 3 arquivo(s) · docs(test-01): proposta da etapa 2 · Baseline golden cases","etapa":2,"passo":"commitProposta"}
+{"em":1794148246905,"nivel":"ok","texto":"Commit da proposta: ok · 4dd0343 · 3 arquivo(s)","etapa":2,"passo":"commitProposta"}
+{"em":1794148246909,"nivel":"passo","texto":"Aplicar a spec","etapa":2,"passo":"aplicar"}
+{"em":1794148246913,"nivel":"info","texto":"proposta antecipada da etapa 3 em paralelo","etapa":2,"passo":"aplicar"}
+{"em":1794148304502,"nivel":"ok","texto":"proposta antecipada da etapa 3 pronta","etapa":2,"passo":"aplicar"}
+{"em":1794148800532,"nivel":"aviso","texto":"a sessão terminou sem marcar tarefas (1 de 2 continuações)","etapa":2,"passo":"aplicar"}
+{"em":1794148800533,"nivel":"erro","texto":"Aplicar a spec: .specs\\workflows\\test-01\\specs\\02-baseline-golden-cases/tarefas.md não tem tarefas","etapa":2,"passo":"aplicar"}
+{"em":1794148800534,"nivel":"passo","texto":"Recuperação 1 · Aplicar a spec","etapa":2,"passo":"aplicar"}
+{"em":1794148823830,"nivel":"ok","texto":"recuperação 1 resolveu: O passo anterior já havia movido a spec (proposta.md e tarefas.md) para specs/arquivo/ antes da checagem, então o devkit não achou tarefas.md no caminho esperado da etapa 2.","etapa":2,"passo":"aplicar"}
+{"em":1794148823834,"nivel":"passo","texto":"Verificar a mudança","etapa":2,"passo":"verificar"}
+{"em":1794148823840,"nivel":"info","texto":"Verificar a mudança: pulado · sem verificações configuradas","etapa":2,"passo":"verificar"}
+{"em":1794148823844,"nivel":"passo","texto":"Arquivar a spec","etapa":2,"passo":"arquivar"}
+{"em":1794148823849,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\02-baseline-golden-cases → .specs\\workflows\\test-01\\specs\\arquivo\\02-baseline-golden-cases","etapa":2,"passo":"arquivar"}
+{"em":1794148823852,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\02-baseline-golden-cases","etapa":2,"passo":"arquivar"}
+{"em":1794148823856,"nivel":"passo","texto":"Commit da entrega","etapa":2,"passo":"commitEntrega"}

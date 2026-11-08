@@ -218,7 +218,208 @@
           "descricao": "Executa a SPEC-02: casos executáveis em `tools/parity/` (cases.json e replay.mjs) obtidos rodando a versão original da tag `v0-original` em contêiner JDK 8.\nReferências: `BASELINE_COMPORTAMENTO_ORIGINAL.md`.\nLimite: sem alterar a API original.",
           "spec": "02-baseline-golden-cases",
           "specPronta": false,
-          "status": "pendente"
+          "status": "entregue",
+          "entregueEm": "2026-11-08T14:40:23.859Z",
+          "iteracao": 2,
+          "duracaoMs": 579677,
+          "custo": 1.5089005,
+          "passos": [
+            {
+              "id": "propor",
+              "situacao": "ok",
+              "duracaoMs": 25715,
+              "custo": 0.168938,
+              "tentativas": 1,
+              "detalhe": "19 tarefas"
+            },
+            {
+              "id": "partida",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "commitProposta",
+              "situacao": "ok",
+              "duracaoMs": 339,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "4dd0343 · 3 arquivo(s)"
+            },
+            {
+              "id": "aplicar",
+              "situacao": "aviso",
+              "duracaoMs": 553620,
+              "custo": 1.3399625,
+              "tentativas": 1,
+              "detalhe": "recuperado",
+              "recuperacoes": [
+                {
+                  "numero": 1,
+                  "erro": ".specs\\workflows\\test-01\\specs\\02-baseline-golden-cases/tarefas.md não tem tarefas",
+                  "resolvida": true,
+                  "custo": 0.15170320000000004,
+                  "em": "2026-11-08T14:40:00.535Z",
+                  "causa": "O passo anterior já havia movido a spec (proposta.md e tarefas.md) para specs/arquivo/ antes da checagem, então o devkit não achou tarefas.md no caminho esperado da etapa 2.",
+                  "oQueFez": "Devolvi proposta.md e tarefas.md de specs/arquivo/02-baseline-golden-cases/ para specs/02-baseline-golden-cases/ (cópia e remoção, sem git) e removi a pasta vazia em arquivo/. O tarefas.md tem 19 tarefas `- [x]` e nenhuma pendente.",
+                  "precisaPessoa": false
+                }
+              ]
+            },
+            {
+              "id": "verificar",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "arquivar",
+              "situacao": "ok",
+              "duracaoMs": 3,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\02-baseline-golden-cases"
+            },
+            {
+              "id": "commitEntrega",
+              "situacao": "ok",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1
+            }
+          ],
+          "sessoes": [
+            {
+              "rotulo": "propor-02",
+              "passo": "propor",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.168938,
+              "turnos": 5,
+              "duracaoMs": 25704,
+              "inicio": 1794148220829,
+              "fim": 1794148246539,
+              "tokens": {
+                "entrada": 8,
+                "saida": 1165,
+                "cacheCriacao": 35571,
+                "cacheLeitura": 149880
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "antecipar-03",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.24908219999999998,
+              "turnos": 6,
+              "duracaoMs": 57579,
+              "inicio": 1794148246914,
+              "fim": 1794148304499,
+              "tokens": {
+                "entrada": 10,
+                "saida": 4765,
+                "cacheCriacao": 45115,
+                "cacheLeitura": 209522
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-02-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.456245,
+              "turnos": 12,
+              "duracaoMs": 195633,
+              "inicio": 1794148248111,
+              "fim": 1794148443753,
+              "tokens": {
+                "entrada": 22,
+                "saida": 15489,
+                "cacheCriacao": 60219,
+                "cacheLeitura": 604350
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-02-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.5186309,
+              "turnos": 21,
+              "duracaoMs": 316943,
+              "inicio": 1794148443757,
+              "fim": 1794148760708,
+              "tokens": {
+                "entrada": 36,
+                "saida": 14837,
+                "cacheCriacao": 63534,
+                "cacheLeitura": 1160529
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-02-3",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2133834,
+              "turnos": 7,
+              "duracaoMs": 39809,
+              "inicio": 1794148760712,
+              "fim": 1794148800528,
+              "tokens": {
+                "entrada": 12,
+                "saida": 2231,
+                "cacheCriacao": 41044,
+                "cacheLeitura": 268734
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "recuperar-aplicar-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.1517032,
+              "turnos": 4,
+              "duracaoMs": 23203,
+              "inicio": 1794148800609,
+              "fim": 1794148823821,
+              "tokens": {
+                "entrada": 6,
+                "saida": 1055,
+                "cacheCriacao": 32737,
+                "cacheLeitura": 101932
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            }
+          ]
         },
         {
           "numero": 3,
@@ -504,7 +705,7 @@
     "etapa": 2,
     "inicio": "2026-11-08T14:30:20.816Z",
     "commitInicial": "f70aeb1e3f1eced0059ab7863c416e275f219120",
-    "passoAtual": 2,
+    "passoAtual": 6,
     "passos": [
       {
         "id": "propor",
@@ -524,62 +725,78 @@
       },
       {
         "id": "commitProposta",
+        "situacao": "ok",
+        "duracaoMs": 339,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "4dd0343 · 3 arquivo(s)"
+      },
+      {
+        "id": "aplicar",
+        "situacao": "aviso",
+        "duracaoMs": 553620,
+        "custo": 1.3399625,
+        "tentativas": 1,
+        "recuperacoes": [
+          {
+            "numero": 1,
+            "erro": ".specs\\workflows\\test-01\\specs\\02-baseline-golden-cases/tarefas.md não tem tarefas",
+            "resolvida": true,
+            "custo": 0.15170320000000004,
+            "em": "2026-11-08T14:40:00.535Z",
+            "causa": "O passo anterior já havia movido a spec (proposta.md e tarefas.md) para specs/arquivo/ antes da checagem, então o devkit não achou tarefas.md no caminho esperado da etapa 2.",
+            "oQueFez": "Devolvi proposta.md e tarefas.md de specs/arquivo/02-baseline-golden-cases/ para specs/02-baseline-golden-cases/ (cópia e remoção, sem git) e removi a pasta vazia em arquivo/. O tarefas.md tem 19 tarefas `- [x]` e nenhuma pendente.",
+            "precisaPessoa": false
+          }
+        ],
+        "detalhe": "recuperado"
+      },
+      {
+        "id": "verificar",
+        "situacao": "pulado",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "arquivar",
+        "situacao": "ok",
+        "duracaoMs": 3,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\02-baseline-golden-cases"
+      },
+      {
+        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
-      },
-      {
-        "id": "aplicar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "verificar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "arquivar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
       }
     ],
     "titulo": "Propõe a spec de baseline executável de golden cases em tools/parity",
     "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md` completos, derivados da SPEC-02. Revisei os dois contra o repositório e não alterei nada.\nA tag `v0-original` existe (etapa 1 arquivada) e `tools/` ainda não existe, então a etapa começa do zero.\n`BASELINE_COMPORTAMENTO_ORIGINAL.md` e `API_CONTRACTS.md` §4 existem, e o baseline tem 17 casos (B01–B17).\n`tarefas.md` tem 6 grupos e 16 tarefas, dentro do limite de 4 a 30. A `proposta.md` termina em \"Decisões tomadas sem consulta\", com um item marcado **[REVISAR]**: os casos `apenasV1` (DIV-08 e 401).\n`.specs/06-execution-plan/` não existe, como previsto; o desvio está registrado na tarefa 1.2. A execução depende do Docker para as tarefas 2.x e 5.x."
   },
   "totais": {
-    "duracaoMs": 158380,
-    "custo": 1.8378766999999998,
+    "duracaoMs": 712342,
+    "custo": 3.4269214,
     "execucoes": 1,
     "iteracoes": 2,
     "entregues": 1,
-    "sessoes": 7,
-    "turnos": 46,
+    "sessoes": 12,
+    "turnos": 96,
     "verificacoes": 0,
     "correcoes": 0,
-    "recuperacoes": 1,
-    "recuperacoesResolvidas": 1,
+    "recuperacoes": 2,
+    "recuperacoesResolvidas": 2,
     "falhas": 0,
-    "commits": 2,
+    "commits": 3,
     "tokens": {
-      "entrada": 58,
-      "saida": 19258,
-      "cacheCriacao": 269275,
-      "cacheLeitura": 1161733
+      "entrada": 144,
+      "saida": 57635,
+      "cacheCriacao": 511924,
+      "cacheLeitura": 3506800
     }
   },
   "ultimaExecucao": {

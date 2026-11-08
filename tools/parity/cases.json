@@ -1,0 +1,553 @@
+{
+  "versao": 1,
+  "descricao": "Golden cases B01-B17 da versão original (tag v0-original). Fonte: .specs/00-product-discovery/BASELINE_COMPORTAMENTO_ORIGINAL.md e .specs/01-architecture/API_CONTRACTS.md §4.",
+  "convencoes": {
+    "caminhos": "Caminhos de campo usam notação com pontos; '[]' percorre todos os itens de um array (ex.: '[].numProcedimento'). '$' é a raiz.",
+    "estavel": "Mapa caminho -> valor exato esperado.",
+    "conjuntos": "Mapa caminho -> lista comparada SEM ordem.",
+    "conjuntosOrdenados": "Mapa caminho -> lista comparada COM ordem (usado na v1).",
+    "contem": "Mapa caminho -> trecho de texto que deve estar contido no valor.",
+    "ausentes": "Lista de caminhos que NÃO podem existir na resposta.",
+    "volateis": "Campos observados que variam a cada execução e são ignorados na comparação.",
+    "ordemExecucao": "Os casos rodam na ordem do campo 'ordem'. B06, B07 e B12 ficam no fim de cada grupo porque deixam a base suja.",
+    "base": "A original usa H2 em memória: os casos não são idempotentes e exigem contêiner novo a cada execução."
+  },
+  "semente": {
+    "numeros": [1234, 4567, 6789]
+  },
+  "casos": [
+    {
+      "id": "B01",
+      "grupo": "procedimento",
+      "ordem": 1,
+      "descricao": "Dado a carga inicial do perfil test, quando listo os procedimentos, então recebo 200 com os 3 itens da semente, sexos como nomes (F, M) e idades sem ordem garantida.",
+      "original": {
+        "requisicao": { "metodo": "GET", "caminho": "/procedimentos" },
+        "resposta": {
+          "status": 200,
+          "estavel": { "$.length": 3 },
+          "conjuntos": {
+            "[].numProcedimento": [1234, 4567, 6789]
+          },
+          "volateis": ["[].id", "[].idades (ordem)", "[].sexos (ordem)"],
+          "observada": [
+            { "id": 1, "numProcedimento": 1234, "sexos": ["F"], "idades": [20, 10] },
+            { "id": 2, "numProcedimento": 4567, "sexos": ["M", "F"], "idades": [20, 30] },
+            { "id": 3, "numProcedimento": 6789, "sexos": ["M", "F"], "idades": [10] }
+          ]
+        }
+      },
+      "normalizacoes": [
+        "idades e sexos comparados como conjuntos (sem ordem) na original",
+        "id da linha ignorado"
+      ],
+      "mapeamentoV1": {
+        "requisicao": { "metodo": "GET", "caminho": "/api/v1/procedimentos" },
+        "resposta": {
+          "status": 200,
+          "conjuntos": { "itens[].numProcedimento": [1234, 4567, 6789] },
+          "conjuntosOrdenados": { "itens[numProcedimento=1234].idades": [10, 20] }
+        }
+      },
+      "divergencia": "DIV-07"
+    },
+    {
+      "id": "B02",
+      "grupo": "procedimento",
+      "ordem": 2,
+      "descricao": "Dado um procedimento novo 9999 com sexos [1,2] e idades [18,30], quando cadastro, então recebo 201 sem corpo e com Location.",
+      "original": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/procedimentos",
+          "cabecalhos": { "Content-Type": "application/json" },
+          "corpo": { "numProcedimento": 9999, "sexos": [1, 2], "idades": [18, 30] }
+        },
+        "resposta": {
+          "status": 201,
+          "corpoVazio": true,
+          "volateis": ["Location (host e id)"],
+          "observada": { "cabecalhos": { "Location": "http://localhost:18080/procedimentos/4" } }
+        }
+      },
+      "normalizacoes": ["Location: só a presença do cabecalho é verificada"],
+      "mapeamentoV1": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/api/v1/procedimentos",
+          "corpo": { "numProcedimento": 9999, "sexos": ["M", "F"], "idades": [18, 30] }
+        },
+        "resposta": {
+          "status": 201,
+          "estavel": { "numProcedimento": 9999 },
+          "conjuntos": { "sexos": ["M", "F"], "idades": [18, 30] },
+          "cabecalhosPresentes": ["Location"]
+        }
+      },
+      "divergencia": "DIV-03"
+    },
+    {
+      "id": "B03",
+      "grupo": "procedimento",
+      "ordem": 3,
+      "descricao": "Dado um cadastro com sexos [\"M\",\"F\"] (texto), quando envio, então recebo 400 do Spring: a entrada só aceita 1/2 (assimetria entrada x saída).",
+      "original": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/procedimentos",
+          "cabecalhos": { "Content-Type": "application/json" },
+          "corpo": { "numProcedimento": 9998, "sexos": ["M", "F"], "idades": [18] }
+        },
+        "resposta": {
+          "status": 400,
+          "estavel": { "status": 400, "error": "Bad Request" },
+          "contem": { "message": "Cannot deserialize value of type `java.lang.Integer` from String \"M\"" },
+          "volateis": ["timestamp", "trace", "message (trecho após o primeiro ponto)"]
+        }
+      },
+      "normalizacoes": ["timestamp e trace ignorados; message comparada por trecho"],
+      "mapeamentoV1": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/api/v1/procedimentos",
+          "corpo": { "numProcedimento": 9998, "sexos": ["M", "F"], "idades": [18] }
+        },
+        "resposta": { "status": 201, "estavel": { "numProcedimento": 9998 } }
+      },
+      "divergencia": "DIV-02"
+    },
+    {
+      "id": "B04",
+      "grupo": "procedimento",
+      "ordem": 4,
+      "descricao": "Dado o procedimento 9999 já cadastrado (B02), quando cadastro de novo o mesmo número, então recebo 403 com a mensagem de duplicidade.",
+      "original": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/procedimentos",
+          "cabecalhos": { "Content-Type": "application/json" },
+          "corpo": { "numProcedimento": 9999, "sexos": [1], "idades": [1] }
+        },
+        "resposta": {
+          "status": 403,
+          "estavel": {
+            "status": 403,
+            "error": "Não Autorizado",
+            "message": "Procedimento já Cadastrado na Base de Dados : Nº 9999",
+            "path": "/procedimentos"
+          },
+          "volateis": ["timestamp (epoch em ms)"]
+        }
+      },
+      "normalizacoes": ["timestamp ignorado"],
+      "mapeamentoV1": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/api/v1/procedimentos",
+          "corpo": { "numProcedimento": 9999, "sexos": ["M"], "idades": [1] }
+        },
+        "resposta": { "status": 403, "estavel": { "code": "PROCEDIMENTO_DUPLICADO" } }
+      },
+      "divergencia": "DIV-04"
+    },
+    {
+      "id": "B05",
+      "grupo": "procedimento",
+      "ordem": 5,
+      "descricao": "Dado um cadastro sem numProcedimento, quando envio, então recebo 400 com a mensagem de campo obrigatório.",
+      "original": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/procedimentos",
+          "cabecalhos": { "Content-Type": "application/json" },
+          "corpo": { "sexos": [1], "idades": [1] }
+        },
+        "resposta": {
+          "status": 400,
+          "estavel": { "status": 400, "error": "Bad Request" },
+          "contem": { "errors[].defaultMessage": "informe o número do procedimento para prosseguir com a operação." },
+          "volateis": ["timestamp", "errors[].codes", "errors[].arguments"]
+        }
+      },
+      "normalizacoes": ["timestamp, codes e arguments ignorados; compara-se defaultMessage"],
+      "mapeamentoV1": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/api/v1/procedimentos",
+          "corpo": { "sexos": ["M"], "idades": [1] }
+        },
+        "resposta": { "status": 400, "estavel": { "code": "VALIDACAO_INVALIDA" } }
+      },
+      "divergencia": "DIV-06"
+    },
+    {
+      "id": "B08",
+      "grupo": "procedimento",
+      "ordem": 6,
+      "descricao": "Dado um JSON malformado, quando envio o cadastro, então recebo 400 padrão do Spring.",
+      "original": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/procedimentos",
+          "cabecalhos": { "Content-Type": "application/json" },
+          "corpoBruto": "{\"numProcedimento\":"
+        },
+        "resposta": {
+          "status": 400,
+          "estavel": { "status": 400, "error": "Bad Request" },
+          "contem": { "message": "JSON parse error" },
+          "volateis": ["timestamp", "trace"]
+        }
+      },
+      "normalizacoes": ["timestamp e trace ignorados"],
+      "mapeamentoV1": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/api/v1/procedimentos",
+          "cabecalhos": { "Content-Type": "application/json" },
+          "corpoBruto": "{\"numProcedimento\":"
+        },
+        "resposta": { "status": 400, "estavel": { "code": "CORPO_INVALIDO" } }
+      },
+      "divergencia": "DIV-04"
+    },
+    {
+      "id": "B06",
+      "grupo": "procedimento",
+      "ordem": 90,
+      "descricao": "Dado um cadastro com sexos [3] (código inexistente), quando envio, então a original aceita com 201 (sem validação do código de sexo). Deixa a base suja: executar por último.",
+      "original": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/procedimentos",
+          "cabecalhos": { "Content-Type": "application/json" },
+          "corpo": { "numProcedimento": 7777, "sexos": [3], "idades": [5] }
+        },
+        "resposta": {
+          "status": 201,
+          "corpoVazio": true,
+          "volateis": ["Location (host e id)"]
+        }
+      },
+      "normalizacoes": ["Location: só a presença é verificada"],
+      "mapeamentoV1": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/api/v1/procedimentos",
+          "corpo": { "numProcedimento": 7777, "sexos": ["X"], "idades": [5] }
+        },
+        "resposta": { "status": 400, "codeAnyOf": ["VALIDACAO_INVALIDA", "CORPO_INVALIDO"] }
+      },
+      "divergencia": "DIV-02"
+    },
+    {
+      "id": "B07",
+      "grupo": "procedimento",
+      "ordem": 91,
+      "descricao": "Dado o cadastro inválido de B06, quando listo os procedimentos, então a original responde 500 (Código inválido :3): um cadastro ruim quebra a listagem inteira.",
+      "original": {
+        "requisicao": { "metodo": "GET", "caminho": "/procedimentos" },
+        "resposta": {
+          "status": 500,
+          "estavel": { "status": 500, "error": "Internal Server Error" },
+          "contem": { "message": "Código inválido :3" },
+          "volateis": ["timestamp", "trace", "message (cadeia de referência)"]
+        }
+      },
+      "normalizacoes": ["timestamp e trace ignorados; message comparada por trecho"],
+      "mapeamentoV1": {
+        "requisicao": { "metodo": "GET", "caminho": "/api/v1/procedimentos" },
+        "resposta": {
+          "status": 200,
+          "ausentes": ["itens[numProcedimento=7777]"]
+        }
+      },
+      "divergencia": "DIV-02"
+    },
+    {
+      "id": "B09",
+      "grupo": "autorizacao",
+      "ordem": 10,
+      "descricao": "Dado o procedimento 4567 (M,F; 20,30), quando solicito com idade 20 e sexo F, então recebo 200 com corpo vazio.",
+      "original": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/autorizadores/4567",
+          "query": { "idade": "20", "sexo": "F" }
+        },
+        "resposta": { "status": 200, "corpoVazio": true }
+      },
+      "normalizacoes": [],
+      "mapeamentoV1": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/api/v1/autorizacoes",
+          "corpo": { "numProcedimento": 4567, "idade": 20, "sexo": "F" }
+        },
+        "resposta": { "status": 201, "estavel": { "permitido": true, "procedimento.numProcedimento": 4567 } }
+      },
+      "divergencia": "DIV-05"
+    },
+    {
+      "id": "B10",
+      "grupo": "autorizacao",
+      "ordem": 11,
+      "descricao": "Dado o procedimento 4567, quando solicito com idade 30 e sexo minúsculo m, então recebo 200: a comparação de sexo é case-insensitive.",
+      "original": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/autorizadores/4567",
+          "query": { "idade": "30", "sexo": "m" }
+        },
+        "resposta": { "status": 200, "corpoVazio": true }
+      },
+      "normalizacoes": [],
+      "mapeamentoV1": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/api/v1/autorizacoes",
+          "corpo": { "numProcedimento": 4567, "idade": 30, "sexo": "m" }
+        },
+        "resposta": { "status": 201, "estavel": { "permitido": true, "procedimento.numProcedimento": 4567 } }
+      },
+      "divergencia": "DIV-05"
+    },
+    {
+      "id": "B11",
+      "grupo": "autorizacao",
+      "ordem": 12,
+      "descricao": "Dado o procedimento 1234 (só F; 10,20), quando solicito com idade 30 e sexo M, então recebo 403 de negativa de negócio e nada é gravado.",
+      "original": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/autorizadores/1234",
+          "query": { "idade": "30", "sexo": "M" }
+        },
+        "resposta": {
+          "status": 403,
+          "estavel": {
+            "status": 403,
+            "error": "Não Autorizado",
+            "message": "Operação não Autorizada, Sexo e/ou Idade não aderentes ao Procedimento Solicitado.",
+            "path": "/autorizadores/1234"
+          },
+          "volateis": ["timestamp (epoch em ms)"]
+        }
+      },
+      "normalizacoes": ["timestamp ignorado"],
+      "mapeamentoV1": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/api/v1/autorizacoes",
+          "corpo": { "numProcedimento": 1234, "idade": 30, "sexo": "M" }
+        },
+        "resposta": { "status": 403, "estavel": { "code": "AUTORIZACAO_NEGADA" } }
+      },
+      "divergencia": "DIV-05"
+    },
+    {
+      "id": "B13",
+      "grupo": "autorizacao",
+      "ordem": 13,
+      "descricao": "Dado o procedimento 4567, quando solicito sem o parâmetro sexo, então recebo 400 informando o parâmetro ausente.",
+      "original": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/autorizadores/4567",
+          "query": { "idade": "20" }
+        },
+        "resposta": {
+          "status": 400,
+          "estavel": { "status": 400, "error": "Bad Request", "message": "Required String parameter 'sexo' is not present" },
+          "volateis": ["timestamp", "trace"]
+        }
+      },
+      "normalizacoes": ["timestamp e trace ignorados"],
+      "mapeamentoV1": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/api/v1/autorizacoes",
+          "corpo": { "numProcedimento": 4567, "idade": 20 }
+        },
+        "resposta": { "status": 400, "estavel": { "code": "VALIDACAO_INVALIDA" } }
+      },
+      "divergencia": "DIV-05"
+    },
+    {
+      "id": "B14",
+      "grupo": "autorizacao",
+      "ordem": 14,
+      "descricao": "Dado um número de procedimento não numérico (abc), quando solicito, então recebo 400 de conversão de tipo.",
+      "original": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/autorizadores/abc",
+          "query": { "idade": "20", "sexo": "F" }
+        },
+        "resposta": {
+          "status": 400,
+          "estavel": { "status": 400, "error": "Bad Request" },
+          "contem": { "message": "Failed to convert value of type 'java.lang.String' to required type 'java.lang.Integer'" },
+          "volateis": ["timestamp", "trace"]
+        }
+      },
+      "normalizacoes": ["timestamp e trace ignorados; message comparada por trecho"],
+      "mapeamentoV1": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/api/v1/autorizacoes",
+          "corpo": { "numProcedimento": "abc", "idade": 20, "sexo": "F" }
+        },
+        "resposta": { "status": 400, "codeAnyOf": ["VALIDACAO_INVALIDA", "CORPO_INVALIDO"] }
+      },
+      "divergencia": "DIV-05"
+    },
+    {
+      "id": "B15",
+      "grupo": "autorizacao",
+      "ordem": 15,
+      "descricao": "Dado B09 e B10 executados, quando listo as autorizações, então recebo 200 com dois registros para o procedimento 4567 (o OneToOne não limita).",
+      "original": {
+        "requisicao": { "metodo": "GET", "caminho": "/autorizadores" },
+        "resposta": {
+          "status": 200,
+          "estavel": { "$.length": 2, "[].permitido": [true, true] },
+          "conjuntos": { "[].procedimento.numProcedimento": [4567, 4567] },
+          "volateis": ["[].id", "[].procedimento.id", "[].procedimento.idades (ordem)"],
+          "observada": [
+            { "id": 1, "procedimento": { "id": 2, "numProcedimento": 4567, "sexos": ["M", "F"], "idades": [20, 30] }, "permitido": true },
+            { "id": 2, "procedimento": { "id": 2, "numProcedimento": 4567, "sexos": ["M", "F"], "idades": [20, 30] }, "permitido": true }
+          ]
+        }
+      },
+      "normalizacoes": ["ids ignorados; idades como conjunto"],
+      "mapeamentoV1": {
+        "requisicao": { "metodo": "GET", "caminho": "/api/v1/autorizacoes" },
+        "resposta": {
+          "status": 200,
+          "estavel": { "totalItens": 2 },
+          "conjuntos": { "itens[].procedimento.numProcedimento": [4567, 4567] }
+        }
+      },
+      "divergencia": "DIV-07"
+    },
+    {
+      "id": "B12",
+      "grupo": "autorizacao",
+      "ordem": 90,
+      "descricao": "Dado um procedimento inexistente 55555, quando solicito, então a original responde 500 (NullPointerException) e expõe o stack trace.",
+      "original": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/autorizadores/55555",
+          "query": { "idade": "30", "sexo": "M" }
+        },
+        "resposta": {
+          "status": 500,
+          "estavel": { "status": 500, "error": "Internal Server Error" },
+          "contem": { "trace": "java.lang.NullPointerException" },
+          "volateis": ["timestamp", "trace (restante)"]
+        }
+      },
+      "normalizacoes": ["timestamp ignorado; trace comparado só pelo início"],
+      "mapeamentoV1": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/api/v1/autorizacoes",
+          "corpo": { "numProcedimento": 55555, "idade": 30, "sexo": "M" }
+        },
+        "resposta": {
+          "status": 404,
+          "estavel": { "code": "PROCEDIMENTO_NAO_ENCONTRADO" },
+          "ausentes": ["trace"]
+        }
+      },
+      "divergencia": "DIV-01"
+    },
+    {
+      "id": "B16",
+      "grupo": "infra",
+      "ordem": 20,
+      "descricao": "Dado uma requisição OPTIONS com Origin http://localhost:4200, quando consulto, então a original responde 403 Invalid CORS request (sem CORS).",
+      "original": {
+        "requisicao": {
+          "metodo": "OPTIONS",
+          "caminho": "/procedimentos",
+          "cabecalhos": {
+            "Origin": "http://localhost:4200",
+            "Access-Control-Request-Method": "GET"
+          }
+        },
+        "resposta": { "status": 403, "contem": { "$": "Invalid CORS request" } }
+      },
+      "normalizacoes": ["corpo é texto puro"],
+      "mapeamentoV1": {
+        "requisicao": {
+          "metodo": "OPTIONS",
+          "caminho": "/api/v1/procedimentos",
+          "cabecalhos": {
+            "Origin": "http://localhost:4200",
+            "Access-Control-Request-Method": "GET"
+          }
+        },
+        "resposta": {
+          "statusAnyOf": [200, 204],
+          "cabecalhosPresentes": ["Access-Control-Allow-Origin"],
+          "observacao": "CORS permitido apenas no perfil local"
+        }
+      }
+    },
+    {
+      "id": "B17",
+      "grupo": "infra",
+      "ordem": 21,
+      "descricao": "Dado a versão original sem Actuator, quando consulto /actuator/health, então recebo 404.",
+      "original": {
+        "requisicao": { "metodo": "GET", "caminho": "/actuator/health" },
+        "resposta": {
+          "status": 404,
+          "estavel": { "status": 404, "error": "Not Found", "path": "/actuator/health" },
+          "volateis": ["timestamp"]
+        }
+      },
+      "normalizacoes": ["timestamp ignorado"],
+      "mapeamentoV1": {
+        "requisicao": { "metodo": "GET", "caminho": "/actuator/health", "semAutenticacao": true },
+        "resposta": { "status": 200, "estavel": { "status": "UP" } }
+      }
+    }
+  ],
+  "adicionais": [
+    {
+      "id": "A01",
+      "grupo": "autorizacao",
+      "ordem": 30,
+      "apenasV1": true,
+      "descricao": "Dado um pedido de autorização com sexo \"Masculino\" (nome por extenso), quando envio, então a v1 responde 400; a original respondia 403 (DIV-08).",
+      "mapeamentoV1": {
+        "requisicao": {
+          "metodo": "POST",
+          "caminho": "/api/v1/autorizacoes",
+          "corpo": { "numProcedimento": 4567, "idade": 20, "sexo": "Masculino" }
+        },
+        "resposta": { "status": 400, "codeAnyOf": ["VALIDACAO_INVALIDA", "CORPO_INVALIDO"] }
+      },
+      "divergencia": "DIV-08"
+    },
+    {
+      "id": "A02",
+      "grupo": "infra",
+      "ordem": 31,
+      "apenasV1": true,
+      "descricao": "Dado uma rota protegida sem token, quando consulto a listagem de procedimentos, então a v1 responde 401 NAO_AUTENTICADO (NEW-04).",
+      "mapeamentoV1": {
+        "requisicao": { "metodo": "GET", "caminho": "/api/v1/procedimentos", "semAutenticacao": true },
+        "resposta": {
+          "status": 401,
+          "estavel": { "code": "NAO_AUTENTICADO" },
+          "cabecalhosPresentes": ["WWW-Authenticate"]
+        }
+      }
+    }
+  ]
+}
