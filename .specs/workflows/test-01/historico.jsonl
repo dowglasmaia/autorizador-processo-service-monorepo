@@ -70,3 +70,13 @@
 {"em":1794149244206,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\03-fundacao-backend → .specs\\workflows\\test-01\\specs\\arquivo\\03-fundacao-backend","etapa":3,"passo":"arquivar"}
 {"em":1794149244210,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\03-fundacao-backend","etapa":3,"passo":"arquivar"}
 {"em":1794149244214,"nivel":"passo","texto":"Commit da entrega","etapa":3,"passo":"commitEntrega"}
+{"em":1794149244836,"nivel":"ok","texto":"1ce3f2f · 63 arquivo(s) · feat(autorizador): Propõe a spec da fundação do backend com remoção d…","etapa":3,"passo":"commitEntrega"}
+{"em":1794149244853,"nivel":"ok","texto":"Commit da entrega: ok · 1ce3f2f · 63 arquivo(s)","etapa":3,"passo":"commitEntrega"}
+{"em":1794149244860,"nivel":"ok","texto":"Etapa 3 entregue · commit 1ce3f2f","etapa":3,"passo":"commitEntrega"}
+{"em":1794149244928,"nivel":"passo","texto":"Etapa 4 · Fundação do banco (iteração 4)","etapa":4}
+{"em":1794149244929,"nivel":"passo","texto":"Propor a spec","etapa":4,"passo":"propor"}
+{"em":1794149244933,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":4,"passo":"propor"}
+{"em":1794149288847,"nivel":"ok","texto":"Propor a spec: ok · 26 tarefas","etapa":4,"passo":"propor"}
+{"em":1794149288850,"nivel":"passo","texto":"Verificar ponto de partida","etapa":4,"passo":"partida"}
+{"em":1794149288857,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":4,"passo":"partida"}
+{"em":1794149288860,"nivel":"passo","texto":"Commit da proposta","etapa":4,"passo":"commitProposta"}

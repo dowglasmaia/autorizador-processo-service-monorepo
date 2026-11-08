@@ -2,7 +2,7 @@
 
 ## 1. Preparação
 - [ ] 1.1 Ler `INDEX.md`, `memory/`, `shared/como-executar.md`, `DATABASE_DESIGN.md`, `DECISIONS.md` (ADR-05, ADR-14) e as referências `flyway-migrations.md` e `testing-and-observability.md` da skill `java-persistence-performance`; registrar o desvio de `.specs/06-execution-plan/`
-- [ ] 1.2 Conferir o que a etapa 3 entregou (`api-autorizador-processo`, `pom.xml`, `application.yml`, pacote base, `ArchitectureTest`); configurar `JAVA_HOME=C:\jdk-25.0.2`
+- [ ] 1.2 Conferir o estado atual de `api-autorizador-processo` (`pom.xml`, `application.yml` com perfil padrão `local`, `application-test.yml`, pacote `org.maia.autorizador`, `ArchitectureTest`, `ModularityTests`); configurar `JAVA_HOME=C:\jdk-25.0.2`
 - [ ] 1.3 Verificar `docker version`; se indisponível, registrar bloqueio nas tarefas 4.x, 5.x e 6.x que dependem de contêiner
 
 ## 2. Dependências e configuração
@@ -25,7 +25,7 @@
 ## 5. Infraestrutura de testes
 - [ ] 5.1 Criar classe-base de integração com contêiner PostgreSQL 16 singleton reutilizável (`@ServiceConnection`) (T6)
 - [ ] 5.2 Criar utilitário de limpeza do banco entre testes (T6)
-- [ ] 5.3 Ajustar o teste de contexto e o health da etapa 3 para usar o contêiner, sem H2
+- [ ] 5.3 Ajustar `ApplicationTests`, `ModularityTests` e os testes que sobem contexto para usar o contêiner, sem H2
 
 ## 6. Testes de persistência
 - [ ] 6.1 Teste: migração limpa aplica V1 e V2 e `flyway_schema_history` lista 2 versões com sucesso (T7)

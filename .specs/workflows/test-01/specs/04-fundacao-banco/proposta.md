@@ -5,14 +5,15 @@ Etapa 4 de 31 · Fase 1 · derivada da `SPEC-04` (`.specs/02-backend/SPEC-04-dat
 ## Objetivo
 Introduzir PostgreSQL 16, Flyway, Testcontainers e a auditoria (RN10) em `api-autorizador-processo`, com as migrações `V1__schema_base.sql` e `V2__auditoria.sql`, perfis de configuração e seed local. **Sem módulos de negócio.** Risco tratado aqui: compatibilidade do `hibernate-envers` com o Hibernate do Boot 4.1.2 e Java 25 (spike).
 
-## Ponto de partida (baseado no plano; a etapa 3 ainda não foi entregue)
-- `api-autorizador-processo/` ainda não existe no working tree; a etapa 3 vai gerá-lo (Boot 4.1.2, Java 25, Modulith, ArchUnit, sem datasource, sem H2, `/actuator/health` UP).
-- `.specs/01-architecture/DATABASE_DESIGN.md` e a SPEC-04 existem. `.specs/06-execution-plan/` não existe (desvio a registrar na evidência).
-- Esta proposta será revisada contra o que a etapa 3 entregar (nomes de pacote, `application.yml`, versões no `pom.xml`, `compose.yaml` da raiz).
+## Ponto de partida (conferido contra o código da etapa 3)
+- `api-autorizador-processo/` existe: Boot 4.1.2, Java 25, `spring-modulith`, `archunit-junit5`, starters webmvc/actuator/validation/opentelemetry; pacote base `org.maia.autorizador` (`Application`, `shared/logging`, `generated`); `ArchitectureTest`, `ModularityTests`, `ApplicationTests` (`@SpringBootTest` sem banco).
+- **Sem** datasource, JPA, Flyway, Testcontainers nem `src/main/resources/db`; `pom.xml` sem H2. `application.yml` define `spring.profiles.default: local`, então o perfil `local` é o padrão de execução; `src/test/resources/application-test.yml` desliga `spring.ai.model.chat`.
+- `.env.example` já traz `DB_URL`, `DB_USERNAME` e `DB_PASSWORD` (vazia); a raiz tem `compose.yaml` com `postgres:16-alpine` (porta 5432, healthcheck) e `README.md`; o backend tem `.github/workflows/build.yml`.
+- Docker 29.9.2 disponível no ambiente. `.specs/06-execution-plan/` não existe (desvio a registrar na evidência).
 
 ## Escopo
 1. Dependências: driver PostgreSQL, `spring-boot-starter-data-jpa`, Flyway (+ módulo PostgreSQL), Testcontainers (PostgreSQL 16), `hibernate-envers` (versão do BOM).
-2. `application.yml`: `spring.datasource.*` por `DB_URL/DB_USERNAME/DB_PASSWORD`, `ddl-auto=none`, `open-in-view=false`, Flyway ativo; perfil `local` aponta para `localhost:5432` (Compose) e acrescenta `classpath:db/seed` a `spring.flyway.locations`.
+2. `application.yml`: `spring.datasource.*` por `DB_URL/DB_USERNAME/DB_PASSWORD`, `ddl-auto=none`, `open-in-view=false`, Flyway ativo; perfil `local` (já é o padrão, ver ponto de partida) aponta para `localhost:5432` (Compose) e acrescenta `classpath:db/seed` a `spring.flyway.locations`.
 3. `V1__schema_base.sql` e `V2__auditoria.sql` exatamente como em `DATABASE_DESIGN.md` (V1: `procedimento`, `procedimento_sexo`, `procedimento_idade`, `autorizacao`; V2: `revinfo` e tabelas `*_audit`).
 4. Spike do Envers com entidade mínima descartável, em PostgreSQL via Testcontainers. Se funcionar, fixar `org.hibernate.envers.audit_table_suffix=_audit`; se falhar, plano B com gatilhos PostgreSQL em `V2`. Resultado registrado em `DECISIONS.md`.
 5. `db/seed/V1000__seed_local.sql` (1234 F [10,20]; 4567 M,F [20,30]; 6789 M,F [10]), só no perfil `local`, fora de `src/main/java`.
@@ -34,7 +35,7 @@ Introduzir PostgreSQL 16, Flyway, Testcontainers e a auditoria (RN10) em `api-au
 ## Riscos
 - Envers pode não funcionar com o Hibernate efetivo do Boot 4.1.2 / Java 25: o spike decide; plano B por gatilhos.
 - Docker indisponível impede Testcontainers e a verificação do perfil `local`: registrar bloqueio nas tarefas afetadas, não marcá-las como concluídas.
-- A etapa 3 exigia contexto sem datasource; ao adicionar JPA/Flyway, o teste de contexto e o health passam a precisar de banco (ou de Testcontainers): ajustar sem usar H2.
+- A etapa 3 subiu o contexto sem datasource; ao adicionar JPA/Flyway, o teste de contexto e o health passam a precisar de banco (ou de Testcontainers): ajustar sem usar H2.
 - Container do Compose deve ser encerrado ao final; nenhum processo deixado rodando.
 
 ## Decisões tomadas sem consulta
