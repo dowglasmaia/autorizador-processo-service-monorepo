@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 import org.testcontainers.postgresql.PostgreSQLContainer;
 
 /**
@@ -19,6 +20,7 @@ import org.testcontainers.postgresql.PostgreSQLContainer;
  */
 @SpringBootTest
 @ActiveProfiles("local")
+@TestPropertySource(properties = "app.jwt.secret=segredo-somente-para-testes-0123456789-abcdef")
 class SeedLocalTest {
 
     @ServiceConnection
@@ -53,6 +55,6 @@ class SeedLocalTest {
 
         List<String> versoes = jdbc.queryForList(
                 "select version from flyway_schema_history order by installed_rank", String.class);
-        assertThat(versoes).containsExactly("1", "2", "1000");
+        assertThat(versoes).containsExactly("1", "2", "3", "1000");
     }
 }

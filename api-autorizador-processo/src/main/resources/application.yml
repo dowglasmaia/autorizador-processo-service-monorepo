@@ -23,6 +23,18 @@ app:
     # Lista separada por vírgula; vazio = nenhuma origem liberada. O curinga "*" é ignorado.
     allowed-origins: ${CORS_ALLOWED_ORIGINS:}
 
+  jwt:
+    # Sem valor padrão: ausente ou com menos de 32 bytes, a aplicação não inicia (ADR-16).
+    secret: ${JWT_SECRET:}
+    issuer: autorizador-processo
+    ttl-minutos: ${JWT_TTL_MINUTOS:60}
+
+  auth:
+    bootstrap:
+      # Primeiro usuário: criado só com a tabela vazia e as duas variáveis presentes. Sem valor padrão.
+      email: ${AUTH_BOOTSTRAP_EMAIL:}
+      senha: ${AUTH_BOOTSTRAP_SENHA:}
+
 management:
   endpoints:
     web:

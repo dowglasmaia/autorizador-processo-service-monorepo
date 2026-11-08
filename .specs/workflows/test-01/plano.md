@@ -39,7 +39,7 @@ o Objetivo e ter todas as specs executadas sem invervenção humana e com o refe
 
 ## Fase 2 · Fase 2 — Módulos do backend refatorado
 
-7. **Autenticação JWT no backend** · `07-autenticacao-jwt-backend` · · — Executa a SPEC-22: login por e-mail e senha, emissão e validação de JWT (HS256) e proteção de todas as rotas, exceto login e health. Referências: `SECURITY_REQUIREMENTS.md`. Limite: sem papéis e sem cadastro de usuários.
+7. **Autenticação JWT no backend** · `07-autenticacao-jwt-backend` · ✔ — Executa a SPEC-22: login por e-mail e senha, emissão e validação de JWT (HS256) e proteção de todas as rotas, exceto login e health. Referências: `SECURITY_REQUIREMENTS.md`. Limite: sem papéis e sem cadastro de usuários.
 8. **Módulo procedimento** · `08-modulo-procedimento` · · — Executa a SPEC-07: módulo `procedimento` em Hexagonal Pragmática, com paridade com a versão original. Referências: skill `java-spring-create-module` e golden cases. Limite: sem o catálogo estendido.
 9. **Catálogo estendido** · `09-catalogo-estendido` · · — Executa a SPEC-12: campos de cadastro do protótipo no procedimento (nova feature NEW-01), com migração e contrato atualizado. Referências: o protótipo em `.specs/design/prototype/`. Limite: só o módulo procedimento.
 10. **Módulo autorizacao** · `10-modulo-autorizacao` · · — Executa a SPEC-08: solicitar autorização com critérios de idade e sexo e consulta do histórico. Referências: `FUNCTIONAL_TRACEABILITY.md`. Limite: sem o painel.

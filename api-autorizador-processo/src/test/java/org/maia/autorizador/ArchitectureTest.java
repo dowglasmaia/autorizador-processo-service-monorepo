@@ -93,7 +93,7 @@ class ArchitectureTest {
                         String pacote = d.getTargetClass().getPackageName();
                         String alvo = funcionalidade(pacote);
                         if (propria != null && alvo != null && !alvo.equals(propria) && !alvo.equals("shared")
-                                && (pacote.contains(".api") || pacote.contains(".infrastructure"))) {
+                                && !alvo.equals("generated") && (pacote.contains(".api") || pacote.contains(".infrastructure"))) {
                             eventos.add(SimpleConditionEvent.violated(origem,
                                     origem.getName() + " usa " + d.getTargetClass().getName()));
                         }
@@ -121,7 +121,16 @@ class ArchitectureTest {
     @ArchTest
     static final ArchRule shared_security_isolado = noClasses().that().resideInAPackage(BASE + ".shared.security..")
             .should().dependOnClassesThat().resideInAnyPackage(
-                    BASE + ".procedimento..", BASE + ".autorizacao..", BASE + ".painel..", BASE + ".shared.logging..");
+                    BASE + ".procedimento..", BASE + ".autorizacao..", BASE + ".painel..", BASE + ".autenticacao..",
+                    BASE + ".shared.logging..");
+
+    /** SPEC-07: o domínio de autenticação não depende de Spring, JPA nem Jackson (nem de segurança compartilhada). */
+    @ArchTest
+    static final ArchRule autenticacao_domain_sem_framework = noClasses()
+            .that().resideInAPackage(BASE + ".autenticacao.domain..")
+            .should().dependOnClassesThat().resideInAnyPackage(
+                    "org.springframework..", "jakarta.persistence..", "com.fasterxml.jackson..", "tools.jackson..",
+                    BASE + ".shared..");
 
     /** Regra 8: controllers sem Repository e sem entidade/domínio. */
     @ArchTest

@@ -11,7 +11,11 @@ public class BusinessRuleException extends RuntimeException {
         /** Operação não permitida (403). */
         OPERACAO_NAO_PERMITIDA,
         /** Recurso inexistente (404). */
-        NAO_ENCONTRADO
+        NAO_ENCONTRADO,
+        /** Credencial inválida ou ausente (401). */
+        NAO_AUTENTICADO,
+        /** Limite de tentativas excedido (429). */
+        LIMITE_EXCEDIDO
     }
 
     private final String code;

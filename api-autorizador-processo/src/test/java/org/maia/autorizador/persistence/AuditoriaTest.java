@@ -17,7 +17,8 @@ import spike.auditoria.SpikeProcedimento;
 class AuditoriaTest extends IntegrationTestBase {
 
     @TestConfiguration
-    @EntityScan(basePackageClasses = SpikeProcedimento.class)
+    @EntityScan(basePackageClasses = SpikeProcedimento.class,
+            basePackages = "org.maia.autorizador.autenticacao.infrastructure.persistence")
     static class Mapeamento {
     }
 

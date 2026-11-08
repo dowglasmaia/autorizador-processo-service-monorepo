@@ -36,7 +36,7 @@ O perfil padrão é `local` (logs em texto legível). Ele aponta para o PostgreS
 
 ## Variáveis de ambiente
 
-Copie `.env.example` e exporte o que precisar. Todas têm valor padrão, exceto `DB_PASSWORD`.
+Copie `.env.example` e exporte o que precisar. Todas têm valor padrão, exceto `DB_PASSWORD` e `JWT_SECRET` (obrigatórias) e as variáveis `AUTH_BOOTSTRAP_*` (opcionais, sem padrão).
 
 | Variável | Padrão | Uso |
 |---|---|---|
@@ -51,6 +51,10 @@ Copie `.env.example` e exporte o que precisar. Todas têm valor padrão, exceto 
 | `TRACING_SAMPLING_PROBABILITY` | `0.1` | Fração de traces amostrados |
 | `OTEL_EXPORT_ENABLED` | `false` | Exporta traces e métricas por OTLP |
 | `OTEL_EXPORTER_OTLP_ENDPOINT` | `http://localhost:4318` | Endereço do Collector |
+| `JWT_SECRET` | sem padrão (obrigatória) | Segredo HS256 do JWT; mínimo de 32 bytes. Ausente ou curto, a aplicação não inicia. Nunca versionar |
+| `JWT_TTL_MINUTOS` | `60` | Validade do token de acesso em minutos |
+| `AUTH_BOOTSTRAP_EMAIL` | sem padrão | E-mail do primeiro usuário; criado só se a tabela `usuario` estiver vazia e as duas variáveis `AUTH_BOOTSTRAP_*` estiverem definidas |
+| `AUTH_BOOTSTRAP_SENHA` | sem padrão | Senha do primeiro usuário (guardada apenas como hash BCrypt); nunca registrada em log nem versionada |
 
 ## Arquitetura
 
@@ -72,3 +76,7 @@ Edite `src/main/resources/openapi/openapi.yaml` e rode `./mvnw clean verify`. O 
 ## Logs e observabilidade
 
 Os logs saem em JSON na saída padrão (texto no perfil `local`). `RequestLoggingFilter` aceita ou cria `X-Request-Id`, devolve o cabeçalho na resposta e registra uma linha `request completed` por requisição (método, caminho, status, duração), sem query string, cabeçalhos nem corpo. Nunca registre senhas, tokens ou dados pessoais. A exportação OTLP fica desligada até `OTEL_EXPORT_ENABLED=true`.
+
+## Autenticação
+
+`POST /api/v1/auth/login` (e-mail e senha) devolve um JWT HS256 (`iss=autorizador-processo`, `sub`=id do usuário). Todas as demais rotas exigem `Authorization: Bearer <token>`; sem token válido a resposta é `401 problem+json` (`NAO_AUTENTICADO` ou `SESSAO_EXPIRADA`). A 6ª falha de login em 15 minutos para o mesmo e-mail e IP responde `429` com `Retry-After`. Não há cadastro de usuários: o primeiro é criado pelo bootstrap (`AUTH_BOOTSTRAP_EMAIL` e `AUTH_BOOTSTRAP_SENHA`).

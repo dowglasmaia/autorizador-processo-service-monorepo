@@ -10,3 +10,7 @@ logging:
   structured:
     format:
       console: ""
+app:
+  jwt:
+    # Segredo exclusivo de testes (nunca usado fora deles).
+    secret: segredo-somente-para-testes-0123456789-abcdef

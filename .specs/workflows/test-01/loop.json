@@ -1179,7 +1179,176 @@
           "descricao": "Executa a SPEC-22: login por e-mail e senha, emissão e validação de JWT (HS256) e proteção de todas as rotas, exceto login e health.\nReferências: `SECURITY_REQUIREMENTS.md`.\nLimite: sem papéis e sem cadastro de usuários.",
           "spec": "07-autenticacao-jwt-backend",
           "specPronta": false,
-          "status": "pendente"
+          "status": "entregue",
+          "entregueEm": "2026-11-08T15:40:18.034Z",
+          "iteracao": 7,
+          "duracaoMs": 945542,
+          "custo": 4.203262199999999,
+          "passos": [
+            {
+              "id": "propor",
+              "situacao": "ok",
+              "duracaoMs": 44705,
+              "custo": 0.2466527,
+              "tentativas": 1,
+              "detalhe": "24 tarefas"
+            },
+            {
+              "id": "partida",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "commitProposta",
+              "situacao": "ok",
+              "duracaoMs": 351,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "742bb15 · 5 arquivo(s)"
+            },
+            {
+              "id": "aplicar",
+              "situacao": "aviso",
+              "duracaoMs": 900480,
+              "custo": 3.9566094999999994,
+              "tentativas": 2,
+              "detalhe": "recuperado",
+              "recuperacoes": [
+                {
+                  "numero": 1,
+                  "erro": "2 tarefa(s) continuam abertas depois de 3 sessões sem progresso",
+                  "resolvida": false,
+                  "custo": 0.1607276999999998,
+                  "em": "2026-11-08T15:29:05.931Z",
+                  "causa": "As tarefas 7.2 e 7.3 continuam abertas porque o Maven não baixa `spring-boot-starter-oauth2-resource-server:4.1.2` nem `spring-boot-starter-security-test:4.1.2` do Maven Central (erro PKIX de certificado). O código de segurança nunca foi compilado nem testado.",
+                  "oQueFez": "Reexecutei `./mvnw -B verify` e o mesmo erro PKIX apareceu. Não alterei nenhum arquivo. Marcar 7.2 e 7.3 como concluídas sem build e testes verdes seria falso, e o problema está no ambiente (certificado do Central), então não o contornei.",
+                  "precisaPessoa": true
+                },
+                {
+                  "numero": 2,
+                  "erro": "2 tarefa(s) continuam abertas depois de 3 sessões sem progresso",
+                  "resolvida": true,
+                  "custo": 0.45054019999999984,
+                  "em": "2026-11-08T15:32:14.541Z",
+                  "causa": "O erro PKIX vinha do truststore do JDK, que não confiava no certificado do Maven Central; sem build, as tarefas 7.2 e 7.3 ficavam abertas. Quando o build rodou, apareceram testes defasados por causa da migração V3 e do novo módulo de autenticação.",
+                  "oQueFez": "Rodei o Maven com `MAVEN_OPTS=\"-Djavax.net.ssl.trustStoreType=Windows-ROOT\"`, sem desligar a validação TLS, e as dependências 4.1.2 resolveram. Corrigi 6 testes: MigracaoTest e SeedLocalTest (V3 entra na lista de versões), AuditoriaTest (o @EntityScan inclui o pacote de autenticação), VarreduraSegurancaTest (@Qualifier no mapeamento MVC), ArchitectureTest (a regra ignora o pacote `generated`) e AutenticarUsuarioUseCaseTest (a falha é contada por par e-mail/IP). `./mvnw -B clean verify` passou: 78 testes, 0 falhas, BUILD SUCCESS. O `git grep` de segredo literal e o de \"legado/legacy\" não acharam ocorrências. Marquei 7.2 e 7.3 em `tarefas.md`, registrei a decisão na `proposta.md` e movi `SPEC-22` para `.specs/archive/` com `git mv`.",
+                  "precisaPessoa": false
+                }
+              ]
+            },
+            {
+              "id": "verificar",
+              "situacao": "pulado",
+              "duracaoMs": 1,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "arquivar",
+              "situacao": "ok",
+              "duracaoMs": 5,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\07-autenticacao-jwt-backend"
+            },
+            {
+              "id": "commitEntrega",
+              "situacao": "ok",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1
+            }
+          ],
+          "sessoes": [
+            {
+              "rotulo": "aplicar-07-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.1633753,
+              "turnos": 5,
+              "duracaoMs": 41530,
+              "inicio": 1794151817087,
+              "fim": 1794151858628,
+              "tokens": {
+                "entrada": 8,
+                "saida": 1294,
+                "cacheCriacao": 33839,
+                "cacheLeitura": 150633
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-07-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.1595602,
+              "turnos": 5,
+              "duracaoMs": 35716,
+              "inicio": 1794151858634,
+              "fim": 1794151894358,
+              "tokens": {
+                "entrada": 8,
+                "saida": 1079,
+                "cacheCriacao": 33418,
+                "cacheLeitura": 150822
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-07-3",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.1590358,
+              "turnos": 5,
+              "duracaoMs": 40160,
+              "inicio": 1794151894364,
+              "fim": 1794151934531,
+              "tokens": {
+                "entrada": 8,
+                "saida": 1171,
+                "cacheCriacao": 33067,
+                "cacheLeitura": 150418
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "recuperar-aplicar-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.4505402,
+              "turnos": 20,
+              "duracaoMs": 483258,
+              "inicio": 1794151934630,
+              "fim": 1794152417897,
+              "tokens": {
+                "entrada": 36,
+                "saida": 9506,
+                "cacheCriacao": 60990,
+                "cacheLeitura": 1114482
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            }
+          ]
         },
         {
           "numero": 8,
@@ -1415,7 +1584,7 @@
     "etapa": 7,
     "inicio": "2026-11-08T15:15:17.788Z",
     "commitInicial": "82ae4e03ae4436cf285e3ca9f89cee1677d91aa3",
-    "passoAtual": 2,
+    "passoAtual": 6,
     "passos": [
       {
         "id": "propor",
@@ -1435,65 +1604,91 @@
       },
       {
         "id": "commitProposta",
+        "situacao": "ok",
+        "duracaoMs": 351,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "742bb15 · 5 arquivo(s)"
+      },
+      {
+        "id": "aplicar",
+        "situacao": "aviso",
+        "duracaoMs": 900480,
+        "custo": 3.9566094999999994,
+        "tentativas": 2,
+        "recuperacoes": [
+          {
+            "numero": 1,
+            "erro": "2 tarefa(s) continuam abertas depois de 3 sessões sem progresso",
+            "resolvida": false,
+            "custo": 0.1607276999999998,
+            "em": "2026-11-08T15:29:05.931Z",
+            "causa": "As tarefas 7.2 e 7.3 continuam abertas porque o Maven não baixa `spring-boot-starter-oauth2-resource-server:4.1.2` nem `spring-boot-starter-security-test:4.1.2` do Maven Central (erro PKIX de certificado). O código de segurança nunca foi compilado nem testado.",
+            "oQueFez": "Reexecutei `./mvnw -B verify` e o mesmo erro PKIX apareceu. Não alterei nenhum arquivo. Marcar 7.2 e 7.3 como concluídas sem build e testes verdes seria falso, e o problema está no ambiente (certificado do Central), então não o contornei.",
+            "precisaPessoa": true
+          },
+          {
+            "numero": 2,
+            "erro": "2 tarefa(s) continuam abertas depois de 3 sessões sem progresso",
+            "resolvida": true,
+            "custo": 0.45054019999999984,
+            "em": "2026-11-08T15:32:14.541Z",
+            "causa": "O erro PKIX vinha do truststore do JDK, que não confiava no certificado do Maven Central; sem build, as tarefas 7.2 e 7.3 ficavam abertas. Quando o build rodou, apareceram testes defasados por causa da migração V3 e do novo módulo de autenticação.",
+            "oQueFez": "Rodei o Maven com `MAVEN_OPTS=\"-Djavax.net.ssl.trustStoreType=Windows-ROOT\"`, sem desligar a validação TLS, e as dependências 4.1.2 resolveram. Corrigi 6 testes: MigracaoTest e SeedLocalTest (V3 entra na lista de versões), AuditoriaTest (o @EntityScan inclui o pacote de autenticação), VarreduraSegurancaTest (@Qualifier no mapeamento MVC), ArchitectureTest (a regra ignora o pacote `generated`) e AutenticarUsuarioUseCaseTest (a falha é contada por par e-mail/IP). `./mvnw -B clean verify` passou: 78 testes, 0 falhas, BUILD SUCCESS. O `git grep` de segredo literal e o de \"legado/legacy\" não acharam ocorrências. Marquei 7.2 e 7.3 em `tarefas.md`, registrei a decisão na `proposta.md` e movi `SPEC-22` para `.specs/archive/` com `git mv`.",
+            "precisaPessoa": false
+          }
+        ],
+        "detalhe": "recuperado"
+      },
+      {
+        "id": "verificar",
+        "situacao": "pulado",
+        "duracaoMs": 1,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "arquivar",
+        "situacao": "ok",
+        "duracaoMs": 5,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\07-autenticacao-jwt-backend"
+      },
+      {
+        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
-      },
-      {
-        "id": "aplicar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "verificar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "arquivar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
       }
     ],
     "titulo": "Propõe a spec de autenticação JWT (login por e-mail e senha, HS256) no backend",
     "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md` antecipados (22 tarefas em 7 grupos). Reconferi os dois contra o código atual e ajustei os trechos que dependiam da etapa 6.\nA etapa 6 está entregue: `GlobalExceptionHandler`, `BusinessRuleException` e `CorsConfig` existem em `shared`. O `CorsConfig` já permite `Authorization` e usa `app.cors.allowed-origins`, então o Security só precisa ativar o CORS, sem duplicar a allowlist.\nO `responses.yaml` já tem `ProblemDetail` e as respostas 400/403/404/500, mas falta 401 e 429. Também não existem `auth.yaml`, `security.yaml`, `V3__usuario.sql`, Spring Security no `pom.xml` nem controllers.\n`.specs/06-execution-plan/` não existe (desvio a registrar). Não rodei build nem testes, porque este passo só propõe a spec e não altera código."
   },
   "totais": {
-    "duracaoMs": 2823336,
-    "custo": 10.752737,
-    "execucoes": 1,
+    "duracaoMs": 3724173,
+    "custo": 15.1226652,
+    "execucoes": 2,
     "iteracoes": 7,
     "entregues": 6,
-    "sessoes": 34,
-    "turnos": 370,
+    "sessoes": 46,
+    "turnos": 529,
     "verificacoes": 0,
     "correcoes": 0,
-    "recuperacoes": 3,
-    "recuperacoesResolvidas": 3,
+    "recuperacoes": 5,
+    "recuperacoesResolvidas": 4,
     "falhas": 0,
-    "commits": 12,
+    "commits": 13,
     "tokens": {
-      "entrada": 556,
-      "saida": 225626,
-      "cacheCriacao": 1640926,
-      "cacheLeitura": 14797536
+      "entrada": 768,
+      "saida": 342221,
+      "cacheCriacao": 2278276,
+      "cacheLeitura": 21339078
     }
   },
   "ultimaExecucao": {
-    "inicio": "2026-11-08T14:27:39.396Z"
+    "inicio": "2026-11-08T15:30:17.055Z"
   }
 }

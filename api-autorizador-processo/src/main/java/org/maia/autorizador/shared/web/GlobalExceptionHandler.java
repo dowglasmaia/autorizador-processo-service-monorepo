@@ -8,10 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.maia.autorizador.shared.error.BusinessRuleException;
+import org.maia.autorizador.shared.error.LimiteExcedidoException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.context.MessageSourceResolvable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;
@@ -39,10 +41,37 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(BusinessRuleException.class)
     ResponseEntity<ProblemDetail> negocio(BusinessRuleException ex, HttpServletRequest request) {
-        boolean naoEncontrado = ex.getCategoria() == BusinessRuleException.Categoria.NAO_ENCONTRADO;
-        HttpStatus status = naoEncontrado ? HttpStatus.NOT_FOUND : HttpStatus.FORBIDDEN;
-        String titulo = naoEncontrado ? "Não encontrado" : "Operação não permitida";
-        return resposta(status, titulo, ex.getMessage(), ex.getCode(), request, List.of());
+        HttpStatus status;
+        String titulo;
+        switch (ex.getCategoria()) {
+            case NAO_ENCONTRADO -> {
+                status = HttpStatus.NOT_FOUND;
+                titulo = "Não encontrado";
+            }
+            case NAO_AUTENTICADO -> {
+                status = HttpStatus.UNAUTHORIZED;
+                titulo = "Não autenticado";
+            }
+            case LIMITE_EXCEDIDO -> {
+                status = HttpStatus.TOO_MANY_REQUESTS;
+                titulo = "Muitas tentativas";
+            }
+            default -> {
+                status = HttpStatus.FORBIDDEN;
+                titulo = "Operação não permitida";
+            }
+        }
+        ResponseEntity<ProblemDetail> base = resposta(status, titulo, ex.getMessage(), ex.getCode(), request,
+                List.of());
+        ResponseEntity.BodyBuilder construtor = ResponseEntity.status(status)
+                .contentType(MediaType.APPLICATION_PROBLEM_JSON);
+        if (status == HttpStatus.UNAUTHORIZED) {
+            construtor.header(HttpHeaders.WWW_AUTHENTICATE, "Bearer");
+        }
+        if (ex instanceof LimiteExcedidoException limite) {
+            construtor.header(HttpHeaders.RETRY_AFTER, Long.toString(limite.getRetryAfterSegundos()));
+        }
+        return construtor.body(base.getBody());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

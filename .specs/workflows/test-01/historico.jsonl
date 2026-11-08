@@ -146,3 +146,29 @@
 {"em":1794150962515,"nivel":"passo","texto":"Verificar ponto de partida","etapa":7,"passo":"partida"}
 {"em":1794150962525,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":7,"passo":"partida"}
 {"em":1794150962530,"nivel":"passo","texto":"Commit da proposta","etapa":7,"passo":"commitProposta"}
+{"em":1794150962882,"nivel":"ok","texto":"742bb15 · 5 arquivo(s) · docs(test-01): proposta da etapa 7 · Autenticação JWT no backend","etapa":7,"passo":"commitProposta"}
+{"em":1794150962890,"nivel":"ok","texto":"Commit da proposta: ok · 742bb15 · 5 arquivo(s)","etapa":7,"passo":"commitProposta"}
+{"em":1794150962896,"nivel":"passo","texto":"Aplicar a spec","etapa":7,"passo":"aplicar"}
+{"em":1794150962901,"nivel":"info","texto":"proposta antecipada da etapa 8 em paralelo","etapa":7,"passo":"aplicar"}
+{"em":1794151063794,"nivel":"ok","texto":"proposta antecipada da etapa 8 pronta","etapa":7,"passo":"aplicar"}
+{"em":1794151669605,"nivel":"aviso","texto":"a sessão terminou sem marcar tarefas (1 de 2 continuações)","etapa":7,"passo":"aplicar"}
+{"em":1794151710668,"nivel":"aviso","texto":"a sessão terminou sem marcar tarefas (2 de 2 continuações)","etapa":7,"passo":"aplicar"}
+{"em":1794151745927,"nivel":"aviso","texto":"a sessão terminou sem marcar tarefas (3 de 2 continuações)","etapa":7,"passo":"aplicar"}
+{"em":1794151745928,"nivel":"erro","texto":"Aplicar a spec: 2 tarefa(s) continuam abertas depois de 3 sessões sem progresso","etapa":7,"passo":"aplicar"}
+{"em":1794151745930,"nivel":"passo","texto":"Recuperação 1 · Aplicar a spec","etapa":7,"passo":"aplicar"}
+{"em":1794151773548,"nivel":"aviso","texto":"vigia encerrado: aguardando · As tarefas 7.2 e 7.3 continuam abertas porque o Maven não baixa `spring-boot-starter-oauth2-resource-server:4.1.2` nem `spring-boot-starter-security-test:4.1.2` do Maven Central (erro PKIX de certificado). O código de segurança nunca foi compilado nem testado. · o que fazer: Corrigir o acesso ao Maven Central no JDK 25 (`C:\\jdk-25.0.2`). Por exemplo, importe no truststore do JDK o certificado raiz do proxy ou antivírus que intercepta o HTTPS, ou aponte o Maven para um espelho confiável. Depois reexecute o passo para rodar `./mvnw verify`.","etapa":7,"passo":"aplicar"}
+{"em":1794151817059,"nivel":"info","texto":"vigia iniciado (pid 20904) · execução 2"}
+{"em":1794151817078,"nivel":"passo","texto":"Etapa 7 · Autenticação JWT no backend (iteração 7)","etapa":7}
+{"em":1794151817079,"nivel":"passo","texto":"Aplicar a spec","etapa":7,"passo":"aplicar"}
+{"em":1794151858633,"nivel":"aviso","texto":"a sessão terminou sem marcar tarefas (1 de 2 continuações)","etapa":7,"passo":"aplicar"}
+{"em":1794151894362,"nivel":"aviso","texto":"a sessão terminou sem marcar tarefas (2 de 2 continuações)","etapa":7,"passo":"aplicar"}
+{"em":1794151934537,"nivel":"aviso","texto":"a sessão terminou sem marcar tarefas (3 de 2 continuações)","etapa":7,"passo":"aplicar"}
+{"em":1794151934538,"nivel":"erro","texto":"Aplicar a spec: 2 tarefa(s) continuam abertas depois de 3 sessões sem progresso","etapa":7,"passo":"aplicar"}
+{"em":1794151934540,"nivel":"passo","texto":"Recuperação 2 · Aplicar a spec","etapa":7,"passo":"aplicar"}
+{"em":1794152417916,"nivel":"ok","texto":"recuperação 2 resolveu: O erro PKIX vinha do truststore do JDK, que não confiava no certificado do Maven Central; sem build, as tarefas 7.2 e 7.3 ficavam abertas. Quando o build rodou, apareceram testes defasados por causa da migração V3 e do novo módulo de autenticação.","etapa":7,"passo":"aplicar"}
+{"em":1794152417923,"nivel":"passo","texto":"Verificar a mudança","etapa":7,"passo":"verificar"}
+{"em":1794152417935,"nivel":"info","texto":"Verificar a mudança: pulado · sem verificações configuradas","etapa":7,"passo":"verificar"}
+{"em":1794152418004,"nivel":"passo","texto":"Arquivar a spec","etapa":7,"passo":"arquivar"}
+{"em":1794152418014,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\07-autenticacao-jwt-backend → .specs\\workflows\\test-01\\specs\\arquivo\\07-autenticacao-jwt-backend","etapa":7,"passo":"arquivar"}
+{"em":1794152418022,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\07-autenticacao-jwt-backend","etapa":7,"passo":"arquivar"}
+{"em":1794152418028,"nivel":"passo","texto":"Commit da entrega","etapa":7,"passo":"commitEntrega"}
