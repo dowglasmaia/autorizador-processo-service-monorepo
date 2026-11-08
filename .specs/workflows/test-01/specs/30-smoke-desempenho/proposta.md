@@ -1,16 +1,16 @@
 # Smoke de desempenho
 
-Etapa 30 de 31 · Fase 4 · derivada da `SPEC-42` (`.specs/05-quality/SPEC-42-performance-smoke.md`), com referência a `.specs/05-quality/NON_FUNCTIONAL_REQUIREMENTS.md` (NFR-02..04) e dependência da SPEC-30 (ambiente completo). Escrita antes da entrega da etapa 29; será revisada contra a base entregue por ela.
+Etapa 30 de 31 · Fase 4 · derivada da `SPEC-42` (`.specs/05-quality/SPEC-42-performance-smoke.md`), com referência a `.specs/05-quality/NON_FUNCTIONAL_REQUIREMENTS.md` (NFR-02..04) e dependência da SPEC-30 (ambiente completo). Revisada contra a base entregue pela etapa 29 (SPEC-41 arquivada).
 
 ## Objetivo
 **Medir** (não presumir) o desempenho no ambiente do Compose contra as metas provisórias NFR-02..04 e, só se alguma falhar, aplicar o menor ajuste com evidência (`EXPLAIN` e remedição). Registrar baseline, números e conclusões em `.specs/05-quality/PERFORMANCE_REPORT.md`. Sem mudança de comportamento e sem teste de carga pesado (limite do plano).
 
-## Ponto de partida (conferido antes da etapa 29)
+## Ponto de partida (conferido contra o código atual, após a etapa 29)
 - `.specs/06-execution-plan/` não existe (desvio a registrar na evidência). `NON_FUNCTIONAL_REQUIREMENTS.md` e `SPEC-42` estão em `.specs/05-quality/`; `PERFORMANCE_REPORT.md` ainda não existe. O `DATABASE_DESIGN.md` §3 citado pela SPEC deve ser localizado em `.specs/` na execução.
 - `compose.yaml` na raiz com `postgres` (16-alpine), `api` (readiness em `/actuator/health/readiness`; exige `JWT_SECRET`; usuário inicial via `AUTH_BOOTSTRAP_EMAIL`/`AUTH_BOOTSTRAP_SENHA`) e `app` (Nginx na porta 4200 com proxy `/api/`).
 - Migrations Flyway V1..V4. Único índice secundário em V1: `ix_autorizacao_procedimento (procedimento_id)`. Listas paginadas por `page`/`size` (padrão 20, máximo 200) em `/procedimentos` e `/autorizacoes`; `/painel/resumo` agrega no banco. Rotas: `/api/v1/auth/login`, `/procedimentos`, `/autorizacoes`, `/painel/resumo`.
-- Pastas `scripts/` e `tools/` existem na raiz (`tools/contract`, `tools/parity`); a etapa 29 deve criar `tools/security/`. Não há `tools/perf/` nem Lighthouse nas dependências do frontend.
-- Atenção às contramedidas da etapa 29: o limitador de login (6ª falha → 429) e um possível `limit_req` ou limite de corpo no Nginx **não podem ser disparados pela carga**; a carga faz **um** login e reutiliza o token.
+- `tools/` tem `contract`, `parity` e `security` (`sondagem.sh` + `sondagem.mjs`): o `.sh` sobe um Compose **descartável** (projeto, portas e `.env` próprios, segredos aleatórios) e derruba tudo com o volume, mesmo em falha. `tools/perf/` segue esse padrão. Não há Lighthouse nas dependências do frontend.
+- Contramedidas da etapa 29 confirmadas: `LimitadorTentativasAdapter` (5 falhas/15 min por chave, em memória), `limit_req zone=login` no Nginx (`nginx/limites.conf.template`, só em `/api/v1/auth/login`) e `client_max_body_size`. A carga **não pode dispará-los**: faz **um** login válido e reutiliza o token; o desempenho da API é medido também direto na porta da API, e o Nginx só é usado para o bundle/LCP. Gzip já está ligado no Nginx.
 
 ## Escopo
 1. **Dados sintéticos** (T1): script reproduzível em `tools/perf/` que gera 1.000 procedimentos e 10.000 autorizações no PostgreSQL do Compose, com dados fictícios, idempotente e sem dados reais. Os dados ficam em volume descartável (`docker compose down -v` ao fim).
@@ -36,6 +36,7 @@ Etapa 30 de 31 · Fase 4 · derivada da `SPEC-42` (`.specs/05-quality/SPEC-42-pe
 ## Decisões tomadas sem consulta
 - **Ferramenta de carga:** script próprio em `tools/perf/` (Node, sem dependência nova) em vez de instalar k6/wrk, pela regra de não instalar dependências. Se o gerador de carga virar gargalo, registrar e trocar por contêiner efêmero. **[REVISAR]**
 - **Lighthouse:** via `npx` pontual, sem alterar `package.json`; se indisponível, usar medição equivalente (tamanho gz do build + trace de carga) e registrar a limitação. **[REVISAR]**
+- **Compose descartável próprio** (padrão de `tools/security/sondagem.sh`: projeto, portas e `.env` temporários, `down -v` em `trap`), sem tocar no `.env` nem nos contêineres do desenvolvedor. **[REVISAR]**
 - **Dados sintéticos por SQL (`generate_series`) via `docker compose exec postgres psql`**, e não pela API, para não acionar o limitador de login; `POST /autorizacoes` é medido pela API. **[REVISAR]**
 - Metas só são alteradas se a medição justificar, com o ajuste registrado no relatório e em `NON_FUNCTIONAL_REQUIREMENTS.md`.
 - Desvio registrado: pasta `.specs/06-execution-plan/` inexistente.

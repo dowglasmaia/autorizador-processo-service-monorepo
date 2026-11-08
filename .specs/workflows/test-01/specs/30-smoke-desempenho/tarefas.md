@@ -2,8 +2,8 @@
 
 ## 1. Preparação
 - [ ] 1.1 Ler `SPEC-42`, `NON_FUNCTIONAL_REQUIREMENTS.md` (NFR-02..04), `DATABASE_DESIGN.md` §3 e as referências de `java-persistence-performance`; registrar o desvio da pasta `06-execution-plan` inexistente
-- [ ] 1.2 Conferir o que a etapa 29 entregou (limites de corpo, `limit_req`, limitador de login) e definir como a carga evita acioná-los; confirmar Docker disponível
-- [ ] 1.3 Criar `tools/perf/` com README curto (pré-requisitos, `.env` descartável, comandos e limpeza)
+- [ ] 1.2 Conferir o que a etapa 29 entregou (`limites.conf.template`, `limit_req` do login, `LimitadorTentativasAdapter`) e definir como a carga evita acioná-los; confirmar Docker disponível
+- [ ] 1.3 Criar `tools/perf/` (padrão de `tools/security/sondagem.sh`: Compose descartável com `trap` de limpeza) com README curto: pré-requisitos, comandos e limpeza
 
 ## 2. Dados sintéticos
 - [ ] 2.1 Escrever script idempotente que gera 1.000 procedimentos e 10.000 autorizações fictícios no PostgreSQL do Compose

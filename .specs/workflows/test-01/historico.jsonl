@@ -663,3 +663,13 @@
 {"em":1794170739209,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\29-seguranca-hardening → .specs\\workflows\\test-01\\specs\\arquivo\\29-seguranca-hardening","etapa":29,"passo":"arquivar"}
 {"em":1794170739217,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\29-seguranca-hardening","etapa":29,"passo":"arquivar"}
 {"em":1794170739225,"nivel":"passo","texto":"Commit da entrega","etapa":29,"passo":"commitEntrega"}
+{"em":1794170740532,"nivel":"ok","texto":"c98a1c7 · 27 arquivo(s) · feat(autorizador): Propõe a spec de segurança e hardening (SPEC-41) r…","etapa":29,"passo":"commitEntrega"}
+{"em":1794170740558,"nivel":"ok","texto":"Commit da entrega: ok · c98a1c7 · 27 arquivo(s)","etapa":29,"passo":"commitEntrega"}
+{"em":1794170740572,"nivel":"ok","texto":"Etapa 29 entregue · commit c98a1c7","etapa":29,"passo":"commitEntrega"}
+{"em":1794170740678,"nivel":"passo","texto":"Etapa 30 · Smoke de desempenho (iteração 30)","etapa":30}
+{"em":1794170740680,"nivel":"passo","texto":"Propor a spec","etapa":30,"passo":"propor"}
+{"em":1794170740688,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":30,"passo":"propor"}
+{"em":1794170789683,"nivel":"ok","texto":"Propor a spec: ok · 18 tarefas","etapa":30,"passo":"propor"}
+{"em":1794170789690,"nivel":"passo","texto":"Verificar ponto de partida","etapa":30,"passo":"partida"}
+{"em":1794170789704,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":30,"passo":"partida"}
+{"em":1794170789712,"nivel":"passo","texto":"Commit da proposta","etapa":30,"passo":"commitProposta"}
