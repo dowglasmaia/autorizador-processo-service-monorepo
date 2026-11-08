@@ -8,7 +8,7 @@
 
 ## 2. Revisão de microcopy
 - [ ] 2.1 Revisar voz, clareza e ação em cada mensagem; remover jargão técnico ("API", "perfil test").
-- [ ] 2.2 Trocar o rodapé do shell por estado genérico da API e corrigir grafia ("Nº"), conferindo o grep de termos proibidos.
+- [ ] 2.2 Conferir o texto do estado da API no shell (já genérico) e corrigir grafia ("Nº"), conferindo o grep de termos proibidos.
 - [ ] 2.3 Revisar estados vazios e de erro de todas as telas (texto + ação "Tentar novamente"/próximo passo).
 
 ## 3. Acessibilidade

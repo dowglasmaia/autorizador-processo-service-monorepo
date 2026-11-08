@@ -1,17 +1,19 @@
 # Microcopy e acessibilidade
 
-Etapa 24 de 31 · Fase 3 · derivada da `SPEC-21` (`.specs/03-frontend/SPEC-21-microcopy-acessibilidade.md`). Escrita antecipadamente, enquanto a etapa 23 (painel) é implementada; será revisada contra o que a 23 entregar.
+Etapa 24 de 31 · Fase 3 · derivada da `SPEC-21` (`.specs/03-frontend/SPEC-21-microcopy-acessibilidade.md`). Escrita antecipadamente e revisada contra o código entregue até a etapa 23 (painel já implementado).
 
 ## Objetivo
 Passe final de qualidade sobre todas as telas do frontend (`/login`, `/painel`, `/procedimentos`, `/procedimentos/novo`, `/solicitar`, `/autorizacoes`): catálogo único de mensagens em pt-BR, revisão de acessibilidade (WCAG, nível AA), navegação por teclado, foco, contraste, estados vazios e de erro. **Sem novas funcionalidades**, sem mudança de regras nem de contrato; alterações restritas à camada de apresentação.
 
-## Ponto de partida (conferido no código antes da etapa 23)
+## Ponto de partida (conferido no código após a etapa 23)
+- O painel já existe (`features/painel`, com `barra-cobertura`, `rosca-sexos`, `ultimas-autorizacoes`) e já usa `role="status"`/`aria-label`; falta só auditar gráficos (alternativa textual) e migrar seus textos.
+- O shell já exibe o estado da API via `ApiStatusService` (`role="status"`), sem "perfil test"; resta conferir o texto e migrá-lo ao catálogo.
 - Não existe `core/i18n/mensagens.ts`. Há só `features/login/mensagens-login.ts`; os demais textos estão soltos nos templates e componentes.
 - `src/index.html` está com `<html lang="en">`; precisa ser `pt-BR`.
 - Títulos de página por rota já existem (`'… · Autorizador'`) em todas as rotas.
 - Já há `aria-live`/`role="alert"` em `toast-host`, `loading-overlay`, login, procedimentos, procedimento-novo, solicitar e autorizações (a 23 deve acrescentar o painel).
 - `shared/ui` tem `dialog`, `chip`, `field`, `data-table`, `empty-state` etc.; foco preso/retorno do diálogo e teclado de chips/etapas ainda não foram auditados.
-- Nenhuma biblioteca de a11y (axe) está no `package.json`; testes usam Vitest via `ng test`. Os grep proibidos (`perfil test`, `ná Cadastrado`, `Integridades`) já retornam vazio em `src`; o rodapé "localhost:8080 · perfil test" do protótipo precisa ser conferido no shell.
+- Nenhuma biblioteca de a11y (axe) está no `package.json`; testes usam Vitest via `ng test`. Os grep proibidos (`perfil test`, `ná Cadastrado`, `Integridades`) já retornam vazio em `src`; o grep já está vazio, inclusive no shell.
 - `.specs/06-execution-plan/` não existe; desvio a registrar na evidência.
 
 ## Escopo
@@ -35,6 +37,7 @@ Passe final de qualidade sobre todas as telas do frontend (`/login`, `/painel`, 
 - `npm run lint`, `npm run build` e `npm test` verdes; sem `any`.
 
 ## Decisões tomadas sem consulta
+- **Revisão (etapa 24):** painel e estado da API no shell já entregues pela etapa 23; a tarefa de rodapé virou conferência do texto. Nenhum requisito novo.
 - **Nível WCAG:** o plano diz 2.1 AA e a SPEC-21 diz 2.2 AA; adotado **2.2 AA** (inclui o 2.1) e alvo de toque ≥ 44 px, como a spec. [REVISAR]
 - **Teste automatizado de a11y sem nova dependência:** o `axe-core` não está instalado e este loop não autoriza instalar. Implementar verificações com Vitest/DOM (nomes acessíveis, `lang`, landmarks, rótulos, ordem de foco, `alt`/`aria-label`, contraste dos tokens calculado). Se o `axe-core` for aceito, é decisão humana. [REVISAR]
 - **Catálogo:** objeto `as const` simples em TypeScript, sem biblioteca de i18n e sem `LOCALE_ID`; apenas pt-BR.

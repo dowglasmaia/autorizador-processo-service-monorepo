@@ -527,3 +527,13 @@
 {"em":1794163709312,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\23-feature-painel → .specs\\workflows\\test-01\\specs\\arquivo\\23-feature-painel","etapa":23,"passo":"arquivar"}
 {"em":1794163709319,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\23-feature-painel","etapa":23,"passo":"arquivar"}
 {"em":1794163709326,"nivel":"passo","texto":"Commit da entrega","etapa":23,"passo":"commitEntrega"}
+{"em":1794163709885,"nivel":"ok","texto":"877ac50 · 19 arquivo(s) · feat(autorizador): Revisa a spec da tela do painel (SPEC-20) contra a…","etapa":23,"passo":"commitEntrega"}
+{"em":1794163709911,"nivel":"ok","texto":"Commit da entrega: ok · 877ac50 · 19 arquivo(s)","etapa":23,"passo":"commitEntrega"}
+{"em":1794163709928,"nivel":"ok","texto":"Etapa 23 entregue · commit 877ac50","etapa":23,"passo":"commitEntrega"}
+{"em":1794163710019,"nivel":"passo","texto":"Etapa 24 · Microcopy e acessibilidade (iteração 24)","etapa":24}
+{"em":1794163710020,"nivel":"passo","texto":"Propor a spec","etapa":24,"passo":"propor"}
+{"em":1794163710028,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":24,"passo":"propor"}
+{"em":1794163747588,"nivel":"ok","texto":"Propor a spec: ok · 17 tarefas","etapa":24,"passo":"propor"}
+{"em":1794163747595,"nivel":"passo","texto":"Verificar ponto de partida","etapa":24,"passo":"partida"}
+{"em":1794163747607,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":24,"passo":"partida"}
+{"em":1794163747614,"nivel":"passo","texto":"Commit da proposta","etapa":24,"passo":"commitProposta"}

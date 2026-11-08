@@ -4129,7 +4129,8 @@
               "origem": "provider",
               "esforco": "medium"
             }
-          ]
+          ],
+          "commit": "877ac50"
         },
         {
           "numero": 24,
@@ -4212,19 +4213,19 @@
     }
   ],
   "iteracao": {
-    "numero": 23,
-    "etapa": 23,
-    "inicio": "2026-11-08T18:43:17.536Z",
-    "commitInicial": "6ed0b84982d61c2d680d818e0215161744d4061e",
-    "passoAtual": 6,
+    "numero": 24,
+    "etapa": 24,
+    "inicio": "2026-11-08T18:48:30.012Z",
+    "commitInicial": "877ac50bc11d80fd997db3b1787b732ae8a81c69",
+    "passoAtual": 2,
     "passos": [
       {
         "id": "propor",
         "situacao": "ok",
-        "duracaoMs": 45379,
-        "custo": 0.22602360000000002,
+        "duracaoMs": 37555,
+        "custo": 0.20161869999999998,
         "tentativas": 1,
-        "detalhe": "16 tarefas"
+        "detalhe": "17 tarefas"
       },
       {
         "id": "partida",
@@ -4236,66 +4237,62 @@
       },
       {
         "id": "commitProposta",
-        "situacao": "ok",
-        "duracaoMs": 386,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "ba6dc0c · 5 arquivo(s)"
-      },
-      {
-        "id": "aplicar",
-        "situacao": "ok",
-        "duracaoMs": 265901,
-        "custo": 0.9775748,
-        "tentativas": 1,
-        "detalhe": "16/16 tarefas · 2 sessão(ões)"
-      },
-      {
-        "id": "verificar",
-        "situacao": "pulado",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "arquivar",
-        "situacao": "ok",
-        "duracaoMs": 4,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\23-feature-painel"
-      },
-      {
-        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
+      },
+      {
+        "id": "aplicar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "verificar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "arquivar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "commitEntrega",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
       }
     ],
-    "titulo": "Revisa a spec da tela do painel (SPEC-20) contra a base entregue",
-    "comparacao": "A pasta já tinha `proposta.md` e `tarefas.md` escritos antes da etapa 22. Revisei os dois contra o código atual e os mantive, com ajustes pontuais.\n`features/painel` ainda é só o esqueleto (\"Em construção\"). O contrato e os tipos de `ResumoPainel`, `CoberturaIdade` e `DistribuicaoSexos` já existem em `shared/api`, e `SessaoSolicitacoes` e `KpiCard` estão prontos para uso.\nA etapa 22 entregou a rota `/autorizacoes`, o `descreverRegras` e o padrão de serviço com signals (`AutorizacoesService`). Passei a reaproveitá-los na spec, na tarefa 1.1 e em `UltimasAutorizacoes`.\nO locale pt-BR não está registrado no app. A data por extenso passa a usar `Intl.DateTimeFormat` em função pura testável, no lugar de `DatePipe`.\nA tarefa 1.1 também confere se o tipo `Autorizacao` do painel é compatível com `AutorizacaoDto`. Nenhum código de aplicação foi alterado. A spec tem 16 tarefas, e a pasta `06-execution-plan` segue inexistente."
+    "titulo": "Revisa a spec de microcopy e acessibilidade (SPEC-21) contra a base entregue",
+    "comparacao": "A pasta da etapa já tinha `proposta.md` e `tarefas.md`, escritos antes da etapa 23. Revisei os dois contra o código atual em vez de recriá-los.\nO painel já existe em `features/painel`, com gráficos e `role=status`/`aria-label`. Ficam para a etapa 24 a alternativa textual dos gráficos e a migração dos textos para o catálogo.\nO shell já mostra o estado da API pelo `ApiStatusService`, sem \"perfil test\". A tarefa 2.2 virou conferência do texto e da grafia.\nAinda faltam `core/i18n/mensagens.ts` (só existe `mensagens-login.ts`) e `lang=\"pt-BR\"` (o `index.html` está com `lang=\"en\"`). Não há axe no `package.json`, e a spec decide fazer a verificação de a11y só com Vitest/DOM.\nO grep de termos proibidos já retorna vazio em `src`. Mantive 17 tarefas em 5 grupos, sem alterar o escopo, e registrei a revisão em \"Decisões tomadas sem consulta\"."
   },
   "totais": {
-    "duracaoMs": 14980197,
-    "custo": 45.2088709,
+    "duracaoMs": 15018324,
+    "custo": 45.4104896,
     "execucoes": 2,
-    "iteracoes": 23,
-    "entregues": 22,
-    "sessoes": 122,
-    "turnos": 1630,
+    "iteracoes": 24,
+    "entregues": 23,
+    "sessoes": 123,
+    "turnos": 1637,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 6,
     "recuperacoesResolvidas": 5,
     "falhas": 0,
-    "commits": 45,
+    "commits": 46,
     "tokens": {
-      "entrada": 2442,
-      "saida": 1098736,
-      "cacheCriacao": 6620163,
-      "cacheLeitura": 72840675
+      "entrada": 2454,
+      "saida": 1100991,
+      "cacheCriacao": 6658557,
+      "cacheLeitura": 73095362
     }
   },
   "ultimaExecucao": {
