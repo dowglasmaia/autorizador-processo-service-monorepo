@@ -1,16 +1,17 @@
 # Tela do painel
 
-Etapa 23 de 31 · Fase 3 · derivada da `SPEC-20` (`.specs/03-frontend/SPEC-20-feature-painel.md`). Referências: SPEC-09 (resumo no backend) e protótipo (`.specs/design/prototype/Autorizador.dc.html`, `renderVals`). Escrita antes da entrega da etapa 22; será revisada contra o que ela entregar.
+Etapa 23 de 31 · Fase 3 · derivada da `SPEC-20` (`.specs/03-frontend/SPEC-20-feature-painel.md`). Referências: SPEC-09 (resumo no backend) e protótipo (`.specs/design/prototype/Autorizador.dc.html`, `renderVals`). Revisada contra a base entregue até a etapa 22.
 
 ## Objetivo
 Entregar `/painel` (rota padrão) alimentado por `obterResumoPainel`: cabeçalho com data por extenso (pt-BR), hero "Autorize um procedimento em segundos" + "Nova solicitação", 4 KPIs (**Procedimentos**, **Autorizações**, **Idades cobertas**, **Aprovação** da sessão), **Cobertura por idade** (barras horizontais), **Sexos aceitos** (rosca M × F com legenda e total) e **Últimas autorizações** (até 4, "Ver todas →", vazio "Nenhuma autorização concedida ainda.").
 
-## Ponto de partida (conferido no código antes da etapa 22)
+## Ponto de partida (conferido no código após a etapa 22)
 - `features/painel/` tem só `painel.routes.ts` e `pages/painel-page.ts`, esqueleto com `EmptyState` "Em construção". A rota `painel` já é o destino do redirect da raiz. Não há serviço, componentes, `doc.md` nem testes.
 - Tipos gerados já reexportados por `shared/api`: `ResumoPainel`, `CoberturaIdade`, `DistribuicaoSexos` e `AutorizacaoDto`. Operação `obterResumoPainel` existe no contrato (`modules/painel.yaml`). **Sem novos endpoints.**
 - `core/sessao/sessao-solicitacoes.ts` expõe `concedidas()` e `negadas()` (signals); a tela de solicitar já os alimenta.
 - `shared/ui` já tem `KpiCard` (label/value/hint/icon/loading), `Card`, `PageHeader`, `EmptyState`, `Skeleton`, `Button`, `Tag`, `Icon`. Padrão de serviço com signals: `ProcedimentosService` (`ApiClient`, `AppError`).
-- A etapa 22 (autorizações) ainda não foi entregue; esta etapa só depende dela para a rota `/autorizacoes` ("Ver todas →") e possivelmente para um helper de data/regras se ela o criar. Revisar na etapa.
+- A etapa 22 foi entregue: a rota `autorizacoes` existe em `app.routes.ts` ("Ver todas →") e `features/autorizacoes/regras.ts` exporta `descreverRegras(procedimento)` (sexos + idades), reaproveitável em `UltimasAutorizacoes`. O padrão de serviço com signals (`AutorizacoesService`: `ApiClient`, `AppError`, `isAppError`) é o modelo a seguir. `ResumoPainel.ultimasAutorizacoes` usa o tipo `Autorizacao` do contrato do painel (confirmar compatibilidade com `AutorizacaoDto`).
+- O locale `pt-BR` **não** está registrado (`registerLocaleData`/`LOCALE_ID` ausentes no código): a data por extenso usa `Intl.DateTimeFormat('pt-BR')`.
 - `.specs/06-execution-plan/` não existe; desvio a registrar na evidência.
 
 ## Escopo
@@ -32,6 +33,7 @@ Entregar `/painel` (rota padrão) alimentado por `obterResumoPainel`: cabeçalho
 - *Given* uma autorização concedida na sessão · *Then* "Aprovação" 100%.
 - Falha de rede → estado de erro com nova tentativa.
 - Valores vêm do servidor, sem recomputar a partir de listas.
+- Regras dos itens recentes exibidas com `descreverRegras` (sem duplicar lógica).
 - `npm run lint`, `npm run build` e `npm test` verdes; sem `any`.
 
 ## Decisões tomadas sem consulta
@@ -40,6 +42,6 @@ Entregar `/painel` (rota padrão) alimentado por `obterResumoPainel`: cabeçalho
 - **Verificação contra o Compose e capturas 320/768/1280:** adiadas para a SPEC-30; aqui valem testes com `HttpTestingController` e, se o Docker estiver disponível, conferência opcional. [REVISAR]
 - **Cores dos gráficos:** tokens do design system existentes, verificados para contraste AA; dois tons distintos mais rótulo textual para M/F (não só cor).
 - **Aprovação da sessão:** calculada no cliente a partir de `SessaoSolicitacoes`, arredondada ao inteiro; reinicia ao recarregar a página (documentado na tela).
-- **Data por extenso:** `Intl`/`DatePipe` com locale `pt-BR` já registrado; se não estiver, registrar localmente.
+- **Data por extenso:** `Intl.DateTimeFormat('pt-BR')` em função pura testável, pois o locale não está registrado no app (evita alterar a configuração global).
 - **Barras:** largura proporcional ao maior valor devolvido pelo servidor.
 - **Recarga:** o painel recarrega o resumo a cada entrada na rota (dados sempre atuais), sem cache. [REVISAR]

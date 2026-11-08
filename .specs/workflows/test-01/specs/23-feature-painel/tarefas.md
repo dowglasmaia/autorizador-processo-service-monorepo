@@ -1,7 +1,7 @@
 # Tarefas — Tela do painel
 
 ## 1. Dados e rota
-- [ ] 1.1 Conferir o que a etapa 22 entregou (helpers, rotas, `/autorizacoes`) e ajustar a proposta se preciso.
+- [ ] 1.1 Reaproveitar o que a etapa 22 entregou (`descreverRegras`, rota `/autorizacoes`, padrão de serviço) e conferir a compatibilidade de `Autorizacao` do painel com `AutorizacaoDto`.
 - [ ] 1.2 Criar `features/painel/data-access/painel.service.ts` com `carregar()` e signals `resumo/carregando/erro`, usando `ApiClient` e `ResumoPainel`.
 - [ ] 1.3 Criar `doc.md` da feature e manter a rota lazy `/painel` como padrão.
 
@@ -12,7 +12,7 @@
 - [ ] 2.4 Criar `calcularAprovacao` (0/0 → "—", 1/1 → 100%, 1/3 → 33%) com testes.
 
 ## 3. Página
-- [ ] 3.1 Montar cabeçalho com data por extenso, hero e botão "Nova solicitação" → `/solicitar`.
+- [ ] 3.1 Montar cabeçalho com data por extenso (`Intl` pt-BR, função pura testada), hero e botão "Nova solicitação" → `/solicitar`.
 - [ ] 3.2 Montar os 4 KPIs com `KpiCard`, incluindo "Aprovação" ligada a `SessaoSolicitacoes` e legenda "solicitações desta sessão".
 - [ ] 3.3 Implementar estados de esqueleto, erro com "Tentar novamente" e vazio.
 - [ ] 3.4 Garantir responsividade (KPIs auto-fit, gráficos empilhados < md) e `prefers-reduced-motion`.

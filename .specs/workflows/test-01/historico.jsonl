@@ -505,3 +505,13 @@
 {"em":1794163396364,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\22-feature-autorizacoes → .specs\\workflows\\test-01\\specs\\arquivo\\22-feature-autorizacoes","etapa":22,"passo":"arquivar"}
 {"em":1794163396371,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\22-feature-autorizacoes","etapa":22,"passo":"arquivar"}
 {"em":1794163396378,"nivel":"passo","texto":"Commit da entrega","etapa":22,"passo":"commitEntrega"}
+{"em":1794163397302,"nivel":"ok","texto":"6ed0b84 · 15 arquivo(s) · feat(autorizador): Revisa a spec da tela de autorizações (SPEC-19) co…","etapa":22,"passo":"commitEntrega"}
+{"em":1794163397320,"nivel":"ok","texto":"Commit da entrega: ok · 6ed0b84 · 15 arquivo(s)","etapa":22,"passo":"commitEntrega"}
+{"em":1794163397333,"nivel":"ok","texto":"Etapa 22 entregue · commit 6ed0b84","etapa":22,"passo":"commitEntrega"}
+{"em":1794163397543,"nivel":"passo","texto":"Etapa 23 · Tela do painel (iteração 23)","etapa":23}
+{"em":1794163397544,"nivel":"passo","texto":"Propor a spec","etapa":23,"passo":"propor"}
+{"em":1794163397552,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":23,"passo":"propor"}
+{"em":1794163442938,"nivel":"ok","texto":"Propor a spec: ok · 16 tarefas","etapa":23,"passo":"propor"}
+{"em":1794163442944,"nivel":"passo","texto":"Verificar ponto de partida","etapa":23,"passo":"partida"}
+{"em":1794163442956,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":23,"passo":"partida"}
+{"em":1794163442962,"nivel":"passo","texto":"Commit da proposta","etapa":23,"passo":"commitProposta"}

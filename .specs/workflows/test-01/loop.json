@@ -3972,7 +3972,8 @@
               "origem": "provider",
               "esforco": "medium"
             }
-          ]
+          ],
+          "commit": "6ed0b84"
         },
         {
           "numero": 23,
@@ -4064,90 +4065,86 @@
     }
   ],
   "iteracao": {
-    "numero": 22,
-    "etapa": 22,
-    "inicio": "2026-11-08T18:38:51.767Z",
-    "commitInicial": "eed534c2e72374f6a1ac96a0e0b952fd94aa6a45",
-    "passoAtual": 6,
+    "numero": 23,
+    "etapa": 23,
+    "inicio": "2026-11-08T18:43:17.536Z",
+    "commitInicial": "6ed0b84982d61c2d680d818e0215161744d4061e",
+    "passoAtual": 2,
     "passos": [
       {
         "id": "propor",
         "situacao": "ok",
-        "duracaoMs": 49392,
-        "custo": 0.2531059,
+        "duracaoMs": 45379,
+        "custo": 0.22602360000000002,
         "tentativas": 1,
-        "detalhe": "12 tarefas"
+        "detalhe": "16 tarefas"
       },
       {
         "id": "partida",
         "situacao": "pulado",
-        "duracaoMs": 1,
+        "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1,
         "detalhe": "sem verificações configuradas"
       },
       {
         "id": "commitProposta",
-        "situacao": "ok",
-        "duracaoMs": 400,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "fe6333f · 5 arquivo(s)"
-      },
-      {
-        "id": "aplicar",
-        "situacao": "ok",
-        "duracaoMs": 214691,
-        "custo": 0.7327069000000002,
-        "tentativas": 1,
-        "detalhe": "12/12 tarefas · 2 sessão(ões)"
-      },
-      {
-        "id": "verificar",
-        "situacao": "pulado",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "arquivar",
-        "situacao": "ok",
-        "duracaoMs": 4,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\22-feature-autorizacoes"
-      },
-      {
-        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
+      },
+      {
+        "id": "aplicar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "verificar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "arquivar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "commitEntrega",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
       }
     ],
-    "titulo": "Revisa a spec da tela de autorizações (SPEC-19) contra a base entregue",
-    "comparacao": "A pasta já tinha `proposta.md` e `tarefas.md` antecipados, escritos antes da etapa 21. Revisei os dois contra o código e não recriei nada.\n`features/autorizacoes` continua só com a rota e uma página-esqueleto \"Em construção\". Não há serviço, `doc.md` nem testes.\nA etapa 21 já entregou o link \"Ver autorizações concedidas\" (`routerLink=\"/autorizacoes\"`) em `/solicitar`, então nada muda lá.\nCorrigi uma premissa: a tela de procedimentos não tem controle de paginação (só chama `carregar({ pagina: 0 })`). O controle Anterior/Próxima com `aria-live` será criado nesta etapa (tarefa 3.4) e não reaproveitado.\nOs tipos `AutorizacaoDto` e `PaginaAutorizacoes` já estão em `shared/api`. A spec registra, com [REVISAR], que o plano cita \"filtros\" mas a SPEC-19 e o contrato só trazem `page` e `size`.\nOs arquivos têm 21 tarefas em 4 grupos."
+    "titulo": "Revisa a spec da tela do painel (SPEC-20) contra a base entregue",
+    "comparacao": "A pasta já tinha `proposta.md` e `tarefas.md` escritos antes da etapa 22. Revisei os dois contra o código atual e os mantive, com ajustes pontuais.\n`features/painel` ainda é só o esqueleto (\"Em construção\"). O contrato e os tipos de `ResumoPainel`, `CoberturaIdade` e `DistribuicaoSexos` já existem em `shared/api`, e `SessaoSolicitacoes` e `KpiCard` estão prontos para uso.\nA etapa 22 entregou a rota `/autorizacoes`, o `descreverRegras` e o padrão de serviço com signals (`AutorizacoesService`). Passei a reaproveitá-los na spec, na tarefa 1.1 e em `UltimasAutorizacoes`.\nO locale pt-BR não está registrado no app. A data por extenso passa a usar `Intl.DateTimeFormat` em função pura testável, no lugar de `DatePipe`.\nA tarefa 1.1 também confere se o tipo `Autorizacao` do painel é compatível com `AutorizacaoDto`. Nenhum código de aplicação foi alterado. A spec tem 16 tarefas, e a pasta `06-execution-plan` segue inexistente."
   },
   "totais": {
-    "duracaoMs": 14667598,
-    "custo": 43.7720823,
+    "duracaoMs": 14713906,
+    "custo": 43.9981059,
     "execucoes": 2,
-    "iteracoes": 22,
-    "entregues": 21,
-    "sessoes": 118,
-    "turnos": 1571,
+    "iteracoes": 23,
+    "entregues": 22,
+    "sessoes": 119,
+    "turnos": 1580,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 6,
     "recuperacoesResolvidas": 5,
     "falhas": 0,
-    "commits": 43,
+    "commits": 44,
     "tokens": {
-      "entrada": 2360,
-      "saida": 1061207,
-      "cacheCriacao": 6410364,
-      "cacheLeitura": 70619289
+      "entrada": 2374,
+      "saida": 1064077,
+      "cacheCriacao": 6451921,
+      "cacheLeitura": 70929965
     }
   },
   "ultimaExecucao": {
