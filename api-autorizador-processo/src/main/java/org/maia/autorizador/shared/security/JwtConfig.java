@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
+import org.springframework.security.oauth2.core.OAuth2Error;
 import org.springframework.security.oauth2.core.OAuth2TokenValidator;
+import org.springframework.security.oauth2.core.OAuth2TokenValidatorResult;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -50,8 +52,16 @@ public class JwtConfig {
     @Bean
     JwtDecoder jwtDecoder() {
         NimbusJwtDecoder decoder = NimbusJwtDecoder.withSecretKey(chave).macAlgorithm(MacAlgorithm.HS256).build();
-        OAuth2TokenValidator<Jwt> validador = new DelegatingOAuth2TokenValidator<>(JwtValidators.createDefaultWithIssuer(emissor));
+        OAuth2TokenValidator<Jwt> validador = new DelegatingOAuth2TokenValidator<>(
+                JwtValidators.createDefaultWithIssuer(emissor), exigeExpiracao());
         decoder.setJwtValidator(validador);
         return decoder;
+    }
+
+    /** O validador padrão só confere {@code exp} se presente; token sem expiração seria eterno (SEC-14). */
+    private static OAuth2TokenValidator<Jwt> exigeExpiracao() {
+        return jwt -> jwt.getExpiresAt() != null
+                ? OAuth2TokenValidatorResult.success()
+                : OAuth2TokenValidatorResult.failure(new OAuth2Error("invalid_token", "Token sem expiração (exp).", null));
     }
 }

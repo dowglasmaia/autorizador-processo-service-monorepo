@@ -5046,7 +5046,175 @@
           "descricao": "Executa a SPEC-41: revisão de segurança, cabeçalhos, segredos, limites de requisição e dependências.\nReferências: `SECURITY_REQUIREMENTS.md`.\nLimite: correções dentro do escopo da spec.",
           "spec": "29-seguranca-hardening",
           "specPronta": false,
-          "status": "pendente"
+          "status": "entregue",
+          "entregueEm": "2026-11-08T20:45:39.232Z",
+          "iteracao": 29,
+          "duracaoMs": 1422866,
+          "custo": 2.5599546,
+          "passos": [
+            {
+              "id": "propor",
+              "situacao": "ok",
+              "duracaoMs": 64642,
+              "custo": 0.20710939999999997,
+              "tentativas": 1,
+              "detalhe": "19 tarefas"
+            },
+            {
+              "id": "partida",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "commitProposta",
+              "situacao": "ok",
+              "duracaoMs": 447,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "d411195 · 5 arquivo(s)"
+            },
+            {
+              "id": "aplicar",
+              "situacao": "ok",
+              "duracaoMs": 1357773,
+              "custo": 2.3528452000000004,
+              "tentativas": 1,
+              "detalhe": "19/19 tarefas · 3 sessão(ões)"
+            },
+            {
+              "id": "verificar",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "arquivar",
+              "situacao": "ok",
+              "duracaoMs": 4,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\29-seguranca-hardening"
+            },
+            {
+              "id": "commitEntrega",
+              "situacao": "ok",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1
+            }
+          ],
+          "sessoes": [
+            {
+              "rotulo": "propor-29",
+              "passo": "propor",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.20710939999999997,
+              "turnos": 7,
+              "duracaoMs": 64623,
+              "inicio": 1794169316244,
+              "fim": 1794169380877,
+              "tokens": {
+                "entrada": 12,
+                "saida": 2400,
+                "cacheCriacao": 39313,
+                "cacheLeitura": 258334
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "antecipar-30",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.32886129999999997,
+              "turnos": 9,
+              "duracaoMs": 92128,
+              "inicio": 1794169381393,
+              "fim": 1794169473531,
+              "tokens": {
+                "entrada": 14,
+                "saida": 9838,
+                "cacheCriacao": 49550,
+                "cacheLeitura": 322533
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-29-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 1.5009994,
+              "turnos": 46,
+              "duracaoMs": 900875,
+              "inicio": 1794169382823,
+              "fim": 1794170283707,
+              "tokens": {
+                "entrada": 88,
+                "saida": 52420,
+                "cacheCriacao": 136785,
+                "cacheLeitura": 4294834
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-29-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.6140288000000002,
+              "turnos": 22,
+              "duracaoMs": 310810,
+              "inicio": 1794170283714,
+              "fim": 1794170594534,
+              "tokens": {
+                "entrada": 42,
+                "saida": 17904,
+                "cacheCriacao": 72758,
+                "cacheLeitura": 1438728
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-29-3",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.23781699999999997,
+              "turnos": 9,
+              "duracaoMs": 144609,
+              "inicio": 1794170594541,
+              "fim": 1794170739158,
+              "tokens": {
+                "entrada": 14,
+                "saida": 2568,
+                "cacheCriacao": 44466,
+                "cacheLeitura": 342450
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            }
+          ]
         },
         {
           "numero": 30,
@@ -5074,7 +5242,7 @@
     "etapa": 29,
     "inicio": "2026-11-08T20:21:56.224Z",
     "commitInicial": "1d9043f32614635134cadc6536cb8cd141dd0d07",
-    "passoAtual": 2,
+    "passoAtual": 6,
     "passos": [
       {
         "id": "propor",
@@ -5094,62 +5262,66 @@
       },
       {
         "id": "commitProposta",
+        "situacao": "ok",
+        "duracaoMs": 447,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "d411195 · 5 arquivo(s)"
+      },
+      {
+        "id": "aplicar",
+        "situacao": "ok",
+        "duracaoMs": 1357773,
+        "custo": 2.3528452000000004,
+        "tentativas": 1,
+        "detalhe": "19/19 tarefas · 3 sessão(ões)"
+      },
+      {
+        "id": "verificar",
+        "situacao": "pulado",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "arquivar",
+        "situacao": "ok",
+        "duracaoMs": 4,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\29-seguranca-hardening"
+      },
+      {
+        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
-      },
-      {
-        "id": "aplicar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "verificar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "arquivar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
       }
     ],
     "titulo": "Propõe a spec de segurança e hardening (SPEC-41) revisada contra a base entregue",
     "comparacao": "A pasta da etapa já tinha `proposta.md` e `tarefas.md` antecipados (antes da etapa 28), com 18 tarefas em 6 grupos. Revisei e completei os dois arquivos em vez de recriá-los.\nConferi o estado atual: a etapa 28 entregou três workflows em `.github/workflows`, que a spec passa a revisar quanto a permissões e segredos, sem alterá-los.\nO Nginx do frontend não tem `Permissions-Policy`, `client_max_body_size` nem `limit_req`. O Dockerfile do frontend já usa `nginx-unprivileged`, então SEC-08 tende a precisar só de evidência.\nO script de sondagem passou para `tools/security/`, junto de `tools/contract` e `tools/parity`. O README raiz ainda não tem modelo de ameaça nem riscos aceitos.\nMantive a cobertura de SEC-01..SEC-21 (a SPEC cita só 01..12) e as decisões marcadas como [REVISAR]."
   },
   "totais": {
-    "duracaoMs": 20617766,
-    "custo": 54.8938178,
+    "duracaoMs": 21975990,
+    "custo": 57.5755243,
     "execucoes": 2,
     "iteracoes": 29,
     "entregues": 28,
-    "sessoes": 148,
-    "turnos": 1980,
+    "sessoes": 152,
+    "turnos": 2066,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 7,
     "recuperacoesResolvidas": 6,
     "falhas": 0,
-    "commits": 56,
+    "commits": 57,
     "tokens": {
-      "entrada": 3046,
-      "saida": 1308356,
-      "cacheCriacao": 8055201,
-      "cacheLeitura": 91314544
+      "entrada": 3204,
+      "saida": 1391086,
+      "cacheCriacao": 8358760,
+      "cacheLeitura": 97713089
     }
   },
   "ultimaExecucao": {

@@ -1,0 +1,13 @@
+# Limites de requisição (SPEC-41). Gerado no início do contêiner por envsubst (mecanismo /etc/nginx/templates
+# da imagem nginx) a partir das variáveis NGINX_*; os valores padrão estão no Dockerfile.
+# Incluído no contexto http (conf.d); `limit_req_zone` só é válido aqui.
+
+# Corpo máximo; acima disso o Nginx responde 413 sem repassar à API.
+client_max_body_size ${NGINX_MAX_BODY};
+# Cabeçalhos grandes demais -> 414/400/431 do Nginx.
+client_header_buffer_size 4k;
+large_client_header_buffers 4 ${NGINX_MAX_HEADER_BUFFER};
+
+# Login: limite por IP antes de chegar à API (a API ainda limita por e-mail+IP, PRM-09).
+limit_req_zone $binary_remote_addr zone=login:10m rate=${NGINX_LOGIN_RATE};
+limit_req_status 429;

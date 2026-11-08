@@ -36,8 +36,14 @@ app:
       email: ${AUTH_BOOTSTRAP_EMAIL:}
       senha: ${AUTH_BOOTSTRAP_SENHA:}
 
+  http:
+    # Limite do corpo (413 acima dele); o Nginx aplica o seu próprio (NGINX_MAX_BODY).
+    max-body-bytes: ${HTTP_MAX_BODY_BYTES:65536}
+
 server:
   port: ${SERVER_PORT:8080}
+  # Limite do total de cabeçalhos da requisição (Tomcat responde 431 acima dele).
+  max-http-request-header-size: ${HTTP_MAX_HEADER_BYTES:16KB}
 
 management:
   # Só health e info são expostos; métricas Micrometer ficam internas (sem endpoint, sem coletor).

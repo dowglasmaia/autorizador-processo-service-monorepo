@@ -98,6 +98,30 @@ O que roda quando: mudar só o frontend dispara Frontend CI e Integração CI; s
 
 **Branch protection.** Um check de workflow com filtro de `paths` que não dispara fica "pendente" e bloqueia o merge se for marcado como obrigatório. Marque como obrigatórios só checks que sempre rodam, ou crie um job final agregador sem filtro de caminho; na dúvida, não marque os checks por projeto como obrigatórios.
 
+## Segurança
+
+### Modelo de ameaça resumido
+
+| Ativo | Ameaça | Mitigação |
+|-------|--------|-----------|
+| Dados do paciente e das autorizações | Acesso sem autenticação, token forjado, adulterado ou expirado | JWT HS256 com `exp`/`iss` obrigatórios, segredo ≥ 32 bytes vindo do ambiente; todas as rotas `/api/v1/**` exigem token, exceto o login |
+| Contas de usuário | Força bruta, enumeração de e-mails | Resposta idêntica para e-mail inexistente, senha errada e usuário inativo; 5 falhas em 15 min → `429` com `Retry-After`; `limit_req` por IP no Nginx; senha só como BCrypt |
+| API | Injeção (SQL/HTML), corpo ou cabeçalho gigantes, vazamento por erro | Consultas parametrizadas, validação de entrada, limites de corpo e de cabeçalho (Nginx e Spring), erros RFC 9457 sem stack trace, Actuator só com `health` |
+| Navegador | XSS, clickjacking, sniffing, open redirect | Angular sem `innerHTML` com dado externo, CSP restritiva, `X-Frame-Options`, `nosniff`, `Referrer-Policy`, `Permissions-Policy`, token em `sessionStorage` e retorno pós-login validado |
+| Segredos | Vazamento em repositório, imagem ou log | Só `.env.example` versionado; contêineres sem root; logs sem senha/token |
+
+As sondagens ativas estão em `tools/security/` (`sondagem.sh` sobe o Compose com um `.env` descartável e derruba tudo ao final).
+
+### HTTPS (SEC-12)
+
+O Nginx do Compose escuta em HTTP puro (porta 8080). **Em qualquer ambiente real, coloque um terminador TLS (proxy reverso, balanceador ou ingress) com HTTPS na frente do Nginx**: o token trafega no cabeçalho `Authorization` e a senha no login, e sem TLS ficam legíveis na rede. Ao fazer isso: redirecione HTTP para HTTPS, ative `Strict-Transport-Security` no terminador, rode a API no perfil `prod` (`SPRING_PROFILES_ACTIVE=prod`, sem seed nem Swagger) e repasse o IP real do cliente (`X-Forwarded-For`); atrás de um proxy/NAT o `limit_req` do Nginx enxerga o IP do proxy.
+
+### Riscos aceitos
+
+- **Sem refresh token (PEN-10):** o token dura 60 minutos e, ao expirar, o usuário entra de novo. Não há revogação antes do vencimento.
+- **Limitador de login em memória (PEN-11):** vale para uma única instância da API; com várias réplicas cada uma conta separado e o contador zera no reinício. Atrás do Nginx a API vê o IP do próprio Nginx, então, no Compose, o limite da API é na prática por e-mail; o `limit_req` do Nginx cobre o IP.
+- **Sem papéis/perfis (PEN-12):** todo usuário autenticado acessa todas as funções. Não há cadastro de usuários nem recuperação de senha.
+
 ## Versão original
 
 A versão original da API (tag `v0-original`) oferece:

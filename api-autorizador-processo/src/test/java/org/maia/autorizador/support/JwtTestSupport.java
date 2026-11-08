@@ -48,6 +48,16 @@ public final class JwtTestSupport {
                 Duration.ofHours(1));
     }
 
+    /** Assinatura e emissor corretos, mas sem a claim {@code exp}: deve ser rejeitado (SEC-14). */
+    public static String tokenSemExpiracao(long usuarioId, String email) {
+        var chave = new SecretKeySpec(SEGREDO_DE_TESTE.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
+        var encoder = new NimbusJwtEncoder(new ImmutableSecret<>(chave));
+        JwtClaimsSet claims = JwtClaimsSet.builder().issuer(EMISSOR).subject(String.valueOf(usuarioId))
+                .claim("email", email).issuedAt(Instant.now()).build();
+        return encoder.encode(JwtEncoderParameters.from(JwsHeader.with(MacAlgorithm.HS256).build(), claims))
+                .getTokenValue();
+    }
+
     public static String token(String segredo, String emissor, long usuarioId, String email, Instant emitidoEm,
             Duration validade) {
         var chave = new SecretKeySpec(segredo.getBytes(StandardCharsets.UTF_8), "HmacSHA256");

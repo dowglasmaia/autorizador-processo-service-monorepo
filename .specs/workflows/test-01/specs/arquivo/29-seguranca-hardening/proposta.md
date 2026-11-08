@@ -44,3 +44,15 @@ Verificar cada requisito de `SECURITY_REQUIREMENTS.md` com **evidência executad
 - **Varredura de dependências:** `npm audit` e a ferramenta já disponível no ambiente (ex.: `docker scout`/`trivy` via Docker, se existir); sem adicionar plugin Maven novo ao build. Se nenhuma ferramenta de imagem estiver disponível, registrar limitação.
 - **Sondagens como script:** o script de sondagem fica em `scripts/` (ou `tools/security/`), usa `.env` descartável e não deixa processos rodando.
 - **Execução real em HTTPS** não é possível aqui: SEC-12 fica documentada, não executada.
+- **Lote 1 · 413 com `code: CORPO_INVALIDO`:** o enum de `code` do contrato não tem valor próprio para corpo grande; reutilizei `CORPO_INVALIDO` em vez de ampliar o contrato (413 e 411 não estão documentados nas operações). **[REVISAR]**
+- **Lote 1 · 405/415 sem `code`:** como no 404, o handler não define `code` para não ampliar o enum do contrato.
+- **Lote 1 · Nginx por template:** `default.conf` virou `default.conf.template` e entrou `limites.conf.template` (mecanismo `/etc/nginx/templates` com `envsubst` da imagem) para que os limites sejam configuráveis por variável `NGINX_*`; valores padrão no `Dockerfile`. `MONOREPO_STRUCTURE.md` atualizado.
+- **Lote 1 · `limit_req` aplicado** (30r/m por IP, burst 10) em vez de risco aceito, por ser só configuração. **[REVISAR]** os valores.
+- **Lote 1 · Perfil no Compose:** `SPRING_PROFILES_ACTIVE` passou a ser repassado (padrão `local`, sem mudar o comportamento atual; o e2e depende da seed). A sondagem usa `prod`.
+- **Lote 1 · `HDR-03/HDR-04`** (Permissions-Policy, Cache-Control na API) ficaram fora do script até a tarefa 3.3, para não deixar sondagem falhando; entram junto da correção.
+- **Lote 1 · Correções fora da lista, achadas pelas sondagens (com teste):** `exp` obrigatório no JWT; 405/415 deixam de responder 500.
+
+### Decisões do lote 2 (sem consulta)
+- 3.3: `Cache-Control` da API mantido nos padrões do Spring Security (já `no-store`), apenas coberto por teste e sondagem; acrescentado `Cross-Origin-Opener-Policy` além do `Permissions-Policy` pedido.
+- 4.2: o plugin de dependências do Maven não resolveu no ambiente (PKIX); a varredura Maven foi feita consultando o OSV.dev com os jars do artefato. Sem ferramenta de varredura de imagens (4.3): limitação registrada, não bloqueante. **[REVISAR]** decidir se o CI passa a rodar Trivy/OWASP Dependency-Check.
+- 4.4: nenhuma atualização (só vulnerabilidade moderada no OpenTelemetry, gerida pelo BOM do Spring Boot).

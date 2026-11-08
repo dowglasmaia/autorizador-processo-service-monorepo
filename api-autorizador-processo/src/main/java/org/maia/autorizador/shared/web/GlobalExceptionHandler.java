@@ -27,6 +27,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.HandlerMethodValidationException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 /**
@@ -143,6 +145,27 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NoResourceFoundException.class)
     ResponseEntity<ProblemDetail> rotaInexistente(HttpServletRequest request) {
         return resposta(HttpStatus.NOT_FOUND, "Não encontrado", "Recurso não encontrado.", null, request, List.of());
+    }
+
+    /** Método HTTP não previsto na rota: 405 com {@code Allow}, sem {@code code} (o enum do contrato não ganha valor). */
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    ResponseEntity<ProblemDetail> metodoNaoPermitido(HttpRequestMethodNotSupportedException ex,
+            HttpServletRequest request) {
+        ResponseEntity<ProblemDetail> base = resposta(HttpStatus.METHOD_NOT_ALLOWED, "Método não permitido",
+                "Método não permitido para este recurso.", null, request, List.of());
+        var permitidos = ex.getSupportedHttpMethods();
+        if (permitidos == null || permitidos.isEmpty()) {
+            return base;
+        }
+        return ResponseEntity.status(base.getStatusCode()).allow(permitidos.toArray(new org.springframework.http.HttpMethod[0]))
+                .contentType(MediaType.APPLICATION_PROBLEM_JSON).body(base.getBody());
+    }
+
+    /** Content-Type não aceito pela rota: 415 genérico. */
+    @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
+    ResponseEntity<ProblemDetail> tipoDeMidiaNaoSuportado(HttpServletRequest request) {
+        return resposta(HttpStatus.UNSUPPORTED_MEDIA_TYPE, "Tipo de mídia não suportado",
+                "Use Content-Type application/json.", null, request, List.of());
     }
 
     @ExceptionHandler(Exception.class)

@@ -11,7 +11,7 @@ autorizador-processo/                      (raiz do repositório)
 │  ├─ Dockerfile  (SPEC-10)
 │  └─ src/main/{java,resources/{openapi/{modules,common},db/{migration,seed},application*.yml}} · src/test
 ├─ app-autorizador-processo/               Angular 21 · Tailwind (gerado por angular-frontend-scaffold)
-│  ├─ package.json · angular.json · Dockerfile · nginx/default.conf  (SPEC-13)
+│  ├─ package.json · angular.json · Dockerfile · nginx/default.conf.template  (SPEC-13)
 │  └─ src/app/{core,layout,shared,features}
 ├─ tools/parity/                           cases.json + replay.mjs (SPEC-02/31) — executável contra qualquer base URL
 ├─ compose.yaml · .env.example             integração local (existentes; ajustados em SPEC-10/13)

@@ -123,4 +123,18 @@ class GlobalExceptionHandlerTest {
                 .andExpect(status().isForbidden())
                 .andExpect(header().doesNotExist("Access-Control-Allow-Origin"));
     }
+
+    @Test
+    void metodoNaoPermitidoRetorna405ComAllowSemVazar() throws Exception {
+        var r = mvc.perform(get(BASE + "/validacao"));
+        problema(r, 405, null);
+        r.andExpect(header().string("Allow", containsString("POST")))
+                .andExpect(content().string(not(containsString("Exception"))));
+    }
+
+    @Test
+    void tipoDeMidiaNaoSuportadoRetorna415() throws Exception {
+        var r = mvc.perform(post(BASE + "/validacao").contentType(MediaType.TEXT_PLAIN).content("x=1"));
+        problema(r, 415, null);
+    }
 }

@@ -16,7 +16,11 @@ RUN npm run build
 # --- Estágio de runtime -------------------------------------------------------
 FROM nginxinc/nginx-unprivileged:stable-alpine
 # Copia só o resultado estático (browser/) e a configuração do Nginx.
-COPY nginx/default.conf nginx/security-headers.inc /etc/nginx/conf.d/
+# Os .template passam por envsubst no início do contêiner (mecanismo da imagem) e viram arquivos de conf.d.
+COPY nginx/security-headers.inc /etc/nginx/conf.d/
+COPY nginx/default.conf.template nginx/limites.conf.template /etc/nginx/templates/
+# Limites configuráveis em tempo de execução (-e NGINX_...): corpo, buffer de cabeçalho e login por IP.
+ENV NGINX_MAX_BODY=64k     NGINX_MAX_HEADER_BUFFER=8k     NGINX_LOGIN_RATE=30r/m     NGINX_LOGIN_BURST=10
 COPY --from=build /workspace/dist/app-autorizador-processo/browser /usr/share/nginx/html
 
 # Escuta em 8080 (usuário não-root não abre a porta 80).

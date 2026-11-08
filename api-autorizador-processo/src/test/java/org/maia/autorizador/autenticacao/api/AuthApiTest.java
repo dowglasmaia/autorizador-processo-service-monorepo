@@ -178,4 +178,18 @@ class AuthApiTest extends IntegrationTestBase {
         naoAutenticado(me("Bearer " + JwtTestSupport.tokenComEmissorErrado(usuario.id(), email)),
                 "NAO_AUTENTICADO");
     }
+
+    @Test
+    void tokenSemExpiracaoRetorna401() throws Exception {
+        naoAutenticado(me("Bearer " + JwtTestSupport.tokenSemExpiracao(usuario.id(), email)), "NAO_AUTENTICADO");
+    }
+
+    @Test
+    void respostasDaApiNaoSaoArmazenadasEmCache() throws Exception {
+        String token = login(email, SENHA, "10.9.9." + (int) (Math.random() * 200 + 1))
+                .andReturn().getResponse().getContentAsString();
+        String jwt = token.replaceAll(".*\"(?:accessToken|token)\"\s*:\s*\"([^\"]+)\".*", "$1");
+        me("Bearer " + jwt).andExpect(status().isOk())
+                .andExpect(header().string(HttpHeaders.CACHE_CONTROL, org.hamcrest.Matchers.containsString("no-store")));
+    }
 }
