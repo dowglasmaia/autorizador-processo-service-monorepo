@@ -572,3 +572,13 @@
 {"em":1794168029663,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\25-e2e-ambiente-completo → .specs\\workflows\\test-01\\specs\\arquivo\\25-e2e-ambiente-completo","etapa":25,"passo":"arquivar"}
 {"em":1794168029670,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\25-e2e-ambiente-completo","etapa":25,"passo":"arquivar"}
 {"em":1794168029676,"nivel":"passo","texto":"Commit da entrega","etapa":25,"passo":"commitEntrega"}
+{"em":1794168031187,"nivel":"ok","texto":"7ed701b · 25 arquivo(s) · feat(autorizador): Revisa a spec dos testes e2e do ambiente (SPEC-30)…","etapa":25,"passo":"commitEntrega"}
+{"em":1794168031208,"nivel":"ok","texto":"Commit da entrega: ok · 7ed701b · 25 arquivo(s)","etapa":25,"passo":"commitEntrega"}
+{"em":1794168031219,"nivel":"ok","texto":"Etapa 25 entregue · commit 7ed701b","etapa":25,"passo":"commitEntrega"}
+{"em":1794168031570,"nivel":"passo","texto":"Etapa 26 · Paridade com o baseline (iteração 26)","etapa":26}
+{"em":1794168031572,"nivel":"passo","texto":"Propor a spec","etapa":26,"passo":"propor"}
+{"em":1794168031579,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":26,"passo":"propor"}
+{"em":1794168074351,"nivel":"ok","texto":"Propor a spec: ok · 16 tarefas","etapa":26,"passo":"propor"}
+{"em":1794168074359,"nivel":"passo","texto":"Verificar ponto de partida","etapa":26,"passo":"partida"}
+{"em":1794168074371,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":26,"passo":"partida"}
+{"em":1794168074377,"nivel":"passo","texto":"Commit da proposta","etapa":26,"passo":"commitProposta"}

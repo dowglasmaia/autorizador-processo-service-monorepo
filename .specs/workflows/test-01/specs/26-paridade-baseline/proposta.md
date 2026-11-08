@@ -1,15 +1,17 @@
 # Paridade com o baseline
 
-Etapa 26 de 31 · Fase 4 · derivada da `SPEC-31` (`.specs/04-integration/SPEC-31-paridade-baseline.md`). Referência: `SPEC-02` (golden cases, já entregue em `tools/parity/`). Escrita antes da entrega da etapa 25; será revisada contra o que ela entregar.
+Etapa 26 de 31 · Fase 4 · derivada da `SPEC-31` (`.specs/04-integration/SPEC-31-paridade-baseline.md`). Referência: `SPEC-02` (golden cases, já entregue em `tools/parity/`). Revisada contra a base após a etapa 25 (SPEC-30 entregue e arquivada).
 
 ## Objetivo
 Provar que a nova API (`api-autorizador-processo`) preserva o comportamento da versão original: executar os golden cases de `tools/parity/` contra a v1 com a seed local e classificar cada caso como **IDÊNTICO**, **DIV-xx aprovada** ou **FALHA**. Divergência inesperada vira correção da implementação, não exceção.
 
-## Ponto de partida (conferido antes da etapa 25)
+## Ponto de partida (conferido após a etapa 25)
 - `tools/parity/` tem `README.md`, `cases.json` (B01–B17, adicionais A01/A02 só da v1 e N01–N04) e `replay.mjs` (Node, sem dependências; `--target v1`, `--email`/`--senha`, `--only`).
 - A tag `v0-original` existe; `compose.yaml` na raiz sobe `postgres`, `api` e `app`; a seed local (1234, 4567, 6789) chega via perfil `local`, que é o padrão.
 - Não existe `tools/parity/RELATORIO.md`. `.specs/06-execution-plan/` não existe (desvio a registrar).
 - A SPEC-31 cita "nova DIV" e "B01, B02, B04, B09–B11, B15 IDÊNTICO quanto à decisão de negócio", mas no `cases.json` esses casos já têm DIV (ex.: B01 DIV-07, B02 DIV-03). A classificação deve distinguir decisão de negócio idêntica de forma divergente aprovada.
+
+- Etapa 25 entregue: Playwright em `app-autorizador-processo/e2e` sobe o projeto Compose `e2e` com `.env` descartável em `e2e/.tmp` (ignorado pelo git). A máquina só tem o binário `docker-compose` v5.6.1 (sem o plugin `docker compose`); Docker 29.9.2 está disponível. O perfil `local` é o padrão da API, então a seed já chega pelo Compose.
 
 ## Escopo
 1. Subir `postgres` e `api` com seed local (projeto Compose descartável, `.env` de teste, segredos fora do git) e rodar `replay.mjs --target v1` autenticado.
@@ -31,5 +33,6 @@ Provar que a nova API (`api-autorizador-processo`) preserva o comportamento da v
 ## Decisões tomadas sem consulta
 - **Coluna "original" do relatório** vem do bloco `original` do `cases.json` (já validado na SPEC-02), sem subir a original de novo; só se sobe se houver dúvida sobre um caso. **[REVISAR]**
 - **Classificação:** IDÊNTICO = sem `divergencia` ou decisão de negócio igual; DIV-xx = caso com `divergencia` e v1 conforme `mapeamentoV1`; FALHA = qualquer outro resultado. Assim o aceite da SPEC-31 é lido pela decisão de negócio, registrando o desvio acima.
-- **Ambiente:** projeto Compose próprio com credenciais de teste geradas na hora, no mesmo estilo da etapa 25.
+- **Compose:** usar `docker compose` ou, na falta do plugin, `docker-compose`, com as mesmas opções. Porta da API publicada em `API_PORT` (8080).
+- **Ambiente:** projeto Compose próprio (`-p paridade`) com credenciais de teste geradas na hora, no mesmo estilo da etapa 25.
 - **T4 (job de CI)** adiada para a SPEC-40, por ser fora desta etapa no plano.

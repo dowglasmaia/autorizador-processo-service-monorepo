@@ -4532,7 +4532,8 @@
               "origem": "provider",
               "esforco": "medium"
             }
-          ]
+          ],
+          "commit": "7ed701b"
         },
         {
           "numero": 26,
@@ -4592,19 +4593,19 @@
     }
   ],
   "iteracao": {
-    "numero": 25,
-    "etapa": 25,
-    "inicio": "2026-11-08T18:56:52.008Z",
-    "commitInicial": "32fc6456b387af7168ee9a4be1d6045afabd1109",
-    "passoAtual": 6,
+    "numero": 26,
+    "etapa": 26,
+    "inicio": "2026-11-08T20:00:31.563Z",
+    "commitInicial": "7ed701b5b9c4e7e998c1622d48a0809a268312d0",
+    "passoAtual": 2,
     "passos": [
       {
         "id": "propor",
         "situacao": "ok",
-        "duracaoMs": 42734,
-        "custo": 0.2193777,
+        "duracaoMs": 42766,
+        "custo": 0.2744351,
         "tentativas": 1,
-        "detalhe": "25 tarefas"
+        "detalhe": "16 tarefas"
       },
       {
         "id": "partida",
@@ -4616,66 +4617,62 @@
       },
       {
         "id": "commitProposta",
-        "situacao": "ok",
-        "duracaoMs": 385,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "1ed75e3 · 5 arquivo(s)"
-      },
-      {
-        "id": "aplicar",
-        "situacao": "ok",
-        "duracaoMs": 3774428,
-        "custo": 2.3921024999999996,
-        "tentativas": 1,
-        "detalhe": "25/25 tarefas · 5 sessão(ões)"
-      },
-      {
-        "id": "verificar",
-        "situacao": "pulado",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "arquivar",
-        "situacao": "ok",
-        "duracaoMs": 3,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\25-e2e-ambiente-completo"
-      },
-      {
-        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
+      },
+      {
+        "id": "aplicar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "verificar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "arquivar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "commitEntrega",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
       }
     ],
-    "titulo": "Revisa a spec dos testes e2e do ambiente (SPEC-30) contra a base entregue",
-    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md`, escritos antes da etapa 24. Revisei os dois contra o código atual e os mantive, com escopo, 25 tarefas e critérios de aceite.\nCorrigi uma premissa errada: a proposta dizia que a seed não chegava ao Compose. Mas `application.yml` define `spring.profiles.default: local`, o `compose.yaml` não define `SPRING_PROFILES_ACTIVE` e o `application-local.yml` inclui `db/seed` no Flyway. Então a seed já é carregada no Compose.\nPor isso o override `compose.e2e.yaml` virou contingência: a tarefa 2.2 agora só confirma a seed, e a decisão foi registrada como [REVISAR].\nConfirmei que não há Playwright, script `e2e` nem pasta `e2e/` no app, e que `.specs/06-execution-plan/` continua inexistente. O catálogo `core/i18n/mensagens.ts` existe e traz o texto \"Não foi possível carregar\", usado no cenário 7.\nNenhum código da aplicação foi alterado."
+    "titulo": "Revisa a spec de paridade com o baseline (SPEC-31) contra a base entregue",
+    "comparacao": "A pasta da etapa 26 já tinha proposta.md e tarefas.md (17 tarefas em 5 grupos), escritos antes da etapa 25. Revisei os dois contra o estado atual e mantive o escopo da SPEC-31.\ntools/parity/ (README, cases.json, replay.mjs) existe, mas não há RELATORIO.md. A pasta .specs/06-execution-plan/ continua inexistente.\nA etapa 25 está entregue e arquivada. O Docker 29.9.2 está disponível, mas só existe o binário docker-compose, sem o plugin `docker compose`. Registrei o fallback e a tarefa 1.2 agora confere isso.\nO perfil local é o padrão da API, então a seed (1234, 4567, 6789) já chega pelo Compose. O .env descartável segue o padrão da etapa 25.\nSegue a ressalva da SPEC-31: os casos B01 e B02 já têm DIV no cases.json. A proposta trata isso lendo o aceite pela decisão de negócio, e o job de CI fica para a SPEC-40. Nenhum código da aplicação foi alterado."
   },
   "totais": {
-    "duracaoMs": 19300099,
-    "custo": 50.199209200000006,
+    "duracaoMs": 19344384,
+    "custo": 50.473644300000004,
     "execucoes": 2,
-    "iteracoes": 25,
-    "entregues": 24,
-    "sessoes": 134,
-    "turnos": 1820,
+    "iteracoes": 26,
+    "entregues": 25,
+    "sessoes": 135,
+    "turnos": 1827,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 6,
     "recuperacoesResolvidas": 5,
     "falhas": 0,
-    "commits": 49,
+    "commits": 50,
     "tokens": {
-      "entrada": 2774,
-      "saida": 1204260,
-      "cacheCriacao": 7332041,
-      "cacheLeitura": 83709898
+      "entrada": 2786,
+      "saida": 1206708,
+      "cacheCriacao": 7388508,
+      "cacheLeitura": 83950529
     }
   },
   "ultimaExecucao": {

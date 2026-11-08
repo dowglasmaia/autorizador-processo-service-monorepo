@@ -63,7 +63,7 @@ o Objetivo e ter todas as specs executadas sem invervenção humana e com o refe
 
 ## Fase 4 · Fase 4 — Integração, qualidade e finalização
 
-25. **Testes e2e do ambiente** · `25-e2e-ambiente-completo` · ✔ — Executa a SPEC-30: testes ponta a ponta contra o ambiente completo do Compose, cobrindo login e os fluxos principais. Referências: `TEST_STRATEGY.md`. Limite: sem alterar regras de negócio.
+25. **Testes e2e do ambiente** · `25-e2e-ambiente-completo` · ✔ 7ed701b — Executa a SPEC-30: testes ponta a ponta contra o ambiente completo do Compose, cobrindo login e os fluxos principais. Referências: `TEST_STRATEGY.md`. Limite: sem alterar regras de negócio.
 26. **Paridade com o baseline** · `26-paridade-baseline` · · — Executa a SPEC-31: roda os golden cases de `tools/parity/` contra a nova API e documenta diferenças aceitas. Referências: SPEC-02. Limite: divergência inesperada vira correção, não exceção.
 27. **Desvio de contrato** · `27-contract-drift-check` · · — Executa a SPEC-32: verificação de que os tipos regenerados são idênticos aos versionados e de que as respostas reais respeitam o contrato. Referências: SPEC-05 e SPEC-16. Limite: sem mudar o contrato.
 28. **CI por projeto** · `28-ci-por-projeto` · · — Executa a SPEC-40: `backend-ci.yml`, `frontend-ci.yml` e `integracao-ci.yml`, cada um disparado só por mudança no próprio caminho. Referências: `.github/workflows`. Limite: sem deploy.

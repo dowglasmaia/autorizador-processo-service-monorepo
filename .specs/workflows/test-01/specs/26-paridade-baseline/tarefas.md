@@ -1,6 +1,6 @@
 ## 1. Preparação
 - [ ] 1.1 Ler `SPEC-31`, `tools/parity/README.md`, `BASELINE_COMPORTAMENTO_ORIGINAL.md` e `API_CONTRACTS.md` §4; registrar a ausência de `.specs/06-execution-plan/`.
-- [ ] 1.2 Conferir o estado do repositório (etapa 25 entregue, `cases.json` íntegro, Docker disponível) e revisar esta proposta contra o que mudou.
+- [ ] 1.2 Conferir o estado do repositório (etapa 25 entregue e `docker-compose` disponível, `cases.json` íntegro, Docker disponível) e revisar esta proposta contra o que mudou.
 
 ## 2. Execução contra a v1
 - [ ] 2.1 Subir `postgres` e `api` pelo Compose com `.env` descartável (usuário bootstrap, `JWT_SECRET`) e esperar `healthy`.
