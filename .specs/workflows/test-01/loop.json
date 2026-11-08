@@ -2217,7 +2217,8 @@
               "origem": "provider",
               "esforco": "medium"
             }
-          ]
+          ],
+          "commit": "c4de00d"
         },
         {
           "numero": 13,
@@ -2404,19 +2405,19 @@
     }
   ],
   "iteracao": {
-    "numero": 12,
-    "etapa": 12,
-    "inicio": "2026-11-08T16:51:17.824Z",
-    "commitInicial": "91cc31d372cd768029b836ff3353992e5911156e",
-    "passoAtual": 6,
+    "numero": 13,
+    "etapa": 13,
+    "inicio": "2026-11-08T17:15:19.447Z",
+    "commitInicial": "c4de00d53af08aa9f0406746ad50061c8c9e7fd6",
+    "passoAtual": 2,
     "passos": [
       {
         "id": "propor",
         "situacao": "ok",
-        "duracaoMs": 40444,
-        "custo": 0.2091744,
+        "duracaoMs": 42291,
+        "custo": 0.21982200000000002,
         "tentativas": 1,
-        "detalhe": "21 tarefas"
+        "detalhe": "14 tarefas"
       },
       {
         "id": "partida",
@@ -2428,66 +2429,62 @@
       },
       {
         "id": "commitProposta",
-        "situacao": "ok",
-        "duracaoMs": 370,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "382a54f · 5 arquivo(s)"
-      },
-      {
-        "id": "aplicar",
-        "situacao": "ok",
-        "duracaoMs": 1400042,
-        "custo": 1.3616073,
-        "tentativas": 1,
-        "detalhe": "21/21 tarefas · 3 sessão(ões)"
-      },
-      {
-        "id": "verificar",
-        "situacao": "pulado",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "arquivar",
-        "situacao": "ok",
-        "duracaoMs": 4,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\12-config-observabilidade"
-      },
-      {
-        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
+      },
+      {
+        "id": "aplicar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "verificar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "arquivar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "commitEntrega",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
       }
     ],
-    "titulo": "Revisa a spec de config e observabilidade (SPEC-11) contra a entrega da etapa 11",
-    "comparacao": "A pasta já tinha proposta.md e tarefas.md antecipados. Revisei os dois contra o código atual e os completei, sem recriar.\nConfirmei as lacunas da SPEC-11. O actuator expõe `health,info,metrics`. Não há grupos liveness/readiness nem show-details. A porta usa `PORT` em vez de `SERVER_PORT`. O `pom.xml` não tem springdoc, só a liberação no `SecurityConfig`. Faltam os testes de readiness com banco parado, de 404 da UI e de formato do log JSON.\nOs eventos de negócio já são logados com e-mail mascarado. Por isso a tarefa 3.3 passou a ser conferência.\nA etapa 11 (painel) não alterou configuração nem observabilidade. Atualizei a proposta com isso e com `SERVER_PORT`, `LOG_LEVEL_ROOT` e `LOG_FORMAT` ausentes do `.env.example`.\nA spec tem 21 tarefas em 6 grupos. A decisão [REVISAR] continua: `/actuator/metrics` não é exposto, para seguir a SPEC-11 e o limite de não usar stack externa."
+    "titulo": "Propõe a spec do Docker Compose do backend (SPEC-10)",
+    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md` escritos antecipadamente. Revisei os dois contra o código atual em vez de recriá-los.\nO backend não tem `Dockerfile` nem `.dockerignore`. O serviço `api` do `compose.yaml` não define `healthcheck`, mas o `app` exige `api: service_healthy`. O `api` também não repassa `JWT_SECRET`, `JWT_TTL_MINUTOS`, `AUTH_BOOTSTRAP_*` nem `CORS_ALLOWED_ORIGINS`.\nA etapa 12 já entregou `SERVER_PORT` (padrão 8080), apenas `health,info` expostos e o grupo `readiness` (`readinessState,db`). Atualizei a proposta para o `healthcheck` usar `/actuator/health/readiness`, e a tarefa 2.1 para reconferir isso.\nO `.env.example` da raiz já tem as chaves, mas `JWT_SECRET` está vazio. O backend tem um `.env.example` próprio, que a proposta registra como ponto de coerência. O Docker 29.9.2 está disponível, então a verificação com Compose é viável.\nA spec mantém o serviço `app` fora do escopo (SPEC-13). São 14 tarefas em 4 grupos; as decisões marcadas [REVISAR] seguem na seção de decisões."
   },
   "totais": {
-    "duracaoMs": 9423737,
-    "custo": 27.416878399999995,
+    "duracaoMs": 9466604,
+    "custo": 27.636700399999995,
     "execucoes": 2,
-    "iteracoes": 12,
-    "entregues": 11,
-    "sessoes": 70,
-    "turnos": 978,
+    "iteracoes": 13,
+    "entregues": 12,
+    "sessoes": 71,
+    "turnos": 984,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 5,
     "recuperacoesResolvidas": 4,
     "falhas": 0,
-    "commits": 23,
+    "commits": 24,
     "tokens": {
-      "entrada": 1436,
-      "saida": 668828,
-      "cacheCriacao": 3937639,
-      "cacheLeitura": 45232630
+      "entrada": 1446,
+      "saida": 671342,
+      "cacheCriacao": 3980969,
+      "cacheLeitura": 45446050
     }
   },
   "ultimaExecucao": {

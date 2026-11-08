@@ -282,3 +282,13 @@
 {"em":1794158118779,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\12-config-observabilidade → .specs\\workflows\\test-01\\specs\\arquivo\\12-config-observabilidade","etapa":12,"passo":"arquivar"}
 {"em":1794158118783,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\12-config-observabilidade","etapa":12,"passo":"arquivar"}
 {"em":1794158118788,"nivel":"passo","texto":"Commit da entrega","etapa":12,"passo":"commitEntrega"}
+{"em":1794158119358,"nivel":"ok","texto":"c4de00d · 18 arquivo(s) · feat(autorizador): Revisa a spec de config e observabilidade (SPEC-11…","etapa":12,"passo":"commitEntrega"}
+{"em":1794158119375,"nivel":"ok","texto":"Commit da entrega: ok · c4de00d · 18 arquivo(s)","etapa":12,"passo":"commitEntrega"}
+{"em":1794158119386,"nivel":"ok","texto":"Etapa 12 entregue · commit c4de00d","etapa":12,"passo":"commitEntrega"}
+{"em":1794158119453,"nivel":"passo","texto":"Etapa 13 · Docker Compose do backend (iteração 13)","etapa":13}
+{"em":1794158119454,"nivel":"passo","texto":"Propor a spec","etapa":13,"passo":"propor"}
+{"em":1794158119461,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":13,"passo":"propor"}
+{"em":1794158161756,"nivel":"ok","texto":"Propor a spec: ok · 14 tarefas","etapa":13,"passo":"propor"}
+{"em":1794158161760,"nivel":"passo","texto":"Verificar ponto de partida","etapa":13,"passo":"partida"}
+{"em":1794158161767,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":13,"passo":"partida"}
+{"em":1794158161772,"nivel":"passo","texto":"Commit da proposta","etapa":13,"passo":"commitProposta"}

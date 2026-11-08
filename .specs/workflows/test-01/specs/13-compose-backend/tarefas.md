@@ -4,7 +4,7 @@
 - [ ] 1.3 Criar `api-autorizador-processo/.dockerignore` (`target/`, `.git`, `.env`, arquivos de IDE).
 
 ## 2. Compose e variáveis
-- [ ] 2.1 Conferir, após a etapa 12, as variáveis e o endpoint de health realmente expostos pela API e ajustar o plano de acordo.
+- [ ] 2.1 Reconferir em `application.yml` e `SecurityConfig` as variáveis e o endpoint `/actuator/health/readiness` (entregues pela etapa 12) antes de escrever o healthcheck.
 - [ ] 2.2 Adicionar `healthcheck` ao serviço `api` com ferramenta presente na imagem e `start_period` adequado; manter o `pg_isready` do `postgres`.
 - [ ] 2.3 Repassar ao `api` `JWT_SECRET` (obrigatório, `${JWT_SECRET:?defina JWT_SECRET no .env}`), `JWT_TTL_MINUTOS`, `AUTH_BOOTSTRAP_EMAIL`, `AUTH_BOOTSTRAP_SENHA` e `CORS_ALLOWED_ORIGINS`.
 - [ ] 2.4 Corrigir o cabeçalho do `compose.yaml` (referências a SPEC-10/SPEC-13) e incluir os comandos para subir só o banco e `postgres api`.

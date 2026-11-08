@@ -1,6 +1,6 @@
 # Docker Compose do backend
 
-Etapa 13 de 31 · Fase 2 · derivada da `SPEC-10` (`.specs/04-integration/SPEC-10-ambiente-docker-compose.md`). Proposta escrita antecipadamente, enquanto a etapa 12 (config e observabilidade) é implementada; será revisada contra o que ela entregar.
+Etapa 13 de 31 · Fase 2 · derivada da `SPEC-10` (`.specs/04-integration/SPEC-10-ambiente-docker-compose.md`). Proposta escrita antecipadamente e revisada contra o código entregue pela etapa 12 (config e observabilidade).
 
 ## Objetivo
 Tornar o `compose.yaml` e o `.env.example` da raiz **executáveis e verificados** para PostgreSQL + API: Dockerfile da API (`eclipse-temurin:25`), `healthcheck` do serviço `api`, repasse das variáveis de autenticação e documentação de uso. Hoje o serviço `app` exige `api: service_healthy`, mas o `api` não tem `healthcheck`, e a pasta `api-autorizador-processo/` não tem `Dockerfile`; com isso `docker compose up` do ambiente completo falha.
@@ -10,7 +10,7 @@ Tornar o `compose.yaml` e o `.env.example` da raiz **executáveis e verificados*
 - O `api` **não** repassa `JWT_SECRET`, `JWT_TTL_MINUTOS`, `AUTH_BOOTSTRAP_EMAIL`, `AUTH_BOOTSTRAP_SENHA` nem `CORS_ALLOWED_ORIGINS`, embora o `application.yml` os consuma e a API não inicie sem `JWT_SECRET` de no mínimo 32 bytes.
 - O `.env.example` já traz essas chaves, mas `JWT_SECRET` está vazio e sem aviso de "só desenvolvimento"; o cabeçalho do compose cita "SPEC-10 §1; SPEC-13 §4" (referências do conjunto antigo).
 - Não há `Dockerfile` nem `.dockerignore` no backend. O `pom.xml` usa o Maven Wrapper (`mvnw`, `.mvn/`) e `spring-boot-starter-actuator`; `application.yml` expõe `health,info,metrics` e `SecurityConfig` libera `/actuator/health/**`. O perfil padrão do Spring é `local`.
-- A etapa 12 (em andamento) altera `application*.yml`: `SERVER_PORT`, exposição só de `health,info` e grupos `liveness`/`readiness`. Esta etapa precisa seguir o que ela entregar (ver decisões).
+- A etapa 12 já entregou em `application.yml`: `server.port: ${SERVER_PORT:8080}`, exposição só de `health,info`, `probes.enabled: true` e grupos `liveness` (`livenessState`) e `readiness` (`readinessState,db`); `show-details: never` fora do perfil local. `SecurityConfig` libera `/actuator/health/**`. O backend tem também um `.env.example` próprio (`api-autorizador-processo/.env.example`), que não faz parte desta etapa e deve ficar coerente com o da raiz.
 
 ## Escopo
 1. `api-autorizador-processo/Dockerfile` multi-stage: build com JDK 25 (`eclipse-temurin:25-jdk`) via `./mvnw -DskipTests package`; runtime `eclipse-temurin:25-jre`, usuário não-root, `EXPOSE 8080`, sem ferramentas de build. `.dockerignore` (`target/`, `.git`, `.env`, IDE).
@@ -36,7 +36,7 @@ Tornar o `compose.yaml` e o `.env.example` da raiz **executáveis e verificados*
 
 ## Decisões tomadas sem consulta
 - **Healthcheck por `wget`/`curl`?** A imagem `eclipse-temurin:25-jre` (Ubuntu) traz `curl`? Não é garantido; decisão provisória: conferir na execução e, se faltar, instalar `curl` na camada de runtime ou usar um `java` mínimo; registrar o escolhido. [REVISAR]
-- **Endpoint do healthcheck:** usar `/actuator/health` agora e trocar para `/actuator/health/readiness` se a etapa 12 entregar o grupo, para que o compose siga o que a API realmente expõe. Revisar na reconciliação.
+- **Endpoint do healthcheck:** a etapa 12 entregou o grupo `readiness` (inclui `db`), então o healthcheck usa `/actuator/health/readiness`; o critério de aceite da SPEC-10 (`/actuator/health` = `UP`) continua valendo e é conferido também.
 - **`JWT_SECRET` obrigatório no compose (`:?`)**, conforme a SPEC-10, e valor de desenvolvimento só em `.env.example` com aviso; o `.env.example` hoje o deixa vazio e passa a trazer um valor claramente marcado como de desenvolvimento (≥ 32 bytes). [REVISAR]
-- **Porta:** o contêiner continua ouvindo em 8080; se a etapa 12 trocar `PORT` por `SERVER_PORT`, o compose não precisa mudar enquanto o padrão for 8080.
-- **Perfil do contêiner:** o perfil padrão é `local`; manter, sem criar perfil novo nesta etapa, e deixar a revisão para a etapa 12 e a SPEC-41.
+- **Porta:** o contêiner continua ouvindo em 8080; a etapa 12 usa `SERVER_PORT` (padrão 8080); o compose não define `SERVER_PORT` no `api`, mantém 8080 no contêiner e publica em `API_PORT`.
+- **Perfil do contêiner:** o perfil padrão é `local`; manter, sem criar perfil novo nesta etapa, e deixar a revisão para a SPEC-41. Atenção: no perfil `local` o health mostra detalhes e a documentação é servida; registrar isso como ponto de hardening para a SPEC-41.
