@@ -114,3 +114,13 @@
 {"em":1794150557637,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\05-contrato-openapi-v1 → .specs\\workflows\\test-01\\specs\\arquivo\\05-contrato-openapi-v1","etapa":5,"passo":"arquivar"}
 {"em":1794150557643,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\05-contrato-openapi-v1","etapa":5,"passo":"arquivar"}
 {"em":1794150557650,"nivel":"passo","texto":"Commit da entrega","etapa":5,"passo":"commitEntrega"}
+{"em":1794150558563,"nivel":"ok","texto":"14ea799 · 15 arquivo(s) · feat(autorizador): Propõe a spec do contrato OpenAPI v1 com módulos p…","etapa":5,"passo":"commitEntrega"}
+{"em":1794150558576,"nivel":"ok","texto":"Commit da entrega: ok · 14ea799 · 15 arquivo(s)","etapa":5,"passo":"commitEntrega"}
+{"em":1794150558583,"nivel":"ok","texto":"Etapa 5 entregue · commit 14ea799","etapa":5,"passo":"commitEntrega"}
+{"em":1794150558669,"nivel":"passo","texto":"Etapa 6 · Erros, validação e CORS (iteração 6)","etapa":6}
+{"em":1794150558670,"nivel":"passo","texto":"Propor a spec","etapa":6,"passo":"propor"}
+{"em":1794150558675,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":6,"passo":"propor"}
+{"em":1794150608077,"nivel":"ok","texto":"Propor a spec: ok · 14 tarefas","etapa":6,"passo":"propor"}
+{"em":1794150608081,"nivel":"passo","texto":"Verificar ponto de partida","etapa":6,"passo":"partida"}
+{"em":1794150608087,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":6,"passo":"partida"}
+{"em":1794150608091,"nivel":"passo","texto":"Commit da proposta","etapa":6,"passo":"commitProposta"}

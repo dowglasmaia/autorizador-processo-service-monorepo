@@ -1,7 +1,7 @@
 # Tarefas — Erros, validação e CORS
 
 ## 1. Preparação
-- [ ] 1.1 Reconferir o estado após a etapa 5 (`ProblemDetail` do contrato, pacotes gerados, `pom.xml`) e ler `API_CONTRACTS.md` §3 e SEC-02/03/05; registrar a ausência de `.specs/06-execution-plan/`.
+- [ ] 1.1 Reconferir o `ProblemDetail`/`FieldViolation` de `openapi/common/responses.yaml` e o `pom.xml` entregues pela etapa 5 e ler `API_CONTRACTS.md` §3 e SEC-02/03/05; registrar a ausência de `.specs/06-execution-plan/`.
 - [ ] 1.2 Verificar se `@WebMvcTest` precisa do starter de teste de MVC no Boot 4 e adicioná-lo, com escopo `test`, só se faltar.
 
 ## 2. Exceções e tratamento global
@@ -12,7 +12,7 @@
 
 ## 3. CORS
 - [ ] 3.1 Criar `shared.web.CorsConfig` lendo `CORS_ALLOWED_ORIGINS` (padrão vazio, sem `*`), métodos `GET,POST,OPTIONS`, cabeçalhos `Authorization` e `Content-Type`.
-- [ ] 3.2 Definir `http://localhost:4200` no `application-local.yml` e documentar a variável no `.env.example`, se existir.
+- [ ] 3.2 Definir `http://localhost:4200` no `application-local.yml` e documentar `CORS_ALLOWED_ORIGINS` no `.env.example` da raiz.
 
 ## 4. Testes e verificação
 - [ ] 4.1 Criar controller de teste descartável (somente em `src/test`) que dispara cada tipo de erro.

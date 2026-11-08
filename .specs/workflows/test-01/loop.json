@@ -1007,7 +1007,8 @@
               "origem": "provider",
               "esforco": "medium"
             }
-          ]
+          ],
+          "commit": "14ea799"
         },
         {
           "numero": 6,
@@ -1262,19 +1263,19 @@
     }
   ],
   "iteracao": {
-    "numero": 5,
-    "etapa": 5,
-    "inicio": "2026-11-08T15:00:44.069Z",
-    "commitInicial": "b485c9c6a786bc620c18fa74d28ad7f2163aab41",
-    "passoAtual": 6,
+    "numero": 6,
+    "etapa": 6,
+    "inicio": "2026-11-08T15:09:18.663Z",
+    "commitInicial": "14ea7997c7b1e576719ada1e4157970c102009af",
+    "passoAtual": 2,
     "passos": [
       {
         "id": "propor",
         "situacao": "ok",
-        "duracaoMs": 41383,
-        "custo": 0.1980175,
+        "duracaoMs": 49399,
+        "custo": 0.23425849999999998,
         "tentativas": 1,
-        "detalhe": "19 tarefas"
+        "detalhe": "14 tarefas"
       },
       {
         "id": "partida",
@@ -1286,66 +1287,62 @@
       },
       {
         "id": "commitProposta",
-        "situacao": "ok",
-        "duracaoMs": 346,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "cd95ce0 · 5 arquivo(s)"
-      },
-      {
-        "id": "aplicar",
-        "situacao": "ok",
-        "duracaoMs": 471768,
-        "custo": 1.1215382000000003,
-        "tentativas": 1,
-        "detalhe": "19/19 tarefas · 3 sessão(ões)"
-      },
-      {
-        "id": "verificar",
-        "situacao": "pulado",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "arquivar",
-        "situacao": "ok",
-        "duracaoMs": 4,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\05-contrato-openapi-v1"
-      },
-      {
-        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
+      },
+      {
+        "id": "aplicar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "verificar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "arquivar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "commitEntrega",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
       }
     ],
-    "titulo": "Propõe a spec do contrato OpenAPI v1 com módulos procedimento, autorizacao e painel e err…",
-    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md` escritos antes da entrega da etapa 4. Revisei os dois em vez de recriar.\nO `pom.xml` tem só a execução `generate-openapi` (gerador 7.26.0) sobre o placeholder `openapi.yaml` (`paths: {}`). Não existem `openapi/modules/` nem `openapi/common/`, então toda a construção do contrato continua pendente.\nO `pom.xml` e `db/migration` já trazem as dependências de banco da etapa 4. Atualizei a proposta, que ainda dizia \"etapa 4 em andamento\", e incluí o risco de Docker indisponível para o `verify`.\nA proposta cobre as 6 operações, os 3 módulos, o `ProblemDetail` único e a execução do gerador por módulo, e deixa `auth`/segurança, NEW-01 e os controllers fora. São 17 tarefas em 5 grupos.\n`.specs/06-execution-plan/` continua inexistente. Isso fica registrado como desvio na evidência."
+    "titulo": "Propõe a spec de erros RFC 9457, validação e CORS do backend",
+    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md`, escritos antes da etapa 5. Revisei os dois contra o código atual em vez de recriá-los.\nA etapa 5 já entregou o contrato: `openapi/common/responses.yaml` traz `ProblemDetail`, `FieldViolation` e o enum de 7 `code`. Atualizei o ponto de partida e deixei o contrato como referência do handler.\nEm `src/main` ainda não há controller, `GlobalExceptionHandler` nem `CorsConfig`. O `pom.xml` não tem Spring Security nem starter de teste de MVC. `application.yml` não tem propriedade de CORS e o `.env.example` não cita `CORS_ALLOWED_ORIGINS`, então a tarefa 3.2 agora pede essa documentação.\nEscopo e tarefas não mudaram (14 tarefas em 4 grupos). Acrescentei uma decisão sobre o 404 genérico para rota inexistente, sem criar `code` novo no enum.\n`.specs/06-execution-plan/` continua inexistente e o desvio vai para a evidência. Não alterei código."
   },
   "totais": {
-    "duracaoMs": 2418762,
-    "custo": 9.0229334,
+    "duracaoMs": 2469078,
+    "custo": 9.257191899999999,
     "execucoes": 1,
-    "iteracoes": 5,
-    "entregues": 4,
-    "sessoes": 29,
-    "turnos": 311,
+    "iteracoes": 6,
+    "entregues": 5,
+    "sessoes": 30,
+    "turnos": 318,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 3,
     "recuperacoesResolvidas": 3,
     "falhas": 0,
-    "commits": 9,
+    "commits": 10,
     "tokens": {
-      "entrada": 470,
-      "saida": 181350,
-      "cacheCriacao": 1376532,
-      "cacheLeitura": 12504580
+      "entrada": 482,
+      "saida": 184140,
+      "cacheCriacao": 1421442,
+      "cacheLeitura": 12771525
     }
   },
   "ultimaExecucao": {
