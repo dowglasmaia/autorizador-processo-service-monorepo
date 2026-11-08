@@ -419,7 +419,8 @@
               "origem": "provider",
               "esforco": "medium"
             }
-          ]
+          ],
+          "commit": "43acc61"
         },
         {
           "numero": 3,
@@ -701,17 +702,17 @@
     }
   ],
   "iteracao": {
-    "numero": 2,
-    "etapa": 2,
-    "inicio": "2026-11-08T14:30:20.816Z",
-    "commitInicial": "f70aeb1e3f1eced0059ab7863c416e275f219120",
-    "passoAtual": 6,
+    "numero": 3,
+    "etapa": 3,
+    "inicio": "2026-11-08T14:40:24.876Z",
+    "commitInicial": "43acc61d4e8b2df013ed6fa11671d5ce7a97fc7e",
+    "passoAtual": 2,
     "passos": [
       {
         "id": "propor",
         "situacao": "ok",
-        "duracaoMs": 25715,
-        "custo": 0.168938,
+        "duracaoMs": 33957,
+        "custo": 0.2018982,
         "tentativas": 1,
         "detalhe": "19 tarefas"
       },
@@ -725,78 +726,62 @@
       },
       {
         "id": "commitProposta",
-        "situacao": "ok",
-        "duracaoMs": 339,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "4dd0343 · 3 arquivo(s)"
-      },
-      {
-        "id": "aplicar",
-        "situacao": "aviso",
-        "duracaoMs": 553620,
-        "custo": 1.3399625,
-        "tentativas": 1,
-        "recuperacoes": [
-          {
-            "numero": 1,
-            "erro": ".specs\\workflows\\test-01\\specs\\02-baseline-golden-cases/tarefas.md não tem tarefas",
-            "resolvida": true,
-            "custo": 0.15170320000000004,
-            "em": "2026-11-08T14:40:00.535Z",
-            "causa": "O passo anterior já havia movido a spec (proposta.md e tarefas.md) para specs/arquivo/ antes da checagem, então o devkit não achou tarefas.md no caminho esperado da etapa 2.",
-            "oQueFez": "Devolvi proposta.md e tarefas.md de specs/arquivo/02-baseline-golden-cases/ para specs/02-baseline-golden-cases/ (cópia e remoção, sem git) e removi a pasta vazia em arquivo/. O tarefas.md tem 19 tarefas `- [x]` e nenhuma pendente.",
-            "precisaPessoa": false
-          }
-        ],
-        "detalhe": "recuperado"
-      },
-      {
-        "id": "verificar",
-        "situacao": "pulado",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "arquivar",
-        "situacao": "ok",
-        "duracaoMs": 3,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\02-baseline-golden-cases"
-      },
-      {
-        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
+      },
+      {
+        "id": "aplicar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "verificar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "arquivar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "commitEntrega",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
       }
     ],
-    "titulo": "Propõe a spec de baseline executável de golden cases em tools/parity",
-    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md` completos, derivados da SPEC-02. Revisei os dois contra o repositório e não alterei nada.\nA tag `v0-original` existe (etapa 1 arquivada) e `tools/` ainda não existe, então a etapa começa do zero.\n`BASELINE_COMPORTAMENTO_ORIGINAL.md` e `API_CONTRACTS.md` §4 existem, e o baseline tem 17 casos (B01–B17).\n`tarefas.md` tem 6 grupos e 16 tarefas, dentro do limite de 4 a 30. A `proposta.md` termina em \"Decisões tomadas sem consulta\", com um item marcado **[REVISAR]**: os casos `apenasV1` (DIV-08 e 401).\n`.specs/06-execution-plan/` não existe, como previsto; o desvio está registrado na tarefa 1.2. A execução depende do Docker para as tarefas 2.x e 5.x."
+    "titulo": "Propõe a spec da fundação do backend com remoção do código original da raiz",
+    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md` antecipados (17 tarefas em 5 grupos). Revisei os dois contra o repositório e deixei as tarefas como estavam.\nA raiz ainda tem o projeto original (Spring Boot 2.2.6 com H2, em `pom.xml`, `mvnw`, `.mvn/` e `src/`). `api-autorizador-processo/` ainda não existe.\nA tag `v0-original` existe e a etapa 2 entregou `tools/parity/` (`cases.json`, `replay.mjs`, `README.md`). A pré-prova da remoção da raiz está satisfeita, e atualizei o \"Ponto de partida\" e a decisão [REVISAR] para refletir isso.\n`.specs/06-execution-plan/` continua inexistente, e isso fica registrado como desvio. Não alterei código da aplicação."
   },
   "totais": {
-    "duracaoMs": 712342,
-    "custo": 3.4269214,
+    "duracaoMs": 747240,
+    "custo": 3.6288196,
     "execucoes": 1,
-    "iteracoes": 2,
-    "entregues": 1,
-    "sessoes": 12,
-    "turnos": 96,
+    "iteracoes": 3,
+    "entregues": 2,
+    "sessoes": 13,
+    "turnos": 103,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 2,
     "recuperacoesResolvidas": 2,
     "falhas": 0,
-    "commits": 3,
+    "commits": 4,
     "tokens": {
-      "entrada": 144,
-      "saida": 57635,
-      "cacheCriacao": 511924,
-      "cacheLeitura": 3506800
+      "entrada": 156,
+      "saida": 59405,
+      "cacheCriacao": 551558,
+      "cacheLeitura": 3763182
     }
   },
   "ultimaExecucao": {

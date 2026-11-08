@@ -45,3 +45,13 @@
 {"em":1794148823849,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\02-baseline-golden-cases → .specs\\workflows\\test-01\\specs\\arquivo\\02-baseline-golden-cases","etapa":2,"passo":"arquivar"}
 {"em":1794148823852,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\02-baseline-golden-cases","etapa":2,"passo":"arquivar"}
 {"em":1794148823856,"nivel":"passo","texto":"Commit da entrega","etapa":2,"passo":"commitEntrega"}
+{"em":1794148824794,"nivel":"ok","texto":"43acc61 · 11 arquivo(s) · feat(autorizador): Propõe a spec de baseline executável de golden cas…","etapa":2,"passo":"commitEntrega"}
+{"em":1794148824804,"nivel":"ok","texto":"Commit da entrega: ok · 43acc61 · 11 arquivo(s)","etapa":2,"passo":"commitEntrega"}
+{"em":1794148824810,"nivel":"ok","texto":"Etapa 2 entregue · commit 43acc61","etapa":2,"passo":"commitEntrega"}
+{"em":1794148824881,"nivel":"passo","texto":"Etapa 3 · Fundação do backend (iteração 3)","etapa":3}
+{"em":1794148824882,"nivel":"passo","texto":"Propor a spec","etapa":3,"passo":"propor"}
+{"em":1794148824885,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":3,"passo":"propor"}
+{"em":1794148858845,"nivel":"ok","texto":"Propor a spec: ok · 19 tarefas","etapa":3,"passo":"propor"}
+{"em":1794148858849,"nivel":"passo","texto":"Verificar ponto de partida","etapa":3,"passo":"partida"}
+{"em":1794148858855,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":3,"passo":"partida"}
+{"em":1794148858860,"nivel":"passo","texto":"Commit da proposta","etapa":3,"passo":"commitProposta"}

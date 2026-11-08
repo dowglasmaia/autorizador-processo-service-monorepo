@@ -5,10 +5,9 @@ Etapa 3 de 31 · Fase 1 · derivada da `SPEC-03` (`.specs/02-backend/SPEC-03-bac
 ## Objetivo
 Gerar o projeto Maven `api-autorizador-processo` (modular monolith, Hexagonal Pragmática, Java 25, Spring Boot 4.1.2, contract-first) e **remover o código original da raiz** depois que o baseline (etapa 2) existir. Resultado: o projeto compila, testa e sobe com `/actuator/health` = `UP`, **sem regras de negócio**.
 
-## Ponto de partida (observado antes da etapa 2 terminar)
-- A raiz ainda tem `pom.xml`, `mvnw`, `mvnw.cmd`, `.mvn/` e `src/` (Spring Boot 2.2.6 / H2), além de `compose.yaml` e `README.md` ("em construção").
-- `api-autorizador-processo/` ainda não existe; a tag `v0-original` e a movimentação do protótipo vieram da etapa 1.
-- A etapa 2 (`tools/parity/` com `cases.json` e `replay.mjs`) estava em andamento; esta etapa **só remove o código da raiz se o baseline estiver entregue** (tarefa 1.2). Revisar esta proposta contra o que a etapa 2 entregou.
+## Ponto de partida (conferido contra o repositório)
+- A raiz ainda tem `pom.xml`, `mvnw`, `mvnw.cmd`, `.mvn/` e `src/` (Spring Boot 2.2.6 / H2, pacote `org.maia.procedimentosapi`), além de `compose.yaml` e `README.md`.
+- `api-autorizador-processo/` ainda não existe. A tag `v0-original` existe (etapa 1) e `tools/parity/` (`cases.json`, `replay.mjs`, `README.md`) foi entregue pela etapa 2: a pré-condição da remoção está satisfeita.
 - `.specs/06-execution-plan/` não existe (desvio a registrar na evidência).
 
 ## Escopo
@@ -41,7 +40,7 @@ Gerar o projeto Maven `api-autorizador-processo` (modular monolith, Hexagonal Pr
 - Remoção da raiz é irreversível no working tree, mas recuperável pela tag `v0-original`; só executar com o baseline entregue.
 
 ## Decisões tomadas sem consulta
-- **[REVISAR]** Condicionar a remoção do código da raiz (tarefa 4.1) à presença de `tools/parity/cases.json` e `replay.mjs` da etapa 2; se faltarem, a tarefa fica bloqueada e o restante segue. A remoção é coberta pela SPEC-03 e pela tag `v0-original`, por isso não se pediu `aprovacao.md`.
+- **[REVISAR]** Manter a verificação, na tarefa 1.2, de `tools/parity/cases.json`, `replay.mjs` e da tag `v0-original` antes da remoção da raiz (tarefa 4.1); hoje existem, então a remoção segue; se sumirem, a tarefa fica bloqueada. A remoção é coberta pela SPEC-03 e pela tag `v0-original`, por isso não se pediu `aprovacao.md`.
 - Manter a ordem do plano (etapa 3 antes de 4): o projeto sobe sem datasource; a configuração de banco fica na etapa 4.
 - Manter as 10 regras ArchUnit mesmo sem módulos de negócio ainda; regras sem classes candidatas usam `allowEmptyShould(true)`.
 - Não dividir tarefas: a spec tem 8 tarefas, agrupadas em 5 blocos.
