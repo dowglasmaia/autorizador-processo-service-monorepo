@@ -1,5 +1,7 @@
 package org.maia.autorizador.procedimento.infrastructure.persistence;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import org.maia.autorizador.procedimento.application.port.ProcedimentoRepository;
 import org.maia.autorizador.procedimento.domain.exception.ProcedimentoDuplicadoException;
@@ -55,6 +57,15 @@ class ProcedimentoRepositoryAdapter implements ProcedimentoRepository {
     @Transactional(readOnly = true)
     public Optional<Procedimento> buscarPorNumero(int numProcedimento) {
         return jpa.findByNumeroProcedimento(numProcedimento).map(ProcedimentoRepositoryAdapter::paraDominio);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Procedimento> buscarPorIds(Collection<Long> ids) {
+        if (ids.isEmpty()) {
+            return List.of();
+        }
+        return jpa.findAllById(ids).stream().map(ProcedimentoRepositoryAdapter::paraDominio).toList();
     }
 
     @Override

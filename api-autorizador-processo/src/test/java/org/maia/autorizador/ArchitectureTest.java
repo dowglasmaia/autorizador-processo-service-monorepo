@@ -25,10 +25,18 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * As 10 regras de {@code TARGET_ARCHITECTURE.md} §2.1. Falha de regra falha o {@code verify}.
  */
-@AnalyzeClasses(packages = "org.maia.autorizador", importOptions = ImportOption.DoNotIncludeTests.class)
+@AnalyzeClasses(packages = "org.maia.autorizador", importOptions = {ImportOption.DoNotIncludeTests.class, ArchitectureTest.SemPackageInfo.class})
 class ArchitectureTest {
 
     private static final String BASE = "org.maia.autorizador";
+
+    /** Ignora {@code package-info} (só carregam anotações do Modulith, como {@code @NamedInterface}). */
+    static final class SemPackageInfo implements ImportOption {
+        @Override
+        public boolean includes(com.tngtech.archunit.core.importer.Location location) {
+            return !location.contains("package-info");
+        }
+    }
 
     /** Regra 1: o domínio não depende de framework. */
     @ArchTest
@@ -139,6 +147,16 @@ class ArchitectureTest {
             .should().dependOnClassesThat().resideInAnyPackage(
                     "org.springframework..", "jakarta.persistence..", "com.fasterxml.jackson..", "tools.jackson..",
                     "org.hibernate..", BASE + ".generated..", BASE + ".procedimento.api..",
+                    BASE + ".procedimento.infrastructure..");
+
+    /** SPEC-10: o domínio de autorizacao é Java puro (só depende de procedimento.domain e shared.error). */
+    @ArchTest
+    static final ArchRule autorizacao_domain_sem_framework = noClasses()
+            .that().resideInAPackage(BASE + ".autorizacao.domain..")
+            .should().dependOnClassesThat().resideInAnyPackage(
+                    "org.springframework..", "jakarta.persistence..", "com.fasterxml.jackson..", "tools.jackson..",
+                    "org.hibernate..", BASE + ".generated..", BASE + ".autorizacao.api..",
+                    BASE + ".autorizacao.infrastructure..", BASE + ".procedimento.api..",
                     BASE + ".procedimento.infrastructure..");
 
     /** Regra 8: controllers sem Repository e sem entidade/domínio. */

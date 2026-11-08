@@ -35,6 +35,19 @@ class ProcedimentoPersistenciaTest extends IntegrationTestBase {
     }
 
     @Test
+    void buscaEmLotePorIdsDevolveSomenteOsExistentes() {
+        Procedimento a = procedimentos.salvar(Procedimento.create(8801, List.of(Sexo.M), List.of(10, 20)));
+        Procedimento b = procedimentos.salvar(Procedimento.create(8802, List.of(Sexo.F), List.of(30)));
+
+        List<Procedimento> lote = procedimentos.buscarPorIds(List.of(a.id(), b.id(), 987654L));
+
+        assertThat(lote).extracting(Procedimento::numProcedimento).containsExactlyInAnyOrder(8801, 8802);
+        assertThat(lote).filteredOn(p -> p.numProcedimento() == 8801).singleElement()
+                .satisfies(p -> assertThat(p.idades()).containsExactly(10, 20));
+        assertThat(procedimentos.buscarPorIds(List.of())).isEmpty();
+    }
+
+    @Test
     void listasVaziasSaoGravadasEDevolvidasVazias() {
         Procedimento salvo = procedimentos.salvar(Procedimento.create(7, List.of(), List.of()));
 

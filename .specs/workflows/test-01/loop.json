@@ -1714,7 +1714,175 @@
           "descricao": "Executa a SPEC-08: solicitar autorização com critérios de idade e sexo e consulta do histórico.\nReferências: `FUNCTIONAL_TRACEABILITY.md`.\nLimite: sem o painel.",
           "spec": "10-modulo-autorizacao",
           "specPronta": false,
-          "status": "pendente"
+          "status": "entregue",
+          "entregueEm": "2026-11-08T16:40:10.577Z",
+          "iteracao": 10,
+          "duracaoMs": 990048,
+          "custo": 2.5296938,
+          "passos": [
+            {
+              "id": "propor",
+              "situacao": "ok",
+              "duracaoMs": 75568,
+              "custo": 0.3901485,
+              "tentativas": 1,
+              "detalhe": "20 tarefas"
+            },
+            {
+              "id": "partida",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "commitProposta",
+              "situacao": "ok",
+              "duracaoMs": 435,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "a5316ed · 5 arquivo(s)"
+            },
+            {
+              "id": "aplicar",
+              "situacao": "ok",
+              "duracaoMs": 914042,
+              "custo": 2.1395453,
+              "tentativas": 1,
+              "detalhe": "20/20 tarefas · 3 sessão(ões)"
+            },
+            {
+              "id": "verificar",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "arquivar",
+              "situacao": "ok",
+              "duracaoMs": 3,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\10-modulo-autorizacao"
+            },
+            {
+              "id": "commitEntrega",
+              "situacao": "ok",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1
+            }
+          ],
+          "sessoes": [
+            {
+              "rotulo": "propor-10",
+              "passo": "propor",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.3901485,
+              "turnos": 11,
+              "duracaoMs": 75552,
+              "inicio": 1794155020442,
+              "fim": 1794155096003,
+              "tokens": {
+                "entrada": 16,
+                "saida": 6941,
+                "cacheCriacao": 69298,
+                "cacheLeitura": 435145
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "antecipar-11",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.35508390000000006,
+              "turnos": 10,
+              "duracaoMs": 83546,
+              "inicio": 1794155096486,
+              "fim": 1794155180042,
+              "tokens": {
+                "entrada": 16,
+                "saida": 9553,
+                "cacheCriacao": 54695,
+                "cacheLeitura": 407419
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-10-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.8937489999999998,
+              "turnos": 40,
+              "duracaoMs": 513279,
+              "inicio": 1794155097926,
+              "fim": 1794155611216,
+              "tokens": {
+                "entrada": 60,
+                "saida": 25074,
+                "cacheCriacao": 97357,
+                "cacheLeitura": 2534610
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-10-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.8926587000000001,
+              "turnos": 27,
+              "duracaoMs": 253422,
+              "inicio": 1794155611221,
+              "fim": 1794155864652,
+              "tokens": {
+                "entrada": 40,
+                "saida": 27277,
+                "cacheCriacao": 110697,
+                "cacheLeitura": 1770207
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-10-3",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.35313760000000005,
+              "turnos": 14,
+              "duracaoMs": 145854,
+              "inicio": 1794155864658,
+              "fim": 1794156010520,
+              "tokens": {
+                "entrada": 22,
+                "saida": 6160,
+                "cacheCriacao": 57451,
+                "cacheLeitura": 616896
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            }
+          ]
         },
         {
           "numero": 11,
@@ -1923,7 +2091,7 @@
     "etapa": 10,
     "inicio": "2026-11-08T16:23:40.429Z",
     "commitInicial": "0b59ec662bae2b70e86719f2bd8ac07632b3975d",
-    "passoAtual": 2,
+    "passoAtual": 6,
     "passos": [
       {
         "id": "propor",
@@ -1943,62 +2111,66 @@
       },
       {
         "id": "commitProposta",
+        "situacao": "ok",
+        "duracaoMs": 435,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "a5316ed · 5 arquivo(s)"
+      },
+      {
+        "id": "aplicar",
+        "situacao": "ok",
+        "duracaoMs": 914042,
+        "custo": 2.1395453,
+        "tentativas": 1,
+        "detalhe": "20/20 tarefas · 3 sessão(ões)"
+      },
+      {
+        "id": "verificar",
+        "situacao": "pulado",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "arquivar",
+        "situacao": "ok",
+        "duracaoMs": 3,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\10-modulo-autorizacao"
+      },
+      {
+        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
-      },
-      {
-        "id": "aplicar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "verificar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "arquivar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
       }
     ],
     "titulo": "Revisa a spec do módulo autorizacao (SPEC-08) contra as etapas 8 e 9",
     "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md`, escritos antes de a etapa 9 terminar. Revisei os dois contra o código entregue em vez de recriar.\nO pacote `autorizacao` ainda não existe. O contrato `autorizacao.yaml` e as tabelas `autorizacao` e `autorizacao_audit` (V1 e V2) já cobrem a etapa, então não há mudança de contrato nem migração nova.\n`ProcedimentoEntity` é pacote-privada e a porta `ProcedimentoRepository` não busca por vários ids. Por isso o `@ManyToOne` entre módulos não serve. Propus um acréscimo aditivo `buscarPorIds`/`porIds` em `procedimento` (tarefa 3.0), marcado [REVISAR] porque contraria o \"não alterar procedimento\" da SPEC-08. O motivo daquela restrição, o paralelismo com a SPEC-12, já caiu.\nO controller não pode usar `domain.model`, então a resposta deve ser montada a partir de `ObterProcedimentoUseCase.Resultado` e `Catalogo`. `Pagina` fica em `procedimento.domain.model`, então o módulo terá sua própria paginação.\nO `check-architecture.mjs` não existe, e a verificação equivalente é o `ArchitectureTest`. `.specs/06-execution-plan/` também não existe. Ambos estão registrados como desvios. A spec ficou com 20 tarefas."
   },
   "totais": {
-    "duracaoMs": 6401414,
-    "custo": 21.466488100000003,
+    "duracaoMs": 7315894,
+    "custo": 23.9611173,
     "execucoes": 2,
     "iteracoes": 10,
     "entregues": 9,
-    "sessoes": 57,
-    "turnos": 756,
+    "sessoes": 61,
+    "turnos": 847,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 5,
     "recuperacoesResolvidas": 4,
     "falhas": 0,
-    "commits": 18,
+    "commits": 19,
     "tokens": {
-      "entrada": 1090,
-      "saida": 522306,
-      "cacheCriacao": 3106634,
-      "cacheLeitura": 33628047
+      "entrada": 1228,
+      "saida": 590370,
+      "cacheCriacao": 3426834,
+      "cacheLeitura": 38957179
     }
   },
   "ultimaExecucao": {

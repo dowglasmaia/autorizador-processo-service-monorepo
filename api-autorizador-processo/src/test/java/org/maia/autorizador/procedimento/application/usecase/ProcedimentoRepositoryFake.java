@@ -1,6 +1,7 @@
 package org.maia.autorizador.procedimento.application.usecase;
 
 import java.time.Instant;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +43,11 @@ class ProcedimentoRepositoryFake implements ProcedimentoRepository {
             return Optional.empty();
         }
         return porId.values().stream().filter(p -> p.numProcedimento() == numProcedimento).findFirst();
+    }
+
+    @Override
+    public List<Procedimento> buscarPorIds(Collection<Long> ids) {
+        return ids.stream().map(porId::get).filter(java.util.Objects::nonNull).toList();
     }
 
     @Override

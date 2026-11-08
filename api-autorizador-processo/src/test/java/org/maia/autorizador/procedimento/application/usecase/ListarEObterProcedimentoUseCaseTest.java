@@ -35,6 +35,15 @@ class ListarEObterProcedimentoUseCaseTest {
     }
 
     @Test
+    void carregaEmLoteIgnorandoIdsInexistentes() {
+        var porIds = obter.porIds(List.of(1L, 2L, 999L));
+
+        assertThat(porIds).containsOnlyKeys(1L, 2L);
+        assertThat(porIds.get(1L).numProcedimento()).isEqualTo(4567);
+        assertThat(obter.porIds(List.of())).isEmpty();
+    }
+
+    @Test
     void filtraPorPrefixoEIgnoraFiltroEmBranco() {
         assertThat(numeros("12", true, 0, 10)).containsExactly(12, 1234);
         assertThat(numeros("  ", true, 0, 10)).hasSize(4);

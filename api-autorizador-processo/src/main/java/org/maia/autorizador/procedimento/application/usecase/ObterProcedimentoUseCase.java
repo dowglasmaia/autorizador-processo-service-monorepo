@@ -1,7 +1,11 @@
 package org.maia.autorizador.procedimento.application.usecase;
 
 import java.time.Instant;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import org.maia.autorizador.procedimento.application.port.ProcedimentoRepository;
 import org.maia.autorizador.procedimento.domain.exception.ProcedimentoNaoEncontradoException;
 import org.maia.autorizador.procedimento.domain.model.DadosCatalogo;
@@ -59,6 +63,12 @@ public class ObterProcedimentoUseCase {
     public Resultado executar(long id) {
         return procedimentos.buscarPorId(id).map(Resultado::de)
                 .orElseThrow(() -> ProcedimentoNaoEncontradoException.porId(id));
+    }
+
+    /** Carrega vários procedimentos de uma vez (sem N+1), indexados por id; ids inexistentes ficam de fora. */
+    public Map<Long, Resultado> porIds(Collection<Long> ids) {
+        return procedimentos.buscarPorIds(ids).stream().map(Resultado::de)
+                .collect(Collectors.toMap(Resultado::id, Function.identity()));
     }
 
     public Procedimento porNumero(int numProcedimento) {
