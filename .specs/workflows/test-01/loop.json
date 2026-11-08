@@ -2531,7 +2531,8 @@
               "origem": "provider",
               "esforco": "medium"
             }
-          ]
+          ],
+          "commit": "9423251"
         }
       ]
     },
@@ -2700,19 +2701,19 @@
     }
   ],
   "iteracao": {
-    "numero": 14,
-    "etapa": 14,
-    "inicio": "2026-11-08T17:28:51.078Z",
-    "commitInicial": "ec1a9bc559b49a5650491907a5b5988140953bb4",
-    "passoAtual": 6,
+    "numero": 15,
+    "etapa": 15,
+    "inicio": "2026-11-08T17:32:41.725Z",
+    "commitInicial": "9423251e6602034787e43f4c46fd882fe14c2cb9",
+    "passoAtual": 2,
     "passos": [
       {
         "id": "propor",
         "situacao": "ok",
-        "duracaoMs": 61901,
-        "custo": 0.2300794,
+        "duracaoMs": 39350,
+        "custo": 0.20215080000000002,
         "tentativas": 1,
-        "detalhe": "13 tarefas"
+        "detalhe": "15 tarefas"
       },
       {
         "id": "partida",
@@ -2724,66 +2725,62 @@
       },
       {
         "id": "commitProposta",
-        "situacao": "ok",
-        "duracaoMs": 707,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "1dd1822 · 5 arquivo(s)"
-      },
-      {
-        "id": "aplicar",
-        "situacao": "ok",
-        "duracaoMs": 166952,
-        "custo": 0.47004690000000005,
-        "tentativas": 1,
-        "detalhe": "13/13 tarefas · 2 sessão(ões)"
-      },
-      {
-        "id": "verificar",
-        "situacao": "pulado",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "arquivar",
-        "situacao": "ok",
-        "duracaoMs": 4,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\14-migracao-dados-condicional"
-      },
-      {
-        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
+      },
+      {
+        "id": "aplicar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "verificar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "arquivar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "commitEntrega",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
       }
     ],
-    "titulo": "Revisa a spec da migração de dados condicional (SPEC-50) contra o estado atual",
-    "comparacao": "A pasta da etapa já tinha `proposta.md` e `tarefas.md`, escritos antecipadamente na etapa 13. Revisei os dois contra o repositório e mantive a estrutura: 4 grupos e 13 tarefas, com o ramo A (não aplicável) como esperado e o ramo B condicionado a `aprovacao.md`.\nConfirmei que não há base de origem: nenhum `*.mv.db`, `*.dump` ou `*.bak`. Os únicos `.sql` são as migrations V1–V4 e o seed local. `tools/` só tem `parity/` e não existe `tools/importacao/`.\n`.env.example` e `compose.yaml` não têm variáveis de conexão com a origem. Não achei variáveis de ambiente com nomes de MySQL ou origem, e o Docker está disponível.\nAjustei dois pontos. A proposta agora registra que a revisão foi feita contra o código atual e inclui essas evidências. A tarefa 2.2 passou a apontar a linha `02-backend/` do `INDEX.md`, que é o único lugar onde a SPEC-50 aparece, porque o índice não tem tabela de status.\nA SPEC-50 segue com a seção \"Resultado\" em branco e fora de `.specs/archive/`, o que fica para a aplicação. Não mexi em código."
+    "titulo": "Propõe a spec da fundação do frontend Angular (SPEC-14)",
+    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md`, antecipados na etapa 14. Revisei os dois contra o repositório e mantive o escopo e as 15 tarefas, em 5 grupos.\n`app-autorizador-processo/` ainda não existe. A raiz tem só `api-autorizador-processo/`, `tools/`, `compose.yaml` e `README.md`, então o scaffold roda sem conflito. A etapa 14 (SPEC-50) foi arquivada sem tocar no frontend.\nO Node é v24.14.0, acima do mínimo de 20.19. A skill `angular-frontend-scaffold` tem `scaffold.mjs` e `validate.mjs`. A SPEC-14 continua em `.specs/03-frontend/`.\nO `.gitignore` da raiz já cobre `node_modules/` e `build/`, mas não vi `dist` do frontend; ficou como a tarefa 4.4. A pasta `06-execution-plan/` citada no `INDEX.md` não existe, e o desvio fica para a evidência da execução.\nSó atualizei o cabeçalho e a seção \"Decisões tomadas sem consulta\" da proposta. Nenhum código foi alterado."
   },
   "totais": {
-    "duracaoMs": 10465323,
-    "custo": 29.505149799999995,
+    "duracaoMs": 10505370,
+    "custo": 29.707300599999993,
     "execucoes": 2,
-    "iteracoes": 14,
-    "entregues": 13,
-    "sessoes": 78,
-    "turnos": 1059,
+    "iteracoes": 15,
+    "entregues": 14,
+    "sessoes": 79,
+    "turnos": 1066,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 5,
     "recuperacoesResolvidas": 4,
     "falhas": 0,
-    "commits": 27,
+    "commits": 28,
     "tokens": {
-      "entrada": 1568,
-      "saida": 703645,
-      "cacheCriacao": 4292292,
-      "cacheLeitura": 48444884
+      "entrada": 1580,
+      "saida": 705810,
+      "cacheCriacao": 4330996,
+      "cacheLeitura": 48701492
     }
   },
   "ultimaExecucao": {

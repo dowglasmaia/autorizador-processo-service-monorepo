@@ -1,6 +1,6 @@
 # Fundação do frontend
 
-Etapa 15 de 31 · Fase 3 · derivada da `SPEC-14` (`.specs/03-frontend/SPEC-14-angular-foundation.md`). Proposta antecipada durante a etapa 14; será revisada contra o que a etapa 14 entregar.
+Etapa 15 de 31 · Fase 3 · derivada da `SPEC-14` (`.specs/03-frontend/SPEC-14-angular-foundation.md`). Proposta antecipada na etapa 14 e revisada na etapa 15 contra o estado atual: a etapa 14 (SPEC-50) foi arquivada sem tocar no frontend, `app-autorizador-processo/` continua inexistente e Node é v24.14.0.
 
 ## Objetivo
 Gerar o projeto `app-autorizador-processo` (Angular 21, TypeScript estrito, SCSS, Tailwind via PostCSS, standalone, zoneless, porta 4200, shell mínimo) com o gerador oficial da skill `angular-frontend-scaffold`, e acrescentar o que o gerador deliberadamente não traz: executor de testes com um teste do shell, script `lint`, `environment` com `apiBaseUrl`, `README.md` e regra `OnPush`/estrito documentada e verificada.
@@ -38,3 +38,4 @@ Gerar o projeto `app-autorizador-processo` (Angular 21, TypeScript estrito, SCSS
 - **Lint:** adotar `angular-eslint` (o CLI 21 não traz lint por padrão), com regras para `OnPush` e `inject()`; é a opção mais conservadora e coerente com o `npm run lint` exigido pelo loop. [REVISAR]
 - **Testes após o scaffold:** a regra da skill de não rodar testes vale para o gerador; os testes da SPEC-14 T4 rodam depois, como etapa separada.
 - **Sem proxy:** mantido conforme a SPEC-14; CORS fica a cargo do backend (perfil `local`).
+- **Revisão da proposta antecipada:** conferida contra o repositório; escopo e tarefas mantidos. A SPEC-14 indica `angular-architect` para T4–T7; será usada junto com `angular-frontend-scaffold`. O `.gitignore` da raiz já ignora `node_modules/` e `build/`; falta conferir `dist` do frontend (tarefa 4.4).

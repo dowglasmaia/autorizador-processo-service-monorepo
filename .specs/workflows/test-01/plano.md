@@ -46,7 +46,7 @@ o Objetivo e ter todas as specs executadas sem invervenção humana e com o refe
 11. **Módulo painel** · `11-modulo-painel` · ✔ 91cc31d — Executa a SPEC-09: resumo agregado do painel (NEW-02), com consultas eficientes. Referências: protótipo e skill `java-persistence-performance`. Limite: somente leitura.
 12. **Config e observabilidade** · `12-config-observabilidade` · ✔ c4de00d — Executa a SPEC-11: perfis de configuração, health, logs e métricas básicas. Referências: `NON_FUNCTIONAL_REQUIREMENTS.md`. Limite: sem stack externa de monitoramento.
 13. **Docker Compose do backend** · `13-compose-backend` · ✔ ec1a9bc — Executa a SPEC-10: Dockerfile da API (`eclipse-temurin:25`) e ajuste do `compose.yaml` e do `.env.example` com PostgreSQL e API. Referências: `compose.yaml` já existente. Limite: o serviço do frontend é tratado na SPEC-13.
-14. **Migração de dados condicional** · `14-migracao-dados-condicional` · ✔ — Executa a SPEC-50 apenas se houver base de origem acessível; caso contrário, registra como não aplicável com evidência e a arquiva. Referências: SPEC-50. Limite: nunca versionar dados reais.
+14. **Migração de dados condicional** · `14-migracao-dados-condicional` · ✔ 9423251 — Executa a SPEC-50 apenas se houver base de origem acessível; caso contrário, registra como não aplicável com evidência e a arquiva. Referências: SPEC-50. Limite: nunca versionar dados reais.
 
 ## Fase 3 · Fase 3 — Frontend Angular completo
 

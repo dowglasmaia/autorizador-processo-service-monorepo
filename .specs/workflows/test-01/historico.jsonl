@@ -326,3 +326,13 @@
 {"em":1794159160733,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\14-migracao-dados-condicional → .specs\\workflows\\test-01\\specs\\arquivo\\14-migracao-dados-condicional","etapa":14,"passo":"arquivar"}
 {"em":1794159160739,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\14-migracao-dados-condicional","etapa":14,"passo":"arquivar"}
 {"em":1794159160745,"nivel":"passo","texto":"Commit da entrega","etapa":14,"passo":"commitEntrega"}
+{"em":1794159161442,"nivel":"ok","texto":"9423251 · 10 arquivo(s) · feat(autorizador): Revisa a spec da migração de dados condicional (SP…","etapa":14,"passo":"commitEntrega"}
+{"em":1794159161454,"nivel":"ok","texto":"Commit da entrega: ok · 9423251 · 10 arquivo(s)","etapa":14,"passo":"commitEntrega"}
+{"em":1794159161464,"nivel":"ok","texto":"Etapa 14 entregue · commit 9423251","etapa":14,"passo":"commitEntrega"}
+{"em":1794159161732,"nivel":"passo","texto":"Etapa 15 · Fundação do frontend (iteração 15)","etapa":15}
+{"em":1794159161733,"nivel":"passo","texto":"Propor a spec","etapa":15,"passo":"propor"}
+{"em":1794159161740,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":15,"passo":"propor"}
+{"em":1794159201095,"nivel":"ok","texto":"Propor a spec: ok · 15 tarefas","etapa":15,"passo":"propor"}
+{"em":1794159201101,"nivel":"passo","texto":"Verificar ponto de partida","etapa":15,"passo":"partida"}
+{"em":1794159201110,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":15,"passo":"partida"}
+{"em":1794159201117,"nivel":"passo","texto":"Commit da proposta","etapa":15,"passo":"commitProposta"}
