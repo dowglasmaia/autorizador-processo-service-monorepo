@@ -3825,7 +3825,154 @@
           "descricao": "Executa a SPEC-19: histórico de autorizações com filtros e paginação.\nReferências: SPEC-08 e protótipo.\nLimite: somente leitura.",
           "spec": "22-feature-autorizacoes",
           "specPronta": false,
-          "status": "pendente"
+          "status": "entregue",
+          "entregueEm": "2026-11-08T18:43:16.385Z",
+          "iteracao": 22,
+          "duracaoMs": 264488,
+          "custo": 0.9858128000000002,
+          "passos": [
+            {
+              "id": "propor",
+              "situacao": "ok",
+              "duracaoMs": 49392,
+              "custo": 0.2531059,
+              "tentativas": 1,
+              "detalhe": "12 tarefas"
+            },
+            {
+              "id": "partida",
+              "situacao": "pulado",
+              "duracaoMs": 1,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "commitProposta",
+              "situacao": "ok",
+              "duracaoMs": 400,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "fe6333f · 5 arquivo(s)"
+            },
+            {
+              "id": "aplicar",
+              "situacao": "ok",
+              "duracaoMs": 214691,
+              "custo": 0.7327069000000002,
+              "tentativas": 1,
+              "detalhe": "12/12 tarefas · 2 sessão(ões)"
+            },
+            {
+              "id": "verificar",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "arquivar",
+              "situacao": "ok",
+              "duracaoMs": 4,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\22-feature-autorizacoes"
+            },
+            {
+              "id": "commitEntrega",
+              "situacao": "ok",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1
+            }
+          ],
+          "sessoes": [
+            {
+              "rotulo": "propor-22",
+              "passo": "propor",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2531059,
+              "turnos": 9,
+              "duracaoMs": 49375,
+              "inicio": 1794163131783,
+              "fim": 1794163181167,
+              "tokens": {
+                "entrada": 16,
+                "saida": 3424,
+                "cacheCriacao": 45239,
+                "cacheLeitura": 378779
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "antecipar-23",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2427375,
+              "turnos": 7,
+              "duracaoMs": 55568,
+              "inicio": 1794163181634,
+              "fim": 1794163237211,
+              "tokens": {
+                "entrada": 12,
+                "saida": 4240,
+                "cacheCriacao": 43517,
+                "cacheLeitura": 262455
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-22-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.4638536000000001,
+              "turnos": 18,
+              "duracaoMs": 138901,
+              "inicio": 1794163183156,
+              "fim": 1794163322072,
+              "tokens": {
+                "entrada": 26,
+                "saida": 13788,
+                "cacheCriacao": 61964,
+                "cacheLeitura": 780656
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-22-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2688533,
+              "turnos": 9,
+              "duracaoMs": 74229,
+              "inicio": 1794163322078,
+              "fim": 1794163396316,
+              "tokens": {
+                "entrada": 16,
+                "saida": 5089,
+                "cacheCriacao": 44726,
+                "cacheLeitura": 390273
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            }
+          ]
         },
         {
           "numero": 23,
@@ -3921,7 +4068,7 @@
     "etapa": 22,
     "inicio": "2026-11-08T18:38:51.767Z",
     "commitInicial": "eed534c2e72374f6a1ac96a0e0b952fd94aa6a45",
-    "passoAtual": 2,
+    "passoAtual": 6,
     "passos": [
       {
         "id": "propor",
@@ -3941,62 +4088,66 @@
       },
       {
         "id": "commitProposta",
+        "situacao": "ok",
+        "duracaoMs": 400,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "fe6333f · 5 arquivo(s)"
+      },
+      {
+        "id": "aplicar",
+        "situacao": "ok",
+        "duracaoMs": 214691,
+        "custo": 0.7327069000000002,
+        "tentativas": 1,
+        "detalhe": "12/12 tarefas · 2 sessão(ões)"
+      },
+      {
+        "id": "verificar",
+        "situacao": "pulado",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "arquivar",
+        "situacao": "ok",
+        "duracaoMs": 4,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\22-feature-autorizacoes"
+      },
+      {
+        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
-      },
-      {
-        "id": "aplicar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "verificar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "arquivar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
       }
     ],
     "titulo": "Revisa a spec da tela de autorizações (SPEC-19) contra a base entregue",
     "comparacao": "A pasta já tinha `proposta.md` e `tarefas.md` antecipados, escritos antes da etapa 21. Revisei os dois contra o código e não recriei nada.\n`features/autorizacoes` continua só com a rota e uma página-esqueleto \"Em construção\". Não há serviço, `doc.md` nem testes.\nA etapa 21 já entregou o link \"Ver autorizações concedidas\" (`routerLink=\"/autorizacoes\"`) em `/solicitar`, então nada muda lá.\nCorrigi uma premissa: a tela de procedimentos não tem controle de paginação (só chama `carregar({ pagina: 0 })`). O controle Anterior/Próxima com `aria-live` será criado nesta etapa (tarefa 3.4) e não reaproveitado.\nOs tipos `AutorizacaoDto` e `PaginaAutorizacoes` já estão em `shared/api`. A spec registra, com [REVISAR], que o plano cita \"filtros\" mas a SPEC-19 e o contrato só trazem `page` e `size`.\nOs arquivos têm 21 tarefas em 4 grupos."
   },
   "totais": {
-    "duracaoMs": 14452503,
-    "custo": 42.7966379,
+    "duracaoMs": 14667598,
+    "custo": 43.7720823,
     "execucoes": 2,
     "iteracoes": 22,
     "entregues": 21,
-    "sessoes": 115,
-    "turnos": 1537,
+    "sessoes": 118,
+    "turnos": 1571,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 6,
     "recuperacoesResolvidas": 5,
     "falhas": 0,
-    "commits": 42,
+    "commits": 43,
     "tokens": {
-      "entrada": 2306,
-      "saida": 1038090,
-      "cacheCriacao": 6260157,
-      "cacheLeitura": 69185905
+      "entrada": 2360,
+      "saida": 1061207,
+      "cacheCriacao": 6410364,
+      "cacheLeitura": 70619289
     }
   },
   "ultimaExecucao": {

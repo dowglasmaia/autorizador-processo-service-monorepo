@@ -44,3 +44,12 @@ Entregar `/autorizacoes` ("Autorizações concedidas"): histórico somente leitu
 - **Controle de paginação novo e local** (a etapa 21 não criou nenhum e procedimentos não possui): componente simples Anterior/Próxima com "Página X de Y" em `aria-live`, na feature; generalização em `shared/ui` fica para depois. [REVISAR]
 - **Constante de tamanho:** definida na própria feature (20), sem importar de `procedimentos`, para não acoplar features.
 - **Filtros:** o plano diz "filtros", mas a SPEC-19 e o contrato (`page`/`size`) não os preveem; não serão criados, para não inventar requisito. [REVISAR]
+- **Lote 1 — tom do status:** `Tag` não tem tom "success" (só `accent`, `accent-2`, `neutral`); "Autorizado" usa `accent`.
+- **Lote 1 — rota:** `autorizacoes.routes.ts` já tinha rota lazy e título; mantida sem alterações. `descreverRegras` fica em `features/autorizacoes/regras.ts`, ordenando idades e sexos (M antes de F).
+- **Lote 2 — paginação:** implementada no template da página (`<nav aria-label="Paginação">`), visível sempre que há tabela; botões Anterior/Próxima nativos (teclado por padrão), desabilitados nos limites; `irPara` ignora páginas fora do intervalo.
+
+## Evidência
+- 3.4 `pages/autorizacoes-page.ts`: nav com Anterior/Próxima e "Página X de Y" em `aria-live`, ligada a `listarAutorizacoes(pagina)`.
+- 4.1 `pages/autorizacoes-page.spec.ts`: 2 linhas em ordem, `criadaEm` nulo ("—"), vazio com CTA, erro com nova tentativa, troca de página e limites.
+- 4.2 `npm run lint` sem erros; `npm run build` ok; `npm test`: 26 arquivos, 171 testes passando.
+- 4.3 Desvio: `.specs/06-execution-plan/` não existe; ignorado. SPEC-19 movida com `git mv` para `.specs/archive/`.

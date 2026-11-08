@@ -493,3 +493,15 @@
 {"em":1794163181187,"nivel":"passo","texto":"Verificar ponto de partida","etapa":22,"passo":"partida"}
 {"em":1794163181201,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":22,"passo":"partida"}
 {"em":1794163181207,"nivel":"passo","texto":"Commit da proposta","etapa":22,"passo":"commitProposta"}
+{"em":1794163181610,"nivel":"ok","texto":"fe6333f · 5 arquivo(s) · docs(test-01): proposta da etapa 22 · Tela de autorizações","etapa":22,"passo":"commitProposta"}
+{"em":1794163181619,"nivel":"ok","texto":"Commit da proposta: ok · fe6333f · 5 arquivo(s)","etapa":22,"passo":"commitProposta"}
+{"em":1794163181626,"nivel":"passo","texto":"Aplicar a spec","etapa":22,"passo":"aplicar"}
+{"em":1794163181632,"nivel":"info","texto":"proposta antecipada da etapa 23 em paralelo","etapa":22,"passo":"aplicar"}
+{"em":1794163237217,"nivel":"ok","texto":"proposta antecipada da etapa 23 pronta","etapa":22,"passo":"aplicar"}
+{"em":1794163396329,"nivel":"ok","texto":"Aplicar a spec: ok · 12/12 tarefas · 2 sessão(ões)","etapa":22,"passo":"aplicar"}
+{"em":1794163396335,"nivel":"passo","texto":"Verificar a mudança","etapa":22,"passo":"verificar"}
+{"em":1794163396348,"nivel":"info","texto":"Verificar a mudança: pulado · sem verificações configuradas","etapa":22,"passo":"verificar"}
+{"em":1794163396355,"nivel":"passo","texto":"Arquivar a spec","etapa":22,"passo":"arquivar"}
+{"em":1794163396364,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\22-feature-autorizacoes → .specs\\workflows\\test-01\\specs\\arquivo\\22-feature-autorizacoes","etapa":22,"passo":"arquivar"}
+{"em":1794163396371,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\22-feature-autorizacoes","etapa":22,"passo":"arquivar"}
+{"em":1794163396378,"nivel":"passo","texto":"Commit da entrega","etapa":22,"passo":"commitEntrega"}
