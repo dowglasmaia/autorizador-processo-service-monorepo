@@ -42,4 +42,4 @@ Fluxo: carregar procedimento por número → `Procedimento.avaliar(idade, sexo)`
 - Definition of Done: RN5–RN8, RN11, DIV-01/05/08 cobertas por testes executados.
 
 ## 6. Resultado
-_Preencher ao concluir._
+Concluída em 2026-11-08 pela etapa `10-modulo-autorizacao` do loop `test-01` (20 tarefas concluídas, nenhuma pendente). Evidência por tarefa em `.specs/workflows/test-01/specs/arquivo/10-modulo-autorizacao/tarefas.md`; desvios e decisões em `proposta.md` da mesma pasta. Verificação global final (checkout limpo, Compose, e2e, paridade, contrato) em `.specs/05-quality/RELATORIO_FINAL.md`.

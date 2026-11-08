@@ -43,4 +43,4 @@ Gerar o novo projeto Maven `api-autorizador-processo` (modular monolith, Clean/H
 - Definition of Done: tarefas com evidência, build e validação executados, original só na tag.
 
 ## 6. Resultado
-_Preencher ao concluir._
+Concluída em 2026-11-08 pela etapa `03-fundacao-backend` do loop `test-01` (19 tarefas concluídas, nenhuma pendente). Evidência por tarefa em `.specs/workflows/test-01/specs/arquivo/03-fundacao-backend/tarefas.md`; desvios e decisões em `proposta.md` da mesma pasta. Verificação global final (checkout limpo, Compose, e2e, paridade, contrato) em `.specs/05-quality/RELATORIO_FINAL.md`.

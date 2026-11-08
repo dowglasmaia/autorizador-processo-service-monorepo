@@ -4,25 +4,53 @@
 
 Monorepo do **Autorizador de Procedimentos Médicos**: cadastro de procedimentos, solicitação e consulta de autorizações (com critérios de idade e sexo do paciente) e painel com indicadores.
 
-> 🚧 **Em construção.** O repositório está sendo modernizado por etapas, seguindo as especificações em [`.specs/`](.specs/INDEX.md). O backend (`api-autorizador-processo`) já tem a fundação pronta (esqueleto, ArchUnit e Modulith); o frontend (`app-autorizador-processo`) tem a fundação pronta (shell Angular 21, testes e lint). O que está marcado como "em construção" abaixo nasce nas próximas etapas.
+> ✅ **Modernização concluída** (aceite em [`RELATORIO_FINAL.md`](.specs/05-quality/RELATORIO_FINAL.md)). Backend, frontend, Compose, CI, e2e, paridade com a versão original, segurança e desempenho foram entregues e verificados. As especificações estão em [`.specs/`](.specs/INDEX.md).
 
 ## Visão
 
-- **Backend** (`api-autorizador-processo`): Spring Boot 4.1.2, Java 25, Maven Wrapper, PostgreSQL 16, Flyway, contrato OpenAPI 3.1, erros RFC 9457 e autenticação JWT por e-mail e senha. Fundação pronta; funcionalidades em construção (veja [`api-autorizador-processo/README.md`](api-autorizador-processo/README.md))
-- **Frontend** (`app-autorizador-processo`): Angular 21, TypeScript estrito, Tailwind CSS, componentes standalone, Signals e formulários reativos tipados, consumindo tipos gerados do OpenAPI. 🚧 em construção
-- **Integração local**: Docker Compose com PostgreSQL, API e frontend. Cada projeto terá seu próprio Dockerfile e seu próprio CI.
+- **Backend** (`api-autorizador-processo`): Spring Boot 4.1.2, Java 25, Maven Wrapper, PostgreSQL 16, Flyway, contrato OpenAPI 3.1, erros RFC 9457 e autenticação JWT por e-mail e senha. Veja [`api-autorizador-processo/README.md`](api-autorizador-processo/README.md).
+- **Frontend** (`app-autorizador-processo`): Angular 21, TypeScript estrito, Tailwind CSS, componentes standalone, zoneless, Signals e formulários reativos tipados, consumindo tipos gerados do OpenAPI. Veja [`app-autorizador-processo/README.md`](app-autorizador-processo/README.md).
+- **Integração local**: Docker Compose com PostgreSQL, API e frontend (Nginx). Cada projeto tem seu próprio Dockerfile e seu próprio CI.
 
-## Estrutura de destino
+## Pré-requisitos
+
+| Ferramenta | Versão | Uso |
+|---|---|---|
+| JDK | 25 (`JAVA_HOME`) | backend |
+| Node.js / npm | 24 (mínimo 20.19) | frontend, `scripts/` e `tools/` |
+| Docker com Compose | 29+ | Compose, Testcontainers, e2e, paridade e desempenho |
+
+## Comandos validados
+
+| Onde | Comando | Resultado verificado na finalização |
+|---|---|---|
+| `api-autorizador-processo` | `./mvnw verify` | 247 testes, `ArchitectureTest` 23/23 |
+| `app-autorizador-processo` | `npm ci && npm run lint && npm run build && npm test` | lint limpo, build ok, 226 testes |
+| `app-autorizador-processo` | `npm run e2e` | 30 cenários (desktop e móvel) |
+| raiz | `node tools/parity/replay.mjs --target v1` | 23/23 casos iguais ao baseline |
+| raiz | `node scripts/check-contract.mjs` e `node scripts/check-contract-compat.mjs` | contrato, tipos e compatibilidade ok |
+
+## Ferramentas (`tools/`)
+
+| Pasta | Para quê |
+|---|---|
+| `tools/parity/` | casos e replay de paridade com a versão original (`replay.mjs`, `RELATORIO.md`) |
+| `tools/contract/` | instantâneo base do contrato v1 usado pelo `check-contract-compat.mjs` |
+| `tools/perf/` | smoke de desempenho (`perf.sh`; ver `PERFORMANCE_REPORT.md`) |
+| `tools/security/` | sondagens ativas de segurança (`sondagem.sh`) |
+
+## Estrutura do monorepo
 
 ```text
 .
-├─ api-autorizador-processo/   backend Spring Boot 4 · Java 25 · Maven            fundação pronta
-├─ app-autorizador-processo/   frontend Angular 21 · Tailwind                     fundação pronta
-├─ tools/parity/               casos e replay de paridade com a versão original
+├─ api-autorizador-processo/   backend Spring Boot 4 · Java 25 · Maven · Dockerfile próprio
+├─ app-autorizador-processo/   frontend Angular 21 · Tailwind · Nginx · Dockerfile próprio
+├─ scripts/                    checks de contrato (tipos e compatibilidade)
+├─ tools/                      parity · contract · perf · security
 ├─ .github/workflows/          CI independente por projeto (backend, frontend, integração)
-├─ compose.yaml · .env.example integração local                                   (existentes; ajustados nas próximas etapas)
+├─ compose.yaml · .env.example integração local (só o .env.example é versionado)
 ├─ README.md                   este arquivo
-└─ .specs/                     especificações, memória do projeto e design
+└─ .specs/                     especificações, memória do projeto, relatórios e design
 ```
 
 O código da **versão original** (Spring Boot 2.2.6 com banco H2) foi removido da raiz e fica preservado pela tag `v0-original`. O protótipo de design está em `.specs/design/prototype/`.
@@ -52,12 +80,12 @@ O Nginx do frontend serve a SPA com fallback para `index.html`, repassa `/api/` 
 
 Sem `JWT_SECRET` (mínimo de 32 bytes) o Compose recusa subir a API. O arquivo `.env` não é versionado; só o `.env.example`. Os testes de integração do backend usam Testcontainers e não dependem do Compose.
 
-## Executar o backend novo
+## Executar o backend
 
 ```bash
 cd api-autorizador-processo
-./mvnw clean verify
-./mvnw spring-boot:run   # http://localhost:8080/actuator/health
+./mvnw clean verify      # exige Docker (Testcontainers)
+./mvnw spring-boot:run   # http://localhost:8080/actuator/health (suba o postgres antes)
 ```
 
 ## Contrato OpenAPI: tipos, conformidade e compatibilidade
@@ -135,7 +163,7 @@ Para executá-la, faça checkout da tag `v0-original` (`git checkout v0-original
 
 ## Especificações
 
-- [Índice](.specs/INDEX.md)
+- [Índice](.specs/INDEX.md) e [relatório final](.specs/05-quality/RELATORIO_FINAL.md)
 - [Produto](.specs/memory/produto.md) e [contexto técnico](.specs/memory/contexto-tecnico.md)
 - [Estrutura do monorepo](.specs/01-architecture/MONOREPO_STRUCTURE.md)
 - [Como executar uma spec](.specs/shared/como-executar.md)

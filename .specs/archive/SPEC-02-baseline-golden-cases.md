@@ -38,4 +38,4 @@ Transformar `BASELINE_COMPORTAMENTO_ORIGINAL.md` em casos **executáveis e reuti
 - Definition of Done: `cases.json` cobre todos os B01–B17 e todas as DIV; `replay.mjs` sem dependências; evidência da execução registrada.
 
 ## 6. Resultado
-_Preencher ao concluir._
+Concluída em 2026-11-08 pela etapa `02-baseline-golden-cases` do loop `test-01` (19 tarefas concluídas, nenhuma pendente). Evidência por tarefa em `.specs/workflows/test-01/specs/arquivo/02-baseline-golden-cases/tarefas.md`; desvios e decisões em `proposta.md` da mesma pasta. Verificação global final (checkout limpo, Compose, e2e, paridade, contrato) em `.specs/05-quality/RELATORIO_FINAL.md`.

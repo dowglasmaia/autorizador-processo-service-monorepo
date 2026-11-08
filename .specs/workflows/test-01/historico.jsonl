@@ -694,3 +694,14 @@
 {"em":1794172063454,"nivel":"passo","texto":"Verificar ponto de partida","etapa":31,"passo":"partida"}
 {"em":1794172063467,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":31,"passo":"partida"}
 {"em":1794172063474,"nivel":"passo","texto":"Commit da proposta","etapa":31,"passo":"commitProposta"}
+{"em":1794172064482,"nivel":"ok","texto":"35f1529 · 5 arquivo(s) · docs(test-01): proposta da etapa 31 · Finalização e aceite","etapa":31,"passo":"commitProposta"}
+{"em":1794172064492,"nivel":"ok","texto":"Commit da proposta: ok · 35f1529 · 5 arquivo(s)","etapa":31,"passo":"commitProposta"}
+{"em":1794172064500,"nivel":"passo","texto":"Aplicar a spec","etapa":31,"passo":"aplicar"}
+{"em":1794172900788,"nivel":"aviso","texto":"a sessão terminou sem marcar tarefas (1 de 2 continuações)","etapa":31,"passo":"aplicar"}
+{"em":1794173103309,"nivel":"ok","texto":"Aplicar a spec: ok · 22/22 tarefas · 3 sessão(ões)","etapa":31,"passo":"aplicar"}
+{"em":1794173103319,"nivel":"passo","texto":"Verificar a mudança","etapa":31,"passo":"verificar"}
+{"em":1794173103334,"nivel":"info","texto":"Verificar a mudança: pulado · sem verificações configuradas","etapa":31,"passo":"verificar"}
+{"em":1794173103343,"nivel":"passo","texto":"Arquivar a spec","etapa":31,"passo":"arquivar"}
+{"em":1794173103353,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\31-finalizacao-documentacao → .specs\\workflows\\test-01\\specs\\arquivo\\31-finalizacao-documentacao","etapa":31,"passo":"arquivar"}
+{"em":1794173103359,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\31-finalizacao-documentacao","etapa":31,"passo":"arquivar"}
+{"em":1794173103366,"nivel":"passo","texto":"Commit da entrega","etapa":31,"passo":"commitEntrega"}

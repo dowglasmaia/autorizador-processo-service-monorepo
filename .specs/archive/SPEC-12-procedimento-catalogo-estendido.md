@@ -42,4 +42,4 @@ O backend original só guarda número, sexos e idades; a tela **Cadastrar proced
 - Definition of Done: contrato atualizado e coerente com o frontend (SPEC-17), `avaliar` comprovadamente inalterado, evidência de testes executados.
 
 ## 6. Resultado
-_Preencher ao concluir._
+Concluída em 2026-11-08 pela etapa `09-catalogo-estendido` do loop `test-01` (21 tarefas concluídas, nenhuma pendente). Evidência por tarefa em `.specs/workflows/test-01/specs/arquivo/09-catalogo-estendido/tarefas.md`; desvios e decisões em `proposta.md` da mesma pasta. Verificação global final (checkout limpo, Compose, e2e, paridade, contrato) em `.specs/05-quality/RELATORIO_FINAL.md`.

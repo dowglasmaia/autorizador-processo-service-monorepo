@@ -5402,7 +5402,154 @@
           "descricao": "Executa a SPEC-43: README do monorepo, documentação final, conferência dos critérios de aceite globais e arquivamento de todas as specs.\nReferências: `.specs/INDEX.md`.\nLimite: sem código novo de negócio.",
           "spec": "31-finalizacao-documentacao",
           "specPronta": false,
-          "status": "pendente"
+          "status": "entregue",
+          "entregueEm": "2026-11-08T21:25:03.373Z",
+          "iteracao": 31,
+          "duracaoMs": 1129040,
+          "custo": 1.8141406,
+          "passos": [
+            {
+              "id": "propor",
+              "situacao": "ok",
+              "duracaoMs": 89233,
+              "custo": 0.37363179999999996,
+              "tentativas": 1,
+              "detalhe": "22 tarefas"
+            },
+            {
+              "id": "partida",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "commitProposta",
+              "situacao": "ok",
+              "duracaoMs": 1006,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "35f1529 · 5 arquivo(s)"
+            },
+            {
+              "id": "aplicar",
+              "situacao": "ok",
+              "duracaoMs": 1038797,
+              "custo": 1.4405088,
+              "tentativas": 1,
+              "detalhe": "22/22 tarefas · 3 sessão(ões)"
+            },
+            {
+              "id": "verificar",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "arquivar",
+              "situacao": "ok",
+              "duracaoMs": 4,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\31-finalizacao-documentacao"
+            },
+            {
+              "id": "commitEntrega",
+              "situacao": "ok",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1
+            }
+          ],
+          "sessoes": [
+            {
+              "rotulo": "propor-31",
+              "passo": "propor",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.37363179999999996,
+              "turnos": 9,
+              "duracaoMs": 89217,
+              "inicio": 1794171974209,
+              "fim": 1794172063433,
+              "tokens": {
+                "entrada": 14,
+                "saida": 11183,
+                "cacheCriacao": 56992,
+                "cacheLeitura": 338058
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-31-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.4840295,
+              "turnos": 21,
+              "duracaoMs": 742208,
+              "inicio": 1794172064508,
+              "fim": 1794172806724,
+              "tokens": {
+                "entrada": 42,
+                "saida": 9540,
+                "cacheCriacao": 64307,
+                "cacheLeitura": 1313175
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-31-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.4585785,
+              "turnos": 15,
+              "duracaoMs": 94041,
+              "inicio": 1794172806730,
+              "fim": 1794172900780,
+              "tokens": {
+                "entrada": 26,
+                "saida": 9618,
+                "cacheCriacao": 70404,
+                "cacheLeitura": 807305
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-31-3",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.4979008,
+              "turnos": 18,
+              "duracaoMs": 202497,
+              "inicio": 1794172900790,
+              "fim": 1794173103297,
+              "tokens": {
+                "entrada": 34,
+                "saida": 11630,
+                "cacheCriacao": 67491,
+                "cacheLeitura": 1115688
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            }
+          ]
         }
       ]
     }
@@ -5412,7 +5559,7 @@
     "etapa": 31,
     "inicio": "2026-11-08T21:06:14.194Z",
     "commitInicial": "82fbb51f130ae7a871d6593ad0c1600c543ff7ea",
-    "passoAtual": 2,
+    "passoAtual": 6,
     "passos": [
       {
         "id": "propor",
@@ -5432,62 +5579,66 @@
       },
       {
         "id": "commitProposta",
+        "situacao": "ok",
+        "duracaoMs": 1006,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "35f1529 · 5 arquivo(s)"
+      },
+      {
+        "id": "aplicar",
+        "situacao": "ok",
+        "duracaoMs": 1038797,
+        "custo": 1.4405088,
+        "tentativas": 1,
+        "detalhe": "22/22 tarefas · 3 sessão(ões)"
+      },
+      {
+        "id": "verificar",
+        "situacao": "pulado",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "arquivar",
+        "situacao": "ok",
+        "duracaoMs": 4,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\31-finalizacao-documentacao"
+      },
+      {
+        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
-      },
-      {
-        "id": "aplicar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "verificar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "arquivar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
       }
     ],
     "titulo": "Propõe a spec de finalização e aceite (SPEC-43) revisada contra a base entregue",
     "comparacao": "A pasta da spec estava vazia, então criei `proposta.md` e `tarefas.md` do zero (22 tarefas em 6 grupos).\n`.specs/06-execution-plan/` (STATE.md, DECISIONS.md) não existe. O relatório final vai para `.specs/05-quality/RELATORIO_FINAL.md` e para o `INDEX.md`, e isso está registrado como decisão a revisar.\nO `INDEX.md` está desatualizado: diz \"só documentação, nada implementado\" e lista só 4 specs concluídas, embora as etapas 1–30 estejam arquivadas.\nAinda estão fora de `.specs/archive/` as specs originais SPEC-01, 02, 03, 08, 09, 11, 12, 20, 21, 23, 42 e 43. A proposta só as arquiva se houver evidência nas etapas derivadas.\n\"legado/legacy\" no backend aparece só no README e na regra 9 do `ArchitectureTest`, que proíbem o termo, então a varredura precisa aceitá-los. O checkout limpo será um clone temporário do HEAD, porque o loop proíbe `git clean` e `checkout`."
   },
   "totais": {
-    "duracaoMs": 23299831,
-    "custo": 59.8137345,
+    "duracaoMs": 24339638,
+    "custo": 61.2542433,
     "execucoes": 2,
     "iteracoes": 31,
     "entregues": 30,
-    "sessoes": 158,
-    "turnos": 2142,
+    "sessoes": 161,
+    "turnos": 2196,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 7,
     "recuperacoesResolvidas": 6,
     "falhas": 0,
-    "commits": 60,
+    "commits": 61,
     "tokens": {
-      "entrada": 3332,
-      "saida": 1449317,
-      "cacheCriacao": 8680256,
-      "cacheLeitura": 101409691
+      "entrada": 3434,
+      "saida": 1480105,
+      "cacheCriacao": 8882458,
+      "cacheLeitura": 104645859
     }
   },
   "ultimaExecucao": {

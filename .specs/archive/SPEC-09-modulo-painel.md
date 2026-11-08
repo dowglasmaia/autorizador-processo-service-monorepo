@@ -37,4 +37,4 @@ Criar `GET /api/v1/painel/resumo`, que o protótipo exige e a versão original n
 - Definition of Done: contrato respeitado, valores do aceite verificados por teste executado.
 
 ## 6. Resultado
-_Preencher ao concluir._
+Concluída em 2026-11-08 pela etapa `11-modulo-painel` do loop `test-01` (16 tarefas concluídas, nenhuma pendente). Evidência por tarefa em `.specs/workflows/test-01/specs/arquivo/11-modulo-painel/tarefas.md`; desvios e decisões em `proposta.md` da mesma pasta. Verificação global final (checkout limpo, Compose, e2e, paridade, contrato) em `.specs/05-quality/RELATORIO_FINAL.md`.

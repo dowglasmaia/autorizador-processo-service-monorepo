@@ -13,6 +13,7 @@ Frontend do **Autorizador de Procedimentos Médicos**: Angular 21, TypeScript es
 | `npm run build` | Build de produção em `dist/` |
 | `npm test` | Testes unitários (Vitest via `@angular/build:unit-test`), execução única |
 | `npm run lint` | `angular-eslint` (exige `OnPush` e `inject()`) |
+| `npm run api:types` | Regenera `src/app/shared/api/api-types.ts` a partir do contrato OpenAPI |
 | `npm run e2e` | Testes e2e Playwright contra o ambiente completo no Docker (desktop e móvel) |
 
 ## Ambientes
@@ -35,7 +36,7 @@ src/environments/
 - **Signals** para estado local e derivado; sem biblioteca de estado externa.
 - **TypeScript estrito** e `strictTemplates` ativos.
 - Textos de UI, mensagens e documentação em português.
-- Tipos da API virão **gerados** do contrato OpenAPI do backend; não duplique DTOs à mão.
+- Tipos da API são **gerados** do contrato OpenAPI do backend; não duplique DTOs à mão (veja a seção abaixo).
 
 ## Autenticação
 - **Fluxo:** `/login` (e-mail e senha) → `POST /auth/login` → `AuthService` guarda o `TokenResponse`. O `authInterceptor` anexa `Authorization: Bearer` somente a URLs sob `apiBaseUrl`; o `authGuard` (`canMatch`) protege `painel`, `procedimentos`, `solicitar` e `autorizacoes`, e o `guestGuard` leva quem já entrou ao painel. O destino pós-login vem de `?retorno=`, validado por `retornoSeguro` (recusa `//x`, `http://`, `javascript:` e barra invertida).
@@ -43,6 +44,14 @@ src/environments/
 - **Logout:** menu do usuário no shell ("Sair"); também ocorre em `401` fora do login, com o aviso "Sua sessão expirou. Entre novamente.".
 - **Riscos aceitos:** token em `sessionStorage` é legível por XSS (cookie `HttpOnly` exigiria mudança no backend); sem refresh token (PEN-09/PEN-10); a validade real é sempre decidida pelo servidor.
 - Detalhes: `src/app/core/auth/doc.md` e `src/app/features/login/doc.md`.
+
+## Tipos gerados do OpenAPI
+
+`src/app/shared/api/api-types.ts` é gerado por `openapi-typescript` a partir de `api-autorizador-processo/src/main/resources/openapi/`. Nunca edite à mão: após mudar o contrato rode `npm run api:types` e versione o resultado. Na raiz, `node scripts/check-contract.mjs` falha se o arquivo estiver defasado (roda no CI de integração).
+
+## Acessibilidade
+
+`src/app/a11y.spec.ts` audita automaticamente (WCAG 2.2 AA, sem axe-core) as 6 rotas: landmarks, rótulos, foco visível, navegação por teclado e diálogo com foco preso e retorno. O que regra automática não cobre está em `doc.md` (seção Acessibilidade) de cada módulo. Os cenários e2e também rodam em viewport móvel.
 
 ## Contêiner Nginx
 

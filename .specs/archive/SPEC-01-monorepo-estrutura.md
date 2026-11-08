@@ -39,4 +39,4 @@ Contexto: a raiz mistura projeto original, protótipo e arquivos novos não rast
 - Definition of Done: tarefas com evidência; nenhum arquivo rastreado removido; README coerente com `MONOREPO_STRUCTURE.md`.
 
 ## 6. Resultado
-_Preencher ao concluir._
+Concluída em 2026-11-08 pela etapa `01-estrutura-monorepo` do loop `test-01` (15 tarefas concluídas, nenhuma pendente). Evidência por tarefa em `.specs/workflows/test-01/specs/arquivo/01-estrutura-monorepo/tarefas.md`; desvios e decisões em `proposta.md` da mesma pasta. Verificação global final (checkout limpo, Compose, e2e, paridade, contrato) em `.specs/05-quality/RELATORIO_FINAL.md`.

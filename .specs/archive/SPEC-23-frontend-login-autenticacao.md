@@ -51,4 +51,4 @@ Implementar a **tela de login** (e-mail e senha) e a autenticação JWT no Angul
 - Definition of Done: todas as rotas de funcionalidade protegidas; `401` tratado centralmente; sem vazamento de token; acessibilidade do formulário verificada.
 
 ## 6. Resultado
-_Preencher ao concluir._
+Concluída em 2026-11-08 pela etapa `18-login-frontend` do loop `test-01` (19 tarefas concluídas, nenhuma pendente). Evidência por tarefa em `.specs/workflows/test-01/specs/arquivo/18-login-frontend/tarefas.md`; desvios e decisões em `proposta.md` da mesma pasta. Verificação global final (checkout limpo, Compose, e2e, paridade, contrato) em `.specs/05-quality/RELATORIO_FINAL.md`.

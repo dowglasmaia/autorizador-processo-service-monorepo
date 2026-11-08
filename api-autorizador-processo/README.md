@@ -2,7 +2,7 @@
 
 Backend do **Autorizador de Procedimentos Médicos**: monólito modular em Java 25 e Spring Boot 4.1.2, com Hexagonal Pragmática (pacote por funcionalidade), contrato OpenAPI 3.1 primeiro e logs estruturados.
 
-> Estado atual (etapa 4, fundação do banco): PostgreSQL 16, Flyway e auditoria (Envers) configurados, sem funcionalidades de negócio. Contrato, funcionalidades e autenticação JWT chegam nas próximas etapas.
+> Estado: entregue e verificado (`./mvnw verify`: 247 testes, `ArchitectureTest` 23/23). Contrato OpenAPI v1 com 8 operações, autenticação JWT, painel, procedimentos e autorizações.
 
 ## Stack
 
@@ -28,7 +28,7 @@ Backend do **Autorizador de Procedimentos Médicos**: monólito modular em Java 
 ## Como rodar
 
 ```sh
-./mvnw clean verify        # compila, gera o contrato, roda testes, ArchUnit e Modulith
+./mvnw clean verify        # compila, gera o contrato, roda testes, ArchUnit e Modulith (exige Docker)
 ./mvnw spring-boot:run     # sobe a API em http://localhost:8080
 ```
 
@@ -84,7 +84,37 @@ org.maia.autorizador
 └── shared/           código técnico transversal (logging; módulo aberto)
 ```
 
-Funcionalidades previstas: `procedimento`, `autorizacao`, `painel`. As fronteiras são verificadas por `ModularityTests` e as regras de camadas e nomenclatura por `ArchitectureTest`; qualquer violação falha o `verify`. Nenhum pacote ou classe pode ter "legado" ou "legacy" no nome.
+Funcionalidades: `autenticacao`, `procedimento`, `autorizacao`, `painel`. As fronteiras são verificadas por `ModularityTests` e as regras de camadas e nomenclatura por `ArchitectureTest`; qualquer violação falha o `verify`. Nenhum pacote ou classe pode ter "legado" ou "legacy" no nome.
+
+## Endpoints (`/api/v1`)
+
+Contrato em `src/main/resources/openapi/modules/`. Todos exigem `Authorization: Bearer <token>`, exceto o login. Erros seguem RFC 9457 (`application/problem+json`).
+
+| Método e caminho | Operação | Uso |
+|---|---|---|
+| `POST /auth/login` | `autenticar` | e-mail e senha → JWT (público) |
+| `GET /auth/me` | `obterUsuarioAtual` | usuário autenticado |
+| `GET /procedimentos` | `listarProcedimentos` | listagem paginada, com filtro e `sort` |
+| `POST /procedimentos` | `cadastrarProcedimento` | cadastra procedimento |
+| `GET /procedimentos/{id}` | `obterProcedimento` | detalhe |
+| `POST /autorizacoes` | `solicitarAutorizacao` | solicita autorização (critérios de idade e sexo) |
+| `GET /autorizacoes` | `listarAutorizacoes` | lista autorizações |
+| `GET /painel/resumo` | `obterResumoPainel` | indicadores do painel |
+
+## Testes
+
+`./mvnw verify` roda testes unitários, de integração (PostgreSQL 16 via Testcontainers, sem H2), de contrato (`ContratoRespostasApiTest` valida respostas reais contra o YAML), de segurança (`VarreduraSegurancaTest`), de log, de concorrência e o `ArchitectureTest`. Sem Docker os testes de integração não rodam. O smoke de desempenho fica em `tools/perf/`.
+
+## ArchUnit
+
+`ArchitectureTest` (23 regras) é obrigatório e falha o `verify`: camadas da Hexagonal Pragmática, domínio sem framework, um caso de uso por operação, portas só de saída, dependências entre módulos e nomenclatura. A regra 9 proíbe "legado" ou "legacy" em pacote ou classe; por isso o termo só aparece nela e nesta documentação.
+
+## Riscos aceitos
+
+- Sem refresh token (PEN-10): o JWT dura 60 minutos e não há revogação antes do vencimento.
+- Limitador de login em memória (PEN-11): vale por instância; zera no reinício.
+- Sem papéis/perfis (PEN-12), cadastro de usuários nem recuperação de senha: fora do escopo.
+- HTTP puro no Compose: em ambiente real, exige terminador TLS na frente (veja o README da raiz, seção Segurança).
 
 ## Contrato primeiro
 

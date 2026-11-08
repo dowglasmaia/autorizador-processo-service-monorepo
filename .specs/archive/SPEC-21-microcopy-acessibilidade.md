@@ -39,4 +39,4 @@ Passe final de qualidade sobre as telas prontas: catálogo único de mensagens e
 - Definition of Done: catálogo único em uso, auditoria executada, pendências a11y justificadas.
 
 ## 6. Resultado
-_Preencher ao concluir._
+Concluída em 2026-11-08 pela etapa `24-microcopy-acessibilidade` do loop `test-01` (17 tarefas concluídas, nenhuma pendente). Evidência por tarefa em `.specs/workflows/test-01/specs/arquivo/24-microcopy-acessibilidade/tarefas.md`; desvios e decisões em `proposta.md` da mesma pasta. Verificação global final (checkout limpo, Compose, e2e, paridade, contrato) em `.specs/05-quality/RELATORIO_FINAL.md`.

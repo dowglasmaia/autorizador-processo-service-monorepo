@@ -37,4 +37,4 @@ Fechar a operação do backend: perfis (`local`, padrão/contêiner), variáveis
 - Definition of Done: todas as variáveis do `.env.example` consumidas; nenhum segredo no repositório (`git grep -i "password" -- api-autorizador-processo` só mostra nomes de variável).
 
 ## 6. Resultado
-_Preencher ao concluir._
+Concluída em 2026-11-08 pela etapa `12-config-observabilidade` do loop `test-01` (21 tarefas concluídas, nenhuma pendente). Evidência por tarefa em `.specs/workflows/test-01/specs/arquivo/12-config-observabilidade/tarefas.md`; desvios e decisões em `proposta.md` da mesma pasta. Verificação global final (checkout limpo, Compose, e2e, paridade, contrato) em `.specs/05-quality/RELATORIO_FINAL.md`.

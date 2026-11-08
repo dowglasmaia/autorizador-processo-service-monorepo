@@ -39,4 +39,4 @@ Tela inicial do protótipo alimentada pela API real (`obterResumoPainel`): cabe�
 - Definition of Done: `obterResumoPainel` coberta; KPI de sessão rotulado; gráficos com alternativa textual.
 
 ## 6. Resultado
-_Preencher ao concluir._
+Concluída em 2026-11-08 pela etapa `23-feature-painel` do loop `test-01` (16 tarefas concluídas, nenhuma pendente). Evidência por tarefa em `.specs/workflows/test-01/specs/arquivo/23-feature-painel/tarefas.md`; desvios e decisões em `proposta.md` da mesma pasta. Verificação global final (checkout limpo, Compose, e2e, paridade, contrato) em `.specs/05-quality/RELATORIO_FINAL.md`.

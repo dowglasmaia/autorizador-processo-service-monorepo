@@ -38,4 +38,4 @@ Medir (não presumir) o desempenho contra as metas provisórias de `NON_FUNCTION
 - Definition of Done: `PERFORMANCE_REPORT.md` preenchido com dados medidos.
 
 ## 6. Resultado
-_Preencher ao concluir._
+Concluída em 2026-11-08 pela etapa `30-smoke-desempenho` do loop `test-01` (18 tarefas concluídas, nenhuma pendente). Evidência por tarefa em `.specs/workflows/test-01/specs/arquivo/30-smoke-desempenho/tarefas.md`; desvios e decisões em `proposta.md` da mesma pasta. Verificação global final (checkout limpo, Compose, e2e, paridade, contrato) em `.specs/05-quality/RELATORIO_FINAL.md`.
