@@ -685,3 +685,12 @@
 {"em":1794171972820,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\30-smoke-desempenho → .specs\\workflows\\test-01\\specs\\arquivo\\30-smoke-desempenho","etapa":30,"passo":"arquivar"}
 {"em":1794171972827,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\30-smoke-desempenho","etapa":30,"passo":"arquivar"}
 {"em":1794171972835,"nivel":"passo","texto":"Commit da entrega","etapa":30,"passo":"commitEntrega"}
+{"em":1794171974095,"nivel":"ok","texto":"82fbb51 · 12 arquivo(s) · feat(autorizador): Revisa a spec de smoke de desempenho (SPEC-42) con…","etapa":30,"passo":"commitEntrega"}
+{"em":1794171974110,"nivel":"ok","texto":"Commit da entrega: ok · 82fbb51 · 12 arquivo(s)","etapa":30,"passo":"commitEntrega"}
+{"em":1794171974123,"nivel":"ok","texto":"Etapa 30 entregue · commit 82fbb51","etapa":30,"passo":"commitEntrega"}
+{"em":1794171974200,"nivel":"passo","texto":"Etapa 31 · Finalização e aceite (iteração 31)","etapa":31}
+{"em":1794171974201,"nivel":"passo","texto":"Propor a spec","etapa":31,"passo":"propor"}
+{"em":1794172063447,"nivel":"ok","texto":"Propor a spec: ok · 22 tarefas","etapa":31,"passo":"propor"}
+{"em":1794172063454,"nivel":"passo","texto":"Verificar ponto de partida","etapa":31,"passo":"partida"}
+{"em":1794172063467,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":31,"passo":"partida"}
+{"em":1794172063474,"nivel":"passo","texto":"Commit da proposta","etapa":31,"passo":"commitProposta"}
