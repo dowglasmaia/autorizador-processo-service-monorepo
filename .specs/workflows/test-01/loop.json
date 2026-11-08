@@ -208,7 +208,8 @@
               "origem": "provider",
               "esforco": "medium"
             }
-          ]
+          ],
+          "commit": "f70aeb1"
         },
         {
           "numero": 2,
@@ -499,19 +500,19 @@
     }
   ],
   "iteracao": {
-    "numero": 1,
-    "etapa": 1,
-    "inicio": "2026-11-08T14:27:39.484Z",
-    "commitInicial": "71f43a737867e52a8a586063540c63a5c0caa326",
-    "passoAtual": 6,
+    "numero": 2,
+    "etapa": 2,
+    "inicio": "2026-11-08T14:30:20.816Z",
+    "commitInicial": "f70aeb1e3f1eced0059ab7863c416e275f219120",
+    "passoAtual": 2,
     "passos": [
       {
         "id": "propor",
         "situacao": "ok",
-        "duracaoMs": 45847,
-        "custo": 0.29106879999999996,
+        "duracaoMs": 25715,
+        "custo": 0.168938,
         "tentativas": 1,
-        "detalhe": "15 tarefas"
+        "detalhe": "19 tarefas"
       },
       {
         "id": "partida",
@@ -523,78 +524,62 @@
       },
       {
         "id": "commitProposta",
-        "situacao": "ok",
-        "duracaoMs": 342,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "7f7ce6e · 5 arquivo(s)"
-      },
-      {
-        "id": "aplicar",
-        "situacao": "aviso",
-        "duracaoMs": 85511,
-        "custo": 0.6794848,
-        "tentativas": 1,
-        "recuperacoes": [
-          {
-            "numero": 1,
-            "erro": ".specs\\workflows\\test-01\\specs\\01-estrutura-monorepo/tarefas.md não tem tarefas",
-            "resolvida": true,
-            "custo": 0.21882069999999998,
-            "em": "2026-11-08T14:29:51.231Z",
-            "causa": "A sessão de aplicar a spec já tinha movido (git mv) a pasta 01-estrutura-monorepo para .specs/archive/. Por isso a checagem não achou o tarefas.md no caminho original e disse que não havia tarefas. As 15 tarefas já estavam concluídas.",
-            "oQueFez": "Movi proposta.md e tarefas.md de volta de .specs/archive/01-estrutura-monorepo/ para .specs/workflows/test-01/specs/01-estrutura-monorepo/ e removi a pasta vazia do archive. O tarefas.md tem 15 tarefas `[x]` e nenhuma pendente. O arquivamento fica para o passo próprio do devkit.",
-            "precisaPessoa": false
-          }
-        ],
-        "detalhe": "recuperado"
-      },
-      {
-        "id": "verificar",
-        "situacao": "pulado",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "arquivar",
-        "situacao": "ok",
-        "duracaoMs": 3,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\01-estrutura-monorepo"
-      },
-      {
-        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
+      },
+      {
+        "id": "aplicar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "verificar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "arquivar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "commitEntrega",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
       }
     ],
-    "titulo": "Propõe a spec de estrutura do monorepo com tag v0-original e protótipo movido",
-    "comparacao": "A pasta da spec estava vazia, então criei `proposta.md` e `tarefas.md` do zero a partir da SPEC-01.\nNenhuma tag existe ainda e o protótipo continua na raiz, não rastreado. O `compose.yaml`, o `.env.example` e `.specs/` também estão não rastreados.\nO `.gitignore` atual cobre `target/`, `dist/` e IDEs, mas não `node_modules/`, `.angular/`, `.env` nem `*.log`. A spec inclui esses itens.\nO README atual é curto (funcionalidades, Swagger, H2 e LinkedIn). A spec o reescreve como README do monorepo e mantém os créditos.\n`.specs/06-execution-plan/` não existe, então a atualização de `STATE.md` da SPEC-01 foi substituída por evidência em `tarefas.md`.\n`.specs/design/` já tem `DESIGN_SYSTEM_DISCOVERY.md`, que deve ser preservado. O git não versiona pastas vazias, então as pastas de destino nascem nas etapas seguintes. Isso está registrado na proposta."
+    "titulo": "Propõe a spec de baseline executável de golden cases em tools/parity",
+    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md` completos, derivados da SPEC-02. Revisei os dois contra o repositório e não alterei nada.\nA tag `v0-original` existe (etapa 1 arquivada) e `tools/` ainda não existe, então a etapa começa do zero.\n`BASELINE_COMPORTAMENTO_ORIGINAL.md` e `API_CONTRACTS.md` §4 existem, e o baseline tem 17 casos (B01–B17).\n`tarefas.md` tem 6 grupos e 16 tarefas, dentro do limite de 4 a 30. A `proposta.md` termina em \"Decisões tomadas sem consulta\", com um item marcado **[REVISAR]**: os casos `apenasV1` (DIV-08 e 401).\n`.specs/06-execution-plan/` não existe, como previsto; o desvio está registrado na tarefa 1.2. A execução depende do Docker para as tarefas 2.x e 5.x."
   },
   "totais": {
-    "duracaoMs": 131703,
-    "custo": 1.6689386999999998,
+    "duracaoMs": 158380,
+    "custo": 1.8378766999999998,
     "execucoes": 1,
-    "iteracoes": 1,
-    "entregues": 0,
-    "sessoes": 6,
-    "turnos": 41,
+    "iteracoes": 2,
+    "entregues": 1,
+    "sessoes": 7,
+    "turnos": 46,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 1,
     "recuperacoesResolvidas": 1,
     "falhas": 0,
-    "commits": 1,
+    "commits": 2,
     "tokens": {
-      "entrada": 50,
-      "saida": 18093,
-      "cacheCriacao": 233704,
-      "cacheLeitura": 1011853
+      "entrada": 58,
+      "saida": 19258,
+      "cacheCriacao": 269275,
+      "cacheLeitura": 1161733
     }
   },
   "ultimaExecucao": {

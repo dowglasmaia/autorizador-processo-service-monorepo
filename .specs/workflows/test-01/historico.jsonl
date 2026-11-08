@@ -20,3 +20,13 @@
 {"em":1794148219664,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\01-estrutura-monorepo → .specs\\workflows\\test-01\\specs\\arquivo\\01-estrutura-monorepo","etapa":1,"passo":"arquivar"}
 {"em":1794148219668,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\01-estrutura-monorepo","etapa":1,"passo":"arquivar"}
 {"em":1794148219672,"nivel":"passo","texto":"Commit da entrega","etapa":1,"passo":"commitEntrega"}
+{"em":1794148220624,"nivel":"ok","texto":"f70aeb1 · 72 arquivo(s) · feat(autorizador): Propõe a spec de estrutura do monorepo com tag v0-…","etapa":1,"passo":"commitEntrega"}
+{"em":1794148220642,"nivel":"ok","texto":"Commit da entrega: ok · f70aeb1 · 72 arquivo(s)","etapa":1,"passo":"commitEntrega"}
+{"em":1794148220649,"nivel":"ok","texto":"Etapa 1 entregue · commit f70aeb1","etapa":1,"passo":"commitEntrega"}
+{"em":1794148220822,"nivel":"passo","texto":"Etapa 2 · Baseline golden cases (iteração 2)","etapa":2}
+{"em":1794148220823,"nivel":"passo","texto":"Propor a spec","etapa":2,"passo":"propor"}
+{"em":1794148220827,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":2,"passo":"propor"}
+{"em":1794148246545,"nivel":"ok","texto":"Propor a spec: ok · 19 tarefas","etapa":2,"passo":"propor"}
+{"em":1794148246549,"nivel":"passo","texto":"Verificar ponto de partida","etapa":2,"passo":"partida"}
+{"em":1794148246556,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":2,"passo":"partida"}
+{"em":1794148246559,"nivel":"passo","texto":"Commit da proposta","etapa":2,"passo":"commitProposta"}
