@@ -29,3 +29,11 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Node / Angular ###
+node_modules/
+.angular/
+
+### Segredos e logs ###
+.env
+*.log

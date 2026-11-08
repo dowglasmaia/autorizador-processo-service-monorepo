@@ -30,7 +30,7 @@ o Objetivo e ter todas as specs executadas sem invervenção humana e com o refe
 
 ## Fase 1 · Fase 1 — Fundações do monorepo e do backend
 
-1. **Estrutura do monorepo** · `01-estrutura-monorepo` · · — Executa a SPEC-01: tag `v0-original`, `.gitignore` raiz, pastas de destino e movimentação do protótipo para `.specs/design/prototype/`. Referências: `01-architecture/MONOREPO_STRUCTURE.md`. Limite: não gera os projetos ainda e não remove o código antigo.
+1. **Estrutura do monorepo** · `01-estrutura-monorepo` · ✔ — Executa a SPEC-01: tag `v0-original`, `.gitignore` raiz, pastas de destino e movimentação do protótipo para `.specs/design/prototype/`. Referências: `01-architecture/MONOREPO_STRUCTURE.md`. Limite: não gera os projetos ainda e não remove o código antigo.
 2. **Baseline golden cases** · `02-baseline-golden-cases` · · — Executa a SPEC-02: casos executáveis em `tools/parity/` (cases.json e replay.mjs) obtidos rodando a versão original da tag `v0-original` em contêiner JDK 8. Referências: `BASELINE_COMPORTAMENTO_ORIGINAL.md`. Limite: sem alterar a API original.
 3. **Fundação do backend** · `03-fundacao-backend` · · — Executa a SPEC-03: gera `api-autorizador-processo` (Java 25, Spring Boot 4.1.2, Modulith, ArchUnit) e remove o código antigo da raiz depois do baseline. Referências: `TARGET_ARCHITECTURE.md` e `DECISIONS.md`. Limite: sem regras de negócio.
 4. **Fundação do banco** · `04-fundacao-banco` · · — Executa a SPEC-04: PostgreSQL 16, Flyway, migrações iniciais, auditoria e Testcontainers. Referências: `DATABASE_DESIGN.md` e a skill `java-persistence-performance`. Limite: sem módulos de negócio.

@@ -37,3 +37,5 @@ A raiz mistura o projeto original (Spring Boot 2.2.6), o protótipo HTML e arqui
 ## Decisões tomadas sem consulta
 - A pasta `.specs/06-execution-plan/` não existe; o item de `STATE.md` da T6 foi substituído por evidência em `tarefas.md`. Sem necessidade de revisão humana.
 - O "início quando execução autorizada" da SPEC-01 é coberto pelo loop automático `test-01`, que já traz a autorização. **[REVISAR]** confirmar que a criação da tag `v0-original` sobre o `HEAD` atual (`71f43a7` ou o commit do devkit que o sucede, sem mudança de código) é o ponto desejado.
+- Desvio confirmado (tarefa 1.2): `.specs/06-execution-plan/` não existe; a evidência fica em `tarefas.md`.
+- Tag `v0-original` criada sobre o `HEAD` `7f7ce6e` (commit de proposta do devkit, sem mudança de código). **[REVISAR]**

@@ -5,3 +5,18 @@
 {"em":1794148105348,"nivel":"passo","texto":"Verificar ponto de partida","etapa":1,"passo":"partida"}
 {"em":1794148105355,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":1,"passo":"partida"}
 {"em":1794148105359,"nivel":"passo","texto":"Commit da proposta","etapa":1,"passo":"commitProposta"}
+{"em":1794148105702,"nivel":"ok","texto":"7f7ce6e · 5 arquivo(s) · docs(test-01): proposta da etapa 1 · Estrutura do monorepo","etapa":1,"passo":"commitProposta"}
+{"em":1794148105708,"nivel":"ok","texto":"Commit da proposta: ok · 7f7ce6e · 5 arquivo(s)","etapa":1,"passo":"commitProposta"}
+{"em":1794148105712,"nivel":"passo","texto":"Aplicar a spec","etapa":1,"passo":"aplicar"}
+{"em":1794148105717,"nivel":"info","texto":"proposta antecipada da etapa 2 em paralelo","etapa":1,"passo":"aplicar"}
+{"em":1794148159206,"nivel":"ok","texto":"proposta antecipada da etapa 2 pronta","etapa":1,"passo":"aplicar"}
+{"em":1794148191227,"nivel":"aviso","texto":"a sessão terminou sem marcar tarefas (1 de 2 continuações)","etapa":1,"passo":"aplicar"}
+{"em":1794148191228,"nivel":"erro","texto":"Aplicar a spec: .specs\\workflows\\test-01\\specs\\01-estrutura-monorepo/tarefas.md não tem tarefas","etapa":1,"passo":"aplicar"}
+{"em":1794148191230,"nivel":"passo","texto":"Recuperação 1 · Aplicar a spec","etapa":1,"passo":"aplicar"}
+{"em":1794148219643,"nivel":"ok","texto":"recuperação 1 resolveu: A sessão de aplicar a spec já tinha movido (git mv) a pasta 01-estrutura-monorepo para .specs/archive/. Por isso a checagem não achou o tarefas.md no caminho original e disse que não havia tarefas. As 15 tarefas já estavam concluídas.","etapa":1,"passo":"aplicar"}
+{"em":1794148219647,"nivel":"passo","texto":"Verificar a mudança","etapa":1,"passo":"verificar"}
+{"em":1794148219654,"nivel":"info","texto":"Verificar a mudança: pulado · sem verificações configuradas","etapa":1,"passo":"verificar"}
+{"em":1794148219658,"nivel":"passo","texto":"Arquivar a spec","etapa":1,"passo":"arquivar"}
+{"em":1794148219664,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\01-estrutura-monorepo → .specs\\workflows\\test-01\\specs\\arquivo\\01-estrutura-monorepo","etapa":1,"passo":"arquivar"}
+{"em":1794148219668,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\01-estrutura-monorepo","etapa":1,"passo":"arquivar"}
+{"em":1794148219672,"nivel":"passo","texto":"Commit da entrega","etapa":1,"passo":"commitEntrega"}

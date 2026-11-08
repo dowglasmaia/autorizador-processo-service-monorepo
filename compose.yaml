@@ -1,0 +1,55 @@
+# Ambiente completo (SPEC-10 §1; SPEC-13 §4): PostgreSQL + API + front.
+# Tudo:        docker compose up -d --build          (front em http://localhost:4200)
+# Só o banco:  docker compose up -d postgres         (para rodar a API/front na máquina, fora do Docker)
+# Parar:       docker compose down                   (acrescente -v para apagar também o volume do banco)
+# Variáveis:   copie .env.example para .env e ajuste (todas têm valor padrão para desenvolvimento).
+# Testes de integração NÃO dependem deste arquivo (usam Testcontainers).
+name: autorizador-processo
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-autorizador}
+      POSTGRES_USER: ${POSTGRES_USER:-autorizador}
+      # Valor padrão apenas para desenvolvimento local; defina POSTGRES_PASSWORD no .env.
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-autorizador}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ./api-autorizador-processo
+    environment:
+      # Dentro da rede do compose o banco é o serviço `postgres` (não localhost).
+      DB_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-autorizador}
+      DB_USERNAME: ${POSTGRES_USER:-autorizador}
+      DB_PASSWORD: ${POSTGRES_PASSWORD:-autorizador}
+      APP_ENV: ${APP_ENV:-local-docker}
+      LOG_LEVEL_APP: ${LOG_LEVEL_APP:-INFO}
+    ports:
+      - "${API_PORT:-8080}:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  app:
+    build:
+      context: ./app-autorizador-processo
+    ports:
+      - "${APP_PORT:-4200}:80"
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  postgres-data:

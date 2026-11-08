@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/broadsheet-578d6724-d5d8-4871-87f1-e1eb8fac4a05/styles.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/duotone/style.css">
+<script src="_ds/broadsheet-578d6724-d5d8-4871-87f1-e1eb8fac4a05/_ds_bundle.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+:root{--font-heading:"Manrope",system-ui,sans-serif;--font-body:"Manrope",system-ui,sans-serif;--font-heading-weight:700;
+--color-bg:#f4fafa;--color-surface:#ffffff;--color-text:#0b2a2f;--color-accent:#0fa88c;--color-accent-2:#e5604a;--color-process-yellow:#8fe0cc;
+--color-divider:rgba(7,70,66,.14);
+--color-neutral-100:#f1f7f7;--color-neutral-200:#e1eded;--color-neutral-300:#cadada;--color-neutral-400:#a9bfbf;--color-neutral-500:#85a0a0;--color-neutral-600:#648080;--color-neutral-700:#4a6666;--color-neutral-800:#2f4a4b;--color-neutral-900:#14292d;
+--color-accent-100:#e3f8f2;--color-accent-200:#c6f0e5;--color-accent-300:#8fe0cc;--color-accent-400:#4fd0b5;--color-accent-500:#15b89a;--color-accent-600:#0a9780;--color-accent-700:#077a69;--color-accent-800:#065e52;--color-accent-900:#04403a;
+--color-accent-2-100:#fff1ee;--color-accent-2-200:#ffddd6;--color-accent-2-300:#ffb9ab;--color-accent-2-400:#ff8f7a;--color-accent-2-500:#ec6a54;--color-accent-2-600:#d44d38;--color-accent-2-700:#aa3a2a;--color-accent-2-800:#7c2a1f;--color-accent-2-900:#4c1913}
+body{margin:0}
+.card{background:#fff;border:1px solid rgba(7,70,66,.1);border-radius:20px}
+.btn{border-radius:999px}.input{border-radius:10px;background:#fff}.dialog{border-radius:22px}.tag{border-radius:999px}
+.table th{color:var(--color-neutral-700)}
+a{color:var(--color-accent-700)}a:hover{color:var(--color-accent-900)}
+@keyframes viewIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes rowIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes pop{0%{opacity:0;transform:scale(.6) rotate(-8deg)}60%{transform:scale(1.08) rotate(2deg)}100%{opacity:1;transform:none}}
+@keyframes dlgIn{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,136,176,.5)}50%{box-shadow:0 0 0 6px rgba(0,136,176,0)}}
+@keyframes plC{0%,100%{transform:translate(-26px,-10px)}50%{transform:translate(0,0)}}
+@keyframes plM{0%,100%{transform:translate(26px,-10px)}50%{transform:translate(0,0)}}
+@keyframes plY{0%,100%{transform:translate(0,22px)}50%{transform:translate(0,0)}}
+@keyframes bar{0%{left:-40%}100%{left:100%}}
+@keyframes dots{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}}
+@keyframes shake{0%,100%{transform:none}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@keyframes toast{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.a-view{animation:viewIn .5s cubic-bezier(.2,.7,.2,1) both}
+.a-row{animation:rowIn .45s cubic-bezier(.2,.7,.2,1) both}
+.a-bar{transform-origin:left;animation:grow .9s cubic-bezier(.2,.7,.2,1) both}
+.a-dlg{animation:dlgIn .35s cubic-bezier(.2,.7,.2,1) both}
+.a-bd{animation:fade .25s both}
+.a-pop{animation:pop .6s cubic-bezier(.2,.9,.3,1.2) both}
+.a-shake{animation:shake .4s both}
+.a-toast{animation:toast .4s cubic-bezier(.2,.7,.2,1) both}
+.pl{position:absolute;width:44px;height:44px;border-radius:50%;mix-blend-mode:multiply;left:calc(50% - 22px);top:calc(50% - 22px);animation-duration:1.4s;animation-iteration-count:infinite;animation-timing-function:ease-in-out}
+.dots::after{content:'';animation:dots 1.4s steps(1) infinite}
+.lift{transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s}
+.lift:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.navi{transition:background .2s,color .2s,padding .25s}
+.navi:hover{background:color-mix(in srgb,var(--color-accent) 10%,transparent);padding-left:18px!important}
+.chip{transition:transform .15s,background .2s}.chip:hover{transform:scale(1.06)}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition:none!important}}
+</style>
+</helmet>
+<div style="display:flex;min-height:100vh;background:var(--color-bg);color:var(--color-text);position:relative;overflow:hidden">
+<div style="position:absolute;right:-180px;top:-200px;width:620px;height:620px;border-radius:50%;background:radial-gradient(circle,rgba(0,136,176,.16),transparent 65%);pointer-events:none"></div>
+<div style="position:absolute;right:240px;top:-260px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(214,0,108,.10),transparent 65%);pointer-events:none"></div>
+
+<aside style="width:250px;flex:none;padding:28px 16px;background:linear-gradient(180deg,#03242b,#021a20);color:#e6f4f1;display:flex;flex-direction:column;gap:32px;position:relative;z-index:1">
+<div style="display:flex;align-items:center;gap:10px;padding-left:8px">
+<div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#10b89a,#0a8f78);display:grid;place-items:center;color:#fff"><i class="ph-duotone ph-clipboard-text" style="font-size:24px"></i></div>
+<div><div style="font-weight:800;font-size:17px;color:#fff">Autorizador</div><div style="font-size:13px;color:#8fb5b0">Procedimentos médicos</div></div>
+</div>
+<nav style="display:flex;flex-direction:column;gap:4px">
+<sc-for list="{{ nav }}" as="n" hint-placeholder-count="4">
+<a href="#" onClick="{{ n.go }}" class="navi" style="{{ n.style }}"><i class="{{ n.icon }}" style="font-size:20px"></i>{{ n.label }}</a>
+</sc-for>
+</nav>
+<div style="margin-top:auto;padding-left:8px;font-size:13px;color:#9fc4bf;display:flex;flex-direction:column;gap:6px">
+<div style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:var(--color-accent);animation:pulse 2s infinite"></span>API conectada</div>
+<div style="font-size:12px;color:#6f9a95">localhost:8080 · perfil test</div>
+</div>
+</aside>
+
+<main style="flex:1;min-width:0;padding:36px 56px 64px 32px;position:relative;z-index:1">
+
+<sc-if value="{{ isDash }}" hint-placeholder-val="{{ true }}">
+<section class="a-view" style="display:flex;flex-direction:column;gap:40px;max-width:1120px">
+<header style="display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap">
+<div style="flex:1;min-width:260px"><div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent-700)">{{ today }}</div>
+<h1 style="font-size:44px;line-height:1.05;margin:8px 0 0;letter-spacing:-.03em">Painel</h1>
+<p style="margin:10px 0 0;font-size:17px;color:var(--color-neutral-700);max-width:520px">Acompanhe o catálogo e as autorizações em tempo real.</p></div>
+</header>
+<div class="a-pop" style="position:relative;overflow:hidden;border-radius:26px;padding:44px 48px;color:#fff;background:radial-gradient(circle at 88% 8%,#00796b 0,transparent 55%),linear-gradient(120deg,#032a33,#03363a)">
+<i class="ph-duotone ph-shield-check" style="font-size:44px;color:#2fd4ae"></i>
+<h2 style="font-size:38px;line-height:1.12;margin:14px 0 0;max-width:520px;letter-spacing:-.025em;color:#fff">Autorize um procedimento em segundos</h2>
+<p style="margin:12px 0 24px;font-size:17px;line-height:1.5;color:#c4dedb;max-width:440px">Informe o procedimento, a idade e o sexo do paciente. A regra é checada na hora.</p>
+<button onClick="{{ goSolic }}" style="display:inline-flex;align-items:center;gap:10px;border:0;cursor:pointer;font:inherit;font-weight:700;font-size:15px;padding:14px 24px;border-radius:999px;background:#fff;color:#062a30;transition:transform .2s,box-shadow .2s" style-hover="transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)">Nova solicitação<i class="ph-duotone ph-arrow-right" style="font-size:18px"></i></button>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px">
+<sc-for list="{{ kpis }}" as="k" hint-placeholder-count="4">
+<div class="card lift a-row" style="{{ k.delay }};padding:22px 24px;gap:6px;border-radius:20px">
+<div class="card-kicker" style="{{ k.kc }}">{{ k.label }}</div>
+<div style="font-family:var(--font-heading);font-weight:600;font-size:60px;line-height:1;letter-spacing:-.03em">{{ k.value }}</div>
+<div class="card-meta">{{ k.hint }}</div>
+</div>
+</sc-for>
+</div>
+
+<div style="display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:56px">
+<div style="display:flex;flex-direction:column;gap:18px">
+<div><h2 style="font-size:24px;margin:0">Cobertura por idade</h2><div style="font-size:14px;color:var(--color-neutral-700);margin-top:2px">Quantos procedimentos aceitam cada idade exata</div></div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<sc-for list="{{ ageBars }}" as="a" hint-placeholder-count="3">
+<div style="display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;font-size:15px">
+<span>{{ a.age }} anos</span>
+<div style="height:14px;background:var(--color-neutral-200);border-radius:2px;overflow:hidden"><div class="a-bar" style="{{ a.style }}"></div></div>
+<span style="text-align:right;font-weight:600">{{ a.n }}</span>
+</div>
+</sc-for>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:18px">
+<div><h2 style="font-size:24px;margin:0">Sexos aceitos</h2><div style="font-size:14px;color:var(--color-neutral-700);margin-top:2px">Distribuição nas regras cadastradas</div></div>
+<div style="display:flex;align-items:center;gap:24px">
+<div class="a-pop" style="{{ donut }}"><div style="position:absolute;inset:22px;border-radius:50%;background:var(--color-bg);display:grid;place-items:center;font-family:var(--font-heading);font-weight:600;font-size:24px">{{ sexTotal }}</div></div>
+<div style="display:flex;flex-direction:column;gap:10px;font-size:15px">
+<div style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;border-radius:50%;background:var(--color-accent)"></span>Masculino · {{ nM }}</div>
+<div style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;border-radius:50%;background:var(--color-accent-2)"></span>Feminino · {{ nF }}</div>
+</div></div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;align-items:baseline;gap:16px"><h2 style="font-size:24px;margin:0">Últimas autorizações</h2><a href="#" onClick="{{ goAut }}" style="font-size:14px">Ver todas →</a></div>
+<sc-if value="{{ hasAuths }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column">
+<sc-for list="{{ recent }}" as="r" hint-placeholder-count="3">
+<div class="a-row" style="{{ r.delay }};display:flex;align-items:center;gap:16px;padding:14px 0;font-size:16px">
+<span style="width:34px;height:34px;border-radius:50%;background:var(--color-accent-100);color:var(--color-accent-700);display:grid;place-items:center"><i class="ph-duotone ph-check-circle" style="font-size:22px"></i></span>
+<span style="font-weight:600;min-width:80px">Nº {{ r.num }}</span>
+<span style="color:var(--color-neutral-700);flex:1">{{ r.rules }}</span>
+<span class="tag tag-accent">Autorizado</span>
+</div>
+</sc-for></div>
+</sc-if>
+<sc-if value="{{ noAuths }}" hint-placeholder-val="{{ false }}"><div style="color:var(--color-neutral-700);font-size:16px">Nenhuma autorização concedida ainda.</div></sc-if>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isProc }}" hint-placeholder-val="{{ false }}">
+<section class="a-view" style="display:flex;flex-direction:column;gap:32px;max-width:1000px">
+<header style="display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap">
+<div style="flex:1;min-width:240px"><div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent-700)">Catálogo</div>
+<h1 style="font-size:46px;line-height:1.05;margin:8px 0 0;letter-spacing:-.02em">Procedimentos</h1>
+<p style="margin:10px 0 0;font-size:17px;color:var(--color-neutral-700)">Cada número define quais sexos e idades podem ser autorizados.</p></div>
+<button class="btn btn-primary" onClick="{{ openForm }}"><i class="ph-duotone ph-plus-circle" style="font-size:18px"></i>Novo procedimento</button>
+</header>
+<sc-if value="{{ hasProcs }}" hint-placeholder-val="{{ true }}">
+<table class="table"><thead><tr><th>Nº</th><th>Sexos</th><th>Idades permitidas</th><th>ID</th><th></th></tr></thead>
+<tbody>
+<sc-for list="{{ procRows }}" as="p" hint-placeholder-count="3">
+<tr class="a-row" style="{{ p.delay }}">
+<td style="font-family:var(--font-heading);font-weight:600;font-size:22px">{{ p.num }}<div style="font-size:13px;font-weight:400;color:var(--color-neutral-700)">{{ p.nome }}</div></td>
+<td><span style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ p.sexos }}" as="s" hint-placeholder-count="1"><span class="{{ s.cls }}">{{ s.label }}</span></sc-for></span></td>
+<td><span style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ p.idades }}" as="i" hint-placeholder-count="2"><span class="tag tag-neutral">{{ i }} anos</span></sc-for></span></td>
+<td style="color:var(--color-neutral-600)">#{{ p.id }}</td>
+<td style="text-align:right"><button class="btn btn-ghost" onClick="{{ p.solic }}">Solicitar →</button></td>
+</tr>
+</sc-for></tbody></table>
+</sc-if>
+<sc-if value="{{ noProcs }}" hint-placeholder-val="{{ false }}">
+<div class="a-pop" style="padding:56px 0;display:flex;flex-direction:column;gap:12px;align-items:flex-start"><i class="ph-duotone ph-clipboard-text" style="font-size:56px;color:var(--color-accent)"></i><h2 style="margin:0;font-size:26px">Nenhum procedimento cadastrado</h2><p style="margin:0;color:var(--color-neutral-700);font-size:16px">Cadastre o primeiro para começar a autorizar.</p><button class="btn btn-primary" onClick="{{ openForm }}">Cadastrar procedimento</button></div>
+</sc-if>
+</section>
+</sc-if>
+
+
+<sc-if value="{{ isNovo }}" hint-placeholder-val="{{ false }}">
+<form class="a-view" onSubmit="{{ nextStep }}" style="display:flex;flex-direction:column;gap:28px;max-width:760px">
+<header><div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent-700)">Catálogo / Procedimentos</div>
+<h1 style="font-size:44px;line-height:1.05;margin:8px 0 0;letter-spacing:-.03em">Cadastrar procedimento</h1>
+<p style="margin:10px 0 18px;font-size:17px;color:var(--color-neutral-700)">Cadastre o procedimento e configure suas condições de cobertura e autorização.</p>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{ steps }}" as="st" hint-placeholder-count="4"><button type="button" onClick="{{ st.go }}" style="{{ st.style }}">{{ st.label }}</button></sc-for></div></header>
+
+<sc-if value="{{ step0 }}" hint-placeholder-val="{{ true }}"><div class="a-view" style="display:flex;flex-direction:column;gap:20px"><h2 style="margin:0;font-size:24px">Identificação do procedimento</h2>
+<div class="field" style=""><label>Nome do procedimento *</label><input class="input" placeholder="Ex.: Ressonância magnética do crânio" value="{{ f.nome }}" onChange="{{ onNome }}"/></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+<div class="field" style=""><label>Código interno * (nº do procedimento)</label><input class="input" type="number" placeholder="Ex.: 9999" value="{{ f.codigo }}" onChange="{{ onCodigo }}"/></div>
+<div class="field" style=""><label>Código TUSS</label><input class="input" placeholder="Código TUSS" value="{{ f.tuss }}" onChange="{{ onTuss }}"/></div>
+<div class="field" style=""><label>Categoria *</label><select class="input" value="{{ f.cat }}" onChange="{{ onCat }}"><option value="">Selecione</option><option>Exames de imagem</option><option>Consultas</option><option>Cirurgias</option><option>Terapias</option><option>Exames laboratoriais</option></select></div>
+<div class="field" style=""><label>Especialidade</label><select class="input" value="{{ f.esp }}" onChange="{{ onEsp }}"><option value="">Selecione</option><option>Cardiologia</option><option>Ortopedia</option><option>Pediatria</option><option>Ginecologia</option><option>Neurologia</option></select></div>
+</div></div></sc-if>
+
+<sc-if value="{{ step1 }}" hint-placeholder-val="{{ false }}"><div class="a-view" style="display:flex;flex-direction:column;gap:16px"><h2 style="margin:0;font-size:24px">Configuração de cobertura</h2>
+<div style="font-size:13px;font-weight:600;color:var(--color-neutral-800)">Tipo de cobertura</div>
+<sc-for list="{{ covOpts }}" as="c" hint-placeholder-count="3"><button type="button" onClick="{{ c.pick }}" style="display:flex;align-items:center;gap:12px;border:0;background:transparent;font:inherit;font-size:17px;cursor:pointer;padding:6px 0;text-align:left"><span style="{{ c.dot }}"></span>{{ c.label }}</button></sc-for></div></sc-if>
+
+<sc-if value="{{ step2 }}" hint-placeholder-val="{{ false }}"><div class="a-view" style="display:flex;flex-direction:column;gap:20px"><h2 style="margin:0;font-size:24px">Elegibilidade</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+<div class="field" style=""><label>Idade mínima</label><input class="input" type="number" min="0" placeholder="Ex.: 18" value="{{ f.min }}" onChange="{{ onMin }}"/></div>
+<div class="field" style=""><label>Idade máxima</label><input class="input" type="number" min="0" placeholder="Ex.: 65" value="{{ f.max }}" onChange="{{ onMax }}"/></div>
+</div>
+<div class="field"><label>Sexo permitido</label><div style="display:flex;gap:10px;flex-wrap:wrap"><sc-for list="{{ sexOpts3 }}" as="s" hint-placeholder-count="3"><button type="button" class="chip" onClick="{{ s.pick }}" style="{{ s.style }}">{{ s.label }}</button></sc-for></div></div></div></sc-if>
+
+<sc-if value="{{ step3 }}" hint-placeholder-val="{{ false }}"><div class="a-view" style="display:flex;flex-direction:column;gap:20px"><h2 style="margin:0;font-size:24px">Utilização e autorização</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+<div class="field" style=""><label>Quantidade máxima</label><input class="input" type="number" min="1" placeholder="Ex.: 2" value="{{ f.qtd }}" onChange="{{ onQtd }}"/></div>
+<div class="field" style=""><label>Período</label><select class="input" value="{{ f.periodo }}" onChange="{{ onPeriodo }}"><option value="">Selecione</option><option>Por mês</option><option>Por ano</option><option>Por vida</option></select></div>
+</div>
+<sc-for list="{{ checks }}" as="c" hint-placeholder-count="2"><button type="button" onClick="{{ c.toggle }}" style="display:flex;align-items:center;gap:12px;border:0;background:transparent;font:inherit;font-size:17px;cursor:pointer;padding:4px 0;text-align:left"><span style="{{ c.box }}"><i class="ph-duotone ph-check" style="font-size:15px"></i></span>{{ c.label }}</button></sc-for></div></sc-if>
+
+<sc-if value="{{ f.err }}" hint-placeholder-val="{{ false }}"><div class="a-shake" style="color:var(--color-accent-2-700);font-size:14px">{{ f.err }}</div></sc-if>
+<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button type="button" class="btn btn-secondary" onClick="{{ closeForm }}">Cancelar</button><span style="flex:1"></span>
+<sc-if value="{{ hasPrev }}" hint-placeholder-val="{{ false }}"><button type="button" class="btn btn-secondary" onClick="{{ prevStep }}">Voltar</button></sc-if>
+<button type="submit" class="btn btn-primary">{{ nextLabel }}</button></div>
+<div style="font-size:13px;color:var(--color-neutral-600);max-width:560px">Hoje a API grava apenas o nº do procedimento, sexos e idades. O intervalo de idades é convertido em idades exatas; demais campos são conceituais.</div>
+</form>
+</sc-if>
+<sc-if value="{{ isSolic }}" hint-placeholder-val="{{ false }}">
+<section class="a-view" style="display:flex;flex-direction:column;gap:32px;max-width:1000px">
+<header><div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent-700)">Elegibilidade</div>
+<h1 style="font-size:46px;line-height:1.05;margin:8px 0 0;letter-spacing:-.02em">Solicitar autorização</h1>
+<p style="margin:10px 0 0;font-size:17px;color:var(--color-neutral-700)">Sexo e idade do paciente são conferidos contra as regras do procedimento.</p></header>
+<div style="display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:64px;align-items:start">
+<form onSubmit="{{ submitReq }}" style="display:flex;flex-direction:column;gap:22px">
+<div class="field"><label>Procedimento</label>
+<select class="input" value="{{ req.num }}" onChange="{{ setReqNum }}"><option value="">Selecione…</option>
+<sc-for list="{{ procOptions }}" as="o" hint-placeholder-count="3"><option value="{{ o.v }}">{{ o.t }}</option></sc-for></select></div>
+<div class="field"><label>Idade do paciente</label><input class="input" type="number" min="0" placeholder="Ex.: 20" value="{{ req.idade }}" onChange="{{ setReqIdade }}"/></div>
+<div class="field"><label>Sexo</label>
+<div style="display:flex;gap:10px">
+<sc-for list="{{ sexOpts }}" as="s" hint-placeholder-count="2"><button type="button" class="chip" onClick="{{ s.pick }}" style="{{ s.style }}">{{ s.label }}</button></sc-for></div></div>
+<sc-if value="{{ req.err }}" hint-placeholder-val="{{ false }}"><div class="a-shake" style="color:var(--color-accent-2-700);font-size:14px">{{ req.err }}</div></sc-if>
+<div style="display:flex;gap:10px"><button type="submit" class="btn btn-primary"><i class="ph-duotone ph-seal-check" style="font-size:18px"></i>Solicitar autorização</button><button type="button" class="btn btn-secondary" onClick="{{ clearReq }}">Limpar</button></div>
+</form>
+<div style="min-height:300px;display:flex;align-items:center">
+<sc-if value="{{ noResult }}" hint-placeholder-val="{{ true }}"><div style="color:var(--color-neutral-600);font-size:18px;font-style:italic;max-width:320px">O resultado aparece aqui.</div></sc-if>
+<sc-if value="{{ resOk }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:14px"><div class="a-pop" style="width:96px;height:96px;border-radius:50%;background:var(--color-accent);color:var(--color-bg);display:grid;place-items:center"><i class="ph-duotone ph-check" style="font-size:56px"></i></div>
+<h2 class="a-view" style="margin:0;font-size:44px;letter-spacing:-.02em;color:var(--color-accent-700)">Autorizado</h2>
+<p class="a-view" style="margin:0;font-size:17px;color:var(--color-neutral-700);animation-delay:.1s">{{ resText }}</p>
+<a href="#" onClick="{{ goAut }}" style="font-size:15px">Ver autorizações concedidas →</a></div></sc-if>
+<sc-if value="{{ resNo }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:14px"><div class="a-pop" style="width:96px;height:96px;border-radius:50%;background:var(--color-accent-2);color:var(--color-bg);display:grid;place-items:center"><i class="ph-duotone ph-x" style="font-size:56px"></i></div>
+<h2 class="a-view" style="margin:0;font-size:44px;letter-spacing:-.02em;color:var(--color-accent-2-700)">Negado</h2>
+<p class="a-view" style="margin:0;font-size:17px;color:var(--color-neutral-700);max-width:400px;animation-delay:.1s">{{ resText }}</p>
+<div style="font-size:13px;color:var(--color-neutral-600);max-width:400px">A API não informa se falhou o sexo ou a idade.</div></div></sc-if>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isAut }}" hint-placeholder-val="{{ false }}">
+<section class="a-view" style="display:flex;flex-direction:column;gap:32px;max-width:1000px">
+<header style="display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap">
+<div style="flex:1;min-width:240px"><div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent-700)">Histórico</div>
+<h1 style="font-size:46px;line-height:1.05;margin:8px 0 0;letter-spacing:-.02em">Autorizações concedidas</h1>
+<p style="margin:10px 0 0;font-size:17px;color:var(--color-neutral-700)">Somente aprovações são registradas — negativas não deixam rastro.</p></div>
+<button class="btn btn-primary" onClick="{{ goSolic }}">Nova solicitação</button>
+</header>
+<sc-if value="{{ hasAuths }}" hint-placeholder-val="{{ true }}">
+<table class="table"><thead><tr><th>ID</th><th>Procedimento</th><th>Regras do procedimento</th><th>Status</th></tr></thead>
+<tbody><sc-for list="{{ authRows }}" as="r" hint-placeholder-count="3">
+<tr class="a-row" style="{{ r.delay }}"><td style="color:var(--color-neutral-600)">#{{ r.id }}</td><td style="font-family:var(--font-heading);font-weight:600;font-size:22px">{{ r.num }}</td><td style="color:var(--color-neutral-700)">{{ r.rules }}</td><td><span class="tag tag-accent">Autorizado</span></td></tr>
+</sc-for></tbody></table>
+</sc-if>
+<sc-if value="{{ noAuths }}" hint-placeholder-val="{{ false }}"><div class="a-pop" style="padding:48px 0;display:flex;flex-direction:column;gap:12px;align-items:flex-start"><i class="ph-duotone ph-seal-check" style="font-size:56px;color:var(--color-accent)"></i><h2 style="margin:0;font-size:26px">Nada por aqui ainda</h2><button class="btn btn-primary" onClick="{{ goSolic }}">Solicitar a primeira</button></div></sc-if>
+</section>
+</sc-if>
+</main>
+
+<sc-if value="{{ errorModal }}" hint-placeholder-val="{{ false }}">
+<div class="dialog-backdrop a-bd" style="z-index:90"><div class="dialog a-dlg" style="align-items:flex-start;gap:14px"><i class="ph-duotone ph-wifi-slash" style="font-size:44px;color:var(--color-accent-2)"></i><div class="dialog-title">Não foi possível carregar</div><div class="dialog-body">O servidor não respondeu. Seus dados não foram alterados.</div><div class="dialog-actions" style="align-self:flex-end"><button class="btn btn-secondary" onClick="{{ dismissErr }}">Fechar</button><button class="btn btn-primary" onClick="{{ retry }}">Tentar novamente</button></div></div></div>
+</sc-if>
+
+<sc-if value="{{ loading }}" hint-placeholder-val="{{ true }}">
+<div class="dialog-backdrop a-bd" style="z-index:100;backdrop-filter:blur(5px)"><div class="dialog a-dlg" style="width:min(320px,100%);align-items:center;gap:6px;padding:36px 28px 28px">
+<div style="position:relative;width:120px;height:100px"><span class="pl" style="background:var(--color-accent);animation-name:plC"></span><span class="pl" style="background:var(--color-accent-2);animation-name:plM"></span><span class="pl" style="background:var(--color-process-yellow);animation-name:plY"></span></div>
+<div class="dialog-title dots" style="font-size:19px;margin-top:6px">{{ loading }}</div>
+<div class="dialog-body" style="font-size:13px">Aguarde um instante</div>
+<div style="position:relative;width:100%;height:3px;background:var(--color-neutral-300);overflow:hidden;margin-top:12px;border-radius:2px"><span style="position:absolute;top:0;height:100%;width:40%;background:var(--color-accent);animation:bar 1.1s ease-in-out infinite"></span></div>
+</div></div>
+</sc-if>
+
+<sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+<div class="a-toast" style="position:fixed;right:32px;bottom:32px;z-index:120;background:var(--color-neutral-900);color:var(--color-bg);padding:14px 20px;border-radius:4px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:10px;font-size:15px"><i class="ph-duotone ph-check-circle" style="font-size:22px;color:var(--color-accent-300)"></i>{{ toast }}</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;loadingMs&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:1200,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Comportamento&quot;,&quot;min&quot;:300,&quot;max&quot;:4000,&quot;step&quot;:100},&quot;simulateError&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Comportamento&quot;},&quot;startEmpty&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Comportamento&quot;}}">
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    const empty = !!(p && p.startEmpty);
+    this.state = {
+      step: 0, view: 'dash', loading: 'Carregando painel', errorModal: null, toast: null, showForm: false, denied: 0,
+      procs: empty ? [] : [
+        { id: 1, num: 1234, sexos: ['F'], idades: [10, 20] },
+        { id: 2, num: 4567, sexos: ['M', 'F'], idades: [20, 30] },
+        { id: 3, num: 6789, sexos: ['M', 'F'], idades: [10] }],
+      auths: empty ? [] : [{ id: 1, num: 4567 }],
+      f: { num: '', sexos: [], idades: [], idadeIn: '', err: '' },
+      req: { num: '', idade: '', sexo: '', err: '', res: null }
+    };
+  }
+  ms() { return this.props.loadingMs ?? 1200; }
+  componentDidMount() { setTimeout(() => this.setState({ loading: null }), this.ms()); }
+  navigate(view, force) {
+    if (!force && view === this.state.view) return;
+    const t = { dash: 'Carregando painel', proc: 'Carregando procedimentos', solic: 'Preparando solicitação', aut: 'Carregando autorizações' }[view];
+    this.setState({ loading: t, errorModal: null });
+    setTimeout(() => {
+      if (this.props.simulateError && !force) return this.setState({ loading: null, errorModal: view });
+      this.setState({ view, loading: null });
+    }, this.ms());
+  }
+  flash(msg) { this.setState({ toast: msg }); setTimeout(() => this.setState({ toast: null }), 3200); }
+  setF(o) { this.setState(s => ({ f: { ...s.f, err: '', ...o } })); }
+  setR(o) { this.setState(s => ({ req: { ...s.req, err: '', ...o } })); }
+  addIdade() {
+    const n = parseInt(this.state.f.idadeIn, 10);
+    if (isNaN(n) || n < 0) return;
+    if (!this.state.f.idades.includes(n)) this.setF({ idades: [...this.state.f.idades, n].sort((a, b) => a - b), idadeIn: '' });
+    else this.setF({ idadeIn: '' });
+  }
+  rules(p) { return p ? p.sexos.map(s => s === 'M' ? 'Masculino' : 'Feminino').join(' e ') + ' · ' + p.idades.join(', ') + ' anos' : ''; }
+  renderVals() {
+    const s = this.state, procs = s.procs, auths = s.auths, byNum = n => procs.find(p => p.num === n);
+    const accent = 'var(--color-accent)', mag = 'var(--color-accent-2)';
+    const chip = (on, c) => `padding:9px 20px;font:inherit;font-size:15px;cursor:pointer;border-radius:2px;border:1px solid ${on ? c : 'var(--color-divider)'};background:${on ? c : 'transparent'};color:${on ? 'var(--color-bg)' : 'var(--color-text)'};transition:all .2s`;
+    const items = [['dash', 'Painel', 'ph-duotone ph-squares-four'], ['proc', 'Procedimentos', 'ph-duotone ph-clipboard-text'], ['solic', 'Solicitar', 'ph-duotone ph-seal-check'], ['aut', 'Autorizações', 'ph-duotone ph-list-checks']];
+    const nav = items.map(([k, label, icon]) => ({ label, icon, go: e => { e.preventDefault(); this.navigate(k); },
+      style: `display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:14px;text-decoration:none;font-size:16px;color:${(s.view === k || (k === 'proc' && s.view === 'novo')) ? '#fff' : '#cfe6e2'};background:${(s.view === k || (k === 'proc' && s.view === 'novo')) ? 'rgba(255,255,255,.09)' : 'transparent'};font-weight:${(s.view === k || (k === 'proc' && s.view === 'novo')) ? 600 : 400}` }));
+    const d = i => `animation-delay:${i * 70}ms`;
+    const ages = {}; procs.forEach(p => p.idades.forEach(a => ages[a] = (ages[a] || 0) + 1));
+    const ageKeys = Object.keys(ages).map(Number).sort((a, b) => a - b), maxA = Math.max(1, ...Object.values(ages));
+    const nM = procs.filter(p => p.sexos.includes('M')).length, nF = procs.filter(p => p.sexos.includes('F')).length, tot = nM + nF;
+    const pm = tot ? nM / tot * 100 : 50;
+    const attempts = auths.length + s.denied;
+    const kpis = [
+      { label: 'Procedimentos', value: procs.length, hint: 'no catálogo', kc: '' },
+      { label: 'Autorizações', value: auths.length, hint: 'concedidas', kc: '' },
+      { label: 'Idades cobertas', value: ageKeys.length, hint: 'valores distintos', kc: '' },
+      { label: 'Aprovação', value: attempts ? Math.round(auths.length / attempts * 100) + '%' : '—', hint: 'solicitações desta sessão', kc: `color:var(--color-accent-700)` }
+    ].map((k, i) => ({ ...k, delay: d(i) }));
+    const authRows = auths.map((a, i) => ({ id: a.id, num: a.num, rules: this.rules(byNum(a.num)), delay: d(i) }));
+    const f = s.f, r = s.req, res = r.res;
+    const goSolicFor = n => e => { this.setState(st => ({ req: { ...st.req, num: String(n), res: null } })); this.navigate('solic'); };
+    return {
+      nav, kpis, authRows, f, req: r, nM, nF, sexTotal: tot,
+      today: new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' }),
+      isDash: s.view === 'dash', isProc: s.view === 'proc', isSolic: s.view === 'solic', isAut: s.view === 'aut',
+      loading: s.loading, errorModal: !!s.errorModal, toast: s.toast, showForm: s.showForm,
+      goSolic: e => this.navigate('solic'), goAut: e => { e.preventDefault(); this.navigate('aut'); },
+      ageBars: ageKeys.map((a, i) => ({ age: a, n: ages[a], style: `height:100%;width:${ages[a] / maxA * 100}%;background:linear-gradient(90deg,var(--color-accent-400),var(--color-accent));animation-delay:${i * 90}ms` })),
+      donut: `position:relative;width:132px;height:132px;border-radius:50%;flex:none;background:conic-gradient(${accent} 0 ${pm}%,${mag} ${pm}% 100%)`,
+      hasAuths: auths.length > 0, noAuths: auths.length === 0,
+      recent: authRows.slice(-4).reverse(),
+      hasProcs: procs.length > 0, noProcs: procs.length === 0,
+      procRows: procs.map((p, i) => ({ nome: p.nome || '', id: p.id, num: p.num, idades: p.idades, delay: d(i),
+        sexos: p.sexos.map(x => ({ label: x === 'M' ? 'Masculino' : 'Feminino', cls: 'tag ' + (x === 'M' ? 'tag-accent' : 'tag-accent-2') })),
+        solic: goSolicFor(p.num) })),
+      openForm: () => this.setState({ view: 'novo', step: 0, f: { nome:'', codigo:'', tuss:'', cat:'', esp:'', cob:'plano', min:'', max:'', sexo:'A', qtd:'', periodo:'', previa:true, just:true, err:'' } }),
+      closeForm: () => this.setState({ view: 'proc' }),
+      onNome: e => this.setF({ nome: e.target.value }), onCodigo: e => this.setF({ codigo: e.target.value }), onTuss: e => this.setF({ tuss: e.target.value }),
+      onCat: e => this.setF({ cat: e.target.value }), onEsp: e => this.setF({ esp: e.target.value }), onMin: e => this.setF({ min: e.target.value }),
+      onMax: e => this.setF({ max: e.target.value }), onQtd: e => this.setF({ qtd: e.target.value }), onPeriodo: e => this.setF({ periodo: e.target.value }),
+      isNovo: s.view === 'novo', step0: s.step === 0, step1: s.step === 1, step2: s.step === 2, step3: s.step === 3,
+      hasPrev: s.step > 0, nextLabel: s.step === 3 ? 'Salvar procedimento' : 'Avançar',
+      steps: ['1. Identificação','2. Cobertura','3. Elegibilidade','4. Utilização'].map((label, i) => ({ label, go: () => this.setState({ step: i }),
+        style: `border:0;font:inherit;font-size:13px;font-weight:600;padding:7px 14px;border-radius:999px;cursor:pointer;transition:all .25s;background:${s.step === i ? 'var(--color-accent)' : s.step > i ? 'var(--color-accent-100)' : 'var(--color-neutral-200)'};color:${s.step === i ? '#fff' : s.step > i ? 'var(--color-accent-800)' : 'var(--color-neutral-700)'}` })),
+      covOpts: [['plano', 'Coberto pelo plano'], ['regras', 'Cobertura condicionada a regras'], ['nao', 'Não coberto']].map(([k, label]) => ({ label, pick: () => this.setF({ cob: k }),
+        dot: `width:20px;height:20px;border-radius:50%;flex:none;transition:all .2s;border:2px solid ${f.cob === k ? 'var(--color-accent)' : 'var(--color-neutral-400)'};background:${f.cob === k ? 'radial-gradient(circle,var(--color-accent) 0 45%,#fff 50%)' : '#fff'}` })),
+      sexOpts3: [['M', 'Masculino'], ['F', 'Feminino'], ['A', 'Ambos']].map(([k, label]) => ({ label, style: chip(f.sexo === k, accent), pick: () => this.setF({ sexo: k }) })),
+      checks: [['previa', 'Exige autorização prévia'], ['just', 'Exige justificativa médica']].map(([k, label]) => ({ label, toggle: () => this.setF({ [k]: !f[k] }),
+        box: `width:22px;height:22px;border-radius:50%;display:grid;place-items:center;flex:none;transition:all .2s;color:#fff;background:${f[k] ? 'var(--color-accent)' : 'var(--color-neutral-300)'}` })),
+      prevStep: () => this.setState({ step: s.step - 1 }),
+      nextStep: e => {
+        e.preventDefault();
+        if (s.step < 3) return this.setState({ step: s.step + 1 });
+        const n = parseInt(f.codigo, 10);
+        if (!f.nome.trim()) return this.setState({ step: 0, f: { ...f, err: 'Informe o nome do procedimento.' } });
+        if (isNaN(n)) return this.setState({ step: 0, f: { ...f, err: 'Informe o número do procedimento para prosseguir com a operação.' } });
+        if (procs.some(p => p.num === n)) return this.setState({ step: 0, f: { ...f, err: 'Procedimento já cadastrado na base de dados: Nº ' + n } });
+        const lo = parseInt(f.min, 10), hi = parseInt(f.max, 10), idades = [];
+        if (!isNaN(lo)) for (let i = lo; i <= Math.min(isNaN(hi) ? lo : hi, 120); i++) idades.push(i);
+        this.setState({ loading: 'Salvando procedimento' });
+        setTimeout(() => {
+          this.setState(st => ({ loading: null, view: 'proc', procs: [...st.procs, { id: st.procs.length + 1, num: n, nome: f.nome.trim(), sexos: f.sexo === 'A' ? ['M', 'F'] : [f.sexo], idades }] }));
+          this.flash('Procedimento ' + n + ' cadastrado');
+        }, this.ms());
+      },
+      procOptions: procs.map(p => ({ v: String(p.num), t: 'Nº ' + p.num })),
+      setReqNum: e => this.setR({ num: e.target.value, res: null }),
+      setReqIdade: e => this.setR({ idade: e.target.value, res: null }),
+      sexOpts: [['M', 'Masculino', accent], ['F', 'Feminino', mag]].map(([k, label, c]) => ({ label, style: chip(r.sexo === k, c), pick: () => this.setR({ sexo: k, res: null }) })),
+      clearReq: () => this.setState({ req: { num: '', idade: '', sexo: '', err: '', res: null } }),
+      submitReq: e => {
+        e.preventDefault();
+        if (!r.num || r.idade === '' || !r.sexo) return this.setR({ err: 'Informe procedimento, idade e sexo do paciente.' });
+        this.setState({ loading: 'Verificando elegibilidade' });
+        setTimeout(() => {
+          const p = byNum(parseInt(r.num, 10)), idade = parseInt(r.idade, 10);
+          const ok = p.sexos.includes(r.sexo) && p.idades.includes(idade);
+          this.setState(st => ({ loading: null, denied: st.denied + (ok ? 0 : 1),
+            auths: ok ? [...st.auths, { id: st.auths.length + 1, num: p.num }] : st.auths,
+            req: { ...st.req, res: { ok, text: ok ? `Procedimento ${p.num} liberado para paciente ${r.sexo === 'M' ? 'masculino' : 'feminino'} de ${idade} anos.` : 'Operação não autorizada: sexo e/ou idade não aderentes ao procedimento solicitado.' } } }));
+        }, this.ms());
+      },
+      noResult: !res, resOk: !!res && res.ok, resNo: !!res && !res.ok, resText: res ? res.text : '',
+      dismissErr: () => this.setState({ errorModal: null }),
+      retry: () => { const v = s.errorModal; this.navigate(v, true); }
+    };
+  }
+}
+</script>
+</body>
+</html>
