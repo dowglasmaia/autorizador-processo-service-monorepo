@@ -1,10 +1,10 @@
 # Tarefas — Login no frontend
 
 ## 1. Autenticação (core/auth)
-- [ ] 1.1 Confirmar o que a etapa 17 entregou (`AppError`, `errorInterceptor`, `api-client`, `api-types.ts` com `autenticar`/`obterUsuarioAtual`) e ajustar a proposta.
+- [ ] 1.1 Adicionar `retryAfter?` ao `AppError`, preenchido pelo `errorInterceptor` em `429` a partir de `Retry-After`, com teste.
 - [ ] 1.2 Criar `core/auth/auth.service.ts` com signals `usuario`, `token`, `autenticado`, `expiraEm`, `entrar` e `sair`.
 - [ ] 1.3 Persistir a sessão em `sessionStorage` (com `try/catch`), restaurá-la no início e agendar o logout no `exp`.
-- [ ] 1.4 Criar `core/auth/auth.interceptor.ts` (Bearer só para `apiBaseUrl`; `401` encerra sessão e redireciona) e registrá-lo em `app.config.ts` sem duplicar o `errorInterceptor`.
+- [ ] 1.4 Criar `core/auth/auth.interceptor.ts` (Bearer só para `apiBaseUrl`; `401` encerra sessão e redireciona) e registrá-lo em `app.config.ts` antes do `errorInterceptor`, sem duplicá-lo.
 
 ## 2. Guards e rotas
 - [ ] 2.1 Criar `retornoSeguro(url)` pura, rejeitando `//x`, `http://`, `javascript:` e barra invertida.

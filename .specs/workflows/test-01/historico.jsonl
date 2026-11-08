@@ -392,3 +392,13 @@
 {"em":1794160687349,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\17-nucleo-http-tipos → .specs\\workflows\\test-01\\specs\\arquivo\\17-nucleo-http-tipos","etapa":17,"passo":"arquivar"}
 {"em":1794160687356,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\17-nucleo-http-tipos","etapa":17,"passo":"arquivar"}
 {"em":1794160687364,"nivel":"passo","texto":"Commit da entrega","etapa":17,"passo":"commitEntrega"}
+{"em":1794160688522,"nivel":"ok","texto":"3a52989 · 47 arquivo(s) · feat(autorizador): Revisa a spec do núcleo HTTP e tipos do frontend (…","etapa":17,"passo":"commitEntrega"}
+{"em":1794160688553,"nivel":"ok","texto":"Commit da entrega: ok · 3a52989 · 47 arquivo(s)","etapa":17,"passo":"commitEntrega"}
+{"em":1794160688579,"nivel":"ok","texto":"Etapa 17 entregue · commit 3a52989","etapa":17,"passo":"commitEntrega"}
+{"em":1794160688724,"nivel":"passo","texto":"Etapa 18 · Login no frontend (iteração 18)","etapa":18}
+{"em":1794160688726,"nivel":"passo","texto":"Propor a spec","etapa":18,"passo":"propor"}
+{"em":1794160688736,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":18,"passo":"propor"}
+{"em":1794160739599,"nivel":"ok","texto":"Propor a spec: ok · 19 tarefas","etapa":18,"passo":"propor"}
+{"em":1794160739605,"nivel":"passo","texto":"Verificar ponto de partida","etapa":18,"passo":"partida"}
+{"em":1794160739615,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":18,"passo":"partida"}
+{"em":1794160739620,"nivel":"passo","texto":"Commit da proposta","etapa":18,"passo":"commitProposta"}

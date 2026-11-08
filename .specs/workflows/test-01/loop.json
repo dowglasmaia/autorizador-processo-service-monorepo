@@ -3049,7 +3049,8 @@
               "origem": "provider",
               "esforco": "medium"
             }
-          ]
+          ],
+          "commit": "3a52989"
         },
         {
           "numero": 18,
@@ -3186,19 +3187,19 @@
     }
   ],
   "iteracao": {
-    "numero": 17,
-    "etapa": 17,
-    "inicio": "2026-11-08T17:52:47.628Z",
-    "commitInicial": "cb726d0b4f43f1dfabf837430f443918d2d0317c",
-    "passoAtual": 6,
+    "numero": 18,
+    "etapa": 18,
+    "inicio": "2026-11-08T17:58:08.717Z",
+    "commitInicial": "3a529893ff10aacd33cb2d528b31b4253709c141",
+    "passoAtual": 2,
     "passos": [
       {
         "id": "propor",
         "situacao": "ok",
-        "duracaoMs": 38440,
-        "custo": 0.2333039,
+        "duracaoMs": 50858,
+        "custo": 0.2727032,
         "tentativas": 1,
-        "detalhe": "17 tarefas"
+        "detalhe": "19 tarefas"
       },
       {
         "id": "partida",
@@ -3210,66 +3211,62 @@
       },
       {
         "id": "commitProposta",
-        "situacao": "ok",
-        "duracaoMs": 371,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "3e9b8bd · 5 arquivo(s)"
-      },
-      {
-        "id": "aplicar",
-        "situacao": "ok",
-        "duracaoMs": 280800,
-        "custo": 0.9664629,
-        "tentativas": 1,
-        "detalhe": "17/17 tarefas · 3 sessão(ões)"
-      },
-      {
-        "id": "verificar",
-        "situacao": "pulado",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "arquivar",
-        "situacao": "ok",
-        "duracaoMs": 5,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\17-nucleo-http-tipos"
-      },
-      {
-        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
+      },
+      {
+        "id": "aplicar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "verificar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "arquivar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "commitEntrega",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
       }
     ],
-    "titulo": "Revisa a spec do núcleo HTTP e tipos do frontend (SPEC-16) contra a base entregue",
-    "comparacao": "A pasta da etapa 17 já tinha `proposta.md` e `tarefas.md`, escritos antes da etapa 16. Revisei e completei os dois contra o código atual.\nA etapa 16 foi entregue (`shared/ui`, `layout/shell`, `core/feedback`, `core/api-status`) e não conflita com esta etapa. `ApiError` e `apiErrorInterceptor` só são usados em `app.config.ts`, então podem ser substituídos sem afetar outras features.\nO app ainda não tem `openapi-typescript`, o script `api:types` nem `.prettierignore`. O contrato tem 12 códigos em `ProblemDetail.code`, e a SPEC-16 cita só 7. Mantive os 12, registrado como [REVISAR].\nAjustei a tarefa 1.3 (excluir `api-types.ts` do ESLint e criar `.prettierignore`) e a 2.3 (remover também o interceptor provisório). A lista ficou com 17 tarefas, sem mexer em código."
+    "titulo": "Revisa a spec do login no frontend (SPEC-23) contra o núcleo HTTP entregue",
+    "comparacao": "A pasta já tinha proposta.md e tarefas.md, escritos antes da etapa 17. Revisei os dois contra o código atual e mantive escopo, tarefas e critérios da SPEC-23.\nA etapa 17 entregou AppError, errorInterceptor, ApiClient e os tipos LoginRequest, TokenResponse e Usuario, que a proposta já presumia. Atualizei os nomes reais e a ordem dos interceptors: authInterceptor vem antes do errorInterceptor.\nO errorInterceptor descarta os cabeçalhos, então o Retry-After do 429 se perde. Acrescentei o ajuste mínimo de um campo retryAfter no AppError, como tarefa 1.1 e decisão [REVISAR].\nO apiBaseUrl é relativo (/api/v1), então a regra do Bearer cobre URL relativa e absoluta. SessaoSolicitacoes não existe ainda, então o logout limpa só o estado de core/auth, com ponto de extensão.\nNão há core/auth, guards nem rota /login, e o shell não tem menu de usuário. São 20 tarefas em 5 grupos, e não alterei código da aplicação."
   },
   "totais": {
-    "duracaoMs": 11991137,
-    "custo": 34.491234799999994,
+    "duracaoMs": 12043172,
+    "custo": 34.763937999999996,
     "execucoes": 2,
-    "iteracoes": 17,
-    "entregues": 16,
-    "sessoes": 92,
-    "turnos": 1249,
+    "iteracoes": 18,
+    "entregues": 17,
+    "sessoes": 93,
+    "turnos": 1257,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 5,
     "recuperacoesResolvidas": 4,
     "falhas": 0,
-    "commits": 33,
+    "commits": 34,
     "tokens": {
-      "entrada": 1856,
-      "saida": 832921,
-      "cacheCriacao": 5016500,
-      "cacheLeitura": 56404054
+      "entrada": 1870,
+      "saida": 837285,
+      "cacheCriacao": 5065603,
+      "cacheLeitura": 56730286
     }
   },
   "ultimaExecucao": {
