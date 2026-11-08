@@ -559,3 +559,16 @@
 {"em":1794164254768,"nivel":"passo","texto":"Verificar ponto de partida","etapa":25,"passo":"partida"}
 {"em":1794164254781,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":25,"passo":"partida"}
 {"em":1794164254788,"nivel":"passo","texto":"Commit da proposta","etapa":25,"passo":"commitProposta"}
+{"em":1794164255175,"nivel":"ok","texto":"1ed75e3 · 5 arquivo(s) · docs(test-01): proposta da etapa 25 · Testes e2e do ambiente","etapa":25,"passo":"commitProposta"}
+{"em":1794164255184,"nivel":"ok","texto":"Commit da proposta: ok · 1ed75e3 · 5 arquivo(s)","etapa":25,"passo":"commitProposta"}
+{"em":1794164255189,"nivel":"passo","texto":"Aplicar a spec","etapa":25,"passo":"aplicar"}
+{"em":1794164255194,"nivel":"info","texto":"proposta antecipada da etapa 26 em paralelo","etapa":25,"passo":"aplicar"}
+{"em":1794164308076,"nivel":"ok","texto":"proposta antecipada da etapa 26 pronta","etapa":25,"passo":"aplicar"}
+{"em":1794164736425,"nivel":"aviso","texto":"a sessão terminou sem marcar tarefas (1 de 2 continuações)","etapa":25,"passo":"aplicar"}
+{"em":1794168029628,"nivel":"ok","texto":"Aplicar a spec: ok · 25/25 tarefas · 5 sessão(ões)","etapa":25,"passo":"aplicar"}
+{"em":1794168029636,"nivel":"passo","texto":"Verificar a mudança","etapa":25,"passo":"verificar"}
+{"em":1794168029647,"nivel":"info","texto":"Verificar a mudança: pulado · sem verificações configuradas","etapa":25,"passo":"verificar"}
+{"em":1794168029654,"nivel":"passo","texto":"Arquivar a spec","etapa":25,"passo":"arquivar"}
+{"em":1794168029663,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\25-e2e-ambiente-completo → .specs\\workflows\\test-01\\specs\\arquivo\\25-e2e-ambiente-completo","etapa":25,"passo":"arquivar"}
+{"em":1794168029670,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\25-e2e-ambiente-completo","etapa":25,"passo":"arquivar"}
+{"em":1794168029676,"nivel":"passo","texto":"Commit da entrega","etapa":25,"passo":"commitEntrega"}

@@ -13,6 +13,7 @@ Frontend do **Autorizador de Procedimentos Médicos**: Angular 21, TypeScript es
 | `npm run build` | Build de produção em `dist/` |
 | `npm test` | Testes unitários (Vitest via `@angular/build:unit-test`), execução única |
 | `npm run lint` | `angular-eslint` (exige `OnPush` e `inject()`) |
+| `npm run e2e` | Testes e2e Playwright contra o ambiente completo no Docker (desktop e móvel) |
 
 ## Ambientes
 - `src/environments/environment.ts` (produção): `apiBaseUrl = '/api/v1'` (mesma origem, atrás de proxy reverso).
@@ -57,3 +58,13 @@ docker compose up -d --build                    # na raiz: banco + API + fronten
 - **Healthcheck:** `GET /healthz` retorna `200 ok` (o Compose usa `wget` em `127.0.0.1`, pois `localhost` resolve para IPv6 na Alpine). `GET /actuator/health` repassa a saúde da API; os demais caminhos de `/actuator/` retornam 404.
 - **Cache:** `index.html` sem cache; `.js`/`.css`/fontes com hash em `immutable` por 1 ano; imagens e favicon com 1 hora.
 - **Cabeçalhos de segurança** (`nginx/security-headers.inc`, incluído em toda `location`): `X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options: DENY` e CSP `default-src 'self'` (com `style-src 'unsafe-inline'` e `script-src-attr 'unsafe-inline'` exigidos pelo build do Angular).
+
+## Testes e2e (Playwright)
+
+Rodam o ambiente completo (PostgreSQL + API + Nginx com o app) em um projeto Compose descartável chamado `e2e`.
+
+- **Pré-requisitos:** Docker com Compose, Node 24, `npm ci` e o Chromium do Playwright (`npx playwright install chromium`). As portas `4200` (app), `18080` (API) e `15432` (banco) devem estar livres; use `APP_PORT`, `E2E_API_PORT` e `E2E_POSTGRES_PORT` para trocá-las.
+- **Executar:** `npm run e2e` (a primeira execução constrói as imagens; leva alguns minutos). Para um cenário: `npx playwright test 05-resiliencia`.
+- **Ambiente:** o *global setup* gera um `.env` descartável em `e2e/.tmp/` (senha e `JWT_SECRET` sorteados, TTL de 1 minuto; nada é versionado), sobe o Compose e espera `api` e `app` ficarem `healthy`. O *teardown* roda `docker compose -p e2e down -v`, mesmo com falhas.
+- **Projetos:** `desktop` e `movel` (Pixel 7), em série, no mesmo banco.
+- **Relatórios:** `playwright-report/` (HTML) e `test-results/junit.xml`; capturas, vídeo e *trace* só em falha (`test-results/artefatos/`).

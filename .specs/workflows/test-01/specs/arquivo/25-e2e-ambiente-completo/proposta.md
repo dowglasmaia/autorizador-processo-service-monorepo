@@ -37,3 +37,34 @@ Validar os fluxos completos pela interface real (navegador → Nginx → API →
 - **Cenário de expiração** usa `JWT_TTL_MINUTOS=1` no `.env` de teste e espera/avança o relógio do navegador (`page.clock`) em vez de dormir 60 s, se a API aceitar; caso contrário, aceita-se espera real isolada em um teste. Se TTL mínimo de 1 minuto for inviável, registrar.
 - **Textos esperados** são lidos do catálogo entregue na etapa 24 (`core/i18n/mensagens.ts`) ou de seletores por papel/rótulo, para não duplicar texto frágil.
 - **Pastas de relatório** (`playwright-report/`, `test-results/`) entram no `.gitignore` do app.
+
+## Registro do lote 1 (Playwright e ambiente)
+- **Desvio `06-execution-plan`:** a pasta citada no índice não existe; ignorada.
+- **Estado conferido:** `compose.yaml` com `postgres`/`api`/`app` e healthchecks; `/login` como destino sem sessão; sem `@playwright/test` antes do lote.
+- **Docker Compose:** a máquina só tem o binário independente `docker-compose` v5.6.1 (o plugin `docker compose` não existe). `e2e/ambiente.ts` usa o plugin se houver e cai para `docker-compose`. Mesmo comportamento, projeto `-p e2e`.
+- **Seed (2.2):** nenhum `compose.e2e.yaml` criado; perfil `local` é o padrão. A presença dos 3 procedimentos será validada pelo cenário 1 (lote seguinte).
+- **`@types/node`** adicionado como devDependency (tipos para `e2e/`, que tem `tsconfig.json` próprio; o lint do Angular só cobre `src/`).
+- **Portas do e2e:** API 18080 e PostgreSQL 15432 (sobrescrevíveis por `E2E_API_PORT`/`E2E_POSTGRES_PORT`) para não colidir com o ambiente de desenvolvimento; app em `APP_PORT` (padrão 4200).
+- **`.env` descartável:** gerado em `e2e/.tmp/e2e.env` (ignorado pelo git; JWT_SECRET, senha do bootstrap e do banco sorteados por execução; TTL 1 min), passado por `--env-file`; removido no teardown. Setup que falha faz `down -v` antes de relançar o erro.
+- **Verificação:** `e2e/fumaca.e2e.ts` (teste mínimo, mantido até os cenários chegarem) passou em desktop contra o Compose limpo; teardown removeu contêineres, rede e volume (0 recursos com o rótulo do projeto `e2e`).
+
+## Registro do lote 3 (helpers e cenários 0–5)
+- **Arquivos:** `e2e/helpers.ts` (login pela UI, `numeroUnico`, leitura do resumo da seed/painel pela API), `01-autenticacao`, `02-painel`, `03-procedimentos`, `04-autorizacoes` (`*.e2e.ts`). O cenário 6 fica para o lote seguinte.
+- **Seletores:** os rótulos dos campos obrigatórios levam `*` (ex.: "Senha *"), então `getByLabel(..., {exact:true})` não casa; usa-se `getByRole('textbox'|'combobox', {name, exact:true})`.
+- **Cenário 1 (seed):** os projetos rodam em série no mesmo banco; só o projeto `desktop` exige os totais exatos da seed (3/0/3). O móvel confere que a tela espelha a API.
+- **Cenário 0b:** espera real de ~60 s (TTL 1 min) em um único teste, sem `page.clock`.
+- **Setup:** passou a fazer `down -v` antes do `up`, porque restos de execução interrompida (volume com outra senha do banco) deixavam a API `unhealthy`.
+- **Verificação:** `npx playwright test --project=desktop` → 11 testes passam (9 na execução completa; 2 do cenário 4/5 após corrigir o seletor do combobox). Execução no projeto móvel fica para a tarefa 6.1.
+
+## Registro do lote 4 (cenários 6–9 e verificação)
+- **Arquivo:** `e2e/05-resiliencia.e2e.ts` (cenários 6, 7, 8 e 9).
+- **Cenário 6:** o produto ignora em silêncio um `?numero=` que não está na lista (não há erro de API nem diálogo). O "erro tratado" verificado é: nada pré-selecionado ("Selecione"), envio sem escolha mostra "Escolha um procedimento." e o painel de resultado continua no estado inicial. **[REVISAR]** se a equipe esperava aviso explícito para número forjado (mudança de produto, fora desta etapa).
+- **Cenário 7:** o título "Não foi possível carregar" nas listas é um estado vazio (`app-empty-state`) com "Tentar novamente", não um modal (o `ErrorDialog` só é usado em login/cadastro). O teste valida esse texto com `docker compose stop api`, religa com `up -d --wait api` num `finally` e confirma a retomada via "Tentar novamente" (com repetição enquanto o Nginx reencontra a API).
+- **Cenário 9:** 320 px em `/painel`, `/procedimentos`, `/solicitar` e `/autorizacoes`, comparando `scrollWidth` e `clientWidth` do documento.
+- **Verificação (6.1/6.2):** `npm run e2e` → 30 testes passam (desktop e móvel, 4,2 min), sem falhas de produto. Depois do teardown: 0 contêineres, volumes e redes do projeto `e2e`, e `e2e/.tmp` removido.
+- **6.3:** seção "Testes e2e (Playwright)" no README do app.
+- **6.4:** `npm run lint` sem erros, `npm run build` ok, `npm test` 226 testes passam.
+- Falta a tarefa 6.5 (evidência final e arquivamento), fora deste lote.
+
+## Registro do lote 5
+- 6.5: evidência por tarefa e resumo em `tarefas.md`; SPEC-30 movida com `git mv` para `.specs/archive/`. Sem bloqueios.

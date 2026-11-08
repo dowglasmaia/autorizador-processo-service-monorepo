@@ -6,7 +6,8 @@
     "build": "ng build",
     "test": "ng test --no-watch",
     "lint": "ng lint",
-    "api:types": "node scripts/gerar-api-types.mjs"
+    "api:types": "node scripts/gerar-api-types.mjs",
+    "e2e": "playwright test"
   },
   "private": true,
   "packageManager": "npm@11.12.1",
@@ -30,6 +31,8 @@
     "@angular/cli": "^21.2.5",
     "@angular/compiler-cli": "^21.2.0",
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.65.0",
+    "@types/node": "^24.19.2",
     "angular-eslint": "21.4.0",
     "eslint": "^10.3.0",
     "jsdom": "^29.1.1",

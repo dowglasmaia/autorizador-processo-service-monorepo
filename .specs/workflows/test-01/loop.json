@@ -4322,7 +4322,217 @@
           "descricao": "Executa a SPEC-30: testes ponta a ponta contra o ambiente completo do Compose, cobrindo login e os fluxos principais.\nReferências: `TEST_STRATEGY.md`.\nLimite: sem alterar regras de negócio.",
           "spec": "25-e2e-ambiente-completo",
           "specPronta": false,
-          "status": "pendente"
+          "status": "entregue",
+          "entregueEm": "2026-11-08T20:00:29.683Z",
+          "iteracao": 25,
+          "duracaoMs": 3817550,
+          "custo": 2.6114801999999995,
+          "passos": [
+            {
+              "id": "propor",
+              "situacao": "ok",
+              "duracaoMs": 42734,
+              "custo": 0.2193777,
+              "tentativas": 1,
+              "detalhe": "25 tarefas"
+            },
+            {
+              "id": "partida",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "commitProposta",
+              "situacao": "ok",
+              "duracaoMs": 385,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "1ed75e3 · 5 arquivo(s)"
+            },
+            {
+              "id": "aplicar",
+              "situacao": "ok",
+              "duracaoMs": 3774428,
+              "custo": 2.3921024999999996,
+              "tentativas": 1,
+              "detalhe": "25/25 tarefas · 5 sessão(ões)"
+            },
+            {
+              "id": "verificar",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "arquivar",
+              "situacao": "ok",
+              "duracaoMs": 3,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\25-e2e-ambiente-completo"
+            },
+            {
+              "id": "commitEntrega",
+              "situacao": "ok",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1
+            }
+          ],
+          "sessoes": [
+            {
+              "rotulo": "propor-25",
+              "passo": "propor",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2193777,
+              "turnos": 7,
+              "duracaoMs": 42717,
+              "inicio": 1794164212024,
+              "fim": 1794164254749,
+              "tokens": {
+                "entrada": 12,
+                "saida": 2552,
+                "cacheCriacao": 41922,
+                "cacheLeitura": 261457
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "antecipar-26",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.23443150000000001,
+              "turnos": 8,
+              "duracaoMs": 52865,
+              "inicio": 1794164255196,
+              "fim": 1794164308067,
+              "tokens": {
+                "entrada": 12,
+                "saida": 4037,
+                "cacheCriacao": 42054,
+                "cacheLeitura": 258215
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-25-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.38621069999999996,
+              "turnos": 17,
+              "duracaoMs": 304797,
+              "inicio": 1794164256519,
+              "fim": 1794164561324,
+              "tokens": {
+                "entrada": 28,
+                "saida": 9883,
+                "cacheCriacao": 52542,
+                "cacheLeitura": 771567
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-25-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.7194621999999999,
+              "turnos": 28,
+              "duracaoMs": 175083,
+              "inicio": 1794164561329,
+              "fim": 1794164736419,
+              "tokens": {
+                "entrada": 46,
+                "saida": 18671,
+                "cacheCriacao": 88946,
+                "cacheLeitura": 1768762
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-25-3",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.6326139000000001,
+              "turnos": 35,
+              "duracaoMs": 1908912,
+              "inicio": 1794164736427,
+              "fim": 1794166645349,
+              "tokens": {
+                "entrada": 68,
+                "saida": 9256,
+                "cacheCriacao": 75399,
+                "cacheLeitura": 2383219
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-25-4",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.43478529999999993,
+              "turnos": 18,
+              "duracaoMs": 1343935,
+              "inicio": 1794166645354,
+              "fim": 1794167989297,
+              "tokens": {
+                "entrada": 32,
+                "saida": 7792,
+                "cacheCriacao": 64280,
+                "cacheLeitura": 996813
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-25-5",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.21903040000000001,
+              "turnos": 8,
+              "duracaoMs": 40304,
+              "inicio": 1794167989304,
+              "fim": 1794168029617,
+              "tokens": {
+                "entrada": 12,
+                "saida": 3129,
+                "cacheCriacao": 40269,
+                "cacheLeitura": 266404
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            }
+          ]
         },
         {
           "numero": 26,
@@ -4386,7 +4596,7 @@
     "etapa": 25,
     "inicio": "2026-11-08T18:56:52.008Z",
     "commitInicial": "32fc6456b387af7168ee9a4be1d6045afabd1109",
-    "passoAtual": 2,
+    "passoAtual": 6,
     "passos": [
       {
         "id": "propor",
@@ -4406,62 +4616,66 @@
       },
       {
         "id": "commitProposta",
+        "situacao": "ok",
+        "duracaoMs": 385,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "1ed75e3 · 5 arquivo(s)"
+      },
+      {
+        "id": "aplicar",
+        "situacao": "ok",
+        "duracaoMs": 3774428,
+        "custo": 2.3921024999999996,
+        "tentativas": 1,
+        "detalhe": "25/25 tarefas · 5 sessão(ões)"
+      },
+      {
+        "id": "verificar",
+        "situacao": "pulado",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "arquivar",
+        "situacao": "ok",
+        "duracaoMs": 3,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\25-e2e-ambiente-completo"
+      },
+      {
+        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
-      },
-      {
-        "id": "aplicar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "verificar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "arquivar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
       }
     ],
     "titulo": "Revisa a spec dos testes e2e do ambiente (SPEC-30) contra a base entregue",
     "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md`, escritos antes da etapa 24. Revisei os dois contra o código atual e os mantive, com escopo, 25 tarefas e critérios de aceite.\nCorrigi uma premissa errada: a proposta dizia que a seed não chegava ao Compose. Mas `application.yml` define `spring.profiles.default: local`, o `compose.yaml` não define `SPRING_PROFILES_ACTIVE` e o `application-local.yml` inclui `db/seed` no Flyway. Então a seed já é carregada no Compose.\nPor isso o override `compose.e2e.yaml` virou contingência: a tarefa 2.2 agora só confirma a seed, e a decisão foi registrada como [REVISAR].\nConfirmei que não há Playwright, script `e2e` nem pasta `e2e/` no app, e que `.specs/06-execution-plan/` continua inexistente. O catálogo `core/i18n/mensagens.ts` existe e traz o texto \"Não foi possível carregar\", usado no cenário 7.\nNenhum código da aplicação foi alterado."
   },
   "totais": {
-    "duracaoMs": 15525283,
-    "custo": 47.5726752,
+    "duracaoMs": 19300099,
+    "custo": 50.199209200000006,
     "execucoes": 2,
     "iteracoes": 25,
     "entregues": 24,
-    "sessoes": 128,
-    "turnos": 1706,
+    "sessoes": 134,
+    "turnos": 1820,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 6,
     "recuperacoesResolvidas": 5,
     "falhas": 0,
-    "commits": 48,
+    "commits": 49,
     "tokens": {
-      "entrada": 2576,
-      "saida": 1151492,
-      "cacheCriacao": 6968551,
-      "cacheLeitura": 77264918
+      "entrada": 2774,
+      "saida": 1204260,
+      "cacheCriacao": 7332041,
+      "cacheLeitura": 83709898
     }
   },
   "ultimaExecucao": {
