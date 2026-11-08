@@ -3637,7 +3637,8 @@
               "origem": "provider",
               "esforco": "medium"
             }
-          ]
+          ],
+          "commit": "e0a76a8"
         },
         {
           "numero": 21,
@@ -3747,19 +3748,19 @@
     }
   ],
   "iteracao": {
-    "numero": 20,
-    "etapa": 20,
-    "inicio": "2026-11-08T18:22:17.869Z",
-    "commitInicial": "96e297d002e99cb500df8f529a86ec4c3bfac359",
-    "passoAtual": 6,
+    "numero": 21,
+    "etapa": 21,
+    "inicio": "2026-11-08T18:31:31.091Z",
+    "commitInicial": "e0a76a813fb3a1931fc39194d68fbfc14b137d9c",
+    "passoAtual": 2,
     "passos": [
       {
         "id": "propor",
         "situacao": "ok",
-        "duracaoMs": 33150,
-        "custo": 0.2001773,
+        "duracaoMs": 54547,
+        "custo": 0.23695570000000002,
         "tentativas": 1,
-        "detalhe": "25 tarefas"
+        "detalhe": "23 tarefas"
       },
       {
         "id": "partida",
@@ -3771,66 +3772,62 @@
       },
       {
         "id": "commitProposta",
-        "situacao": "ok",
-        "duracaoMs": 1868,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "08eada0 · 5 arquivo(s)"
-      },
-      {
-        "id": "aplicar",
-        "situacao": "ok",
-        "duracaoMs": 517368,
-        "custo": 1.8618128,
-        "tentativas": 1,
-        "detalhe": "25/25 tarefas · 4 sessão(ões)"
-      },
-      {
-        "id": "verificar",
-        "situacao": "pulado",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "arquivar",
-        "situacao": "ok",
-        "duracaoMs": 4,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\20-feature-procedimentos"
-      },
-      {
-        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
+      },
+      {
+        "id": "aplicar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "verificar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "arquivar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "commitEntrega",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
       }
     ],
-    "titulo": "Revisa a spec da tela de procedimentos (SPEC-17) contra a base entregue",
-    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md`, escritos antes da etapa 19. Revisei os dois contra o código atual e os mantive.\nO front continua intacto: `features/procedimentos` só tem a rota `''` e uma página-esqueleto \"Em construção\", sem serviço, `doc.md` nem testes.\nOs tipos gerados (`ProcedimentoRequest`, `ProcedimentoDto`, `PaginaProcedimentos`), o núcleo HTTP, `shared/ui` e o `authGuard` em `app.routes.ts` já existem. `features/login` serve de modelo de estrutura.\nA etapa 19 (Nginx) não alterou código Angular. Troquei as menções a \"etapa 19 em curso\" por \"conferida\" e incluí a referência a `features/login` na tarefa 1.1.\nSão 7 grupos e 23 tarefas, dentro do limite. `.specs/06-execution-plan/` não existe, e a tarefa 7.3 registra esse desvio. Nada fora da pasta da spec foi alterado."
+    "titulo": "Revisa a spec da tela solicitar autorização (SPEC-18) contra a base entregue",
+    "comparacao": "A pasta da etapa já tinha proposta.md e tarefas.md escritos antecipadamente; revisei os dois contra o código atual e não recriei nada.\nSegundo o código, `SegmentedChoice` já existe em `shared/ui/chip`, então a spec passou a reaproveitá-lo em vez de criar um componente local.\n`ProcedimentosService` (etapa 20) fixa `size=20` e guarda estado da tela de procedimentos, então não serve ao seletor com `size=200`. A feature terá um método de leitura próprio em `autorizacao.service.ts`.\n`features/solicitar` ainda é esqueleto, `core/sessao` não existe e o link `/solicitar?numero=` já sai da tela de procedimentos. `resultadoNegocio()` e os tipos gerados estão prontos.\nAs tarefas continuam em 6 grupos e cerca de 24 itens, dentro do limite de 4 a 30. Os 3 itens `[REVISAR]` ficam na proposta. A pasta `.specs/06-execution-plan/` continua inexistente."
   },
   "totais": {
-    "duracaoMs": 13962058,
-    "custo": 40.6216629,
+    "duracaoMs": 14017172,
+    "custo": 40.8586186,
     "execucoes": 2,
-    "iteracoes": 20,
-    "entregues": 19,
-    "sessoes": 109,
-    "turnos": 1449,
+    "iteracoes": 21,
+    "entregues": 20,
+    "sessoes": 110,
+    "turnos": 1458,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 6,
     "recuperacoesResolvidas": 5,
     "falhas": 0,
-    "commits": 39,
+    "commits": 40,
     "tokens": {
-      "entrada": 2188,
-      "saida": 987132,
-      "cacheCriacao": 5926482,
-      "cacheLeitura": 65881315
+      "entrada": 2202,
+      "saida": 990184,
+      "cacheCriacao": 5970042,
+      "cacheLeitura": 66202992
     }
   },
   "ultimaExecucao": {

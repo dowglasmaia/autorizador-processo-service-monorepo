@@ -461,3 +461,13 @@
 {"em":1794162690415,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\20-feature-procedimentos → .specs\\workflows\\test-01\\specs\\arquivo\\20-feature-procedimentos","etapa":20,"passo":"arquivar"}
 {"em":1794162690422,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\20-feature-procedimentos","etapa":20,"passo":"arquivar"}
 {"em":1794162690429,"nivel":"passo","texto":"Commit da entrega","etapa":20,"passo":"commitEntrega"}
+{"em":1794162690988,"nivel":"ok","texto":"e0a76a8 · 20 arquivo(s) · feat(autorizador): Revisa a spec da tela de procedimentos (SPEC-17) c…","etapa":20,"passo":"commitEntrega"}
+{"em":1794162691007,"nivel":"ok","texto":"Commit da entrega: ok · e0a76a8 · 20 arquivo(s)","etapa":20,"passo":"commitEntrega"}
+{"em":1794162691019,"nivel":"ok","texto":"Etapa 20 entregue · commit e0a76a8","etapa":20,"passo":"commitEntrega"}
+{"em":1794162691096,"nivel":"passo","texto":"Etapa 21 · Tela solicitar autorização (iteração 21)","etapa":21}
+{"em":1794162691098,"nivel":"passo","texto":"Propor a spec","etapa":21,"passo":"propor"}
+{"em":1794162691104,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":21,"passo":"propor"}
+{"em":1794162745656,"nivel":"ok","texto":"Propor a spec: ok · 23 tarefas","etapa":21,"passo":"propor"}
+{"em":1794162745661,"nivel":"passo","texto":"Verificar ponto de partida","etapa":21,"passo":"partida"}
+{"em":1794162745670,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":21,"passo":"partida"}
+{"em":1794162745675,"nivel":"passo","texto":"Commit da proposta","etapa":21,"passo":"commitProposta"}
