@@ -1,17 +1,18 @@
 # Contêiner Nginx do frontend
 
-Etapa 19 de 31 · Fase 3 · derivada da `SPEC-13` (`.specs/03-frontend/SPEC-13-frontend-container-nginx.md`). Será revisada contra o que a etapa 18 (login) entregar.
+Etapa 19 de 31 · Fase 3 · derivada da `SPEC-13` (`.specs/03-frontend/SPEC-13-frontend-container-nginx.md`). Revisada contra o repositório após a entrega da etapa 18 (login).
 
 ## Objetivo
 Empacotar o Angular em uma imagem Nginx sem Node que serve a SPA, faz proxy de `/api/` para o serviço `api` e fecha o serviço `app` do `compose.yaml` (porta 80 → `${APP_PORT:-4200}`), com cabeçalhos de segurança, cache correto e healthcheck.
 
-## Ponto de partida (conferido no repositório, antes da entrega da etapa 18)
-- `app-autorizador-processo/` não tem `Dockerfile`, `.dockerignore` nem `nginx/`. O build (`ng build`) gera `dist/app-autorizador-processo/browser` (a confirmar no build da etapa).
+## Ponto de partida (conferido no repositório após a etapa 18)
+- `app-autorizador-processo/` não tem `Dockerfile`, `.dockerignore` nem `nginx/`. O build (`ng build`, `@angular/build:application`, sem SSR/prerender) gera `dist/app-autorizador-processo/browser` com `index.html`, `favicon.ico` e `chunk-*.js`/`main-*.js`/`styles-*.css` com hash; `dist/` local existe mas será ignorado pelo `.dockerignore`.
 - `environment.ts` de produção usa `apiBaseUrl: '/api/v1'` (relativo, mesma origem); o de desenvolvimento aponta para `http://localhost:8080/api/v1`. Portanto o Nginx não exige CORS.
 - `compose.yaml` já traz o serviço `app` (`build: ./app-autorizador-processo`, `${APP_PORT:-4200}:80`, `depends_on: api: service_healthy`, `restart`), porém **sem `healthcheck`** e com cabeçalho dizendo que o frontend "só existe após a etapa do frontend". `api` e `postgres` já têm healthcheck; `.env.example` já define `APP_PORT=4200`.
 - O Dockerfile da API (`api-autorizador-processo/Dockerfile`) serve de referência de estilo (multi-stage, camada de dependências separada, comentários em português).
-- O indicador de status da API no shell (`core/api-status`) consulta o health; a SPEC exige expor somente `location = /actuator/health`.
+- O indicador de status da API no shell (`core/api-status`) faz `GET /actuator/health` (caminho relativo, `HEALTH_PATH`); a SPEC exige expor somente `location = /actuator/health`.
 - Existe `scripts/gerar-api-types.mjs`; o build de produção não deve depender dele (tipos já versionados em `shared/api`).
+- Rotas SPA atuais: `login`, `painel`, `procedimentos`, `solicitar`, `autorizacoes`, `**` — todas atendidas pelo fallback `try_files`; o `HEALTH_PATH` relativo depende do proxy `/actuator/health` do Nginx em produção.
 - `.specs/06-execution-plan/` citada no `INDEX.md` não existe; desvio a registrar na evidência.
 
 ## Escopo
@@ -40,4 +41,5 @@ Empacotar o Angular em uma imagem Nginx sem Node que serve a SPA, faz proxy de `
 - **Imagem base:** `nginx-unprivileged` (usuário não-root) em vez de `nginx` comum, conforme a preferência da SPEC; mapeamento do compose será `${APP_PORT:-4200}:8080` se a imagem escutar em 8080.
 - **Serviço `app` já existente no compose:** a etapa só o completa (healthcheck, comentários) em vez de recriá-lo.
 - **Healthcheck:** `wget -qO- http://localhost:8080/healthz` (a imagem Alpine inclui `wget`; `curl` não será instalado).
-- **Etapa 18 em andamento:** nenhuma alteração de código Angular é prevista; a revisão posterior confirmará que rotas como `/login` seguem cobertas pelo fallback da SPA. **[REVISAR]** se a etapa 18 mudar o caminho de saída do build ou o `apiBaseUrl`.
+- **Etapa 18 entregue:** conferido que o caminho de saída do build e o `apiBaseUrl` de produção (`/api/v1`) não mudaram; `/login` e demais rotas ficam cobertas pelo fallback. Nenhuma alteração de código Angular é prevista.
+- **Arquivos hash:** o cache `immutable` será aplicado por extensão (`.js`, `.css`, fontes) e `index.html` terá `no-cache`; `favicon.ico` e demais arquivos sem hash ficam com cache curto.

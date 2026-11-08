@@ -3260,7 +3260,8 @@
               "origem": "provider",
               "esforco": "medium"
             }
-          ]
+          ],
+          "commit": "122f9c0"
         },
         {
           "numero": 19,
@@ -3388,19 +3389,19 @@
     }
   ],
   "iteracao": {
-    "numero": 18,
-    "etapa": 18,
-    "inicio": "2026-11-08T17:58:08.717Z",
-    "commitInicial": "3a529893ff10aacd33cb2d528b31b4253709c141",
-    "passoAtual": 6,
+    "numero": 19,
+    "etapa": 19,
+    "inicio": "2026-11-08T18:08:24.806Z",
+    "commitInicial": "122f9c0451e9adc95073bdd74e7cebc8104e3565",
+    "passoAtual": 2,
     "passos": [
       {
         "id": "propor",
         "situacao": "ok",
-        "duracaoMs": 50858,
-        "custo": 0.2727032,
+        "duracaoMs": 47351,
+        "custo": 0.22614520000000002,
         "tentativas": 1,
-        "detalhe": "19 tarefas"
+        "detalhe": "17 tarefas"
       },
       {
         "id": "partida",
@@ -3412,78 +3413,62 @@
       },
       {
         "id": "commitProposta",
-        "situacao": "ok",
-        "duracaoMs": 378,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "0887a9b · 5 arquivo(s)"
-      },
-      {
-        "id": "aplicar",
-        "situacao": "aviso",
-        "duracaoMs": 532176,
-        "custo": 1.8770308999999996,
-        "tentativas": 1,
-        "recuperacoes": [
-          {
-            "numero": 1,
-            "erro": ".specs\\workflows\\test-01\\specs\\18-login-frontend/tarefas.md não tem tarefas",
-            "resolvida": true,
-            "custo": 0.21680849999999996,
-            "em": "2026-11-08T18:07:52.203Z",
-            "causa": "A sessão de aplicar a spec já tinha movido (git mv) a pasta da spec 18 para .specs/archive/. Por isso o devkit não achou tarefas.md no caminho esperado e acusou \"não tem tarefas\".",
-            "oQueFez": "Devolvi proposta.md e tarefas.md para .specs/workflows/test-01/specs/18-login-frontend/ com git mv e removi a pasta vazia em .specs/archive/. O tarefas.md tem 19 tarefas marcadas [x] e nenhuma pendente. Não alterei o conteúdo. O passo de arquivar da etapa fará o arquivamento depois.",
-            "precisaPessoa": false
-          }
-        ],
-        "detalhe": "recuperado"
-      },
-      {
-        "id": "verificar",
-        "situacao": "pulado",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "arquivar",
-        "situacao": "ok",
-        "duracaoMs": 4,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\18-login-frontend"
-      },
-      {
-        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
+      },
+      {
+        "id": "aplicar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "verificar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "arquivar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "commitEntrega",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
       }
     ],
-    "titulo": "Revisa a spec do login no frontend (SPEC-23) contra o núcleo HTTP entregue",
-    "comparacao": "A pasta já tinha proposta.md e tarefas.md, escritos antes da etapa 17. Revisei os dois contra o código atual e mantive escopo, tarefas e critérios da SPEC-23.\nA etapa 17 entregou AppError, errorInterceptor, ApiClient e os tipos LoginRequest, TokenResponse e Usuario, que a proposta já presumia. Atualizei os nomes reais e a ordem dos interceptors: authInterceptor vem antes do errorInterceptor.\nO errorInterceptor descarta os cabeçalhos, então o Retry-After do 429 se perde. Acrescentei o ajuste mínimo de um campo retryAfter no AppError, como tarefa 1.1 e decisão [REVISAR].\nO apiBaseUrl é relativo (/api/v1), então a regra do Bearer cobre URL relativa e absoluta. SessaoSolicitacoes não existe ainda, então o logout limpa só o estado de core/auth, com ponto de extensão.\nNão há core/auth, guards nem rota /login, e o shell não tem menu de usuário. São 20 tarefas em 5 grupos, e não alterei código da aplicação."
+    "titulo": "Revisa a spec do contêiner Nginx do frontend (SPEC-13) contra a base entregue",
+    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md` (17 tarefas em 5 grupos), escritos antes da etapa 18. Revisei e completei os dois, sem recriá-los.\nConferi no repositório que `app-autorizador-processo/` ainda não tem `Dockerfile`, `.dockerignore` nem `nginx/`. O build gera `dist/app-autorizador-processo/browser` com `index.html` e `chunk-*.js` com hash, sem SSR. O `apiBaseUrl` de produção continua `/api/v1`, relativo e sem CORS.\nO serviço `app` já existe no `compose.yaml`, mas sem `healthcheck`, e o comentário do cabeçalho está desatualizado. O `README.md` raiz ainda diz que o frontend não existe.\nO login da etapa 18 não mudou o build nem o `apiBaseUrl`. As rotas `login`, `painel`, `procedimentos`, `solicitar`, `autorizacoes` e `**` ficam cobertas pelo fallback `try_files`. O indicador de status da API chama `/actuator/health` com caminho relativo, então depende do proxy desse caminho no Nginx.\nAtualizei a proposta com esse ponto de partida e com uma decisão sobre o cache de arquivos sem hash, como `favicon.ico`. A `.specs/06-execution-plan/` continua inexistente e será registrada como desvio na evidência."
   },
   "totais": {
-    "duracaoMs": 12575730,
-    "custo": 36.8815148,
+    "duracaoMs": 12624156,
+    "custo": 37.107659999999996,
     "execucoes": 2,
-    "iteracoes": 18,
-    "entregues": 17,
-    "sessoes": 98,
-    "turnos": 1325,
+    "iteracoes": 19,
+    "entregues": 18,
+    "sessoes": 99,
+    "turnos": 1333,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 6,
     "recuperacoesResolvidas": 5,
     "falhas": 0,
-    "commits": 35,
+    "commits": 36,
     "tokens": {
-      "entrada": 1982,
-      "saida": 894131,
-      "cacheCriacao": 5362239,
-      "cacheLeitura": 60353774
+      "entrada": 1994,
+      "saida": 896833,
+      "cacheCriacao": 5405204,
+      "cacheLeitura": 60626186
     }
   },
   "ultimaExecucao": {

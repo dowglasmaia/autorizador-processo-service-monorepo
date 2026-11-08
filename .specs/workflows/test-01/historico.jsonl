@@ -417,3 +417,13 @@
 {"em":1794161303595,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\18-login-frontend → .specs\\workflows\\test-01\\specs\\arquivo\\18-login-frontend","etapa":18,"passo":"arquivar"}
 {"em":1794161303602,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\18-login-frontend","etapa":18,"passo":"arquivar"}
 {"em":1794161303609,"nivel":"passo","texto":"Commit da entrega","etapa":18,"passo":"commitEntrega"}
+{"em":1794161304672,"nivel":"ok","texto":"122f9c0 · 31 arquivo(s) · feat(autorizador): Revisa a spec do login no frontend (SPEC-23) contr…","etapa":18,"passo":"commitEntrega"}
+{"em":1794161304699,"nivel":"ok","texto":"Commit da entrega: ok · 122f9c0 · 31 arquivo(s)","etapa":18,"passo":"commitEntrega"}
+{"em":1794161304713,"nivel":"ok","texto":"Etapa 18 entregue · commit 122f9c0","etapa":18,"passo":"commitEntrega"}
+{"em":1794161304811,"nivel":"passo","texto":"Etapa 19 · Contêiner Nginx do frontend (iteração 19)","etapa":19}
+{"em":1794161304812,"nivel":"passo","texto":"Propor a spec","etapa":19,"passo":"propor"}
+{"em":1794161304819,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":19,"passo":"propor"}
+{"em":1794161352174,"nivel":"ok","texto":"Propor a spec: ok · 17 tarefas","etapa":19,"passo":"propor"}
+{"em":1794161352181,"nivel":"passo","texto":"Verificar ponto de partida","etapa":19,"passo":"partida"}
+{"em":1794161352193,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":19,"passo":"partida"}
+{"em":1794161352198,"nivel":"passo","texto":"Commit da proposta","etapa":19,"passo":"commitProposta"}
