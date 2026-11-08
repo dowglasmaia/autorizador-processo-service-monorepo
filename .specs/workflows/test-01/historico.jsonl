@@ -102,3 +102,15 @@
 {"em":1794150085468,"nivel":"passo","texto":"Verificar ponto de partida","etapa":5,"passo":"partida"}
 {"em":1794150085475,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":5,"passo":"partida"}
 {"em":1794150085478,"nivel":"passo","texto":"Commit da proposta","etapa":5,"passo":"commitProposta"}
+{"em":1794150085826,"nivel":"ok","texto":"cd95ce0 · 5 arquivo(s) · docs(test-01): proposta da etapa 5 · Contrato OpenAPI v1","etapa":5,"passo":"commitProposta"}
+{"em":1794150085832,"nivel":"ok","texto":"Commit da proposta: ok · cd95ce0 · 5 arquivo(s)","etapa":5,"passo":"commitProposta"}
+{"em":1794150085836,"nivel":"passo","texto":"Aplicar a spec","etapa":5,"passo":"aplicar"}
+{"em":1794150085840,"nivel":"info","texto":"proposta antecipada da etapa 6 em paralelo","etapa":5,"passo":"aplicar"}
+{"em":1794150180027,"nivel":"ok","texto":"proposta antecipada da etapa 6 pronta","etapa":5,"passo":"aplicar"}
+{"em":1794150557611,"nivel":"ok","texto":"Aplicar a spec: ok · 19/19 tarefas · 3 sessão(ões)","etapa":5,"passo":"aplicar"}
+{"em":1794150557616,"nivel":"passo","texto":"Verificar a mudança","etapa":5,"passo":"verificar"}
+{"em":1794150557624,"nivel":"info","texto":"Verificar a mudança: pulado · sem verificações configuradas","etapa":5,"passo":"verificar"}
+{"em":1794150557630,"nivel":"passo","texto":"Arquivar a spec","etapa":5,"passo":"arquivar"}
+{"em":1794150557637,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\05-contrato-openapi-v1 → .specs\\workflows\\test-01\\specs\\arquivo\\05-contrato-openapi-v1","etapa":5,"passo":"arquivar"}
+{"em":1794150557643,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\05-contrato-openapi-v1","etapa":5,"passo":"arquivar"}
+{"em":1794150557650,"nivel":"passo","texto":"Commit da entrega","etapa":5,"passo":"commitEntrega"}

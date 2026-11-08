@@ -839,7 +839,175 @@
           "descricao": "Executa a SPEC-05: contratos OpenAPI 3.1 por módulo (procedimento, autorizacao, painel) e erros comuns, com geração das interfaces.\nReferências: `API_CONTRACTS.md` e a skill `openapi-rest-contract`.\nLimite: sem implementação dos casos de uso.",
           "spec": "05-contrato-openapi-v1",
           "specPronta": false,
-          "status": "pendente"
+          "status": "entregue",
+          "entregueEm": "2026-11-08T15:09:17.656Z",
+          "iteracao": 5,
+          "duracaoMs": 513501,
+          "custo": 1.3195557000000002,
+          "passos": [
+            {
+              "id": "propor",
+              "situacao": "ok",
+              "duracaoMs": 41383,
+              "custo": 0.1980175,
+              "tentativas": 1,
+              "detalhe": "19 tarefas"
+            },
+            {
+              "id": "partida",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "commitProposta",
+              "situacao": "ok",
+              "duracaoMs": 346,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "cd95ce0 · 5 arquivo(s)"
+            },
+            {
+              "id": "aplicar",
+              "situacao": "ok",
+              "duracaoMs": 471768,
+              "custo": 1.1215382000000003,
+              "tentativas": 1,
+              "detalhe": "19/19 tarefas · 3 sessão(ões)"
+            },
+            {
+              "id": "verificar",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "arquivar",
+              "situacao": "ok",
+              "duracaoMs": 4,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\05-contrato-openapi-v1"
+            },
+            {
+              "id": "commitEntrega",
+              "situacao": "ok",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1
+            }
+          ],
+          "sessoes": [
+            {
+              "rotulo": "propor-05",
+              "passo": "propor",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.1980175,
+              "turnos": 6,
+              "duracaoMs": 41372,
+              "inicio": 1794150044079,
+              "fim": 1794150085458,
+              "tokens": {
+                "entrada": 10,
+                "saida": 2101,
+                "cacheCriacao": 39135,
+                "cacheLeitura": 204475
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "antecipar-06",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.32731239999999995,
+              "turnos": 8,
+              "duracaoMs": 94175,
+              "inicio": 1794150085842,
+              "fim": 1794150180023,
+              "tokens": {
+                "entrada": 12,
+                "saida": 9290,
+                "cacheCriacao": 51667,
+                "cacheLeitura": 277204
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-05-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.37548590000000004,
+              "turnos": 10,
+              "duracaoMs": 95378,
+              "inicio": 1794150087105,
+              "fim": 1794150182496,
+              "tokens": {
+                "entrada": 18,
+                "saida": 11418,
+                "cacheCriacao": 53666,
+                "cacheLeitura": 466059
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-05-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.42572070000000006,
+              "turnos": 16,
+              "duracaoMs": 262077,
+              "inicio": 1794150182501,
+              "fim": 1794150444585,
+              "tokens": {
+                "entrada": 30,
+                "saida": 8858,
+                "cacheCriacao": 61439,
+                "cacheLeitura": 913247
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-05-3",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.32033160000000005,
+              "turnos": 14,
+              "duracaoMs": 113009,
+              "inicio": 1794150444590,
+              "fim": 1794150557605,
+              "tokens": {
+                "entrada": 24,
+                "saida": 4569,
+                "cacheCriacao": 52075,
+                "cacheLeitura": 662936
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            }
+          ]
         },
         {
           "numero": 6,
@@ -1098,7 +1266,7 @@
     "etapa": 5,
     "inicio": "2026-11-08T15:00:44.069Z",
     "commitInicial": "b485c9c6a786bc620c18fa74d28ad7f2163aab41",
-    "passoAtual": 2,
+    "passoAtual": 6,
     "passos": [
       {
         "id": "propor",
@@ -1118,62 +1286,66 @@
       },
       {
         "id": "commitProposta",
+        "situacao": "ok",
+        "duracaoMs": 346,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "cd95ce0 · 5 arquivo(s)"
+      },
+      {
+        "id": "aplicar",
+        "situacao": "ok",
+        "duracaoMs": 471768,
+        "custo": 1.1215382000000003,
+        "tentativas": 1,
+        "detalhe": "19/19 tarefas · 3 sessão(ões)"
+      },
+      {
+        "id": "verificar",
+        "situacao": "pulado",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "arquivar",
+        "situacao": "ok",
+        "duracaoMs": 4,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\05-contrato-openapi-v1"
+      },
+      {
+        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
-      },
-      {
-        "id": "aplicar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "verificar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "arquivar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
       }
     ],
     "titulo": "Propõe a spec do contrato OpenAPI v1 com módulos procedimento, autorizacao e painel e err…",
     "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md` escritos antes da entrega da etapa 4. Revisei os dois em vez de recriar.\nO `pom.xml` tem só a execução `generate-openapi` (gerador 7.26.0) sobre o placeholder `openapi.yaml` (`paths: {}`). Não existem `openapi/modules/` nem `openapi/common/`, então toda a construção do contrato continua pendente.\nO `pom.xml` e `db/migration` já trazem as dependências de banco da etapa 4. Atualizei a proposta, que ainda dizia \"etapa 4 em andamento\", e incluí o risco de Docker indisponível para o `verify`.\nA proposta cobre as 6 operações, os 3 módulos, o `ProblemDetail` único e a execução do gerador por módulo, e deixa `auth`/segurança, NEW-01 e os controllers fora. São 17 tarefas em 5 grupos.\n`.specs/06-execution-plan/` continua inexistente. Isso fica registrado como desvio na evidência."
   },
   "totais": {
-    "duracaoMs": 1946644,
-    "custo": 7.574082800000001,
+    "duracaoMs": 2418762,
+    "custo": 9.0229334,
     "execucoes": 1,
     "iteracoes": 5,
     "entregues": 4,
-    "sessoes": 25,
-    "turnos": 263,
+    "sessoes": 29,
+    "turnos": 311,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 3,
     "recuperacoesResolvidas": 3,
     "falhas": 0,
-    "commits": 8,
+    "commits": 9,
     "tokens": {
-      "entrada": 386,
-      "saida": 147215,
-      "cacheCriacao": 1157685,
-      "cacheLeitura": 10185134
+      "entrada": 470,
+      "saida": 181350,
+      "cacheCriacao": 1376532,
+      "cacheLeitura": 12504580
     }
   },
   "ultimaExecucao": {
