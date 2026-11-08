@@ -607,3 +607,15 @@
 {"em":1794168377651,"nivel":"passo","texto":"Verificar ponto de partida","etapa":27,"passo":"partida"}
 {"em":1794168377671,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":27,"passo":"partida"}
 {"em":1794168377678,"nivel":"passo","texto":"Commit da proposta","etapa":27,"passo":"commitProposta"}
+{"em":1794168378487,"nivel":"ok","texto":"6aa9e2b · 5 arquivo(s) · docs(test-01): proposta da etapa 27 · Desvio de contrato","etapa":27,"passo":"commitProposta"}
+{"em":1794168378498,"nivel":"ok","texto":"Commit da proposta: ok · 6aa9e2b · 5 arquivo(s)","etapa":27,"passo":"commitProposta"}
+{"em":1794168378505,"nivel":"passo","texto":"Aplicar a spec","etapa":27,"passo":"aplicar"}
+{"em":1794168378512,"nivel":"info","texto":"proposta antecipada da etapa 28 em paralelo","etapa":27,"passo":"aplicar"}
+{"em":1794168433792,"nivel":"ok","texto":"proposta antecipada da etapa 28 pronta","etapa":27,"passo":"aplicar"}
+{"em":1794168974929,"nivel":"ok","texto":"Aplicar a spec: ok · 14/14 tarefas · 2 sessão(ões)","etapa":27,"passo":"aplicar"}
+{"em":1794168974935,"nivel":"passo","texto":"Verificar a mudança","etapa":27,"passo":"verificar"}
+{"em":1794168974947,"nivel":"info","texto":"Verificar a mudança: pulado · sem verificações configuradas","etapa":27,"passo":"verificar"}
+{"em":1794168974955,"nivel":"passo","texto":"Arquivar a spec","etapa":27,"passo":"arquivar"}
+{"em":1794168974965,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\27-contract-drift-check → .specs\\workflows\\test-01\\specs\\arquivo\\27-contract-drift-check","etapa":27,"passo":"arquivar"}
+{"em":1794168974972,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\27-contract-drift-check","etapa":27,"passo":"arquivar"}
+{"em":1794168974979,"nivel":"passo","texto":"Commit da entrega","etapa":27,"passo":"commitEntrega"}

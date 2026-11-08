@@ -39,3 +39,18 @@ Garantir que o frontend nunca fique defasado em relação ao OpenAPI: os tipos r
 - Comparação de compatibilidade implementada em script Node sem nova ferramenta (diff estrutural de paths, propriedades e `required` do YAML já resolvido); caso falte biblioteca de YAML, reutiliza-se a que o `openapi-typescript` já traz.
 - Número de operações segue o contrato real (8), não o texto da SPEC-32 (6).
 - Execução do script no CI fica para a SPEC-40 (etapa 28), conforme a SPEC.
+
+### Registradas na execução do lote 1
+- **Ausência de `.specs/06-execution-plan/`** confirmada (referência do índice ignorada). `API_CONTRACTS.md` está em `.specs/01-architecture/` (não em `shared/`). Docker 29.9.2 disponível.
+- **Estado após a etapa 26 conferido:** o contrato tem 8 operações e o enum `code` tem **12** valores (a proposta dizia 11 exemplos; `ACESSO_NEGADO` não tem exemplo nas respostas, mas está no enum). Cobertura: 10 por rota, `ERRO_INTERNO` com `@MockitoBean` num caso de uso, e `ACESSO_NEGADO` chamando o `ProblemAccessDeniedHandler` direto (nenhuma rota produz 403 de segurança, pois não há papéis). Um teste falha se o enum ganhar um `code` fora dessa lista.
+- **Mecanismo de validação (3.1): validador mínimo no próprio teste** (`contrato/ContratoOpenApi`, SnakeYAML já transitivo do Spring Boot), sem nova dependência, em vez de `swagger-request-validator`. Resolve `$ref` entre arquivos, valida status declarado, cabeçalhos declarados, content-type e corpo; **propriedade não declarada no contrato falha**, e palavra-chave de esquema desconhecida lança erro para não passar sem verificação. **[REVISAR]**
+- **Achado:** o contrato descreve campos opcionais do catálogo como "ausente (nulo)", mas o esquema não os marca como `nullable` e a API os serializa como `null` (ex.: `Procedimento.nome`, `codigoTuss`, `periodo`). O contrato não pode ser alterado nesta etapa; o validador aceita `null` em propriedade **opcional** como ausência. Se for desejável impor ausência real, é mudança de contrato/serialização fora desta etapa. **[REVISAR]**
+- `check-contract.mjs` usa o gerador do app como subprocesso (`gerar-api-types.mjs <saida>`), comparando texto normalizado (CRLF→LF).
+
+### Registradas na execução do lote 2
+- **3.4 (adulteração):** `PainelController` devolveu temporariamente `202` em vez de `200`; `ContratoRespostasApiTest#obterResumoPainel` falhou (`but was: 202`, apontando `get /painel/resumo`). Controlador revertido (`git diff` sem alterações em `src/main`).
+- **4.1:** `scripts/check-contract-compat.mjs` compara o contrato com o instantâneo `tools/contract/baseline/` (cópia de `openapi/`). Usa `js-yaml`, já instalado no app como dependência transitiva (nenhuma ferramenta nova; resolvido via `createRequire` a partir de `app-autorizador-processo`). Regras: falha em operação/parâmetro/propriedade/resposta/valor de enum removidos ou renomeados, mudança de tipo/formato e nova obrigatoriedade; passa em adições opcionais. Opção `--atualizar-base` regrava o instantâneo. Tornar uma propriedade antes obrigatória em opcional (relaxar) é aceito. **[REVISAR]**
+- **4.2 (demonstração, em cópias temporárias; contrato real intocado):** nova obrigatoriedade, renomeação de propriedade de requisição e de resposta, e rota renomeada → exit 1 com a causa; nova propriedade opcional → exit 0.
+- **5.1:** seção "Contrato OpenAPI" no `README.md` raiz.
+- **5.2:** `node scripts/check-contract.mjs` OK; `./mvnw verify` verde (inclui os testes de conformidade); `npm run lint`, `npm run build` e `npm test` (226 testes) verdes.
+- **5.3:** `SPEC-32` movida com `git mv` para `.specs/archive/`. Desvio: `.specs/06-execution-plan/` não existe. A única ocorrência de "legado/legacy" no backend é a regra do `ArchitectureTest` que a proíbe.

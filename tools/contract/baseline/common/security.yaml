@@ -1,0 +1,13 @@
+openapi: 3.1.0
+info:
+  title: Segurança comum
+  version: 1.0.0
+  description: Esquema de segurança JWT (Bearer) referenciado pelos módulos. Aplicado globalmente; apenas `autenticar` é exceção.
+paths: {}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Token JWT HS256 obtido em `POST /api/v1/auth/login`, enviado no cabeçalho Authorization como Bearer.

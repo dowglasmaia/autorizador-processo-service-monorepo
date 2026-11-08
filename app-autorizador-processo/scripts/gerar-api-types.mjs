@@ -7,7 +7,8 @@ import openapiTS, { astToString } from 'openapi-typescript';
 
 const raiz = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const pastaContrato = resolve(raiz, '../api-autorizador-processo/src/main/resources/openapi/modules');
-const saida = resolve(raiz, 'src/app/shared/api/api-types.ts');
+// Caminho de saída opcional (1º argumento); sem ele, grava o arquivo versionado.
+const saida = process.argv[2] ? resolve(process.argv[2]) : resolve(raiz, 'src/app/shared/api/api-types.ts');
 
 const modulos = readdirSync(pastaContrato)
   .filter((arquivo) => arquivo.endsWith('.yaml'))

@@ -1,0 +1,237 @@
+openapi: 3.1.0
+info:
+  title: Respostas comuns
+  version: 1.0.0
+  description: Fragmento com ProblemDetail (RFC 9457) e respostas de erro padronizadas, referenciado pelos módulos.
+paths: {}
+components:
+  schemas:
+    FieldViolation:
+      type: object
+      description: Violação de validação de um campo.
+      required: [campo, mensagem]
+      properties:
+        campo:
+          type: string
+          description: Nome do campo ou parâmetro inválido.
+          examples: [numProcedimento]
+        mensagem:
+          type: string
+          description: Mensagem em português.
+          examples: [deve ser maior ou igual a 1]
+    ProblemDetail:
+      type: object
+      description: Corpo de erro RFC 9457 (application/problem+json) com extensões.
+      required: [title, status, code, timestamp]
+      properties:
+        type:
+          type: string
+          format: uri
+          description: URI que identifica o tipo do problema.
+          examples: ["about:blank"]
+        title:
+          type: string
+          description: Resumo curto do problema.
+        status:
+          type: integer
+          format: int32
+          description: Status HTTP.
+        detail:
+          type: string
+          description: Explicação em português do problema.
+        instance:
+          type: string
+          description: Caminho da requisição que originou o problema.
+        code:
+          type: string
+          description: Código estável usado pelo cliente para decidir o tratamento.
+          enum:
+            - VALIDACAO_INVALIDA
+            - CORPO_INVALIDO
+            - PARAMETRO_INVALIDO
+            - PROCEDIMENTO_DUPLICADO
+            - AUTORIZACAO_NEGADA
+            - PROCEDIMENTO_NAO_ENCONTRADO
+            - ERRO_INTERNO
+            - CREDENCIAIS_INVALIDAS
+            - NAO_AUTENTICADO
+            - SESSAO_EXPIRADA
+            - ACESSO_NEGADO
+            - MUITAS_TENTATIVAS
+        timestamp:
+          type: string
+          format: date-time
+          description: Instante do erro em UTC.
+        errors:
+          type: array
+          description: Violações por campo; presente apenas em 400 de validação.
+          items:
+            $ref: '#/components/schemas/FieldViolation'
+  responses:
+    BadRequestResponse:
+      description: Requisição inválida (VALIDACAO_INVALIDA, CORPO_INVALIDO ou PARAMETRO_INVALIDO).
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+          examples:
+            validacaoInvalida:
+              summary: Campo inválido
+              value:
+                type: about:blank
+                title: Requisição inválida
+                status: 400
+                detail: Dados inválidos.
+                instance: /api/v1/procedimentos
+                code: VALIDACAO_INVALIDA
+                timestamp: '2026-01-01T12:00:00Z'
+                errors:
+                  - campo: numProcedimento
+                    mensagem: deve ser maior ou igual a 1
+            corpoInvalido:
+              summary: JSON malformado ou tipo incorreto
+              value:
+                type: about:blank
+                title: Requisição inválida
+                status: 400
+                detail: Corpo da requisição inválido.
+                instance: /api/v1/procedimentos
+                code: CORPO_INVALIDO
+                timestamp: '2026-01-01T12:00:00Z'
+            parametroInvalido:
+              summary: Parâmetro de consulta ou caminho inválido
+              value:
+                type: about:blank
+                title: Requisição inválida
+                status: 400
+                detail: 'Parâmetro inválido: size.'
+                instance: /api/v1/procedimentos
+                code: PARAMETRO_INVALIDO
+                timestamp: '2026-01-01T12:00:00Z'
+    ForbiddenResponse:
+      description: Operação não permitida (PROCEDIMENTO_DUPLICADO ou AUTORIZACAO_NEGADA).
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+          examples:
+            procedimentoDuplicado:
+              summary: Número já cadastrado
+              value:
+                type: about:blank
+                title: Operação não permitida
+                status: 403
+                detail: 'Procedimento já cadastrado na base de dados: Nº 9999'
+                instance: /api/v1/procedimentos
+                code: PROCEDIMENTO_DUPLICADO
+                timestamp: '2026-01-01T12:00:00Z'
+            autorizacaoNegada:
+              summary: Sexo e/ou idade não aderentes
+              value:
+                type: about:blank
+                title: Operação não permitida
+                status: 403
+                detail: 'Operação não autorizada: sexo e/ou idade não aderentes ao procedimento solicitado.'
+                instance: /api/v1/autorizacoes
+                code: AUTORIZACAO_NEGADA
+                timestamp: '2026-01-01T12:00:00Z'
+    NotFoundResponse:
+      description: Recurso não encontrado (PROCEDIMENTO_NAO_ENCONTRADO).
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+          examples:
+            procedimentoNaoEncontrado:
+              summary: Procedimento inexistente
+              value:
+                type: about:blank
+                title: Não encontrado
+                status: 404
+                detail: 'Procedimento não cadastrado na base de dados: Nº 55555'
+                instance: /api/v1/procedimentos/55555
+                code: PROCEDIMENTO_NAO_ENCONTRADO
+                timestamp: '2026-01-01T12:00:00Z'
+    InternalServerErrorResponse:
+      description: Falha inesperada (ERRO_INTERNO), sem detalhes técnicos.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+          examples:
+            erroInterno:
+              summary: Erro interno
+              value:
+                type: about:blank
+                title: Erro interno
+                status: 500
+                detail: Erro interno. Tente novamente.
+                instance: /api/v1/procedimentos
+                code: ERRO_INTERNO
+                timestamp: '2026-01-01T12:00:00Z'
+    UnauthorizedResponse:
+      description: Não autenticado (CREDENCIAIS_INVALIDAS, NAO_AUTENTICADO ou SESSAO_EXPIRADA), com cabeçalho WWW-Authenticate Bearer.
+      headers:
+        WWW-Authenticate:
+          description: Esquema de autenticação exigido.
+          schema:
+            type: string
+            examples: [Bearer]
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+          examples:
+            credenciaisInvalidas:
+              summary: E-mail ou senha incorretos
+              value:
+                type: about:blank
+                title: Não autenticado
+                status: 401
+                detail: E-mail ou senha inválidos.
+                instance: /api/v1/auth/login
+                code: CREDENCIAIS_INVALIDAS
+                timestamp: '2026-01-01T12:00:00Z'
+            naoAutenticado:
+              summary: Token ausente ou inválido
+              value:
+                type: about:blank
+                title: Não autenticado
+                status: 401
+                detail: Autenticação necessária.
+                instance: /api/v1/procedimentos
+                code: NAO_AUTENTICADO
+                timestamp: '2026-01-01T12:00:00Z'
+            sessaoExpirada:
+              summary: Token expirado
+              value:
+                type: about:blank
+                title: Não autenticado
+                status: 401
+                detail: Sessão expirada. Entre novamente.
+                instance: /api/v1/procedimentos
+                code: SESSAO_EXPIRADA
+                timestamp: '2026-01-01T12:00:00Z'
+    TooManyRequestsResponse:
+      description: Muitas tentativas de login (MUITAS_TENTATIVAS).
+      headers:
+        Retry-After:
+          description: Segundos até nova tentativa.
+          schema:
+            type: integer
+            format: int32
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+          examples:
+            muitasTentativas:
+              summary: Limite de falhas excedido
+              value:
+                type: about:blank
+                title: Muitas tentativas
+                status: 429
+                detail: Muitas tentativas. Tente novamente mais tarde.
+                instance: /api/v1/auth/login
+                code: MUITAS_TENTATIVAS
+                timestamp: '2026-01-01T12:00:00Z'

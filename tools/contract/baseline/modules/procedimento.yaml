@@ -1,0 +1,261 @@
+openapi: 3.1.0
+info:
+  title: Autorizador — módulo procedimento
+  version: 1.0.0
+  description: Cadastro e consulta de procedimentos com os sexos e idades aceitos.
+servers:
+  - url: /api/v1
+tags:
+  - name: Procedimentos
+    description: Procedimentos autorizáveis.
+paths:
+  /procedimentos:
+    get:
+      operationId: listarProcedimentos
+      tags: [Procedimentos]
+      summary: Lista procedimentos paginados
+      description: Filtra `numProcedimento` por prefixo quando `q` é informado.
+      parameters:
+        - name: q
+          in: query
+          required: false
+          description: Prefixo do número do procedimento (somente dígitos).
+          schema:
+            type: string
+            pattern: '^[0-9]+$'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+        - name: sort
+          in: query
+          required: false
+          description: Ordenação; aceita apenas `numProcedimento,asc` ou `numProcedimento,desc`.
+          schema:
+            type: string
+            enum: ['numProcedimento,asc', 'numProcedimento,desc']
+            default: 'numProcedimento,asc'
+      responses:
+        '200':
+          description: Página de procedimentos.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginaProcedimentos'
+        '400':
+          $ref: '../common/responses.yaml#/components/responses/BadRequestResponse'
+        '500':
+          $ref: '../common/responses.yaml#/components/responses/InternalServerErrorResponse'
+    post:
+      operationId: cadastrarProcedimento
+      tags: [Procedimentos]
+      summary: Cadastra um procedimento
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProcedimentoRequest'
+      responses:
+        '201':
+          description: Procedimento criado.
+          headers:
+            Location:
+              description: URL do recurso criado, `/api/v1/procedimentos/{id}`.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Procedimento'
+        '400':
+          $ref: '../common/responses.yaml#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '../common/responses.yaml#/components/responses/ForbiddenResponse'
+        '500':
+          $ref: '../common/responses.yaml#/components/responses/InternalServerErrorResponse'
+  /procedimentos/{id}:
+    get:
+      operationId: obterProcedimento
+      tags: [Procedimentos]
+      summary: Obtém um procedimento pelo identificador
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Identificador do procedimento.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Procedimento encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Procedimento'
+        '400':
+          $ref: '../common/responses.yaml#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '../common/responses.yaml#/components/responses/NotFoundResponse'
+        '500':
+          $ref: '../common/responses.yaml#/components/responses/InternalServerErrorResponse'
+components:
+  parameters:
+    Page:
+      name: page
+      in: query
+      required: false
+      description: Número da página, começando em 0.
+      schema:
+        type: integer
+        format: int32
+        minimum: 0
+        default: 0
+    Size:
+      name: size
+      in: query
+      required: false
+      description: Itens por página.
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        maximum: 200
+        default: 20
+  schemas:
+    Sexo:
+      type: string
+      description: Sexo aceito pelo procedimento. A entrada também aceita minúsculas; a saída é sempre M ou F.
+      enum: [M, F]
+    Categoria:
+      type: string
+      description: Categoria do procedimento (lista do protótipo).
+      enum: [EXAMES_IMAGEM, CONSULTAS, CIRURGIAS, TERAPIAS, EXAMES_LABORATORIAIS]
+    Especialidade:
+      type: string
+      description: Especialidade do procedimento (lista do protótipo).
+      enum: [CARDIOLOGIA, ORTOPEDIA, PEDIATRIA, GINECOLOGIA, NEUROLOGIA]
+    TipoCobertura:
+      type: string
+      description: Tipo de cobertura; informativo, não altera a decisão de autorização.
+      enum: [PLANO, REGRAS, NAO_COBERTO]
+    Periodo:
+      type: string
+      description: Período a que se refere a quantidade máxima.
+      enum: [MES, ANO, VIDA]
+    ProcedimentoRequest:
+      type: object
+      required: [numProcedimento, nome, categoria]
+      properties:
+        numProcedimento:
+          type: integer
+          format: int32
+          minimum: 1
+          description: Número do procedimento.
+        nome:
+          type: string
+          minLength: 1
+          maxLength: 200
+          description: Nome do procedimento (texto livre; espaços nas pontas são removidos).
+        codigoTuss:
+          type: string
+          maxLength: 30
+          description: Código TUSS.
+        categoria:
+          $ref: '#/components/schemas/Categoria'
+        especialidade:
+          $ref: '#/components/schemas/Especialidade'
+        tipoCobertura:
+          $ref: '#/components/schemas/TipoCobertura'
+        quantidadeMaxima:
+          type: integer
+          format: int32
+          minimum: 1
+          description: Quantidade máxima por período; exige `periodo`.
+        periodo:
+          $ref: '#/components/schemas/Periodo'
+        exigeAutorizacaoPrevia:
+          type: boolean
+          description: Informativo; padrão `false`.
+        exigeJustificativaMedica:
+          type: boolean
+          description: Informativo; padrão `false`.
+        sexos:
+          type: array
+          description: Sexos aceitos; pode ser vazio.
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/Sexo'
+        idades:
+          type: array
+          description: Idades aceitas; pode ser vazio.
+          uniqueItems: true
+          items:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 150
+    Procedimento:
+      type: object
+      required: [id, numProcedimento, sexos, idades, criadoEm]
+      properties:
+        id:
+          type: integer
+          format: int64
+        numProcedimento:
+          type: integer
+          format: int32
+        nome:
+          type: string
+          description: Ausente (nulo) em procedimentos anteriores ao catálogo estendido; o mesmo vale para os demais campos do catálogo.
+        codigoTuss:
+          type: string
+        categoria:
+          $ref: '#/components/schemas/Categoria'
+        especialidade:
+          $ref: '#/components/schemas/Especialidade'
+        tipoCobertura:
+          $ref: '#/components/schemas/TipoCobertura'
+        quantidadeMaxima:
+          type: integer
+          format: int32
+        periodo:
+          $ref: '#/components/schemas/Periodo'
+        exigeAutorizacaoPrevia:
+          type: boolean
+        exigeJustificativaMedica:
+          type: boolean
+        sexos:
+          type: array
+          description: Sexos aceitos, na ordem M, F.
+          items:
+            $ref: '#/components/schemas/Sexo'
+        idades:
+          type: array
+          description: Idades aceitas, em ordem crescente.
+          items:
+            type: integer
+            format: int32
+        criadoEm:
+          type: string
+          format: date-time
+          description: Data de criação em UTC.
+    PaginaProcedimentos:
+      type: object
+      required: [itens, pagina, tamanho, totalItens, totalPaginas]
+      properties:
+        itens:
+          type: array
+          items:
+            $ref: '#/components/schemas/Procedimento'
+        pagina:
+          type: integer
+          format: int32
+        tamanho:
+          type: integer
+          format: int32
+        totalItens:
+          type: integer
+          format: int64
+        totalPaginas:
+          type: integer
+          format: int32

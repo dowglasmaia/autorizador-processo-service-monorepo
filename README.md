@@ -58,6 +58,30 @@ cd api-autorizador-processo
 ./mvnw spring-boot:run   # http://localhost:8080/actuator/health
 ```
 
+## Contrato OpenAPI: tipos, conformidade e compatibilidade
+
+O contrato fica em `api-autorizador-processo/src/main/resources/openapi/`. Três verificações impedem o desvio entre contrato, backend e frontend.
+
+**1. Tipos do frontend em dia** (requer `npm ci` em `app-autorizador-processo`):
+
+```bash
+node scripts/check-contract.mjs      # exit 0 = api-types.ts corresponde ao contrato
+cd app-autorizador-processo && npm run api:types   # regenera src/app/shared/api/api-types.ts
+```
+
+Se falhar com "`api-types.ts` está defasado", o YAML mudou sem regenerar os tipos: rode `npm run api:types` e versione o resultado. Nunca edite `api-types.ts` à mão.
+
+**2. Respostas reais conformes ao contrato** (requer Docker, pois usa Testcontainers): `./mvnw verify` em `api-autorizador-processo` executa `ContratoRespostasApiTest`, `ContratoErroInternoApiTest` e `AcessoNegadoContratoTest`, que chamam as 8 operações com a aplicação real e validam status, cabeçalhos e corpo contra o YAML (validador mínimo em `contrato/ContratoOpenApi`, sem dependência nova). Uma falha informa a operação e o campo divergente; corrija o código da API ou, se o contrato for o que mudou, o YAML (com a verificação 3).
+
+**3. Compatibilidade com o instantâneo base** do contrato v1 (`tools/contract/baseline/`):
+
+```bash
+node scripts/check-contract-compat.mjs                    # falha em remoção, renomeação, mudança de tipo ou nova obrigatoriedade
+node scripts/check-contract-compat.mjs --atualizar-base   # após mudança aditiva aprovada: atualiza o instantâneo
+```
+
+Mudanças aditivas (nova operação, propriedade opcional, novo valor de enum, nova resposta) passam. Uma quebra de compatibilidade exige nova versão da API (`/api/v2`), não a atualização do instantâneo. Depois de atualizar o instantâneo, regenere os tipos e versione tudo junto. A execução no CI fica para a etapa de CI por projeto.
+
 ## Versão original
 
 A versão original da API (tag `v0-original`) oferece:

@@ -1,0 +1,76 @@
+openapi: 3.1.0
+info:
+  title: Autorizador — módulo painel
+  version: 1.0.0
+  description: Resumo agregado para o painel.
+servers:
+  - url: /api/v1
+tags:
+  - name: Painel
+    description: Indicadores do painel.
+paths:
+  /painel/resumo:
+    get:
+      operationId: obterResumoPainel
+      tags: [Painel]
+      summary: Obtém o resumo do painel
+      responses:
+        '200':
+          description: Resumo do painel.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResumoPainel'
+        '500':
+          $ref: '../common/responses.yaml#/components/responses/InternalServerErrorResponse'
+components:
+  schemas:
+    CoberturaIdade:
+      type: object
+      required: [idade, quantidade]
+      properties:
+        idade:
+          type: integer
+          format: int32
+        quantidade:
+          type: integer
+          format: int32
+          description: Número de procedimentos que aceitam a idade.
+    DistribuicaoSexos:
+      type: object
+      required: [masculino, feminino]
+      properties:
+        masculino:
+          type: integer
+          format: int32
+          description: Procedimentos que aceitam o sexo masculino.
+        feminino:
+          type: integer
+          format: int32
+          description: Procedimentos que aceitam o sexo feminino.
+    ResumoPainel:
+      type: object
+      required: [totalProcedimentos, totalAutorizacoes, idadesCobertas, coberturaPorIdade, distribuicaoSexos, ultimasAutorizacoes]
+      properties:
+        totalProcedimentos:
+          type: integer
+          format: int32
+        totalAutorizacoes:
+          type: integer
+          format: int32
+        idadesCobertas:
+          type: integer
+          format: int32
+        coberturaPorIdade:
+          type: array
+          description: Ordenada por idade ascendente.
+          items:
+            $ref: '#/components/schemas/CoberturaIdade'
+        distribuicaoSexos:
+          $ref: '#/components/schemas/DistribuicaoSexos'
+        ultimasAutorizacoes:
+          type: array
+          maxItems: 4
+          description: Até 4 autorizações mais recentes.
+          items:
+            $ref: 'autorizacao.yaml#/components/schemas/Autorizacao'

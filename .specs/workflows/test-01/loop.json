@@ -4732,7 +4732,154 @@
           "descricao": "Executa a SPEC-32: verificação de que os tipos regenerados são idênticos aos versionados e de que as respostas reais respeitam o contrato.\nReferências: SPEC-05 e SPEC-16.\nLimite: sem mudar o contrato.",
           "spec": "27-contract-drift-check",
           "specPronta": false,
-          "status": "pendente"
+          "status": "entregue",
+          "entregueEm": "2026-11-08T20:16:14.986Z",
+          "iteracao": 27,
+          "duracaoMs": 631114,
+          "custo": 1.6534267999999999,
+          "passos": [
+            {
+              "id": "propor",
+              "situacao": "ok",
+              "duracaoMs": 33889,
+              "custo": 0.20019720000000002,
+              "tentativas": 1,
+              "detalhe": "14 tarefas"
+            },
+            {
+              "id": "partida",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "commitProposta",
+              "situacao": "ok",
+              "duracaoMs": 808,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "6aa9e2b · 5 arquivo(s)"
+            },
+            {
+              "id": "aplicar",
+              "situacao": "ok",
+              "duracaoMs": 596413,
+              "custo": 1.4532295999999998,
+              "tentativas": 1,
+              "detalhe": "14/14 tarefas · 2 sessão(ões)"
+            },
+            {
+              "id": "verificar",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "arquivar",
+              "situacao": "ok",
+              "duracaoMs": 4,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\27-contract-drift-check"
+            },
+            {
+              "id": "commitEntrega",
+              "situacao": "ok",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1
+            }
+          ],
+          "sessoes": [
+            {
+              "rotulo": "propor-27",
+              "passo": "propor",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.20019720000000002,
+              "turnos": 7,
+              "duracaoMs": 33870,
+              "inicio": 1794168343752,
+              "fim": 1794168377631,
+              "tokens": {
+                "entrada": 10,
+                "saida": 2389,
+                "cacheCriacao": 38897,
+                "cacheLeitura": 206992
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "antecipar-28",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2431436,
+              "turnos": 7,
+              "duracaoMs": 55264,
+              "inicio": 1794168378513,
+              "fim": 1794168433786,
+              "tokens": {
+                "entrada": 12,
+                "saida": 5064,
+                "cacheCriacao": 41775,
+                "cacheLeitura": 253796
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-27-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.9453280999999999,
+              "turnos": 26,
+              "duracaoMs": 303816,
+              "inicio": 1794168379957,
+              "fim": 1794168683782,
+              "tokens": {
+                "entrada": 46,
+                "saida": 32155,
+                "cacheCriacao": 106558,
+                "cacheLeitura": 1974541
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-27-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.5079015,
+              "turnos": 21,
+              "duracaoMs": 291120,
+              "inicio": 1794168683789,
+              "fim": 1794168974917,
+              "tokens": {
+                "entrada": 36,
+                "saida": 15248,
+                "cacheCriacao": 61607,
+                "cacheLeitura": 1089215
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            }
+          ]
         },
         {
           "numero": 28,
@@ -4778,7 +4925,7 @@
     "etapa": 27,
     "inicio": "2026-11-08T20:05:43.733Z",
     "commitInicial": "5eb3e92b258a0d555bb8d190b074f0bc3d3f787c",
-    "passoAtual": 2,
+    "passoAtual": 6,
     "passos": [
       {
         "id": "propor",
@@ -4798,62 +4945,66 @@
       },
       {
         "id": "commitProposta",
+        "situacao": "ok",
+        "duracaoMs": 808,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "6aa9e2b · 5 arquivo(s)"
+      },
+      {
+        "id": "aplicar",
+        "situacao": "ok",
+        "duracaoMs": 596413,
+        "custo": 1.4532295999999998,
+        "tentativas": 1,
+        "detalhe": "14/14 tarefas · 2 sessão(ões)"
+      },
+      {
+        "id": "verificar",
+        "situacao": "pulado",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "arquivar",
+        "situacao": "ok",
+        "duracaoMs": 4,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\27-contract-drift-check"
+      },
+      {
+        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
-      },
-      {
-        "id": "aplicar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "verificar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "arquivar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
       }
     ],
     "titulo": "Revisa a spec de desvio de contrato (SPEC-32) contra a base entregue",
     "comparacao": "A pasta da spec já tinha proposta.md e tarefas.md antecipados (20 tarefas em 5 grupos). Revisei e completei em vez de recriar.\nO contrato real tem 8 operações e 11 códigos de erro em common/responses.yaml. A SPEC-32 cita 6 operações e 5 códigos, então a proposta e as tarefas passaram a seguir o contrato real.\nJá existem o gerador app-autorizador-processo/scripts/gerar-api-types.mjs (npm run api:types), o README.md raiz e tools/parity/ da etapa 26. Faltam scripts/check-contract.mjs, a validação das respostas contra o esquema e a comparação de compatibilidade.\nNão há .github/workflows nem tag ou branch base do contrato (só v0-original, que não tem OpenAPI). Por isso a referência de compatibilidade é um instantâneo versionado, registrado como [REVISAR]. A integração ao CI fica para a etapa 28.\n.specs/06-execution-plan/ continua inexistente; o desvio entra na tarefa 1.1. Não alterei código da aplicação."
   },
   "totais": {
-    "duracaoMs": 19615075,
-    "custo": 51.815963,
+    "duracaoMs": 20212300,
+    "custo": 53.51233620000001,
     "execucoes": 2,
     "iteracoes": 27,
     "entregues": 26,
-    "sessoes": 140,
-    "turnos": 1875,
+    "sessoes": 143,
+    "turnos": 1929,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 7,
     "recuperacoesResolvidas": 6,
     "falhas": 0,
-    "commits": 52,
+    "commits": 53,
     "tokens": {
-      "entrada": 2870,
-      "saida": 1229962,
-      "cacheCriacao": 7615941,
-      "cacheLeitura": 85949316
+      "entrada": 2964,
+      "saida": 1282429,
+      "cacheCriacao": 7825881,
+      "cacheLeitura": 89266868
     }
   },
   "ultimaExecucao": {
