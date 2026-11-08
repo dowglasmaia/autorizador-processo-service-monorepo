@@ -641,3 +641,13 @@
 {"em":1794169314872,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\28-ci-por-projeto → .specs\\workflows\\test-01\\specs\\arquivo\\28-ci-por-projeto","etapa":28,"passo":"arquivar"}
 {"em":1794169314878,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\28-ci-por-projeto","etapa":28,"passo":"arquivar"}
 {"em":1794169314886,"nivel":"passo","texto":"Commit da entrega","etapa":28,"passo":"commitEntrega"}
+{"em":1794169316071,"nivel":"ok","texto":"1d9043f · 12 arquivo(s) · feat(autorizador): Revisa a spec de CI por projeto (SPEC-40) contra a…","etapa":28,"passo":"commitEntrega"}
+{"em":1794169316089,"nivel":"ok","texto":"Commit da entrega: ok · 1d9043f · 12 arquivo(s)","etapa":28,"passo":"commitEntrega"}
+{"em":1794169316105,"nivel":"ok","texto":"Etapa 28 entregue · commit 1d9043f","etapa":28,"passo":"commitEntrega"}
+{"em":1794169316231,"nivel":"passo","texto":"Etapa 29 · Segurança e hardening (iteração 29)","etapa":29}
+{"em":1794169316233,"nivel":"passo","texto":"Propor a spec","etapa":29,"passo":"propor"}
+{"em":1794169316241,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":29,"passo":"propor"}
+{"em":1794169380889,"nivel":"ok","texto":"Propor a spec: ok · 19 tarefas","etapa":29,"passo":"propor"}
+{"em":1794169380896,"nivel":"passo","texto":"Verificar ponto de partida","etapa":29,"passo":"partida"}
+{"em":1794169380909,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":29,"passo":"partida"}
+{"em":1794169380916,"nivel":"passo","texto":"Commit da proposta","etapa":29,"passo":"commitProposta"}

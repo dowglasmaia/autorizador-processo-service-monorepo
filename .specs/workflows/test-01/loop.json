@@ -5036,7 +5036,8 @@
               "origem": "provider",
               "esforco": "medium"
             }
-          ]
+          ],
+          "commit": "1d9043f"
         },
         {
           "numero": 29,
@@ -5069,90 +5070,86 @@
     }
   ],
   "iteracao": {
-    "numero": 28,
-    "etapa": 28,
-    "inicio": "2026-11-08T20:16:15.776Z",
-    "commitInicial": "88af7fa143d7fa8d2628ee57081bdfbb073a7066",
-    "passoAtual": 6,
+    "numero": 29,
+    "etapa": 29,
+    "inicio": "2026-11-08T20:21:56.224Z",
+    "commitInicial": "1d9043f32614635134cadc6536cb8cd141dd0d07",
+    "passoAtual": 2,
     "passos": [
       {
         "id": "propor",
         "situacao": "ok",
-        "duracaoMs": 45362,
-        "custo": 0.2375408,
+        "duracaoMs": 64642,
+        "custo": 0.20710939999999997,
         "tentativas": 1,
-        "detalhe": "16 tarefas"
+        "detalhe": "19 tarefas"
       },
       {
         "id": "partida",
         "situacao": "pulado",
-        "duracaoMs": 1,
+        "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1,
         "detalhe": "sem verificações configuradas"
       },
       {
         "id": "commitProposta",
-        "situacao": "ok",
-        "duracaoMs": 402,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "04e865f · 5 arquivo(s)"
-      },
-      {
-        "id": "aplicar",
-        "situacao": "ok",
-        "duracaoMs": 293168,
-        "custo": 0.6688759,
-        "tentativas": 1,
-        "detalhe": "16/16 tarefas · 2 sessão(ões)"
-      },
-      {
-        "id": "verificar",
-        "situacao": "pulado",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "arquivar",
-        "situacao": "ok",
-        "duracaoMs": 3,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\28-ci-por-projeto"
-      },
-      {
-        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
+      },
+      {
+        "id": "aplicar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "verificar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "arquivar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "commitEntrega",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
       }
     ],
-    "titulo": "Revisa a spec de CI por projeto (SPEC-40) contra a base entregue",
-    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md` escritos antes da etapa 27. Revisei e completei os dois em vez de recriar.\nNão existe `.github/` no repositório. Os dois Dockerfiles (backend e frontend), o `compose.yaml` e o `tools/parity/replay.mjs` existem. A pasta `.specs/06-execution-plan/` também não existe, e esse desvio fica registrado.\nA etapa 27 já entregou `scripts/check-contract.mjs` e `scripts/check-contract-compat.mjs`, que a spec antecipada tratava como pendentes. Atualizei o ponto de partida e fiz o job `check-contract` rodar os dois scripts. Também incluí `tools/contract/**` nos `paths` da integração e a tarefa de ajustar os trechos do README raiz (\"em construção\" e \"fica para a etapa de CI\").\nNo frontend, `lint`, `test`, `build` e `e2e` existem como scripts. O e2e sobe e derruba o Compose sozinho, com `.env` descartável. O CI precisa só de Node, Docker e do Playwright instalado.\nA spec tem 14 tarefas em 6 grupos, dentro do limite. `check-architecture.mjs` e `validate.mjs`, citados na SPEC-40, não existem. A arquitetura é coberta pelo `ArchitectureTest` dentro do `./mvnw verify`. Isso e a execução real no GitHub (pendente) estão em \"Decisões tomadas sem consulta\"."
+    "titulo": "Propõe a spec de segurança e hardening (SPEC-41) revisada contra a base entregue",
+    "comparacao": "A pasta da etapa já tinha `proposta.md` e `tarefas.md` antecipados (antes da etapa 28), com 18 tarefas em 6 grupos. Revisei e completei os dois arquivos em vez de recriá-los.\nConferi o estado atual: a etapa 28 entregou três workflows em `.github/workflows`, que a spec passa a revisar quanto a permissões e segredos, sem alterá-los.\nO Nginx do frontend não tem `Permissions-Policy`, `client_max_body_size` nem `limit_req`. O Dockerfile do frontend já usa `nginx-unprivileged`, então SEC-08 tende a precisar só de evidência.\nO script de sondagem passou para `tools/security/`, junto de `tools/contract` e `tools/parity`. O README raiz ainda não tem modelo de ameaça nem riscos aceitos.\nMantive a cobertura de SEC-01..SEC-21 (a SPEC cita só 01..12) e as decisões marcadas como [REVISAR]."
   },
   "totais": {
-    "duracaoMs": 20551935,
-    "custo": 54.6867084,
+    "duracaoMs": 20617766,
+    "custo": 54.8938178,
     "execucoes": 2,
-    "iteracoes": 28,
-    "entregues": 27,
-    "sessoes": 147,
-    "turnos": 1973,
+    "iteracoes": 29,
+    "entregues": 28,
+    "sessoes": 148,
+    "turnos": 1980,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 7,
     "recuperacoesResolvidas": 6,
     "falhas": 0,
-    "commits": 55,
+    "commits": 56,
     "tokens": {
-      "entrada": 3034,
-      "saida": 1305956,
-      "cacheCriacao": 8015888,
-      "cacheLeitura": 91056210
+      "entrada": 3046,
+      "saida": 1308356,
+      "cacheCriacao": 8055201,
+      "cacheLeitura": 91314544
     }
   },
   "ultimaExecucao": {
