@@ -8,7 +8,7 @@
 
 ## 2. Ramo A — não aplicável
 - [ ] 2.1 Preencher a seção "Resultado" da SPEC-50 com o motivo do cancelamento sem necessidade, a evidência e a data.
-- [ ] 2.2 Atualizar `.specs/INDEX.md` (status do conjunto) indicando SPEC-50 não aplicável e arquivada.
+- [ ] 2.2 Atualizar `.specs/INDEX.md` (linha de `02-backend/`) indicando SPEC-50 não aplicável e arquivada em `.specs/archive/`.
 - [ ] 2.3 Confirmar que nenhum dado, credencial ou dump foi adicionado ao repositório e que não há o termo "legado/legacy" no backend.
 
 ## 3. Ramo B — somente se houver base acessível

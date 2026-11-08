@@ -2374,7 +2374,8 @@
               "origem": "provider",
               "esforco": "medium"
             }
-          ]
+          ],
+          "commit": "ec1a9bc"
         },
         {
           "numero": 14,
@@ -2552,19 +2553,19 @@
     }
   ],
   "iteracao": {
-    "numero": 13,
-    "etapa": 13,
-    "inicio": "2026-11-08T17:15:19.447Z",
-    "commitInicial": "c4de00d53af08aa9f0406746ad50061c8c9e7fd6",
-    "passoAtual": 6,
+    "numero": 14,
+    "etapa": 14,
+    "inicio": "2026-11-08T17:28:51.078Z",
+    "commitInicial": "ec1a9bc559b49a5650491907a5b5988140953bb4",
+    "passoAtual": 2,
     "passos": [
       {
         "id": "propor",
         "situacao": "ok",
-        "duracaoMs": 42291,
-        "custo": 0.21982200000000002,
+        "duracaoMs": 61901,
+        "custo": 0.2300794,
         "tentativas": 1,
-        "detalhe": "14 tarefas"
+        "detalhe": "13 tarefas"
       },
       {
         "id": "partida",
@@ -2576,66 +2577,62 @@
       },
       {
         "id": "commitProposta",
-        "situacao": "ok",
-        "duracaoMs": 357,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "0f870bd · 5 arquivo(s)"
-      },
-      {
-        "id": "aplicar",
-        "situacao": "ok",
-        "duracaoMs": 768304,
-        "custo": 0.6900408,
-        "tentativas": 1,
-        "detalhe": "14/14 tarefas · 2 sessão(ões)"
-      },
-      {
-        "id": "verificar",
-        "situacao": "pulado",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "arquivar",
-        "situacao": "ok",
-        "duracaoMs": 3,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\13-compose-backend"
-      },
-      {
-        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
+      },
+      {
+        "id": "aplicar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "verificar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "arquivar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "commitEntrega",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
       }
     ],
-    "titulo": "Propõe a spec do Docker Compose do backend (SPEC-10)",
-    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md` escritos antecipadamente. Revisei os dois contra o código atual em vez de recriá-los.\nO backend não tem `Dockerfile` nem `.dockerignore`. O serviço `api` do `compose.yaml` não define `healthcheck`, mas o `app` exige `api: service_healthy`. O `api` também não repassa `JWT_SECRET`, `JWT_TTL_MINUTOS`, `AUTH_BOOTSTRAP_*` nem `CORS_ALLOWED_ORIGINS`.\nA etapa 12 já entregou `SERVER_PORT` (padrão 8080), apenas `health,info` expostos e o grupo `readiness` (`readinessState,db`). Atualizei a proposta para o `healthcheck` usar `/actuator/health/readiness`, e a tarefa 2.1 para reconferir isso.\nO `.env.example` da raiz já tem as chaves, mas `JWT_SECRET` está vazio. O backend tem um `.env.example` próprio, que a proposta registra como ponto de coerência. O Docker 29.9.2 está disponível, então a verificação com Compose é viável.\nA spec mantém o serviço `app` fora do escopo (SPEC-13). São 14 tarefas em 4 grupos; as decisões marcadas [REVISAR] seguem na seção de decisões."
+    "titulo": "Revisa a spec da migração de dados condicional (SPEC-50) contra o estado atual",
+    "comparacao": "A pasta da etapa já tinha `proposta.md` e `tarefas.md`, escritos antecipadamente na etapa 13. Revisei os dois contra o repositório e mantive a estrutura: 4 grupos e 13 tarefas, com o ramo A (não aplicável) como esperado e o ramo B condicionado a `aprovacao.md`.\nConfirmei que não há base de origem: nenhum `*.mv.db`, `*.dump` ou `*.bak`. Os únicos `.sql` são as migrations V1–V4 e o seed local. `tools/` só tem `parity/` e não existe `tools/importacao/`.\n`.env.example` e `compose.yaml` não têm variáveis de conexão com a origem. Não achei variáveis de ambiente com nomes de MySQL ou origem, e o Docker está disponível.\nAjustei dois pontos. A proposta agora registra que a revisão foi feita contra o código atual e inclui essas evidências. A tarefa 2.2 passou a apontar a linha `02-backend/` do `INDEX.md`, que é o único lugar onde a SPEC-50 aparece, porque o índice não tem tabela de status.\nA SPEC-50 segue com a seção \"Resultado\" em branco e fora de `.specs/archive/`, o que fica para a aplicação. Não mexi em código."
   },
   "totais": {
-    "duracaoMs": 10235268,
-    "custo": 28.567201799999992,
+    "duracaoMs": 10297660,
+    "custo": 28.797281199999993,
     "execucoes": 2,
-    "iteracoes": 13,
-    "entregues": 12,
-    "sessoes": 74,
-    "turnos": 1024,
+    "iteracoes": 14,
+    "entregues": 13,
+    "sessoes": 75,
+    "turnos": 1033,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 5,
     "recuperacoesResolvidas": 4,
     "falhas": 0,
-    "commits": 25,
+    "commits": 26,
     "tokens": {
-      "entrada": 1512,
-      "saida": 689413,
-      "cacheCriacao": 4125010,
-      "cacheLeitura": 47181004
+      "entrada": 1528,
+      "saida": 692658,
+      "cacheCriacao": 4165159,
+      "cacheLeitura": 47551018
     }
   },
   "ultimaExecucao": {

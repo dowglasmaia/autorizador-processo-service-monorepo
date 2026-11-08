@@ -304,3 +304,13 @@
 {"em":1794158930490,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\13-compose-backend → .specs\\workflows\\test-01\\specs\\arquivo\\13-compose-backend","etapa":13,"passo":"arquivar"}
 {"em":1794158930496,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\13-compose-backend","etapa":13,"passo":"arquivar"}
 {"em":1794158930502,"nivel":"passo","texto":"Commit da entrega","etapa":13,"passo":"commitEntrega"}
+{"em":1794158930987,"nivel":"ok","texto":"ec1a9bc · 14 arquivo(s) · feat(autorizador): Propõe a spec do Docker Compose do backend (SPEC-1…","etapa":13,"passo":"commitEntrega"}
+{"em":1794158931003,"nivel":"ok","texto":"Commit da entrega: ok · ec1a9bc · 14 arquivo(s)","etapa":13,"passo":"commitEntrega"}
+{"em":1794158931014,"nivel":"ok","texto":"Etapa 13 entregue · commit ec1a9bc","etapa":13,"passo":"commitEntrega"}
+{"em":1794158931084,"nivel":"passo","texto":"Etapa 14 · Migração de dados condicional (iteração 14)","etapa":14}
+{"em":1794158931085,"nivel":"passo","texto":"Propor a spec","etapa":14,"passo":"propor"}
+{"em":1794158931091,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":14,"passo":"propor"}
+{"em":1794158992996,"nivel":"ok","texto":"Propor a spec: ok · 13 tarefas","etapa":14,"passo":"propor"}
+{"em":1794158993000,"nivel":"passo","texto":"Verificar ponto de partida","etapa":14,"passo":"partida"}
+{"em":1794158993008,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":14,"passo":"partida"}
+{"em":1794158993013,"nivel":"passo","texto":"Commit da proposta","etapa":14,"passo":"commitProposta"}
