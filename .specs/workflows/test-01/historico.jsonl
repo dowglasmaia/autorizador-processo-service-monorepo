@@ -380,3 +380,15 @@
 {"em":1794160406094,"nivel":"passo","texto":"Verificar ponto de partida","etapa":17,"passo":"partida"}
 {"em":1794160406104,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":17,"passo":"partida"}
 {"em":1794160406110,"nivel":"passo","texto":"Commit da proposta","etapa":17,"passo":"commitProposta"}
+{"em":1794160406483,"nivel":"ok","texto":"3e9b8bd · 5 arquivo(s) · docs(test-01): proposta da etapa 17 · Núcleo HTTP e tipos","etapa":17,"passo":"commitProposta"}
+{"em":1794160406490,"nivel":"ok","texto":"Commit da proposta: ok · 3e9b8bd · 5 arquivo(s)","etapa":17,"passo":"commitProposta"}
+{"em":1794160406497,"nivel":"passo","texto":"Aplicar a spec","etapa":17,"passo":"aplicar"}
+{"em":1794160406502,"nivel":"info","texto":"proposta antecipada da etapa 18 em paralelo","etapa":17,"passo":"aplicar"}
+{"em":1794160483125,"nivel":"ok","texto":"proposta antecipada da etapa 18 pronta","etapa":17,"passo":"aplicar"}
+{"em":1794160687307,"nivel":"ok","texto":"Aplicar a spec: ok · 17/17 tarefas · 3 sessão(ões)","etapa":17,"passo":"aplicar"}
+{"em":1794160687317,"nivel":"passo","texto":"Verificar a mudança","etapa":17,"passo":"verificar"}
+{"em":1794160687330,"nivel":"info","texto":"Verificar a mudança: pulado · sem verificações configuradas","etapa":17,"passo":"verificar"}
+{"em":1794160687339,"nivel":"passo","texto":"Arquivar a spec","etapa":17,"passo":"arquivar"}
+{"em":1794160687349,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\17-nucleo-http-tipos → .specs\\workflows\\test-01\\specs\\arquivo\\17-nucleo-http-tipos","etapa":17,"passo":"arquivar"}
+{"em":1794160687356,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\17-nucleo-http-tipos","etapa":17,"passo":"arquivar"}
+{"em":1794160687364,"nivel":"passo","texto":"Commit da entrega","etapa":17,"passo":"commitEntrega"}

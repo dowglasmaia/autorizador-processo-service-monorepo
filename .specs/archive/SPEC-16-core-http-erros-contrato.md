@@ -40,3 +40,8 @@ Estabelecer a fronteira tipada com a API: tipos gerados do OpenAPI (somente tipo
 
 ## 6. Resultado
 _Preencher ao concluir._
+
+## Resumo de conclusão (etapa 17 do loop test-01)
+- **Resultado:** núcleo HTTP entregue: tipos gerados do OpenAPI (`npm run api:types`), `AppError`/`mapProblem` (12 códigos), `api-client`, `errorInterceptor`, `resultadoNegocio` e `core/http/doc.md`.
+- **Validações:** `npm run lint`, `npm run build` e `npm test` verdes (62 testes); geração de tipos idempotente.
+- **Limitações aceitas:** `git diff --exit-code` em `shared/api` verificado por comparação antes/depois (arquivos ainda não rastreados); catálogo de 12 códigos do contrato prevalece sobre os 7 da spec. Pasta `06-execution-plan/` inexistente, ignorada.

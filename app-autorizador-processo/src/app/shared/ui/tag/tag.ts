@@ -17,6 +17,7 @@ const TONES: Record<TagTone, string> = {
 export class Tag {
   readonly tone = input<TagTone>('neutral');
   protected readonly classes = computed(
-    () => `inline-flex items-center rounded-pill px-3 py-1 text-xs font-semibold ${TONES[this.tone()]}`,
+    () =>
+      `inline-flex items-center rounded-pill px-3 py-1 text-xs font-semibold ${TONES[this.tone()]}`,
   );
 }

@@ -37,7 +37,9 @@ const FOCAVEIS =
         >
           <h2 [id]="titleId" class="text-xl font-bold text-content">{{ title() }}</h2>
           <div class="mt-3 text-content"><ng-content /></div>
-          <div class="mt-6 flex flex-wrap justify-end gap-3"><ng-content select="[dialog-actions]" /></div>
+          <div class="mt-6 flex flex-wrap justify-end gap-3">
+            <ng-content select="[dialog-actions]" />
+          </div>
         </div>
       </div>
     }

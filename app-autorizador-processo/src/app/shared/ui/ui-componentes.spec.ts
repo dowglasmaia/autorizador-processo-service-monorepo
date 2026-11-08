@@ -7,7 +7,9 @@ import { Chip, DataTable, DataTableColumn, Dialog, Field, FieldControl } from '.
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [Field, FieldControl, Chip, DataTable, Dialog],
   template: `
-    <app-field label="E-mail" help="Ajuda" error="Obrigatório"><input appFieldControl id="i1" /></app-field>
+    <app-field label="E-mail" help="Ajuda" error="Obrigatório"
+      ><input appFieldControl id="i1"
+    /></app-field>
     <app-field label="Nome" help="Ajuda"><input appFieldControl id="i2" /></app-field>
     <button app-chip id="c" [(pressed)]="pressionado">Filtro</button>
     <app-data-table [columns]="colunas" [rows]="linhas" />

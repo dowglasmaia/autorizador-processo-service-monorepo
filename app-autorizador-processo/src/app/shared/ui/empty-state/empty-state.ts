@@ -13,7 +13,8 @@ import { Icon } from '../icon/icon';
     <div class="mt-4"><ng-content /></div>
   `,
   host: {
-    class: 'flex flex-col items-center rounded-card border border-dashed border-divider bg-surface p-8 text-center',
+    class:
+      'flex flex-col items-center rounded-card border border-dashed border-divider bg-surface p-8 text-center',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -18,6 +18,8 @@ describe('App', () => {
     });
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
-    expect(fixture.nativeElement.querySelector('app-shell main#conteudo router-outlet')).not.toBeNull();
+    expect(
+      fixture.nativeElement.querySelector('app-shell main#conteudo router-outlet'),
+    ).not.toBeNull();
   });
 });

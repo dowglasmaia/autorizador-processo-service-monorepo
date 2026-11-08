@@ -27,7 +27,15 @@ export const NAV_ITEMS: readonly NavItem[] = [
  */
 @Component({
   selector: 'app-shell',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, Icon, ToastHost, LoadingOverlay, ErrorDialog],
+  imports: [
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
+    Icon,
+    ToastHost,
+    LoadingOverlay,
+    ErrorDialog,
+  ],
   template: `
     <a
       href="#conteudo"
@@ -36,7 +44,9 @@ export const NAV_ITEMS: readonly NavItem[] = [
       Ir para o conteúdo
     </a>
 
-    <header class="sticky top-0 z-30 flex items-center gap-3 border-b border-divider bg-surface px-4 py-2 lg:hidden">
+    <header
+      class="sticky top-0 z-30 flex items-center gap-3 border-b border-divider bg-surface px-4 py-2 lg:hidden"
+    >
       <button
         type="button"
         class="inline-flex size-11 items-center justify-center rounded-pill hover:bg-neutral-100"
@@ -51,7 +61,11 @@ export const NAV_ITEMS: readonly NavItem[] = [
     </header>
 
     @if (drawerOpen()) {
-      <div class="fixed inset-0 z-40 bg-scrim lg:hidden" (click)="drawerOpen.set(false)" aria-hidden="true"></div>
+      <div
+        class="fixed inset-0 z-40 bg-scrim lg:hidden"
+        (click)="drawerOpen.set(false)"
+        aria-hidden="true"
+      ></div>
     }
 
     <aside

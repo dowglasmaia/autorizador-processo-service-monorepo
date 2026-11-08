@@ -1,0 +1,5 @@
+# Arquivo gerado por `npm run api:types`
+src/app/shared/api/api-types.ts
+/dist
+/node_modules
+/.angular

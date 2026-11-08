@@ -2881,7 +2881,175 @@
           "descricao": "Executa a SPEC-16: tipos gerados do OpenAPI, interceptors e mapeamento de erros RFC 9457.\nReferências: contrato em `api-autorizador-processo/src/main/resources/openapi/`.\nLimite: sem DTOs duplicados à mão.",
           "spec": "17-nucleo-http-tipos",
           "specPronta": false,
-          "status": "pendente"
+          "status": "entregue",
+          "entregueEm": "2026-11-08T17:58:07.370Z",
+          "iteracao": 17,
+          "duracaoMs": 319616,
+          "custo": 1.1997668,
+          "passos": [
+            {
+              "id": "propor",
+              "situacao": "ok",
+              "duracaoMs": 38440,
+              "custo": 0.2333039,
+              "tentativas": 1,
+              "detalhe": "17 tarefas"
+            },
+            {
+              "id": "partida",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "commitProposta",
+              "situacao": "ok",
+              "duracaoMs": 371,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "3e9b8bd · 5 arquivo(s)"
+            },
+            {
+              "id": "aplicar",
+              "situacao": "ok",
+              "duracaoMs": 280800,
+              "custo": 0.9664629,
+              "tentativas": 1,
+              "detalhe": "17/17 tarefas · 3 sessão(ões)"
+            },
+            {
+              "id": "verificar",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "arquivar",
+              "situacao": "ok",
+              "duracaoMs": 5,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\17-nucleo-http-tipos"
+            },
+            {
+              "id": "commitEntrega",
+              "situacao": "ok",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1
+            }
+          ],
+          "sessoes": [
+            {
+              "rotulo": "propor-17",
+              "passo": "propor",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2333039,
+              "turnos": 8,
+              "duracaoMs": 38425,
+              "inicio": 1794160367644,
+              "fim": 1794160406078,
+              "tokens": {
+                "entrada": 12,
+                "saida": 2490,
+                "cacheCriacao": 45231,
+                "cacheLeitura": 274559
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "antecipar-18",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.34474459999999996,
+              "turnos": 9,
+              "duracaoMs": 76607,
+              "inicio": 1794160406504,
+              "fim": 1794160483118,
+              "tokens": {
+                "entrada": 14,
+                "saida": 9143,
+                "cacheCriacao": 54682,
+                "cacheLeitura": 345586
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-17-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.34599030000000003,
+              "turnos": 13,
+              "duracaoMs": 110626,
+              "inicio": 1794160407965,
+              "fim": 1794160518600,
+              "tokens": {
+                "entrada": 22,
+                "saida": 8642,
+                "cacheCriacao": 50288,
+                "cacheLeitura": 583743
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-17-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.4198672,
+              "turnos": 13,
+              "duracaoMs": 128968,
+              "inicio": 1794160518605,
+              "fim": 1794160647581,
+              "tokens": {
+                "entrada": 20,
+                "saida": 14360,
+                "cacheCriacao": 55449,
+                "cacheLeitura": 544312
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-17-3",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2006054,
+              "turnos": 6,
+              "duracaoMs": 39700,
+              "inicio": 1794160647587,
+              "fim": 1794160687296,
+              "tokens": {
+                "entrada": 10,
+                "saida": 2177,
+                "cacheCriacao": 39463,
+                "cacheLeitura": 209634
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            }
+          ]
         },
         {
           "numero": 18,
@@ -3022,7 +3190,7 @@
     "etapa": 17,
     "inicio": "2026-11-08T17:52:47.628Z",
     "commitInicial": "cb726d0b4f43f1dfabf837430f443918d2d0317c",
-    "passoAtual": 2,
+    "passoAtual": 6,
     "passos": [
       {
         "id": "propor",
@@ -3042,62 +3210,66 @@
       },
       {
         "id": "commitProposta",
+        "situacao": "ok",
+        "duracaoMs": 371,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "3e9b8bd · 5 arquivo(s)"
+      },
+      {
+        "id": "aplicar",
+        "situacao": "ok",
+        "duracaoMs": 280800,
+        "custo": 0.9664629,
+        "tentativas": 1,
+        "detalhe": "17/17 tarefas · 3 sessão(ões)"
+      },
+      {
+        "id": "verificar",
+        "situacao": "pulado",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "arquivar",
+        "situacao": "ok",
+        "duracaoMs": 5,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\17-nucleo-http-tipos"
+      },
+      {
+        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
-      },
-      {
-        "id": "aplicar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "verificar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "arquivar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
       }
     ],
     "titulo": "Revisa a spec do núcleo HTTP e tipos do frontend (SPEC-16) contra a base entregue",
     "comparacao": "A pasta da etapa 17 já tinha `proposta.md` e `tarefas.md`, escritos antes da etapa 16. Revisei e completei os dois contra o código atual.\nA etapa 16 foi entregue (`shared/ui`, `layout/shell`, `core/feedback`, `core/api-status`) e não conflita com esta etapa. `ApiError` e `apiErrorInterceptor` só são usados em `app.config.ts`, então podem ser substituídos sem afetar outras features.\nO app ainda não tem `openapi-typescript`, o script `api:types` nem `.prettierignore`. O contrato tem 12 códigos em `ProblemDetail.code`, e a SPEC-16 cita só 7. Mantive os 12, registrado como [REVISAR].\nAjustei a tarefa 1.3 (excluir `api-types.ts` do ESLint e criar `.prettierignore`) e a 2.3 (remover também o interceptor provisório). A lista ficou com 17 tarefas, sem mexer em código."
   },
   "totais": {
-    "duracaoMs": 11709961,
-    "custo": 33.1800273,
+    "duracaoMs": 11991137,
+    "custo": 34.491234799999994,
     "execucoes": 2,
     "iteracoes": 17,
     "entregues": 16,
-    "sessoes": 88,
-    "turnos": 1208,
+    "sessoes": 92,
+    "turnos": 1249,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 5,
     "recuperacoesResolvidas": 4,
     "falhas": 0,
-    "commits": 32,
+    "commits": 33,
     "tokens": {
-      "entrada": 1790,
-      "saida": 798599,
-      "cacheCriacao": 4816618,
-      "cacheLeitura": 54720779
+      "entrada": 1856,
+      "saida": 832921,
+      "cacheCriacao": 5016500,
+      "cacheLeitura": 56404054
     }
   },
   "ultimaExecucao": {

@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, Directive, computed, inject, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Directive,
+  computed,
+  inject,
+  input,
+} from '@angular/core';
 
 let proximoId = 0;
 

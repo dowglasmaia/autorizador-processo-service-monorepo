@@ -15,5 +15,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
 export class Icon {
   readonly name = input.required<string>();
   readonly label = input<string>('');
-  protected readonly classes = computed(() => `ph-duotone ph-${this.name()} inline-block align-middle`);
+  protected readonly classes = computed(
+    () => `ph-duotone ph-${this.name()} inline-block align-middle`,
+  );
 }

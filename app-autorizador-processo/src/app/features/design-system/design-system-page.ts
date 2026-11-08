@@ -28,11 +28,27 @@ interface Linha {
 @Component({
   selector: 'app-design-system-page',
   imports: [
-    Button, Card, Chip, DataTable, Dialog, EmptyState, Field, FieldControl, Icon,
-    KpiCard, PageHeader, SegmentedChoice, Skeleton, Tag,
+    Button,
+    Card,
+    Chip,
+    DataTable,
+    Dialog,
+    EmptyState,
+    Field,
+    FieldControl,
+    Icon,
+    KpiCard,
+    PageHeader,
+    SegmentedChoice,
+    Skeleton,
+    Tag,
   ],
   template: `
-    <app-page-header kicker="Desenvolvimento" title="Design system" description="Galeria dos componentes base." />
+    <app-page-header
+      kicker="Desenvolvimento"
+      title="Design system"
+      description="Galeria dos componentes base."
+    />
 
     <div class="grid gap-6">
       <app-card>
@@ -76,8 +92,16 @@ interface Linha {
       <app-card>
         <h2 class="mb-3 font-bold">Feedback</h2>
         <div class="flex flex-wrap gap-3">
-          <button app-button variant="secondary" (click)="notificacao.show('Salvo com sucesso')">Toast</button>
-          <button app-button variant="secondary" (click)="erro.show('Falha de exemplo', tentarDeNovo)">Erro</button>
+          <button app-button variant="secondary" (click)="notificacao.show('Salvo com sucesso')">
+            Toast
+          </button>
+          <button
+            app-button
+            variant="secondary"
+            (click)="erro.show('Falha de exemplo', tentarDeNovo)"
+          >
+            Erro
+          </button>
           <button app-button variant="secondary" (click)="dialogo.set(true)">Diálogo</button>
         </div>
       </app-card>

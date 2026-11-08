@@ -34,7 +34,9 @@ export class DataTableCell {
     <div class="hidden overflow-x-auto md:block">
       <table class="w-full border-collapse text-left text-sm">
         <caption class="sr-only">
-          {{ caption() }}
+          {{
+            caption()
+          }}
         </caption>
         <thead>
           <tr class="border-b border-divider text-content-muted">

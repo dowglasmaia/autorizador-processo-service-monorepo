@@ -5,7 +5,8 @@
     "start": "ng serve --port 4200",
     "build": "ng build",
     "test": "ng test --no-watch",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "api:types": "node scripts/gerar-api-types.mjs"
   },
   "private": true,
   "packageManager": "npm@11.12.1",
@@ -32,6 +33,7 @@
     "angular-eslint": "21.4.0",
     "eslint": "^10.3.0",
     "jsdom": "^29.1.1",
+    "openapi-typescript": "^7.13.0",
     "prettier": "^3.8.1",
     "typescript": "~5.9.2",
     "typescript-eslint": "8.59.2",
