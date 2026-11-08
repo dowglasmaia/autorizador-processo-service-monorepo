@@ -1164,7 +1164,8 @@
               "origem": "provider",
               "esforco": "medium"
             }
-          ]
+          ],
+          "commit": "82ae4e0"
         }
       ]
     },
@@ -1410,19 +1411,19 @@
     }
   ],
   "iteracao": {
-    "numero": 6,
-    "etapa": 6,
-    "inicio": "2026-11-08T15:09:18.663Z",
-    "commitInicial": "14ea7997c7b1e576719ada1e4157970c102009af",
-    "passoAtual": 6,
+    "numero": 7,
+    "etapa": 7,
+    "inicio": "2026-11-08T15:15:17.788Z",
+    "commitInicial": "82ae4e03ae4436cf285e3ca9f89cee1677d91aa3",
+    "passoAtual": 2,
     "passos": [
       {
         "id": "propor",
         "situacao": "ok",
-        "duracaoMs": 49399,
-        "custo": 0.23425849999999998,
+        "duracaoMs": 44705,
+        "custo": 0.2466527,
         "tentativas": 1,
-        "detalhe": "14 tarefas"
+        "detalhe": "24 tarefas"
       },
       {
         "id": "partida",
@@ -1434,66 +1435,62 @@
       },
       {
         "id": "commitProposta",
-        "situacao": "ok",
-        "duracaoMs": 352,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "839f758 · 5 arquivo(s)"
-      },
-      {
-        "id": "aplicar",
-        "situacao": "ok",
-        "duracaoMs": 308621,
-        "custo": 0.9126023999999999,
-        "tentativas": 1,
-        "detalhe": "14/14 tarefas · 2 sessão(ões)"
-      },
-      {
-        "id": "verificar",
-        "situacao": "pulado",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "arquivar",
-        "situacao": "ok",
-        "duracaoMs": 3,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\06-erros-validacao-cors"
-      },
-      {
-        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
+      },
+      {
+        "id": "aplicar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "verificar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "arquivar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "commitEntrega",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
       }
     ],
-    "titulo": "Propõe a spec de erros RFC 9457, validação e CORS do backend",
-    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md`, escritos antes da etapa 5. Revisei os dois contra o código atual em vez de recriá-los.\nA etapa 5 já entregou o contrato: `openapi/common/responses.yaml` traz `ProblemDetail`, `FieldViolation` e o enum de 7 `code`. Atualizei o ponto de partida e deixei o contrato como referência do handler.\nEm `src/main` ainda não há controller, `GlobalExceptionHandler` nem `CorsConfig`. O `pom.xml` não tem Spring Security nem starter de teste de MVC. `application.yml` não tem propriedade de CORS e o `.env.example` não cita `CORS_ALLOWED_ORIGINS`, então a tarefa 3.2 agora pede essa documentação.\nEscopo e tarefas não mudaram (14 tarefas em 4 grupos). Acrescentei uma decisão sobre o 404 genérico para rota inexistente, sem criar `code` novo no enum.\n`.specs/06-execution-plan/` continua inexistente e o desvio vai para a evidência. Não alterei código."
+    "titulo": "Propõe a spec de autenticação JWT (login por e-mail e senha, HS256) no backend",
+    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md` antecipados (22 tarefas em 7 grupos). Reconferi os dois contra o código atual e ajustei os trechos que dependiam da etapa 6.\nA etapa 6 está entregue: `GlobalExceptionHandler`, `BusinessRuleException` e `CorsConfig` existem em `shared`. O `CorsConfig` já permite `Authorization` e usa `app.cors.allowed-origins`, então o Security só precisa ativar o CORS, sem duplicar a allowlist.\nO `responses.yaml` já tem `ProblemDetail` e as respostas 400/403/404/500, mas falta 401 e 429. Também não existem `auth.yaml`, `security.yaml`, `V3__usuario.sql`, Spring Security no `pom.xml` nem controllers.\n`.specs/06-execution-plan/` não existe (desvio a registrar). Não rodei build nem testes, porque este passo só propõe a spec e não altera código."
   },
   "totais": {
-    "duracaoMs": 2778054,
-    "custo": 10.5060843,
+    "duracaoMs": 2823336,
+    "custo": 10.752737,
     "execucoes": 1,
-    "iteracoes": 6,
-    "entregues": 5,
-    "sessoes": 33,
-    "turnos": 362,
+    "iteracoes": 7,
+    "entregues": 6,
+    "sessoes": 34,
+    "turnos": 370,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 3,
     "recuperacoesResolvidas": 3,
     "falhas": 0,
-    "commits": 11,
+    "commits": 12,
     "tokens": {
-      "entrada": 544,
-      "saida": 223119,
-      "cacheCriacao": 1592547,
-      "cacheLeitura": 14517109
+      "entrada": 556,
+      "saida": 225626,
+      "cacheCriacao": 1640926,
+      "cacheLeitura": 14797536
     }
   },
   "ultimaExecucao": {

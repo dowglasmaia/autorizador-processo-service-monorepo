@@ -136,3 +136,13 @@
 {"em":1794150917111,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\06-erros-validacao-cors → .specs\\workflows\\test-01\\specs\\arquivo\\06-erros-validacao-cors","etapa":6,"passo":"arquivar"}
 {"em":1794150917116,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\06-erros-validacao-cors","etapa":6,"passo":"arquivar"}
 {"em":1794150917122,"nivel":"passo","texto":"Commit da entrega","etapa":6,"passo":"commitEntrega"}
+{"em":1794150917691,"nivel":"ok","texto":"82ae4e0 · 18 arquivo(s) · feat(autorizador): Propõe a spec de erros RFC 9457, validação e CORS …","etapa":6,"passo":"commitEntrega"}
+{"em":1794150917710,"nivel":"ok","texto":"Commit da entrega: ok · 82ae4e0 · 18 arquivo(s)","etapa":6,"passo":"commitEntrega"}
+{"em":1794150917720,"nivel":"ok","texto":"Etapa 6 entregue · commit 82ae4e0","etapa":6,"passo":"commitEntrega"}
+{"em":1794150917793,"nivel":"passo","texto":"Etapa 7 · Autenticação JWT no backend (iteração 7)","etapa":7}
+{"em":1794150917795,"nivel":"passo","texto":"Propor a spec","etapa":7,"passo":"propor"}
+{"em":1794150917801,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":7,"passo":"propor"}
+{"em":1794150962509,"nivel":"ok","texto":"Propor a spec: ok · 24 tarefas","etapa":7,"passo":"propor"}
+{"em":1794150962515,"nivel":"passo","texto":"Verificar ponto de partida","etapa":7,"passo":"partida"}
+{"em":1794150962525,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":7,"passo":"partida"}
+{"em":1794150962530,"nivel":"passo","texto":"Commit da proposta","etapa":7,"passo":"commitProposta"}

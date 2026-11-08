@@ -1,7 +1,7 @@
 # Tarefas — Autenticação JWT no backend
 
 ## 1. Preparação
-- [ ] 1.1 Reconferir o que a etapa 6 entregou (`GlobalExceptionHandler`, `CorsConfig`, `ProblemDetail`) e o `pom.xml`; ler `API_CONTRACTS.md` §6 e SEC-13..SEC-20; registrar a ausência de `.specs/06-execution-plan/`.
+- [ ] 1.1 Reconferir o que a etapa 6 entregou (`GlobalExceptionHandler`, `CorsConfig`, `ProblemDetail`, `responses.yaml`) e o `pom.xml`; ler `API_CONTRACTS.md` §6 e SEC-13..SEC-20; registrar a ausência de `.specs/06-execution-plan/`.
 - [ ] 1.2 Adicionar ao `pom.xml` os starters do Spring Security (resource server) e de testes de segurança, só o que faltar.
 
 ## 2. Contrato

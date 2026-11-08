@@ -1,14 +1,14 @@
 # Autenticação JWT no backend
 
-Etapa 7 de 31 · Fase 2 · derivada da `SPEC-22` (`.specs/02-backend/SPEC-22-backend-autenticacao-jwt.md`). Proposta antecipada, escrita enquanto a etapa 6 era implementada; será reconferida contra o que a etapa 6 entregar.
+Etapa 7 de 31 · Fase 2 · derivada da `SPEC-22` (`.specs/02-backend/SPEC-22-backend-autenticacao-jwt.md`). Proposta reconferida contra o código entregue pela etapa 6.
 
 ## Objetivo
 Introduzir login por e-mail e senha com JWT (HS256) no `api-autorizador-processo`: emitir e validar o token e proteger todas as rotas `/api/v1/**`, exceto `POST /api/v1/auth/login`; `actuator/health*` continua público (SEC-13..SEC-18, SEC-20). Feature nova (a versão original não tinha autenticação). Sem papéis/perfis, sem cadastro de usuários, sem recuperação de senha e sem refresh token.
 
-## Ponto de partida (conferido antes da entrega da etapa 6)
+## Ponto de partida (conferido após a entrega da etapa 6)
 - `api-autorizador-processo/` tem `Application`, `shared/logging/RequestLoggingFilter`, `shared/package-info.java`, migrações `V1__schema_base.sql` e `V2__auditoria.sql` (+ seed `V1000`), `ArchitectureTest`, `ModularityTests`, `IntegrationTestBase` (Testcontainers) e três contratos de módulo em `openapi/modules/` (`procedimento`, `autorizacao`, `painel`) mais `openapi/common/responses.yaml`.
 - Não existem `openapi/modules/auth.yaml` nem `openapi/common/security.yaml`; não há Spring Security no `pom.xml`; não há controllers em `src/main`.
-- A etapa 6 (em andamento) cria `GlobalExceptionHandler`, `BusinessRuleException` e `CorsConfig` (`WebMvcConfigurer`). Esta etapa deve integrar o CORS à cadeia do Spring Security e reaproveitar o formato `problem+json`; a forma exata será conferida na revisão.
+- A etapa 6 entregou `shared.web.GlobalExceptionHandler` (`@ControllerAdvice`, `ProblemDetail` com `code`), `shared.error.BusinessRuleException` e `shared.web.CorsConfig` (`WebMvcConfigurer`, propriedade `app.cors.allowed-origins`, métodos `GET/POST/OPTIONS`, cabeçalhos `Authorization` e `Content-Type`). `responses.yaml` já tem o esquema `ProblemDetail` e as respostas `400/403/404/500`; faltam `401` e `429`. Esta etapa integra o CORS à cadeia do Spring Security (`.cors(...)` reaproveitando a configuração MVC, sem duplicar a allowlist) e os handlers de filtro replicam o formato `problem+json` do handler global.
 - `.specs/06-execution-plan/` não existe (desvio a registrar na evidência).
 - A migração nova será `V3__usuario.sql` (V1 e V2 já existem).
 
@@ -48,5 +48,5 @@ Introduzir login por e-mail e senha com JWT (HS256) no `api-autorizador-processo
 - **Dependências:** o Spring Security (resource server) é exigido pela spec e entra no `pom.xml` apenas com o necessário.
 - **[REVISAR] Rota `/auth/me`:** mantida por constar na SPEC-22 (o frontend a usa), embora o plano cite só login, JWT e proteção.
 - **[REVISAR] Documentação no perfil `local`:** a UI de documentação fica pública somente no perfil `local`, conforme SEC-07.
-- **Reaproveitar a etapa 6:** CORS e formato de erro serão adaptados ao que a etapa 6 entregar (decisão final na revisão da proposta).
+- **Reaproveitar a etapa 6:** a allowlist de CORS continua em `CorsConfig`; o Security apenas ativa CORS para que o pré-voo `OPTIONS` passe sem token. O `403 ACESSO_NEGADO` já existe em `responses.yaml` e é reutilizado.
 - **Bootstrap mantido:** é a única forma de existir usuário sem cadastro; as variáveis não têm valor padrão nem entram no repositório.
