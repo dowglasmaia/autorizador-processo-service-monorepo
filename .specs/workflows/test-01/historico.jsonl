@@ -194,3 +194,13 @@
 {"em":1794153695222,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\08-modulo-procedimento → .specs\\workflows\\test-01\\specs\\arquivo\\08-modulo-procedimento","etapa":8,"passo":"arquivar"}
 {"em":1794153695229,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\08-modulo-procedimento","etapa":8,"passo":"arquivar"}
 {"em":1794153695240,"nivel":"passo","texto":"Commit da entrega","etapa":8,"passo":"commitEntrega"}
+{"em":1794153697458,"nivel":"ok","texto":"ddae3ff · 38 arquivo(s) · feat(autorizador): Propõe a spec do módulo procedimento (cadastro, li…","etapa":8,"passo":"commitEntrega"}
+{"em":1794153697501,"nivel":"ok","texto":"Commit da entrega: ok · ddae3ff · 38 arquivo(s)","etapa":8,"passo":"commitEntrega"}
+{"em":1794153697525,"nivel":"ok","texto":"Etapa 8 entregue · commit ddae3ff","etapa":8,"passo":"commitEntrega"}
+{"em":1794153697712,"nivel":"passo","texto":"Etapa 9 · Catálogo estendido (iteração 9)","etapa":9}
+{"em":1794153697716,"nivel":"passo","texto":"Propor a spec","etapa":9,"passo":"propor"}
+{"em":1794153697741,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":9,"passo":"propor"}
+{"em":1794153769166,"nivel":"ok","texto":"Propor a spec: ok · 21 tarefas","etapa":9,"passo":"propor"}
+{"em":1794153769178,"nivel":"passo","texto":"Verificar ponto de partida","etapa":9,"passo":"partida"}
+{"em":1794153769259,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":9,"passo":"partida"}
+{"em":1794153769268,"nivel":"passo","texto":"Commit da proposta","etapa":9,"passo":"commitProposta"}

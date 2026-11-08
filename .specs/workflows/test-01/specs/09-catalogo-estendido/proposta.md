@@ -1,14 +1,15 @@
 # Catálogo estendido
 
-Etapa 9 de 31 · Fase 2 · derivada da `SPEC-12` (`.specs/02-backend/SPEC-12-procedimento-catalogo-estendido.md`, nova feature NEW-01). Proposta escrita antes da entrega da etapa 8; deve ser reconferida contra o código que ela entregar.
+Etapa 9 de 31 · Fase 2 · derivada da `SPEC-12` (`.specs/02-backend/SPEC-12-procedimento-catalogo-estendido.md`, nova feature NEW-01). Proposta revisada contra o código da etapa 8, já entregue.
 
 ## Objetivo
 Acrescentar de forma **aditiva** ao módulo `procedimento` os dados de cadastro do protótipo: `nome`, `codigoTuss`, `categoria`, `especialidade`, `tipoCobertura`, `quantidadeMaxima`, `periodo`, `exigeAutorizacaoPrevia` e `exigeJustificativaMedica`, com migração `V4`, contrato atualizado e testes. São **dados de catálogo**: `Procedimento.avaliar` e a decisão de autorização não mudam (ADR-10, PEN-02).
 
-## Ponto de partida (conferido antes da etapa 8)
+## Ponto de partida (conferido contra o código entregue pela etapa 8)
 - Existem `V1__schema_base.sql`, `V2__auditoria.sql` e `V3__usuario.sql`; o seed local `db/seed/V1000__seed_local.sql` insere só `numero_procedimento`, sexos e idades (1234, 4567, 6789).
 - `openapi/modules/procedimento.yaml` tem `ProcedimentoRequest` (obrigatório só `numProcedimento`), `Procedimento`, `PaginaProcedimentos` e `Sexo`; `autorizacao.yaml` referencia `Procedimento` de `procedimento.yaml`, então herda os campos novos.
-- O módulo `procedimento` **ainda não existe em `src/main`**: a etapa 8 o cria (domínio `Procedimento.create/avaliar`, `ProcedimentoEntity` com `@Audited`, casos de uso, controller, testes). Esta etapa estende esse código; os nomes exatos de classes e pacotes devem ser confirmados após a entrega da etapa 8.
+- O módulo `procedimento` **já existe** (etapa 8): `domain/model/Procedimento` (`create(int, Collection<Sexo>, Collection<Integer>)`, `restore`, `avaliar`), `Sexo`, `Pagina`; casos de uso `CadastrarProcedimentoUseCase`, `ListarProcedimentosUseCase`, `ObterProcedimentoUseCase`; porta `ProcedimentoRepository`; `ProcedimentoEntity` (`@Audited`, tabela `procedimento`, pacote-privada) com `ProcedimentoRepositoryAdapter`; `ProcedimentoController`; testes `ProcedimentoTest`, `Cadastrar...UseCaseTest`, `ProcedimentoRepositoryFake`, `ProcedimentoControllerTest`, `ProcedimentoApiTest`, `ProcedimentoPersistenciaTest`, `ProcedimentoConcorrenciaDesempenhoTest`. Esta etapa os estende; a assinatura de `create`/`restore` muda de forma aditiva e os testes existentes são ajustados só na chamada, sem mudar expectativas.
+- A auditoria V2 usa `procedimento_audit`, `autorizacao_audit` e `procedimento_sexo_audit`; só `procedimento_audit` recebe as colunas novas.
 - `tools/parity/cases.json` e `replay.mjs` existem desde a etapa 2. `.specs/06-execution-plan/` não existe (desvio a registrar).
 - No protótipo (`.specs/design/prototype/Autorizador.dc.html`) as listas são: categorias Exames de imagem, Consultas, Cirurgias, Terapias, Exames laboratoriais; especialidades Cardiologia, Ortopedia, Pediatria, Ginecologia, Neurologia. O protótipo não traz nome/categoria para os 3 procedimentos do seed.
 
@@ -37,7 +38,7 @@ Acrescentar de forma **aditiva** ao módulo `procedimento` os dados de cadastro 
 - `./mvnw verify` verde (incluindo `ArchitectureTest`, `ModularityTests` e a regressão da etapa 8); Testcontainers exige Docker, senão registrar bloqueio; nenhum nome "legado/legacy".
 
 ## Riscos
-- A etapa 8 pode nomear classes de forma diferente da esperada; reconferir antes de aplicar.
+- Mudar a assinatura de `Procedimento.create` quebra chamadas dos testes da etapa 8; usar sobrecarga/valor de catálogo opcional para não alterar expectativas.
 - `*_audit` desalinhadas com a entidade `@Audited` (Envers) quebram a gravação; espelhar as colunas exatamente.
 - Alterar o contrato sem regenerar quebra a compilação; manter a mudança aditiva.
 - Docker indisponível bloqueia os testes de persistência e de migração.

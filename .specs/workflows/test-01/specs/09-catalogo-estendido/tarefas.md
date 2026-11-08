@@ -1,7 +1,7 @@
 # Tarefas — Catálogo estendido
 
 ## 1. Preparação
-- [ ] 1.1 Reconferir o que a etapa 8 entregou (classes, pacotes, `ProcedimentoEntity`, testes, `spike/auditoria` removido); ler `API_CONTRACTS.md` §2, `DATABASE_DESIGN.md` V4 e as etapas 1, 2 e 4 do formulário no protótipo; registrar a ausência de `.specs/06-execution-plan/`.
+- [ ] 1.1 Reconferir as classes da etapa 8 listadas na proposta (`Procedimento`, `CadastrarProcedimentoUseCase`, `ProcedimentoEntity`, adaptador, controller, testes); ler `API_CONTRACTS.md` §2, `DATABASE_DESIGN.md` V4 e as etapas 1, 2 e 4 do formulário no protótipo; registrar a ausência de `.specs/06-execution-plan/`.
 
 ## 2. Contrato
 - [ ] 2.1 Atualizar `openapi/modules/procedimento.yaml` (aditivo): campos novos em `ProcedimentoRequest` e `Procedimento`, enums `Categoria`, `Especialidade`, `TipoCobertura`, `Periodo`, `nome`/`categoria` obrigatórios no request.
@@ -9,7 +9,7 @@
 
 ## 3. Banco
 - [ ] 3.1 Criar `V4__catalogo_estendido.sql` com colunas nullable e CHECKs conforme `DATABASE_DESIGN.md`.
-- [ ] 3.2 Espelhar as colunas nas tabelas `procedimento_audit` (e equivalentes) na mesma migração.
+- [ ] 3.2 Espelhar as colunas nas tabelas `procedimento_audit` (só ela) na mesma migração.
 
 ## 4. Domínio
 - [ ] 4.1 Escrever os testes do domínio (nome 1..200 com trim, par `quantidadeMaxima`/`periodo`, enums) antes da implementação.

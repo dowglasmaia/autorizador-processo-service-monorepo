@@ -1526,7 +1526,8 @@
               "origem": "provider",
               "esforco": "medium"
             }
-          ]
+          ],
+          "commit": "ddae3ff"
         },
         {
           "numero": 9,
@@ -1749,19 +1750,19 @@
     }
   ],
   "iteracao": {
-    "numero": 8,
-    "etapa": 8,
-    "inicio": "2026-11-08T15:40:19.348Z",
-    "commitInicial": "786e7aafc4d81374371bb3f635ff9ee982c2cb95",
-    "passoAtual": 6,
+    "numero": 9,
+    "etapa": 9,
+    "inicio": "2026-11-08T16:01:37.699Z",
+    "commitInicial": "ddae3ff81d41a54095c295d9b754a248724060f9",
+    "passoAtual": 2,
     "passos": [
       {
         "id": "propor",
         "situacao": "ok",
-        "duracaoMs": 50148,
-        "custo": 0.2375142,
+        "duracaoMs": 71422,
+        "custo": 0.2097374,
         "tentativas": 1,
-        "detalhe": "22 tarefas"
+        "detalhe": "21 tarefas"
       },
       {
         "id": "partida",
@@ -1773,66 +1774,62 @@
       },
       {
         "id": "commitProposta",
-        "situacao": "ok",
-        "duracaoMs": 428,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "0fd6216 · 5 arquivo(s)"
-      },
-      {
-        "id": "aplicar",
-        "situacao": "ok",
-        "duracaoMs": 1225181,
-        "custo": 2.4249066,
-        "tentativas": 1,
-        "detalhe": "22/22 tarefas · 3 sessão(ões)"
-      },
-      {
-        "id": "verificar",
-        "situacao": "pulado",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "arquivar",
-        "situacao": "ok",
-        "duracaoMs": 8,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\08-modulo-procedimento"
-      },
-      {
-        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
+      },
+      {
+        "id": "aplicar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "verificar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "arquivar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "commitEntrega",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
       }
     ],
-    "titulo": "Propõe a spec do módulo procedimento (cadastro, listagem e consulta com paridade) no back…",
-    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md`, escritos antes da etapa 7. Revisei os dois contra o código atual.\nA etapa 7 entregou o módulo `autenticacao`, o `SecurityConfig`, a migração `V3`, o `401` em `responses.yaml` e o `JwtTestSupport`. A `VarreduraSegurancaTest` já cobrirá as rotas novas. Atualizei o ponto de partida com isso.\nAinda não existe nenhum pacote de feature `procedimento`, e o contrato `procedimento.yaml` está pronto. `tools/parity` existe. `.specs/06-execution-plan/` continua ausente (desvio a registrar).\nAchei um resíduo que o rascunho não previa: `src/test/java/spike/auditoria/SpikeProcedimento` mapeia a tabela `procedimento` com `@Audited`. Duas entidades na mesma tabela conflitariam com a entidade real. Acrescentei o risco, uma decisão e a tarefa 4.3 para removê-lo.\nFicaram 23 tarefas, dentro do limite de 30. O escopo segue sem o catálogo estendido, conforme o plano. Não alterei código da aplicação."
+    "titulo": "Propõe a spec do catálogo estendido do procedimento (SPEC-12, NEW-01) no backend",
+    "comparacao": "A pasta da spec já tinha proposta.md e tarefas.md, escritos antes da etapa 8. Revisei os dois, sem recriar.\nA etapa 8 já entregou o módulo `procedimento` (domínio, casos de uso, entidade `@Audited`, adaptador, controller e testes). Troquei a \"premissa de módulo inexistente\" pelos nomes reais das classes.\nAs migrations existentes vão até V3, então V4 é a próxima. Na auditoria só `procedimento_audit` recebe as colunas novas.\n`tools/parity` existe e o protótipo está em `.specs/design/prototype/`. `.specs/06-execution-plan/` continua inexistente, desvio já registrado.\nAcrescentei o risco de mudar a assinatura de `Procedimento.create` e quebrar os testes da etapa 8. São 17 tarefas em 9 grupos, e o escopo segue a SPEC-12 sem inventar requisitos."
   },
   "totais": {
-    "duracaoMs": 5001177,
-    "custo": 18.1491619,
+    "duracaoMs": 5074844,
+    "custo": 18.3588993,
     "execucoes": 2,
-    "iteracoes": 8,
-    "entregues": 7,
-    "sessoes": 51,
-    "turnos": 639,
+    "iteracoes": 9,
+    "entregues": 8,
+    "sessoes": 52,
+    "turnos": 646,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 5,
     "recuperacoesResolvidas": 4,
     "falhas": 0,
-    "commits": 15,
+    "commits": 16,
     "tokens": {
-      "entrada": 930,
-      "saida": 431351,
-      "cacheCriacao": 2662352,
-      "cacheLeitura": 27324765
+      "entrada": 942,
+      "saida": 433861,
+      "cacheCriacao": 2702135,
+      "cacheLeitura": 27579579
     }
   },
   "ultimaExecucao": {
