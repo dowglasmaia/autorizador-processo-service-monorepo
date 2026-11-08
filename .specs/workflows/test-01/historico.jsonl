@@ -172,3 +172,13 @@
 {"em":1794152418014,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\07-autenticacao-jwt-backend → .specs\\workflows\\test-01\\specs\\arquivo\\07-autenticacao-jwt-backend","etapa":7,"passo":"arquivar"}
 {"em":1794152418022,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\07-autenticacao-jwt-backend","etapa":7,"passo":"arquivar"}
 {"em":1794152418028,"nivel":"passo","texto":"Commit da entrega","etapa":7,"passo":"commitEntrega"}
+{"em":1794152419254,"nivel":"ok","texto":"786e7aa · 61 arquivo(s) · feat(autorizador): Propõe a spec de autenticação JWT (login por e-mai…","etapa":7,"passo":"commitEntrega"}
+{"em":1794152419278,"nivel":"ok","texto":"Commit da entrega: ok · 786e7aa · 61 arquivo(s)","etapa":7,"passo":"commitEntrega"}
+{"em":1794152419287,"nivel":"ok","texto":"Etapa 7 entregue · commit 786e7aa","etapa":7,"passo":"commitEntrega"}
+{"em":1794152419353,"nivel":"passo","texto":"Etapa 8 · Módulo procedimento (iteração 8)","etapa":8}
+{"em":1794152419354,"nivel":"passo","texto":"Propor a spec","etapa":8,"passo":"propor"}
+{"em":1794152419360,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":8,"passo":"propor"}
+{"em":1794152469511,"nivel":"ok","texto":"Propor a spec: ok · 22 tarefas","etapa":8,"passo":"propor"}
+{"em":1794152469518,"nivel":"passo","texto":"Verificar ponto de partida","etapa":8,"passo":"partida"}
+{"em":1794152469528,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":8,"passo":"partida"}
+{"em":1794152469533,"nivel":"passo","texto":"Commit da proposta","etapa":8,"passo":"commitProposta"}

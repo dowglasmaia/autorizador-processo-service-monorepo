@@ -1348,7 +1348,8 @@
               "origem": "provider",
               "esforco": "medium"
             }
-          ]
+          ],
+          "commit": "786e7aa"
         },
         {
           "numero": 8,
@@ -1580,19 +1581,19 @@
     }
   ],
   "iteracao": {
-    "numero": 7,
-    "etapa": 7,
-    "inicio": "2026-11-08T15:15:17.788Z",
-    "commitInicial": "82ae4e03ae4436cf285e3ca9f89cee1677d91aa3",
-    "passoAtual": 6,
+    "numero": 8,
+    "etapa": 8,
+    "inicio": "2026-11-08T15:40:19.348Z",
+    "commitInicial": "786e7aafc4d81374371bb3f635ff9ee982c2cb95",
+    "passoAtual": 2,
     "passos": [
       {
         "id": "propor",
         "situacao": "ok",
-        "duracaoMs": 44705,
-        "custo": 0.2466527,
+        "duracaoMs": 50148,
+        "custo": 0.2375142,
         "tentativas": 1,
-        "detalhe": "24 tarefas"
+        "detalhe": "22 tarefas"
       },
       {
         "id": "partida",
@@ -1604,88 +1605,62 @@
       },
       {
         "id": "commitProposta",
-        "situacao": "ok",
-        "duracaoMs": 351,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "742bb15 · 5 arquivo(s)"
-      },
-      {
-        "id": "aplicar",
-        "situacao": "aviso",
-        "duracaoMs": 900480,
-        "custo": 3.9566094999999994,
-        "tentativas": 2,
-        "recuperacoes": [
-          {
-            "numero": 1,
-            "erro": "2 tarefa(s) continuam abertas depois de 3 sessões sem progresso",
-            "resolvida": false,
-            "custo": 0.1607276999999998,
-            "em": "2026-11-08T15:29:05.931Z",
-            "causa": "As tarefas 7.2 e 7.3 continuam abertas porque o Maven não baixa `spring-boot-starter-oauth2-resource-server:4.1.2` nem `spring-boot-starter-security-test:4.1.2` do Maven Central (erro PKIX de certificado). O código de segurança nunca foi compilado nem testado.",
-            "oQueFez": "Reexecutei `./mvnw -B verify` e o mesmo erro PKIX apareceu. Não alterei nenhum arquivo. Marcar 7.2 e 7.3 como concluídas sem build e testes verdes seria falso, e o problema está no ambiente (certificado do Central), então não o contornei.",
-            "precisaPessoa": true
-          },
-          {
-            "numero": 2,
-            "erro": "2 tarefa(s) continuam abertas depois de 3 sessões sem progresso",
-            "resolvida": true,
-            "custo": 0.45054019999999984,
-            "em": "2026-11-08T15:32:14.541Z",
-            "causa": "O erro PKIX vinha do truststore do JDK, que não confiava no certificado do Maven Central; sem build, as tarefas 7.2 e 7.3 ficavam abertas. Quando o build rodou, apareceram testes defasados por causa da migração V3 e do novo módulo de autenticação.",
-            "oQueFez": "Rodei o Maven com `MAVEN_OPTS=\"-Djavax.net.ssl.trustStoreType=Windows-ROOT\"`, sem desligar a validação TLS, e as dependências 4.1.2 resolveram. Corrigi 6 testes: MigracaoTest e SeedLocalTest (V3 entra na lista de versões), AuditoriaTest (o @EntityScan inclui o pacote de autenticação), VarreduraSegurancaTest (@Qualifier no mapeamento MVC), ArchitectureTest (a regra ignora o pacote `generated`) e AutenticarUsuarioUseCaseTest (a falha é contada por par e-mail/IP). `./mvnw -B clean verify` passou: 78 testes, 0 falhas, BUILD SUCCESS. O `git grep` de segredo literal e o de \"legado/legacy\" não acharam ocorrências. Marquei 7.2 e 7.3 em `tarefas.md`, registrei a decisão na `proposta.md` e movi `SPEC-22` para `.specs/archive/` com `git mv`.",
-            "precisaPessoa": false
-          }
-        ],
-        "detalhe": "recuperado"
-      },
-      {
-        "id": "verificar",
-        "situacao": "pulado",
-        "duracaoMs": 1,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "arquivar",
-        "situacao": "ok",
-        "duracaoMs": 5,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\07-autenticacao-jwt-backend"
-      },
-      {
-        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
+      },
+      {
+        "id": "aplicar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "verificar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "arquivar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "commitEntrega",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
       }
     ],
-    "titulo": "Propõe a spec de autenticação JWT (login por e-mail e senha, HS256) no backend",
-    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md` antecipados (22 tarefas em 7 grupos). Reconferi os dois contra o código atual e ajustei os trechos que dependiam da etapa 6.\nA etapa 6 está entregue: `GlobalExceptionHandler`, `BusinessRuleException` e `CorsConfig` existem em `shared`. O `CorsConfig` já permite `Authorization` e usa `app.cors.allowed-origins`, então o Security só precisa ativar o CORS, sem duplicar a allowlist.\nO `responses.yaml` já tem `ProblemDetail` e as respostas 400/403/404/500, mas falta 401 e 429. Também não existem `auth.yaml`, `security.yaml`, `V3__usuario.sql`, Spring Security no `pom.xml` nem controllers.\n`.specs/06-execution-plan/` não existe (desvio a registrar). Não rodei build nem testes, porque este passo só propõe a spec e não altera código."
+    "titulo": "Propõe a spec do módulo procedimento (cadastro, listagem e consulta com paridade) no back…",
+    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md`, escritos antes da etapa 7. Revisei os dois contra o código atual.\nA etapa 7 entregou o módulo `autenticacao`, o `SecurityConfig`, a migração `V3`, o `401` em `responses.yaml` e o `JwtTestSupport`. A `VarreduraSegurancaTest` já cobrirá as rotas novas. Atualizei o ponto de partida com isso.\nAinda não existe nenhum pacote de feature `procedimento`, e o contrato `procedimento.yaml` está pronto. `tools/parity` existe. `.specs/06-execution-plan/` continua ausente (desvio a registrar).\nAchei um resíduo que o rascunho não previa: `src/test/java/spike/auditoria/SpikeProcedimento` mapeia a tabela `procedimento` com `@Audited`. Duas entidades na mesma tabela conflitariam com a entidade real. Acrescentei o risco, uma decisão e a tarefa 4.3 para removê-lo.\nFicaram 23 tarefas, dentro do limite de 30. O escopo segue sem o catálogo estendido, conforme o plano. Não alterei código da aplicação."
   },
   "totais": {
-    "duracaoMs": 3724173,
-    "custo": 15.1226652,
+    "duracaoMs": 3775560,
+    "custo": 15.3601794,
     "execucoes": 2,
-    "iteracoes": 7,
-    "entregues": 6,
-    "sessoes": 46,
-    "turnos": 529,
+    "iteracoes": 8,
+    "entregues": 7,
+    "sessoes": 47,
+    "turnos": 536,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 5,
     "recuperacoesResolvidas": 4,
     "falhas": 0,
-    "commits": 13,
+    "commits": 14,
     "tokens": {
-      "entrada": 768,
-      "saida": 342221,
-      "cacheCriacao": 2278276,
-      "cacheLeitura": 21339078
+      "entrada": 780,
+      "saida": 345208,
+      "cacheCriacao": 2323422,
+      "cacheLeitura": 21609440
     }
   },
   "ultimaExecucao": {
