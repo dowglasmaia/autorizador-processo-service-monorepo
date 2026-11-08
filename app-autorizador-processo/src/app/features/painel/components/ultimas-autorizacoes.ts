@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
 import { RouterLink } from '@angular/router';
 import type { AutorizacaoDto } from '../../../shared/api';
 import { descreverRegras } from '../../autorizacoes/regras';
+import { MENSAGENS } from '../../../core/i18n/mensagens';
 
 const MAXIMO = 4;
 
@@ -12,13 +13,16 @@ const MAXIMO = 4;
   imports: [DatePipe, RouterLink],
   template: `
     <div class="flex items-center justify-between gap-3">
-      <h2 class="text-lg font-bold text-content">Últimas autorizações</h2>
-      <a routerLink="/autorizacoes" class="text-sm font-semibold text-accent-700 hover:underline">
-        Ver todas →
+      <h2 class="text-lg font-bold text-content">{{ m.ultimasTitulo }}</h2>
+      <a
+        routerLink="/autorizacoes"
+        class="inline-flex min-h-11 items-center text-sm font-semibold text-accent-700 hover:underline"
+      >
+        {{ acoes.verTodas }}
       </a>
     </div>
     @if (itens().length === 0) {
-      <p class="mt-4 text-content-muted">Nenhuma autorização concedida ainda.</p>
+      <p class="mt-4 text-content-muted">{{ m.ultimasVazia }}</p>
     } @else {
       <ul class="mt-4 grid gap-3">
         @for (a of itens(); track a.id) {
@@ -46,6 +50,8 @@ const MAXIMO = 4;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UltimasAutorizacoes {
+  protected readonly m = MENSAGENS.painel;
+  protected readonly acoes = MENSAGENS.acoes;
   readonly autorizacoes = input.required<readonly AutorizacaoDto[]>();
 
   protected readonly itens = computed(() => this.autorizacoes().slice(0, MAXIMO));

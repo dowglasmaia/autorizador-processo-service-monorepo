@@ -44,3 +44,29 @@ Passe final de qualidade sobre todas as telas do frontend (`/login`, `/painel`, 
 - **Erros por `code`:** o catálogo mapeia os `code` já existentes do contrato; código desconhecido cai em mensagem genérica acionável.
 - **Capturas 320/768/1280:** feitas se houver navegador disponível; caso contrário, auditoria por CSS/classes e testes, registrando a limitação. [REVISAR]
 - **Contraste:** corrigido nos tokens do design system só quando a medição falhar, preservando a identidade visual do protótipo.
+
+- **Lote 1 (catálogo + revisão + lang):** catálogo em `core/i18n/mensagens.ts` (objeto `as const` + `mensagemDoErro`, com `satisfies Record<ProblemCode,string>`); `mapProblem` usa `problem.detail` do servidor e, na falta, a mensagem do catálogo por `code`. Rodapé do shell passou de "API: disponível" para "Sistema: disponível" (sem jargão). `<title>` do `index.html` trocado para "Autorizador". Textos de rótulos de enum (`rotulos.ts`, sexos, regras de formulário/idades e o resumo do cadastro) permanecem fora do catálogo neste lote — ficam para revisão posterior. [REVISAR]
+
+## Evidência do lote 1
+- 1.1 Inventário: shell (nav, menu, landmarks, status), login, painel (+3 componentes), procedimentos, procedimento-novo (cabeçalho, etapas, botões, erros), solicitar, autorizações, 404, diálogo de erro — todos migrados. Pendentes (rótulos de enum/regras): `rotulos.ts`, `regras-formulario.ts`, `regras.ts`, resumo do cadastro, design-system-page (página interna de demonstração).
+- 1.2/1.3 Catálogo criado; `mensagens-login.ts` e `app-error.ts` consomem o catálogo.
+- 1.4 `mensagens.spec.ts`: 12 codes do contrato, genérico para desconhecido, sem termos proibidos.
+- 2.x Grep de termos proibidos em `src` vazio; estados vazios/erro das telas têm texto e ação ("Tentar novamente"/próximo passo).
+- 3.1 `lang="pt-BR"`; títulos por rota existem; shell tem `header`, `nav`, `main`.
+- Desvio: `.specs/06-execution-plan/` não existe.
+- `npm run lint`, `npm run build` e `npm test` (191 testes) verdes.
+
+## Evidência do lote 2
+- 3.2 Auditoria por tela via `a11y.spec.ts` (nomes, rótulos, ids, `aria-describedby`, `caption`, níveis de título, sem `tabindex` positivo); `aria-live`/`role` já existentes mantidos; gráficos com `aria-label` e legenda textual; foco visível global (`:focus-visible`). Correção: gaveta do shell fechada ficou `invisible` abaixo de `lg` (links fora da tela não recebem foco).
+- 3.3 Diálogo já tinha foco preso/retorno; agora coberto por teste (Tab, Shift+Tab, Esc, retorno). Chips, seletor de sexo e etapas são `<button>` nativos (Enter/Espaço) com `aria-pressed`/`aria-current`.
+- 3.4 Contraste calculado a partir de `styles.scss` para 24 pares usados: todos passam; nenhum token alterado.
+- 3.5 Links de ação em linha ganharam `min-h-11` (painel, solicitar, 404); teste verifica botões e links das 6 telas.
+- 4.1 Sem navegador nesta sessão: auditoria por classes responsivas (cartões abaixo de `md`, rolagem só dentro da tabela, KPIs `auto-fit`, formulários empilhados); `break-words` nos valores dos cartões. Capturas 320/768/1280 e zoom 200 % não foram feitas. [REVISAR]
+- 5.1 `src/app/a11y.spec.ts` (sem nova dependência). Violações restantes: nenhuma detectada pelas regras implementadas; limitações (sem layout real/axe) documentadas em `shared/ui/doc.md`.
+- 5.2 Fluxo só com teclado verificado estruturalmente: todos os controles são elementos nativos (button/a/input/select), sem `(click)` em elementos não interativos, formulários com botão de envio (Enter). Sem teste e2e real de Tab (fica para a SPEC-30). [REVISAR]
+- 5.3 `doc.md` atualizados: `shared/ui` (seção de acessibilidade) e das 5 telas.
+- `npm run lint`, `npm run build` e `npm test` (226 testes) verdes.
+
+## Evidência do lote 3
+- 5.4: `npm run lint` → "All files pass linting"; `npm run build` → bundle gerado sem erros; `npm test` → 32 arquivos, 226 testes passando.
+- Desvio registrado: a pasta `.specs/06-execution-plan/` citada no índice não existe; a referência foi ignorada.

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import type { DistribuicaoSexos } from '../../../shared/api';
+import { MENSAGENS } from '../../../core/i18n/mensagens';
 
 const RAIO = 40;
 const CIRCUNFERENCIA = 2 * Math.PI * RAIO;
@@ -50,14 +51,14 @@ const CIRCUNFERENCIA = 2 * Math.PI * RAIO;
       <ul class="grid gap-2 text-sm">
         <li class="flex items-center gap-2">
           <span class="size-3 rounded-pill bg-accent-700" aria-hidden="true"></span>
-          Masculino: <strong>{{ dados().masculino }}</strong>
+          {{ m.masculino }}: <strong>{{ dados().masculino }}</strong>
         </li>
         <li class="flex items-center gap-2">
           <span class="size-3 rounded-pill bg-accent-2-700" aria-hidden="true"></span>
-          Feminino: <strong>{{ dados().feminino }}</strong>
+          {{ m.feminino }}: <strong>{{ dados().feminino }}</strong>
         </li>
         <li class="text-content-muted">
-          Total: <strong class="text-content">{{ total() }}</strong>
+          {{ m.total }}: <strong class="text-content">{{ total() }}</strong>
         </li>
       </ul>
     </div>
@@ -66,6 +67,7 @@ const CIRCUNFERENCIA = 2 * Math.PI * RAIO;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RoscaSexos {
+  protected readonly m = MENSAGENS.painel;
   readonly dados = input.required<DistribuicaoSexos>();
 
   protected readonly raio = RAIO;
@@ -79,6 +81,6 @@ export class RoscaSexos {
   );
   protected readonly descricao = computed(
     () =>
-      `Sexos aceitos: ${this.dados().masculino} masculino e ${this.dados().feminino} feminino, total ${this.total()}.`,
+      `${MENSAGENS.painel.sexosTitulo}: ${this.dados().masculino} masculino e ${this.dados().feminino} feminino, total ${this.total()}.`,
   );
 }

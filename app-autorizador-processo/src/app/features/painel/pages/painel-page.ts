@@ -7,6 +7,7 @@ import { BarraCobertura } from '../components/barra-cobertura';
 import { RoscaSexos } from '../components/rosca-sexos';
 import { UltimasAutorizacoes } from '../components/ultimas-autorizacoes';
 import { PainelService } from '../data-access/painel.service';
+import { MENSAGENS } from '../../../core/i18n/mensagens';
 
 /** Painel: cabeçalho, hero, KPIs, gráficos e últimas autorizações, com esqueleto, erro e vazio. */
 @Component({
@@ -23,7 +24,7 @@ import { PainelService } from '../data-access/painel.service';
     UltimasAutorizacoes,
   ],
   template: `
-    <app-page-header kicker="Visão geral" title="Painel" [description]="hoje" />
+    <app-page-header [kicker]="m.kicker" [title]="m.titulo" [description]="hoje" />
 
     <section
       class="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-card bg-accent-900 p-6 text-white sm:p-8"
@@ -31,71 +32,71 @@ import { PainelService } from '../data-access/painel.service';
     >
       <div>
         <h2 id="hero-titulo" class="text-2xl font-extrabold sm:text-3xl">
-          Autorize um procedimento em segundos
+          {{ m.heroTitulo }}
         </h2>
-        <p class="mt-1 text-accent-200">Informe o procedimento, a idade e o sexo do paciente.</p>
+        <p class="mt-1 text-accent-200">{{ m.heroTexto }}</p>
       </div>
-      <button app-button (click)="nova()">Nova solicitação</button>
+      <button app-button (click)="nova()">{{ acoes.novaSolicitacao }}</button>
     </section>
 
     @if (servico.erro(); as erro) {
       <div class="mt-6" aria-live="polite">
         <app-empty-state
           icon="warning"
-          title="Não foi possível carregar"
+          [title]="feedback.tituloErroCarregar"
           [description]="erro.detail"
         >
           <button app-button variant="secondary" (click)="servico.carregar()">
-            Tentar novamente
+            {{ acoes.tentarNovamente }}
           </button>
         </app-empty-state>
       </div>
     } @else {
       <section
         class="mt-6 grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(14rem,1fr))]"
-        aria-label="Indicadores"
+        [attr.aria-label]="m.indicadores"
       >
         <app-kpi-card
-          label="Procedimentos"
+          [label]="m.kpiProcedimentos"
           icon="clipboard-text"
-          hint="cadastrados"
+          [hint]="m.kpiProcedimentosDica"
           [value]="resumo()?.totalProcedimentos ?? 0"
           [loading]="carregando()"
         />
         <app-kpi-card
-          label="Autorizações"
+          [label]="m.kpiAutorizacoes"
           icon="check-circle"
-          hint="concedidas"
+          [hint]="m.kpiAutorizacoesDica"
           [value]="resumo()?.totalAutorizacoes ?? 0"
           [loading]="carregando()"
         />
         <app-kpi-card
-          label="Idades cobertas"
+          [label]="m.kpiIdades"
           icon="users"
-          hint="faixas distintas"
+          [hint]="m.kpiIdadesDica"
           [value]="resumo()?.idadesCobertas ?? 0"
           [loading]="carregando()"
         />
         <app-kpi-card
-          label="Aprovação"
+          [label]="m.kpiAprovacao"
           icon="chart-pie"
-          hint="solicitações desta sessão"
+          [hint]="m.kpiAprovacaoDica"
           [value]="aprovacao()"
         />
       </section>
 
       <div class="mt-6 grid gap-4 md:grid-cols-2">
         <app-card>
-          <h2 class="text-lg font-bold text-content">Cobertura por idade</h2>
+          <h2 class="text-lg font-bold text-content">{{ m.coberturaTitulo }}</h2>
           <div class="mt-4">
             @if (resumo(); as r) {
               @if (r.coberturaPorIdade.length === 0) {
-                <p class="text-content-muted">Nenhuma idade coberta ainda.</p>
+                <p class="text-content-muted">{{ m.coberturaVazia }}</p>
               } @else {
                 <app-barra-cobertura [dados]="r.coberturaPorIdade" />
               }
             } @else {
-              <div class="grid gap-3" role="status" aria-label="Carregando cobertura">
+              <div class="grid gap-3" role="status" [attr.aria-label]="m.coberturaCarregando">
                 <app-skeleton class="h-4 w-full" />
                 <app-skeleton class="h-4 w-full" />
                 <app-skeleton class="h-4 w-full" />
@@ -104,7 +105,7 @@ import { PainelService } from '../data-access/painel.service';
           </div>
         </app-card>
         <app-card>
-          <h2 class="text-lg font-bold text-content">Sexos aceitos</h2>
+          <h2 class="text-lg font-bold text-content">{{ m.sexosTitulo }}</h2>
           <div class="mt-4">
             @if (resumo(); as r) {
               <app-rosca-sexos [dados]="r.distribuicaoSexos" />
@@ -119,7 +120,7 @@ import { PainelService } from '../data-access/painel.service';
         @if (resumo(); as r) {
           <app-ultimas-autorizacoes [autorizacoes]="r.ultimasAutorizacoes" />
         } @else {
-          <div class="grid gap-3" role="status" aria-label="Carregando últimas autorizações">
+          <div class="grid gap-3" role="status" [attr.aria-label]="m.ultimasCarregando">
             <app-skeleton class="h-12 w-full" />
             <app-skeleton class="h-12 w-full" />
           </div>
@@ -133,6 +134,9 @@ export class PainelPage implements OnInit {
   private readonly router = inject(Router);
   private readonly sessao = inject(SessaoSolicitacoes);
   protected readonly servico = inject(PainelService);
+  protected readonly m = MENSAGENS.painel;
+  protected readonly acoes = MENSAGENS.acoes;
+  protected readonly feedback = MENSAGENS.feedback;
 
   protected readonly hoje = formatarDataExtenso(new Date());
   protected readonly resumo = this.servico.resumo;

@@ -24,6 +24,7 @@ import {
   criarFormularioSolicitacao,
   type SexoSolicitacao,
 } from '../formulario-solicitacao';
+import { MENSAGENS } from '../../../core/i18n/mensagens';
 
 /** Resultado exibido no painel; `null` representa o estado inicial. */
 export type ResultadoExibido =
@@ -52,30 +53,30 @@ export type ResultadoExibido =
   ],
   template: `
     <app-page-header
-      kicker="Nova solicitação"
-      title="Solicitar autorização"
-      description="Informe o procedimento, a idade e o sexo do paciente."
+      [kicker]="m.kicker"
+      [title]="m.titulo"
+      [description]="m.descricao"
     />
 
     <div class="mt-6 grid gap-6 lg:grid-cols-2">
       <app-card>
         <form class="grid gap-5" [formGroup]="form" (ngSubmit)="solicitar()" novalidate>
-          <app-field label="Procedimento" [required]="true" [error]="erro('procedimento')">
+          <app-field [label]="m.procedimento" [required]="true" [error]="erro('procedimento')">
             @if (carregandoLista()) {
               <app-skeleton class="h-11 w-full" />
-              <span class="sr-only" role="status">Carregando procedimentos…</span>
+              <span class="sr-only" role="status">{{ m.carregandoLista }}</span>
             } @else if (erroLista()) {
               <div class="flex flex-wrap items-center gap-3">
                 <p class="text-sm font-semibold text-danger" role="alert">
-                  Não foi possível carregar os procedimentos.
+                  {{ m.erroLista }}
                 </p>
                 <button app-button variant="secondary" (click)="carregarLista()">
-                  Tentar novamente
+                  {{ acoes.tentarNovamente }}
                 </button>
               </div>
             } @else {
               <select appFieldControl formControlName="procedimento">
-                <option [ngValue]="null">Selecione</option>
+                <option [ngValue]="null">{{ m.selecione }}</option>
                 @for (p of procedimentos(); track p.numProcedimento) {
                   <option [ngValue]="p.numProcedimento">{{ rotulo(p) }}</option>
                 }
@@ -84,7 +85,7 @@ export type ResultadoExibido =
           </app-field>
 
           <app-field
-            label="Idade"
+            [label]="m.idade"
             [required]="true"
             [help]="'Em anos, de ' + idadeMinima + ' a ' + idadeMaxima + '.'"
             [error]="erro('idade')"
@@ -101,10 +102,10 @@ export type ResultadoExibido =
 
           <div>
             <p class="mb-1.5 text-sm font-semibold text-content">
-              Sexo <span class="text-danger" aria-hidden="true">*</span>
+              {{ m.sexo }} <span class="text-danger" aria-hidden="true">*</span>
             </p>
             <app-segmented-choice
-              label="Sexo"
+              [label]="m.sexo"
               [options]="opcoesSexo"
               [value]="form.controls.sexo.value"
               (valueChange)="definirSexo($event)"
@@ -119,15 +120,17 @@ export type ResultadoExibido =
           }
 
           <div class="flex flex-wrap gap-3">
-            <button app-button type="submit" [loading]="enviando()">Solicitar autorização</button>
-            <button app-button variant="secondary" (click)="limpar()">Limpar</button>
+            <button app-button type="submit" [loading]="enviando()">
+              {{ acoes.solicitarAutorizacao }}
+            </button>
+            <button app-button variant="secondary" (click)="limpar()">{{ acoes.limpar }}</button>
           </div>
         </form>
       </app-card>
 
       <app-card>
         <section aria-labelledby="titulo-resultado">
-          <h2 id="titulo-resultado" class="mb-3 text-base font-semibold text-content">Resultado</h2>
+          <h2 id="titulo-resultado" class="mb-3 text-base font-semibold text-content">{{ m.resultado }}</h2>
           <div aria-live="polite" aria-atomic="true">
             @let r = resultado();
             @if (r?.tipo === 'autorizado') {
@@ -136,14 +139,14 @@ export type ResultadoExibido =
                 data-resultado="autorizado"
               >
                 <p class="flex items-center gap-2 text-lg font-bold">
-                  <app-icon name="check-circle" class="text-2xl" /> Autorizado
+                  <app-icon name="check-circle" class="text-2xl" /> {{ m.autorizado }}
                 </p>
                 <p>{{ textoAutorizado() }}</p>
                 <a
                   routerLink="/autorizacoes"
-                  class="font-semibold text-accent-800 underline underline-offset-2"
+                  class="inline-flex min-h-11 items-center font-semibold text-accent-800 underline underline-offset-2"
                 >
-                  Ver autorizações concedidas
+                  {{ acoes.verAutorizacoesConcedidas }}
                 </a>
               </div>
             } @else if (r?.tipo === 'negado') {
@@ -152,10 +155,10 @@ export type ResultadoExibido =
                 data-resultado="negado"
               >
                 <p class="flex items-center gap-2 text-lg font-bold">
-                  <app-icon name="x-circle" class="text-2xl" /> Negado
+                  <app-icon name="x-circle" class="text-2xl" /> {{ m.negado }}
                 </p>
                 <p>{{ textoNegado() }}</p>
-                <p class="text-sm">A regra não informa qual critério falhou.</p>
+                <p class="text-sm">{{ m.negadoNota }}</p>
               </div>
             } @else {
               <div
@@ -163,7 +166,7 @@ export type ResultadoExibido =
                 data-resultado="inicial"
               >
                 <app-icon name="hourglass" class="text-2xl" />
-                <p>O resultado aparece aqui.</p>
+                <p>{{ m.resultadoInicial }}</p>
               </div>
             }
           </div>
@@ -179,6 +182,8 @@ export class SolicitarPage {
   private readonly rota = inject(ActivatedRoute);
   private readonly dialogo = inject(ErrorDialogService);
 
+  protected readonly m = MENSAGENS.solicitar;
+  protected readonly acoes = MENSAGENS.acoes;
   protected readonly form = criarFormularioSolicitacao();
   protected readonly opcoesSexo = OPCOES_SEXO;
   protected readonly idadeMinima = IDADE_MINIMA;
@@ -272,10 +277,10 @@ export class SolicitarPage {
     if (doServidor) return doServidor;
     const c = this.form.controls[campo];
     if (c.valid || !(c.touched || this.tentou())) return '';
-    if (campo === 'procedimento') return 'Escolha um procedimento.';
-    if (campo === 'sexo') return 'Escolha o sexo do paciente.';
-    if (c.hasError('required')) return 'Informe a idade.';
-    if (c.hasError('inteiro')) return 'Use uma idade inteira.';
+    if (campo === 'procedimento') return this.m.escolhaProcedimento;
+    if (campo === 'sexo') return this.m.escolhaSexo;
+    if (c.hasError('required')) return this.m.informeIdade;
+    if (c.hasError('inteiro')) return this.m.idadeInteira;
     return `A idade deve estar entre ${IDADE_MINIMA} e ${IDADE_MAXIMA}.`;
   }
 

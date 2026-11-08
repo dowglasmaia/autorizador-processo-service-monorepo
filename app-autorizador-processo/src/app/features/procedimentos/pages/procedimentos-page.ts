@@ -13,6 +13,7 @@ import type { DataTableColumn } from '../../../shared/ui';
 import type { ProcedimentoDto } from '../../../shared/api';
 import { ProcedimentosService } from '../data-access/procedimentos.service';
 import { ROTULO_CATEGORIA, ROTULO_SEXO } from '../rotulos';
+import { MENSAGENS } from '../../../core/i18n/mensagens';
 
 /** Lista de procedimentos: esqueleto, erro, vazio com CTA e tabela responsiva. */
 @Component({
@@ -20,16 +21,16 @@ import { ROTULO_CATEGORIA, ROTULO_SEXO } from '../rotulos';
   imports: [RouterLink, PageHeader, EmptyState, Skeleton, Button, Tag, DataTable, DataTableCell],
   template: `
     <app-page-header
-      kicker="Cadastro"
-      title="Procedimentos"
-      description="Catálogo de procedimentos e suas regras de elegibilidade."
+      [kicker]="m.kicker"
+      [title]="m.titulo"
+      [description]="m.descricao"
     >
-      <button actions app-button (click)="novo()">Novo procedimento</button>
+      <button actions app-button (click)="novo()">{{ acoes.novoProcedimento }}</button>
     </app-page-header>
 
     <section class="mt-6" aria-live="polite">
       @if (servico.carregando()) {
-        <div class="grid gap-3" role="status" aria-label="Carregando procedimentos">
+        <div class="grid gap-3" role="status" [attr.aria-label]="m.carregando">
           @for (i of esqueleto; track i) {
             <app-skeleton class="h-12 w-full" />
           }
@@ -37,22 +38,22 @@ import { ROTULO_CATEGORIA, ROTULO_SEXO } from '../rotulos';
       } @else if (servico.erro(); as erro) {
         <app-empty-state
           icon="warning"
-          title="Não foi possível carregar"
+          [title]="feedback.tituloErroCarregar"
           [description]="erro.detail"
         >
           <button app-button variant="secondary" (click)="servico.carregar()">
-            Tentar novamente
+            {{ acoes.tentarNovamente }}
           </button>
         </app-empty-state>
       } @else if (servico.vazio()) {
         <app-empty-state
-          title="Nenhum procedimento cadastrado"
-          description="Cadastre o primeiro procedimento para começar a autorizar."
+          [title]="m.vazioTitulo"
+          [description]="m.vazioDescricao"
         >
-          <button app-button (click)="novo()">Novo procedimento</button>
+          <button app-button (click)="novo()">{{ acoes.novoProcedimento }}</button>
         </app-empty-state>
       } @else {
-        <app-data-table [columns]="colunas" [rows]="servico.itens()" caption="Procedimentos">
+        <app-data-table [columns]="colunas" [rows]="servico.itens()" [caption]="m.titulo">
           <ng-template appCell let-row let-column="column" let-text="text">
             @switch (column.key) {
               @case ('procedimento') {
@@ -60,7 +61,7 @@ import { ROTULO_CATEGORIA, ROTULO_SEXO } from '../rotulos';
                 @if (row.nome) {
                   · {{ row.nome }}
                 } @else {
-                  · <span class="italic text-content-muted">Sem nome</span>
+                  · <span class="italic text-content-muted">{{ comum.semNome }}</span>
                 }
               }
               @case ('sexos') {
@@ -76,7 +77,7 @@ import { ROTULO_CATEGORIA, ROTULO_SEXO } from '../rotulos';
                   routerLink="/solicitar"
                   [queryParams]="{ numero: row.numProcedimento }"
                   [attr.aria-label]="'Solicitar autorização do procedimento ' + row.numProcedimento"
-                  >Solicitar →</a
+                  >{{ acoes.solicitar }}</a
                 >
               }
               @default {
@@ -94,18 +95,22 @@ export class ProcedimentosPage implements OnInit {
   protected readonly servico = inject(ProcedimentosService);
   private readonly router = inject(Router);
   protected readonly esqueleto = [1, 2, 3];
+  protected readonly m = MENSAGENS.procedimentos;
+  protected readonly acoes = MENSAGENS.acoes;
+  protected readonly feedback = MENSAGENS.feedback;
+  protected readonly comum = MENSAGENS.comum;
 
   protected readonly colunas: readonly DataTableColumn<ProcedimentoDto>[] = [
-    { key: 'procedimento', label: 'Procedimento' },
+    { key: 'procedimento', label: MENSAGENS.procedimentos.colunas.procedimento },
     {
       key: 'categoria',
-      label: 'Categoria',
+      label: MENSAGENS.procedimentos.colunas.categoria,
       value: (p) => (p.categoria ? ROTULO_CATEGORIA[p.categoria] : null),
     },
-    { key: 'sexos', label: 'Sexos' },
-    { key: 'idades', label: 'Idades', value: (p) => resumoIdades(p.idades) },
-    { key: 'id', label: 'ID' },
-    { key: 'acoes', label: 'Ação' },
+    { key: 'sexos', label: MENSAGENS.procedimentos.colunas.sexos },
+    { key: 'idades', label: MENSAGENS.procedimentos.colunas.idades, value: (p) => resumoIdades(p.idades) },
+    { key: 'id', label: MENSAGENS.procedimentos.colunas.id },
+    { key: 'acoes', label: MENSAGENS.procedimentos.colunas.acao },
   ];
 
   ngOnInit(): void {

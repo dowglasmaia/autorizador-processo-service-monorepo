@@ -4139,7 +4139,175 @@
           "descricao": "Executa a SPEC-21: revisão de textos, estados vazios e de erro, foco, contraste e navegação por teclado (WCAG 2.1 AA).\nReferências: todas as telas.\nLimite: sem novas funcionalidades.",
           "spec": "24-microcopy-acessibilidade",
           "specPronta": false,
-          "status": "pendente"
+          "status": "entregue",
+          "entregueEm": "2026-11-08T18:56:51.249Z",
+          "iteracao": 24,
+          "duracaoMs": 501111,
+          "custo": 1.8685059000000002,
+          "passos": [
+            {
+              "id": "propor",
+              "situacao": "ok",
+              "duracaoMs": 37555,
+              "custo": 0.20161869999999998,
+              "tentativas": 1,
+              "detalhe": "17 tarefas"
+            },
+            {
+              "id": "partida",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "commitProposta",
+              "situacao": "ok",
+              "duracaoMs": 400,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "3b9b707 · 5 arquivo(s)"
+            },
+            {
+              "id": "aplicar",
+              "situacao": "ok",
+              "duracaoMs": 463151,
+              "custo": 1.6668872000000001,
+              "tentativas": 1,
+              "detalhe": "17/17 tarefas · 3 sessão(ões)"
+            },
+            {
+              "id": "verificar",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "arquivar",
+              "situacao": "ok",
+              "duracaoMs": 5,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\24-microcopy-acessibilidade"
+            },
+            {
+              "id": "commitEntrega",
+              "situacao": "ok",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1
+            }
+          ],
+          "sessoes": [
+            {
+              "rotulo": "propor-24",
+              "passo": "propor",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.20161869999999998,
+              "turnos": 7,
+              "duracaoMs": 37534,
+              "inicio": 1794163710030,
+              "fim": 1794163747576,
+              "tokens": {
+                "entrada": 12,
+                "saida": 2255,
+                "cacheCriacao": 38394,
+                "cacheLeitura": 254687
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "antecipar-25",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2759207,
+              "turnos": 8,
+              "duracaoMs": 58499,
+              "inicio": 1794163748042,
+              "fim": 1794163806552,
+              "tokens": {
+                "entrada": 14,
+                "saida": 5087,
+                "cacheCriacao": 48046,
+                "cacheLeitura": 328387
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-24-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.8473745,
+              "turnos": 24,
+              "duracaoMs": 247964,
+              "inicio": 1794163749418,
+              "fim": 1794163997392,
+              "tokens": {
+                "entrada": 46,
+                "saida": 26267,
+                "cacheCriacao": 97622,
+                "cacheLeitura": 1941245
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-24-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.6381564,
+              "turnos": 25,
+              "duracaoMs": 164441,
+              "inicio": 1794163997398,
+              "fim": 1794164161846,
+              "tokens": {
+                "entrada": 40,
+                "saida": 15608,
+                "cacheCriacao": 84700,
+                "cacheLeitura": 1431964
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-24-3",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.18135630000000003,
+              "turnos": 5,
+              "duracaoMs": 49319,
+              "inicio": 1794164161855,
+              "fim": 1794164211185,
+              "tokens": {
+                "entrada": 10,
+                "saida": 987,
+                "cacheCriacao": 37704,
+                "cacheLeitura": 206503
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            }
+          ]
         }
       ]
     },
@@ -4217,7 +4385,7 @@
     "etapa": 24,
     "inicio": "2026-11-08T18:48:30.012Z",
     "commitInicial": "877ac50bc11d80fd997db3b1787b732ae8a81c69",
-    "passoAtual": 2,
+    "passoAtual": 6,
     "passos": [
       {
         "id": "propor",
@@ -4237,62 +4405,66 @@
       },
       {
         "id": "commitProposta",
+        "situacao": "ok",
+        "duracaoMs": 400,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "3b9b707 · 5 arquivo(s)"
+      },
+      {
+        "id": "aplicar",
+        "situacao": "ok",
+        "duracaoMs": 463151,
+        "custo": 1.6668872000000001,
+        "tentativas": 1,
+        "detalhe": "17/17 tarefas · 3 sessão(ões)"
+      },
+      {
+        "id": "verificar",
+        "situacao": "pulado",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "arquivar",
+        "situacao": "ok",
+        "duracaoMs": 5,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\24-microcopy-acessibilidade"
+      },
+      {
+        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
-      },
-      {
-        "id": "aplicar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "verificar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "arquivar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
       }
     ],
     "titulo": "Revisa a spec de microcopy e acessibilidade (SPEC-21) contra a base entregue",
     "comparacao": "A pasta da etapa já tinha `proposta.md` e `tarefas.md`, escritos antes da etapa 23. Revisei os dois contra o código atual em vez de recriá-los.\nO painel já existe em `features/painel`, com gráficos e `role=status`/`aria-label`. Ficam para a etapa 24 a alternativa textual dos gráficos e a migração dos textos para o catálogo.\nO shell já mostra o estado da API pelo `ApiStatusService`, sem \"perfil test\". A tarefa 2.2 virou conferência do texto e da grafia.\nAinda faltam `core/i18n/mensagens.ts` (só existe `mensagens-login.ts`) e `lang=\"pt-BR\"` (o `index.html` está com `lang=\"en\"`). Não há axe no `package.json`, e a spec decide fazer a verificação de a11y só com Vitest/DOM.\nO grep de termos proibidos já retorna vazio em `src`. Mantive 17 tarefas em 5 grupos, sem alterar o escopo, e registrei a revisão em \"Decisões tomadas sem consulta\"."
   },
   "totais": {
-    "duracaoMs": 15018324,
-    "custo": 45.4104896,
+    "duracaoMs": 15481880,
+    "custo": 47.3532975,
     "execucoes": 2,
     "iteracoes": 24,
     "entregues": 23,
-    "sessoes": 123,
-    "turnos": 1637,
+    "sessoes": 127,
+    "turnos": 1699,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 6,
     "recuperacoesResolvidas": 5,
     "falhas": 0,
-    "commits": 46,
+    "commits": 47,
     "tokens": {
-      "entrada": 2454,
-      "saida": 1100991,
-      "cacheCriacao": 6658557,
-      "cacheLeitura": 73095362
+      "entrada": 2564,
+      "saida": 1148940,
+      "cacheCriacao": 6926629,
+      "cacheLeitura": 77003461
     }
   },
   "ultimaExecucao": {

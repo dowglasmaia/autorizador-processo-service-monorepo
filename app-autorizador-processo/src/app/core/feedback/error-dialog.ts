@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Injectable, inject, signal } from '@angular/core';
 import { Button, Dialog } from '../../shared/ui';
+import { MENSAGENS } from '../../core/i18n/mensagens';
 
 export interface ErrorDialogState {
   readonly message: string;
@@ -32,15 +33,15 @@ export class ErrorDialogService {
   imports: [Dialog, Button],
   template: `
     <app-dialog
-      title="Não foi possível carregar"
+      [title]="m.feedback.tituloErroCarregar"
       [open]="service.state() !== null"
       (closed)="service.close()"
     >
       <p>{{ service.state()?.message }}</p>
       <ng-container dialog-actions>
-        <button app-button variant="secondary" (click)="service.close()">Fechar</button>
+        <button app-button variant="secondary" (click)="service.close()">{{ m.acoes.fechar }}</button>
         @if (service.state()?.retry) {
-          <button app-button (click)="service.retry()">Tentar novamente</button>
+          <button app-button (click)="service.retry()">{{ m.acoes.tentarNovamente }}</button>
         }
       </ng-container>
     </app-dialog>
@@ -49,4 +50,5 @@ export class ErrorDialogService {
 })
 export class ErrorDialog {
   protected readonly service = inject(ErrorDialogService);
+  protected readonly m = MENSAGENS;
 }

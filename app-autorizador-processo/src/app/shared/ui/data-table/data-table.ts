@@ -68,7 +68,7 @@ export class DataTableCell {
                 <dt class="text-xs font-semibold uppercase tracking-wide text-content-muted">
                   {{ col.label }}
                 </dt>
-                <dd class="text-content">
+                <dd class="break-words text-content">
                   <ng-container *ngTemplateOutlet="cellTpl(); context: ctx(row, col)" />
                 </dd>
               </div>

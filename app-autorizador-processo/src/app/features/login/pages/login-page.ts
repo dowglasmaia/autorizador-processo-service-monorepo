@@ -16,6 +16,7 @@ import { paraAppError } from '../../../core/http/error.interceptor';
 import { ErrorDialog, ErrorDialogService } from '../../../core/feedback/error-dialog';
 import { Button, Card, Field, FieldControl, Icon } from '../../../shared/ui';
 import { MENSAGEM_SESSAO_EXPIRADA, classificarErroLogin } from '../mensagens-login';
+import { MENSAGENS } from '../../../core/i18n/mensagens';
 
 /** Tela `/login`: painel de marca (a partir de `lg`) e cartão com o formulário de e-mail e senha. */
 @Component({
@@ -25,18 +26,18 @@ import { MENSAGEM_SESSAO_EXPIRADA, classificarErroLogin } from '../mensagens-log
     <div class="grid min-h-dvh lg:grid-cols-2">
       <section
         class="hidden flex-col justify-center bg-linear-to-b from-sidebar-from to-sidebar-to p-12 text-sidebar-content lg:flex"
-        aria-label="Apresentação"
+        [attr.aria-label]="m.apresentacaoRotulo"
       >
         <p class="text-4xl font-extrabold text-white">Autorizador</p>
         <p class="mt-4 max-w-md text-lg">
-          Solicite e acompanhe autorizações de procedimentos em um só lugar.
+          {{ m.apresentacao }}
         </p>
       </section>
 
       <main id="conteudo" class="flex items-center justify-center p-4 sm:p-8">
         <app-card class="w-full max-w-md">
-          <h1 class="text-2xl font-extrabold text-content">Entrar</h1>
-          <p class="mt-1 text-content-muted">Informe seu e-mail e senha para continuar.</p>
+          <h1 class="text-2xl font-extrabold text-content">{{ m.titulo }}</h1>
+          <p class="mt-1 text-content-muted">{{ m.ajuda }}</p>
 
           @if (sessaoExpirada()) {
             <p
@@ -53,7 +54,7 @@ import { MENSAGEM_SESSAO_EXPIRADA, classificarErroLogin } from '../mensagens-log
             (ngSubmit)="enviar()"
             novalidate
           >
-            <app-field label="E-mail" [required]="true" [error]="erroDe('email')">
+            <app-field [label]="m.email" [required]="true" [error]="erroDe('email')">
               <input
                 #campoEmail
                 appFieldControl
@@ -62,7 +63,7 @@ import { MENSAGEM_SESSAO_EXPIRADA, classificarErroLogin } from '../mensagens-log
                 formControlName="email"
               />
             </app-field>
-            <app-field label="Senha" [required]="true" [error]="erroDe('senha')">
+            <app-field [label]="m.senha" [required]="true" [error]="erroDe('senha')">
               <div class="relative">
                 <input
                   appFieldControl
@@ -74,7 +75,7 @@ import { MENSAGEM_SESSAO_EXPIRADA, classificarErroLogin } from '../mensagens-log
                 <button
                   type="button"
                   class="absolute inset-y-0 right-0 inline-flex size-11 items-center justify-center rounded-pill hover:bg-neutral-100"
-                  aria-label="Mostrar senha"
+                  [attr.aria-label]="m.mostrarSenha"
                   [attr.aria-pressed]="senhaVisivel()"
                   (click)="senhaVisivel.set(!senhaVisivel())"
                 >
@@ -86,7 +87,7 @@ import { MENSAGEM_SESSAO_EXPIRADA, classificarErroLogin } from '../mensagens-log
               <p class="text-sm font-semibold text-danger" role="alert">{{ alerta() }}</p>
             }
             <button app-button type="submit" [loading]="enviando()" [disabled]="enviando()">
-              Entrar
+              {{ m.titulo }}
             </button>
           </form>
         </app-card>
@@ -104,6 +105,7 @@ export class LoginPage {
   private readonly dialogo = inject(ErrorDialogService);
   private readonly campoEmail = viewChild<ElementRef<HTMLInputElement>>('campoEmail');
 
+  protected readonly m = MENSAGENS.login;
   protected readonly avisoExpiracao = MENSAGEM_SESSAO_EXPIRADA;
   protected readonly sessaoExpirada = this.auth.sessaoExpirada;
   protected readonly enviando = signal(false);
@@ -128,8 +130,8 @@ export class LoginPage {
     if (servidor) return servidor;
     const c = this.form.controls[campo];
     if (!c.touched || c.valid) return '';
-    if (c.hasError('required')) return campo === 'email' ? 'Informe o e-mail.' : 'Informe a senha.';
-    return 'Informe um e-mail válido.';
+    if (c.hasError('required')) return campo === 'email' ? this.m.informeEmail : this.m.informeSenha;
+    return this.m.emailInvalido;
   }
 
   protected enviar(): void {

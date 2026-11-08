@@ -1,7 +1,8 @@
 import { AppError } from '../../core/errors/app-error';
+import { MENSAGENS } from '../../core/i18n/mensagens';
 
-export const MENSAGEM_CREDENCIAIS = 'E-mail ou senha incorretos.';
-export const MENSAGEM_SESSAO_EXPIRADA = 'Sua sessão expirou. Entre novamente para continuar.';
+export const MENSAGEM_CREDENCIAIS = MENSAGENS.login.credenciais;
+export const MENSAGEM_SESSAO_EXPIRADA = MENSAGENS.login.sessaoExpirada;
 
 export type ResultadoErroLogin =
   /** Mensagem global exibida no formulário (`role="alert"`). */
@@ -12,7 +13,7 @@ export type ResultadoErroLogin =
   | { readonly tipo: 'modal'; readonly mensagem: string };
 
 export function mensagemMuitasTentativas(retryAfter?: number): string {
-  if (retryAfter === undefined) return 'Muitas tentativas. Aguarde um instante e tente novamente.';
+  if (retryAfter === undefined) return MENSAGENS.login.muitasTentativas;
   if (retryAfter < 60) {
     return `Muitas tentativas. Tente novamente em ${retryAfter} ${retryAfter === 1 ? 'segundo' : 'segundos'}.`;
   }

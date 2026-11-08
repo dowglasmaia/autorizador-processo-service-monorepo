@@ -30,3 +30,7 @@ Nenhuma decisão de elegibilidade no cliente; dados do paciente não são armaze
 ## Testes
 
 `data-access/autorizacao.service.spec.ts`, `formulario-solicitacao.spec.ts`, `pages/solicitar-page.spec.ts` (autorizado, negado, inexistente, validação, rede, `?numero=`, Limpar e contadores) e `core/sessao/sessao-solicitacoes.spec.ts`.
+
+## Acessibilidade (etapa 24)
+
+Textos vêm do catálogo `core/i18n/mensagens.ts`; a página é coberta por `src/app/a11y.spec.ts` (rótulos, nomes acessíveis, alvos ≥ 44 px). Detalhes e limitações em `shared/ui/doc.md`.

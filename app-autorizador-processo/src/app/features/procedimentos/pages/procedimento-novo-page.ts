@@ -12,6 +12,7 @@ import { filter } from 'rxjs';
 import { isAppError, type AppError } from '../../../core/errors/app-error';
 import { ErrorDialogService } from '../../../core/feedback/error-dialog';
 import { paraAppError } from '../../../core/http/error.interceptor';
+import { MENSAGENS } from '../../../core/i18n/mensagens';
 import { NotificationService } from '../../../core/feedback/notification.service';
 import type { ProcedimentoRequest } from '../../../shared/api';
 import { ProcedimentosService } from '../data-access/procedimentos.service';
@@ -43,10 +44,10 @@ import {
 export type EscolhaSexo = 'AMBOS' | 'M' | 'F' | 'NENHUM';
 
 export const ETAPAS = [
-  { titulo: 'Identificação' },
-  { titulo: 'Cobertura' },
-  { titulo: 'Elegibilidade' },
-  { titulo: 'Utilização e autorização' },
+  { titulo: MENSAGENS.procedimentoNovo.etapas[0] },
+  { titulo: MENSAGENS.procedimentoNovo.etapas[1] },
+  { titulo: MENSAGENS.procedimentoNovo.etapas[2] },
+  { titulo: MENSAGENS.procedimentoNovo.etapas[3] },
 ] as const;
 
 const NUM_MAX = 2147483647;
@@ -78,12 +79,12 @@ function nomeDoCampo(campo: string): string {
   imports: [ReactiveFormsModule, PageHeader, Field, FieldControl, Button, SegmentedChoice],
   template: `
     <app-page-header
-      kicker="Cadastro"
-      title="Novo procedimento"
-      description="Preencha as etapas para cadastrar o procedimento."
+      [kicker]="m.kicker"
+      [title]="m.titulo"
+      [description]="m.descricao"
     />
 
-    <nav class="mt-6" aria-label="Etapas do cadastro">
+    <nav class="mt-6" [attr.aria-label]="m.etapasRotulo">
       <ol class="flex flex-wrap gap-2">
         @for (e of etapas; track e.titulo; let i = $index) {
           <li>
@@ -302,12 +303,12 @@ function nomeDoCampo(campo: string): string {
 
       <div class="flex flex-wrap gap-3">
         <button app-button variant="secondary" [disabled]="etapa() === 0" (click)="voltar()">
-          Voltar
+          {{ m.voltar }}
         </button>
         @if (etapa() < ultima) {
-          <button app-button type="submit">Avançar</button>
+          <button app-button type="submit">{{ m.avancar }}</button>
         } @else {
-          <button app-button type="submit" [loading]="salvando()">Cadastrar procedimento</button>
+          <button app-button type="submit" [loading]="salvando()">{{ m.cadastrar }}</button>
         }
       </div>
     </form>
@@ -315,6 +316,7 @@ function nomeDoCampo(campo: string): string {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProcedimentoNovoPage {
+  protected readonly m = MENSAGENS.procedimentoNovo;
   protected readonly etapas = ETAPAS;
   protected readonly ultima = ETAPAS.length - 1;
   protected readonly categorias = CATEGORIAS;
@@ -486,7 +488,7 @@ export class ProcedimentoNovoPage {
     this.service.cadastrarProcedimento(corpo).subscribe({
       next: () => {
         this.salvando.set(false);
-        this.notificacoes.show(`Procedimento ${corpo.numProcedimento} cadastrado`);
+        this.notificacoes.show(MENSAGENS.procedimentoNovo.cadastrado(corpo.numProcedimento));
         void this.router.navigate(['/procedimentos']);
       },
       error: (erro: unknown) => {
@@ -544,9 +546,9 @@ export class ProcedimentoNovoPage {
     if (doServidor) return doServidor;
     const c = this.form.get(caminho);
     if (!c || c.valid || !(c.touched || this.tentadas().has(this.etapa()))) return '';
-    if (c.hasError('required')) return 'Campo obrigatório.';
-    if (caminho.endsWith('nome')) return 'Informe o nome do procedimento.';
-    return 'Informe um número inteiro maior que zero.';
+    if (c.hasError('required')) return this.m.campoObrigatorio;
+    if (caminho.endsWith('nome')) return this.m.informeNome;
+    return this.m.numeroInvalido;
   }
 
   protected erroQuantidade(campo: 'quantidadeMaxima' | 'periodo'): string {

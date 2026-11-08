@@ -30,3 +30,7 @@ Tela `/login`, fora do `Shell`. Autentica por e-mail e senha (`POST auth/login`)
 Menu do usuário no shell (e-mail + "Sair"), acessível por teclado (Esc fecha). `AuthService.sair()` limpa
 token, usuário e `sessionStorage`, executa as limpezas registradas por `registrarLimpeza` (hoje não há
 contadores de solicitações no frontend) e navega a `/login`.
+
+## Acessibilidade (etapa 24)
+
+Textos vêm do catálogo `core/i18n/mensagens.ts`; a página é coberta por `src/app/a11y.spec.ts` (rótulos, nomes acessíveis, alvos ≥ 44 px). Detalhes e limitações em `shared/ui/doc.md`.

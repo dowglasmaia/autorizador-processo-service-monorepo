@@ -1,3 +1,4 @@
+import { MENSAGENS, mensagemDoErro } from '../i18n/mensagens';
 import type { FieldViolation, ProblemCode, ProblemDetail } from '../../shared/api';
 
 export type AppErrorKind = 'validacao' | 'negocio' | 'nao-encontrado' | 'rede' | 'servidor';
@@ -38,9 +39,8 @@ const KIND_POR_CODE: Readonly<Record<ProblemCode, AppErrorKind>> = {
   MUITAS_TENTATIVAS: 'negocio',
 };
 
-export const MENSAGEM_SERVIDOR =
-  'Não foi possível concluir a operação. Tente novamente em instantes.';
-export const MENSAGEM_REDE = 'Sem conexão com o servidor. Verifique a rede e tente novamente.';
+export const MENSAGEM_SERVIDOR = MENSAGENS.erros.servidor;
+export const MENSAGEM_REDE = MENSAGENS.erros.rede;
 
 /** Reserva por status HTTP quando o `code` é desconhecido ou ausente. */
 function kindPorStatus(status: number): AppErrorKind {
@@ -65,7 +65,7 @@ export function mapProblem(problem: Partial<ProblemDetail>, status: number): App
   const detail =
     kind === 'servidor'
       ? MENSAGEM_SERVIDOR
-      : (problem.detail ?? problem.title ?? MENSAGEM_SERVIDOR);
+      : (problem.detail ?? mensagemDoErro(problem.code));
   const campos = kind === 'servidor' ? undefined : camposDe(problem.errors);
   return { kind, code, detail, status, ...(campos ? { campos } : {}) };
 }

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import type { CoberturaIdade } from '../../../shared/api';
+import { MENSAGENS } from '../../../core/i18n/mensagens';
 
 /** Barras horizontais: largura proporcional ao maior valor devolvido pelo servidor. */
 @Component({
@@ -22,12 +23,12 @@ import type { CoberturaIdade } from '../../../shared/api';
     </ul>
     <table class="sr-only">
       <caption>
-        Procedimentos por idade coberta
+        {{ m.coberturaTabela }}
       </caption>
       <thead>
         <tr>
-          <th scope="col">Idade</th>
-          <th scope="col">Procedimentos</th>
+          <th scope="col">{{ m.colunaIdade }}</th>
+          <th scope="col">{{ m.colunaProcedimentos }}</th>
         </tr>
       </thead>
       <tbody>
@@ -44,6 +45,7 @@ import type { CoberturaIdade } from '../../../shared/api';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BarraCobertura {
+  protected readonly m = MENSAGENS.painel;
   readonly dados = input.required<readonly CoberturaIdade[]>();
 
   protected readonly barras = computed(() => {

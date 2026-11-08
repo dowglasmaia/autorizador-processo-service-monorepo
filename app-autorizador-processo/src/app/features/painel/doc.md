@@ -21,3 +21,7 @@ Tipos de `shared/api` (gerados). `Autorizacao` do contrato do painel é idêntic
 ## Estados e testes
 
 A página carrega o resumo ao entrar (`ngOnInit`), mostra 4 KPIs (Aprovação vinda de `SessaoSolicitacoes`), esqueleto, erro com "Tentar novamente" e vazio por seção. Testes: serviço (`HttpTestingController`), componentes e página.
+
+## Acessibilidade (etapa 24)
+
+Textos vêm do catálogo `core/i18n/mensagens.ts`; a página é coberta por `src/app/a11y.spec.ts` (rótulos, nomes acessíveis, alvos ≥ 44 px). Detalhes e limitações em `shared/ui/doc.md`.

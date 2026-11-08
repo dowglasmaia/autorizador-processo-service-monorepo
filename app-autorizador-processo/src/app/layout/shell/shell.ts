@@ -8,6 +8,7 @@ import { ErrorDialog } from '../../core/feedback/error-dialog';
 import { LoadingOverlay } from '../../core/feedback/loading-overlay';
 import { ToastHost } from '../../core/feedback/toast-host';
 import { Icon } from '../../shared/ui';
+import { MENSAGENS } from '../../core/i18n/mensagens';
 
 interface NavItem {
   readonly path: string;
@@ -16,10 +17,10 @@ interface NavItem {
 }
 
 export const NAV_ITEMS: readonly NavItem[] = [
-  { path: '/painel', label: 'Painel', icon: 'squares-four' },
-  { path: '/procedimentos', label: 'Procedimentos', icon: 'clipboard-text' },
-  { path: '/solicitar', label: 'Solicitar', icon: 'plus-circle' },
-  { path: '/autorizacoes', label: 'Autorizações', icon: 'seal-check' },
+  { path: '/painel', label: MENSAGENS.shell.nav.painel, icon: 'squares-four' },
+  { path: '/procedimentos', label: MENSAGENS.shell.nav.procedimentos, icon: 'clipboard-text' },
+  { path: '/solicitar', label: MENSAGENS.shell.nav.solicitar, icon: 'plus-circle' },
+  { path: '/autorizacoes', label: MENSAGENS.shell.nav.autorizacoes, icon: 'seal-check' },
 ];
 
 /**
@@ -42,7 +43,7 @@ export const NAV_ITEMS: readonly NavItem[] = [
       href="#conteudo"
       class="sr-only focus:not-sr-only focus:fixed focus:left-2 focus:top-2 focus:z-[70] focus:rounded-pill focus:bg-surface focus:px-4 focus:py-2"
     >
-      Ir para o conteúdo
+      {{ m.irParaConteudo }}
     </a>
 
     <header
@@ -51,14 +52,14 @@ export const NAV_ITEMS: readonly NavItem[] = [
       <button
         type="button"
         class="inline-flex size-11 items-center justify-center rounded-pill hover:bg-neutral-100"
-        aria-label="Abrir menu"
+        [attr.aria-label]="m.abrirMenu"
         aria-controls="navegacao"
         [attr.aria-expanded]="drawerOpen()"
         (click)="drawerOpen.set(true)"
       >
         <app-icon name="list" />
       </button>
-      <span class="font-bold text-content">Autorizador</span>
+      <span class="font-bold text-content">{{ m.marca }}</span>
     </header>
 
     @if (drawerOpen()) {
@@ -72,21 +73,21 @@ export const NAV_ITEMS: readonly NavItem[] = [
     <aside
       id="navegacao"
       class="fixed inset-y-0 left-0 z-50 flex w-64 flex-col bg-linear-to-b from-sidebar-from to-sidebar-to p-4 text-sidebar-content transition-transform lg:translate-x-0"
-      [class]="drawerOpen() ? 'translate-x-0' : '-translate-x-full'"
+      [class]="drawerOpen() ? 'translate-x-0' : '-translate-x-full invisible lg:visible'"
     >
       <div class="mb-6 flex items-center justify-between px-2">
-        <span class="text-lg font-extrabold text-white">Autorizador</span>
+        <span class="text-lg font-extrabold text-white">{{ m.marca }}</span>
         <button
           type="button"
           class="inline-flex size-11 items-center justify-center rounded-pill hover:bg-white/10 lg:hidden"
-          aria-label="Fechar menu"
+          [attr.aria-label]="m.fecharMenu"
           (click)="drawerOpen.set(false)"
         >
           <app-icon name="x" />
         </button>
       </div>
 
-      <nav aria-label="Principal" class="flex flex-1 flex-col gap-1">
+      <nav [attr.aria-label]="m.navegacaoPrincipal" class="flex flex-1 flex-col gap-1">
         @for (item of items; track item.path) {
           <a
             [routerLink]="item.path"
@@ -106,7 +107,7 @@ export const NAV_ITEMS: readonly NavItem[] = [
           <div
             id="menu-usuario"
             role="group"
-            aria-label="Menu do usuário"
+            [attr.aria-label]="m.menuUsuario"
             class="absolute inset-x-0 bottom-full mb-2 rounded-input bg-surface p-2 text-content shadow-lg"
           >
             <p class="break-all px-3 py-2 text-sm text-content-muted">
@@ -118,7 +119,7 @@ export const NAV_ITEMS: readonly NavItem[] = [
               (click)="sair()"
             >
               <app-icon name="sign-out" />
-              Sair
+              {{ m.sair }}
             </button>
           </div>
         }
@@ -136,16 +137,16 @@ export const NAV_ITEMS: readonly NavItem[] = [
       </div>
 
       <p class="px-2 text-sm" role="status">
-        API:
+        {{ m.sistema }}
         @switch (apiStatus.status()) {
           @case ('disponivel') {
-            <span>disponível</span>
+            <span>{{ m.sistemaDisponivel }}</span>
           }
           @case ('indisponivel') {
-            <span>indisponível</span>
+            <span>{{ m.sistemaIndisponivel }}</span>
           }
           @default {
-            <span>verificando…</span>
+            <span>{{ m.sistemaVerificando }}</span>
           }
         }
       </p>
@@ -164,6 +165,7 @@ export const NAV_ITEMS: readonly NavItem[] = [
 })
 export class Shell {
   protected readonly items = NAV_ITEMS;
+  protected readonly m = { ...MENSAGENS.shell, sair: MENSAGENS.acoes.sair };
   protected readonly apiStatus = inject(ApiStatusService);
   protected readonly auth = inject(AuthService);
   protected readonly drawerOpen = signal(false);

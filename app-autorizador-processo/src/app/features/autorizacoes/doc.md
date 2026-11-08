@@ -20,3 +20,7 @@ Os tipos vêm de `shared/api` (gerados); nenhum DTO é duplicado.
 ## Pendências desta etapa
 
 Controle de paginação (3.4) e testes de componente (4.1) vêm no próximo lote.
+
+## Acessibilidade (etapa 24)
+
+Textos vêm do catálogo `core/i18n/mensagens.ts`; a página é coberta por `src/app/a11y.spec.ts` (rótulos, nomes acessíveis, alvos ≥ 44 px). Detalhes e limitações em `shared/ui/doc.md`.

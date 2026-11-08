@@ -61,3 +61,12 @@ Fonte: valores efetivos do protótipo `.specs/design/prototype/Autorizador.dc.ht
 - `core/feedback`: `NotificationService` (toast `role="status"`, 3,2 s, pausa com foco/hover), `LoadingService` (`run()` → overlay só para ações do usuário; páginas usam `Skeleton`), `ErrorDialogService` + `ErrorDialog` ("Não foi possível carregar", Fechar/Tentar novamente).
 - `core/api-status`: `ApiStatusService.check()` consulta `GET /actuator/health`; falha ou status ≠ UP → "indisponível".
 - `layout/shell`: sidebar fixa ≥ `lg`; abaixo, barra superior + gaveta (Esc fecha); `<main id="conteudo">`, item ativo com `aria-current="page"`, link "Ir para o conteúdo". Ligação às rotas na tarefa 4.5.
+
+## Acessibilidade e responsividade (etapa 24)
+
+- **Auditoria automatizada sem dependência:** `src/app/a11y.spec.ts` verifica, nas 6 rotas (`/login`, `/painel`, `/procedimentos`, `/procedimentos/novo`, `/solicitar`, `/autorizacoes`): nome acessível em botões/links, rótulo em campos, `aria-label` em `role="img"`, ids únicos, `aria-describedby` válido, `caption` em tabelas, sem `tabindex` positivo, sem salto de nível de título e alvos de toque (`min-h-11`/`size-11`). Também cobre `lang="pt-BR"`, títulos por rota, foco visível global, diálogo (foco preso, Shift+Tab, Esc e retorno do foco) e o contraste AA dos pares de tokens usados (calculado a partir de `styles.scss`).
+- **Contraste:** nenhum token precisou mudar; todos os pares usados passam (texto ≥ 4,5:1; não textual ≥ 3:1).
+- **Alvos de toque:** links de ação em linha (`Ver todas`, `Ver autorizações concedidas`, `Voltar ao painel`) ganharam `inline-flex min-h-11 items-center`.
+- **Gaveta do shell:** fechada, fica `invisible` abaixo de `lg`, para os links fora da tela não receberem foco.
+- **Responsividade:** `DataTable` vira cartões abaixo de `md` (valores com `break-words`); a tabela só rola dentro do próprio contêiner. KPIs usam `auto-fit`; formulários empilham abaixo de `sm`.
+- **Limitações:** a auditoria roda em jsdom (sem layout/CSS reais), logo não mede rolagem horizontal, zoom 200 % nem ordem visual; isso foi conferido por leitura das classes responsivas. Gráficos têm alternativa textual (`aria-label` na rosca e legenda/valores em texto nas barras). Violações que exigem navegador real (axe, capturas 320/768/1280) ficam para a SPEC-30 (e2e).
