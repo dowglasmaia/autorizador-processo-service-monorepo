@@ -1,6 +1,6 @@
 ## 1. Preparação
 - [ ] 1.1 Ler `SPEC-40`, SPEC-10/13, `TEST_STRATEGY.md`, `SECURITY_REQUIREMENTS.md` (SEC-09) e `MONOREPO_STRUCTURE.md`; registrar a ausência de `.specs/06-execution-plan/`.
-- [ ] 1.2 Revisar esta proposta contra a etapa 27 (existência de `scripts/check-contract.mjs`) e confirmar os scripts reais de cada projeto.
+- [ ] 1.2 Confirmar os scripts reais de cada projeto e que `scripts/check-contract.mjs` e `check-contract-compat.mjs` existem (etapa 27 entregue).
 
 ## 2. Workflow do backend
 - [ ] 2.1 Criar `backend-ci.yml` com `paths`, `concurrency`, `permissions: contents: read` e `workflow_dispatch`.
@@ -14,11 +14,11 @@
 - [ ] 3.3 Jobs de build da imagem Docker do frontend (sem publicar) e `npm audit`.
 
 ## 4. Workflow de integração
-- [ ] 4.1 Criar `integracao-ci.yml` com `paths` de ambos os projetos, `compose.yaml`, `.env.example` e `scripts/check-contract.mjs`.
-- [ ] 4.2 Job `check-contract` (bloqueado se a etapa 27 não entregou o script) e job `e2e` com Compose + Playwright, relatório só em falha.
+- [ ] 4.1 Criar `integracao-ci.yml` com `paths` de ambos os projetos, `compose.yaml`, `.env.example` e `scripts/check-contract*.mjs` e `tools/contract/**`.
+- [ ] 4.2 Job `check-contract` (os dois scripts, após `npm ci` no app) e job `e2e` com Compose + Playwright, relatório só em falha.
 
 ## 5. Documentação
-- [ ] 5.1 README raiz: badges por workflow, tabela "o que roda quando" e orientação sobre branch protection.
+- [ ] 5.1 README raiz: badges por workflow, tabela "o que roda quando", orientação sobre branch protection e ajuste dos trechos "em construção" / "fica para a etapa de CI".
 
 ## 6. Verificação
 - [ ] 6.1 Validar sintaxe com `actionlint` (ou equivalente) nos 3 arquivos e corrigir erros.

@@ -4879,7 +4879,8 @@
               "origem": "provider",
               "esforco": "medium"
             }
-          ]
+          ],
+          "commit": "88af7fa"
         },
         {
           "numero": 28,
@@ -4921,90 +4922,86 @@
     }
   ],
   "iteracao": {
-    "numero": 27,
-    "etapa": 27,
-    "inicio": "2026-11-08T20:05:43.733Z",
-    "commitInicial": "5eb3e92b258a0d555bb8d190b074f0bc3d3f787c",
-    "passoAtual": 6,
+    "numero": 28,
+    "etapa": 28,
+    "inicio": "2026-11-08T20:16:15.776Z",
+    "commitInicial": "88af7fa143d7fa8d2628ee57081bdfbb073a7066",
+    "passoAtual": 2,
     "passos": [
       {
         "id": "propor",
         "situacao": "ok",
-        "duracaoMs": 33889,
-        "custo": 0.20019720000000002,
+        "duracaoMs": 45362,
+        "custo": 0.2375408,
         "tentativas": 1,
-        "detalhe": "14 tarefas"
+        "detalhe": "16 tarefas"
       },
       {
         "id": "partida",
         "situacao": "pulado",
-        "duracaoMs": 0,
+        "duracaoMs": 1,
         "custo": 0,
         "tentativas": 1,
         "detalhe": "sem verificações configuradas"
       },
       {
         "id": "commitProposta",
-        "situacao": "ok",
-        "duracaoMs": 808,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "6aa9e2b · 5 arquivo(s)"
-      },
-      {
-        "id": "aplicar",
-        "situacao": "ok",
-        "duracaoMs": 596413,
-        "custo": 1.4532295999999998,
-        "tentativas": 1,
-        "detalhe": "14/14 tarefas · 2 sessão(ões)"
-      },
-      {
-        "id": "verificar",
-        "situacao": "pulado",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "arquivar",
-        "situacao": "ok",
-        "duracaoMs": 4,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\27-contract-drift-check"
-      },
-      {
-        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
+      },
+      {
+        "id": "aplicar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "verificar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "arquivar",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
+      },
+      {
+        "id": "commitEntrega",
+        "situacao": "pendente",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 0
       }
     ],
-    "titulo": "Revisa a spec de desvio de contrato (SPEC-32) contra a base entregue",
-    "comparacao": "A pasta da spec já tinha proposta.md e tarefas.md antecipados (20 tarefas em 5 grupos). Revisei e completei em vez de recriar.\nO contrato real tem 8 operações e 11 códigos de erro em common/responses.yaml. A SPEC-32 cita 6 operações e 5 códigos, então a proposta e as tarefas passaram a seguir o contrato real.\nJá existem o gerador app-autorizador-processo/scripts/gerar-api-types.mjs (npm run api:types), o README.md raiz e tools/parity/ da etapa 26. Faltam scripts/check-contract.mjs, a validação das respostas contra o esquema e a comparação de compatibilidade.\nNão há .github/workflows nem tag ou branch base do contrato (só v0-original, que não tem OpenAPI). Por isso a referência de compatibilidade é um instantâneo versionado, registrado como [REVISAR]. A integração ao CI fica para a etapa 28.\n.specs/06-execution-plan/ continua inexistente; o desvio entra na tarefa 1.1. Não alterei código da aplicação."
+    "titulo": "Revisa a spec de CI por projeto (SPEC-40) contra a base entregue",
+    "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md` escritos antes da etapa 27. Revisei e completei os dois em vez de recriar.\nNão existe `.github/` no repositório. Os dois Dockerfiles (backend e frontend), o `compose.yaml` e o `tools/parity/replay.mjs` existem. A pasta `.specs/06-execution-plan/` também não existe, e esse desvio fica registrado.\nA etapa 27 já entregou `scripts/check-contract.mjs` e `scripts/check-contract-compat.mjs`, que a spec antecipada tratava como pendentes. Atualizei o ponto de partida e fiz o job `check-contract` rodar os dois scripts. Também incluí `tools/contract/**` nos `paths` da integração e a tarefa de ajustar os trechos do README raiz (\"em construção\" e \"fica para a etapa de CI\").\nNo frontend, `lint`, `test`, `build` e `e2e` existem como scripts. O e2e sobe e derruba o Compose sozinho, com `.env` descartável. O CI precisa só de Node, Docker e do Playwright instalado.\nA spec tem 14 tarefas em 6 grupos, dentro do limite. `check-architecture.mjs` e `validate.mjs`, citados na SPEC-40, não existem. A arquitetura é coberta pelo `ArchitectureTest` dentro do `./mvnw verify`. Isso e a execução real no GitHub (pendente) estão em \"Decisões tomadas sem consulta\"."
   },
   "totais": {
-    "duracaoMs": 20212300,
-    "custo": 53.51233620000001,
+    "duracaoMs": 20258362,
+    "custo": 53.749877000000005,
     "execucoes": 2,
-    "iteracoes": 27,
-    "entregues": 26,
-    "sessoes": 143,
-    "turnos": 1929,
+    "iteracoes": 28,
+    "entregues": 27,
+    "sessoes": 144,
+    "turnos": 1937,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 7,
     "recuperacoesResolvidas": 6,
     "falhas": 0,
-    "commits": 53,
+    "commits": 54,
     "tokens": {
-      "entrada": 2964,
-      "saida": 1282429,
-      "cacheCriacao": 7825881,
-      "cacheLeitura": 89266868
+      "entrada": 2976,
+      "saida": 1285788,
+      "cacheCriacao": 7870232,
+      "cacheLeitura": 89532096
     }
   },
   "ultimaExecucao": {

@@ -619,3 +619,13 @@
 {"em":1794168974965,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\27-contract-drift-check → .specs\\workflows\\test-01\\specs\\arquivo\\27-contract-drift-check","etapa":27,"passo":"arquivar"}
 {"em":1794168974972,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\27-contract-drift-check","etapa":27,"passo":"arquivar"}
 {"em":1794168974979,"nivel":"passo","texto":"Commit da entrega","etapa":27,"passo":"commitEntrega"}
+{"em":1794168975671,"nivel":"ok","texto":"88af7fa · 23 arquivo(s) · feat(autorizador): Revisa a spec de desvio de contrato (SPEC-32) cont…","etapa":27,"passo":"commitEntrega"}
+{"em":1794168975691,"nivel":"ok","texto":"Commit da entrega: ok · 88af7fa · 23 arquivo(s)","etapa":27,"passo":"commitEntrega"}
+{"em":1794168975704,"nivel":"ok","texto":"Etapa 27 entregue · commit 88af7fa","etapa":27,"passo":"commitEntrega"}
+{"em":1794168975782,"nivel":"passo","texto":"Etapa 28 · CI por projeto (iteração 28)","etapa":28}
+{"em":1794168975783,"nivel":"passo","texto":"Propor a spec","etapa":28,"passo":"propor"}
+{"em":1794168975790,"nivel":"info","texto":"a spec já existe (proposta antecipada ou execução anterior): revisando","etapa":28,"passo":"propor"}
+{"em":1794169021159,"nivel":"ok","texto":"Propor a spec: ok · 16 tarefas","etapa":28,"passo":"propor"}
+{"em":1794169021165,"nivel":"passo","texto":"Verificar ponto de partida","etapa":28,"passo":"partida"}
+{"em":1794169021177,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":28,"passo":"partida"}
+{"em":1794169021184,"nivel":"passo","texto":"Commit da proposta","etapa":28,"passo":"commitProposta"}
