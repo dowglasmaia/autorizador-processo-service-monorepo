@@ -52,3 +52,27 @@ Boa parte já veio com o scaffold e com as etapas 4–10; esta etapa **audita, c
 - UI da API só em `local`, servindo o contrato estático; se a biblioteca for incompatível, usar página estática mínima e registrar na evidência.
 - O `traceId` permanece no log e em `X-Request-Id`; não entra no corpo RFC 9457 (contrato não muda nesta etapa).
 - A revisão pós-etapa 11 confirmou que o ponto de partida segue válido; a tarefa 3.3 virou verificação (eventos de negócio já existem) e só cria o que faltar.
+
+### Lote 1 (tarefas 1.1–3.1)
+- Auditoria 1.1: faltavam `SERVER_PORT` (usava-se `PORT`), `LOG_LEVEL_ROOT` e `LOG_FORMAT` no `.env.example` e `CORS_ALLOWED_ORIGINS` na tabela do README; `DB_URL`/`DB_USERNAME` tinham padrão no perfil base. `API_PORT`/`APP_PORT`/`POSTGRES_*` são do Compose, não da aplicação.
+- Padrões de conexão (`DB_URL`, `DB_USERNAME`) movidos para `application-local.yml`; `DB_PASSWORD`, `JWT_SECRET` e `AUTH_BOOTSTRAP_*` seguem sem padrão. `SERVER_PORT` tem padrão `8080` no perfil base (porta fixa do contêiner, sem segredo).
+- Health: `show-details`/`show-components` = `never` no base e `always` em `local`; grupos `liveness` (`livenessState`) e `readiness` (`readinessState,db`) com probes habilitadas.
+- 2.4: `SecurityConfig` já libera apenas `/actuator/health` e `/actuator/health/**`; nada a alterar.
+- 3.1: ECS é o formato do perfil base e `local` usa padrão de texto; adicionado `spanId` ao padrão local (já havia `requestId` e `traceId`). Cobertura por teste fica nas tarefas 5.x.
+- `./mvnw verify` verde (223 testes).
+
+### Lote 2 (tarefas 3.2–5.3)
+- 3.2/3.3: revisadas as 7 chamadas `log.*` e o `RequestLoggingFilter` (só método, caminho sem query, status, duração): e-mail sempre via `MascaraEmail`, sem senha/token/JWT; eventos de login e de autorização concedida/negada já têm dados não sensíveis. Nada a corrigir nem criar.
+- 3.4: métricas só internas confirmadas (exposição `health,info`; OTLP de métricas/logs/tracing desligado por padrão).
+- 4.1: springdoc não foi adicionado (evita dependência de compatibilidade com Boot 4.1 e duplicar o contrato). `DocumentacaoApiController` (`@Profile("local")`, pacote `shared/docs`) serve `/swagger-ui.html` (página mínima com Swagger UI via CDN `unpkg`, exige internet só em `local`) e o contrato estático em `/v3/api-docs/{modules|common}/{arquivo}.yaml`, espelhando a árvore para os `$ref` relativos funcionarem.
+- 4.2: `SecurityConfig` passou a liberar as rotas de documentação em todos os perfis; fora de `local` não há handler, então a resposta é `404` (antes seria `401`).
+- 5.x: testes `SaudeReadinessTest` (contêiner Postgres isolado, pool com timeout de 2 s), `ActuatorExposicaoTest` (env/metrics/beans = 401 ou 404, nunca 200; `health` sem `components`/`details`), `DocumentacaoPerfilPadraoTest` e `DocumentacaoPerfilLocalTest`. Os testes usam o perfil `test` (não `local`) como "perfil padrão", porque `spring.profiles.default=local`.
+- `./mvnw verify` verde (228 testes).
+
+### Lote 3 (tarefas 5.4–6.4)
+- 5.4: `LogJsonEcsTest` faz login com `X-Request-Id` e confere a linha `request completed` em JSON ECS (`@timestamp`, `log.level`, `ecs.version`, `traceId` de 32 hex e `requestId`) e a ausência de senha, e-mail completo e JWT em toda a saída. O `LoggingSystem` é singleton da JVM e já iniciado por outro contexto (formato do perfil `test` é texto); por isso o teste faz `cleanUp()` + `initialize()` com formato `ecs` e restaura o formato anterior no `@AfterEach`.
+- 6.1: seção "Configuração e operação" no `README.md` (perfis, health, logs, documentação da API; variáveis na tabela existente).
+- 6.2: `./mvnw verify` com JDK 25.0.2 verde (229 testes, incluindo `ArchitectureTest` e `ModularityTests`).
+- 6.3: Postgres do Compose (`docker-compose up -d --wait postgres`, porta 55432; o plugin `docker compose` não existe aqui, usou-se o binário `docker-compose`) e API em `local` na porta 18080: `/actuator/health` `UP`, `readiness` `UP` com `db`, `/actuator/env` → **401** (não exposto; sem credencial o Spring Security responde 401 antes do 404, aceito pelo `ActuatorExposicaoTest`), `/swagger-ui.html` → 200. O volume antigo do Compose tinha checksum de migração divergente (`001`); para não apagar dados, usou-se um banco temporário `verif_etapa12`, removido ao fim. Processos da API e contêiner encerrados.
+- 6.4: `git grep -i password -- api-autorizador-processo` mostra só nomes de variável (`DB_PASSWORD`, `MVNW_PASSWORD` do wrapper), `PasswordEncoder` e a propriedade `password: ${DB_PASSWORD:}`; nenhum valor de segredo. "legado/legacy" só aparece na regra do README e no `ArchitectureTest` que a impõe.
+- Arquivamento da spec: fica a cargo do passo de arquivamento do devkit (a pasta da spec está em `.specs/workflows`, não em `.specs/`).

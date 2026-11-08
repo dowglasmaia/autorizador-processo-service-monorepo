@@ -4,8 +4,9 @@ spring:
   profiles:
     default: local
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/autorizador}
-    username: ${DB_USERNAME:autorizador}
+    # Sem valor padrão fora do perfil local: o contêiner/ambiente precisa informar as três variáveis.
+    url: ${DB_URL:}
+    username: ${DB_USERNAME:}
     password: ${DB_PASSWORD:}
   jpa:
     open-in-view: false
@@ -35,11 +36,27 @@ app:
       email: ${AUTH_BOOTSTRAP_EMAIL:}
       senha: ${AUTH_BOOTSTRAP_SENHA:}
 
+server:
+  port: ${SERVER_PORT:8080}
+
 management:
+  # Só health e info são expostos; métricas Micrometer ficam internas (sem endpoint, sem coletor).
   endpoints:
     web:
       exposure:
-        include: health,info,metrics
+        include: health,info
+  endpoint:
+    health:
+      # Sem detalhes fora do perfil local (que sobrescreve para always).
+      show-details: never
+      show-components: never
+      probes:
+        enabled: true
+      group:
+        liveness:
+          include: livenessState
+        readiness:
+          include: readinessState,db
   # Tracing and metrics via Spring Boot's native OpenTelemetry support (Micrometer Tracing bridge + OTLP).
   # Export is OFF by default; set OTEL_EXPORT_ENABLED=true and the standard OTEL_EXPORTER_OTLP_* variables
   # (mapped automatically by Spring Boot) to send data to an OpenTelemetry Collector.

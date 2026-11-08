@@ -36,18 +36,19 @@ O perfil padrão é `local` (logs em texto legível). Ele aponta para o PostgreS
 
 ## Variáveis de ambiente
 
-Copie `.env.example` e exporte o que precisar. Todas têm valor padrão, exceto `DB_PASSWORD` e `JWT_SECRET` (obrigatórias) e as variáveis `AUTH_BOOTSTRAP_*` (opcionais, sem padrão).
+Copie `.env.example` e exporte o que precisar. Valores padrão de conexão existem só no perfil `local`; `DB_URL`, `DB_USERNAME`, `DB_PASSWORD` e `JWT_SECRET` não têm padrão nos demais perfis, e as variáveis `AUTH_BOOTSTRAP_*` são opcionais e sem padrão.
 
 | Variável | Padrão | Uso |
 |---|---|---|
-| `DB_URL` | `jdbc:postgresql://localhost:5432/autorizador` | URL JDBC do PostgreSQL  |
-| `DB_USERNAME` | `autorizador` | Usuário do banco  |
+| `DB_URL` | sem padrão (`jdbc:postgresql://localhost:5432/autorizador` no perfil `local`) | URL JDBC do PostgreSQL |
+| `DB_USERNAME` | sem padrão (`autorizador` no perfil `local`) | Usuário do banco |
 | `DB_PASSWORD` | sem padrão versionado | Senha do banco; nunca versionar |
+| `CORS_ALLOWED_ORIGINS` | vazio (`http://localhost:4200` no perfil `local`) | Origens CORS separadas por vírgula; o curinga `*` é ignorado |
 | `APP_ENV` | `production` | Nome do ambiente nos logs e na telemetria |
 | `LOG_LEVEL_APP` | `INFO` (`DEBUG` no perfil `local`) | Nível de log do pacote `org.maia.autorizador` |
 | `LOG_LEVEL_ROOT` | `INFO` | Nível de log raiz |
 | `LOG_FORMAT` | `ecs` | Formato do JSON: `ecs`, `logstash` ou `gelf` (o perfil `local` imprime texto) |
-| `PORT` | `8080` | Porta HTTP |
+| `SERVER_PORT` | `8080` | Porta HTTP do processo |
 | `TRACING_SAMPLING_PROBABILITY` | `0.1` | Fração de traces amostrados |
 | `OTEL_EXPORT_ENABLED` | `false` | Exporta traces e métricas por OTLP |
 | `OTEL_EXPORTER_OTLP_ENDPOINT` | `http://localhost:4318` | Endereço do Collector |
@@ -55,6 +56,22 @@ Copie `.env.example` e exporte o que precisar. Todas têm valor padrão, exceto 
 | `JWT_TTL_MINUTOS` | `60` | Validade do token de acesso em minutos |
 | `AUTH_BOOTSTRAP_EMAIL` | sem padrão | E-mail do primeiro usuário; criado só se a tabela `usuario` estiver vazia e as duas variáveis `AUTH_BOOTSTRAP_*` estiverem definidas |
 | `AUTH_BOOTSTRAP_SENHA` | sem padrão | Senha do primeiro usuário (guardada apenas como hash BCrypt); nunca registrada em log nem versionada |
+
+## Configuração e operação
+
+**Perfis.** O perfil padrão é `local` (`spring.profiles.default`): logs em texto, detalhes de health, documentação da API e seed de exemplo. Fora dele (contêiner/produção, por exemplo `SPRING_PROFILES_ACTIVE=prod`) valem as regras restritivas: sem padrões de conexão, sem seed, sem documentação e health sem detalhes. Variáveis e padrões estão na tabela acima; segredos (`DB_PASSWORD`, `JWT_SECRET`, `AUTH_BOOTSTRAP_*`) nunca têm padrão versionado.
+
+**Health.** Só `health` e `info` são expostos pelo Actuator; `env`, `metrics`, `beans` e demais respondem `404`/`401`. Rotas públicas: `/actuator/health/**`.
+
+| Rota | Uso | Resposta |
+|---|---|---|
+| `/actuator/health/liveness` | processo vivo | `200 UP` |
+| `/actuator/health/readiness` | pronto para tráfego (inclui o banco) | `200 UP`; `503 DOWN` com o PostgreSQL parado |
+| `/actuator/health` | resumo | `UP`; componentes só no perfil `local` |
+
+**Logs.** JSON ECS na saída padrão (`LOG_FORMAT` troca para `logstash` ou `gelf`); texto legível em `local`. Cada linha de requisição traz `requestId` (cabeçalho `X-Request-Id`), `traceId` e `spanId`. E-mails aparecem mascarados e nenhum log contém senha, token ou JWT. Métricas Micrometer ficam internas (sem endpoint exposto); a exportação OTLP só liga com `OTEL_EXPORT_ENABLED=true`.
+
+**Documentação da API.** Somente no perfil `local`: `http://localhost:8080/swagger-ui.html` serve o contrato estático de `openapi/` (a página carrega a Swagger UI de um CDN, exigindo internet). Nos demais perfis `/swagger-ui*` e `/v3/api-docs*` respondem `404`.
 
 ## Arquitetura
 

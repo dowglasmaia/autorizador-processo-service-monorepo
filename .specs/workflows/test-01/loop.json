@@ -2049,7 +2049,175 @@
           "descricao": "Executa a SPEC-11: perfis de configuração, health, logs e métricas básicas.\nReferências: `NON_FUNCTIONAL_REQUIREMENTS.md`.\nLimite: sem stack externa de monitoramento.",
           "spec": "12-config-observabilidade",
           "specPronta": false,
-          "status": "pendente"
+          "status": "entregue",
+          "entregueEm": "2026-11-08T17:15:18.794Z",
+          "iteracao": 12,
+          "duracaoMs": 1440860,
+          "custo": 1.5707817,
+          "passos": [
+            {
+              "id": "propor",
+              "situacao": "ok",
+              "duracaoMs": 40444,
+              "custo": 0.2091744,
+              "tentativas": 1,
+              "detalhe": "21 tarefas"
+            },
+            {
+              "id": "partida",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "commitProposta",
+              "situacao": "ok",
+              "duracaoMs": 370,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "382a54f · 5 arquivo(s)"
+            },
+            {
+              "id": "aplicar",
+              "situacao": "ok",
+              "duracaoMs": 1400042,
+              "custo": 1.3616073,
+              "tentativas": 1,
+              "detalhe": "21/21 tarefas · 3 sessão(ões)"
+            },
+            {
+              "id": "verificar",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "arquivar",
+              "situacao": "ok",
+              "duracaoMs": 4,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\12-config-observabilidade"
+            },
+            {
+              "id": "commitEntrega",
+              "situacao": "ok",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1
+            }
+          ],
+          "sessoes": [
+            {
+              "rotulo": "propor-12",
+              "passo": "propor",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2091744,
+              "turnos": 7,
+              "duracaoMs": 40427,
+              "inicio": 1794156677840,
+              "fim": 1794156718277,
+              "tokens": {
+                "entrada": 10,
+                "saida": 2208,
+                "cacheCriacao": 41523,
+                "cacheLeitura": 209824
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "antecipar-13",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2580957,
+              "turnos": 7,
+              "duracaoMs": 62912,
+              "inicio": 1794156718704,
+              "fim": 1794156781625,
+              "tokens": {
+                "entrada": 10,
+                "saida": 5272,
+                "cacheCriacao": 45981,
+                "cacheLeitura": 214317
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-12-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2914372,
+              "turnos": 10,
+              "duracaoMs": 188358,
+              "inicio": 1794156720157,
+              "fim": 1794156908528,
+              "tokens": {
+                "entrada": 18,
+                "saida": 5263,
+                "cacheCriacao": 48488,
+                "cacheLeitura": 448192
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-12-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.4747262,
+              "turnos": 17,
+              "duracaoMs": 255574,
+              "inicio": 1794156908533,
+              "fim": 1794157164116,
+              "tokens": {
+                "entrada": 34,
+                "saida": 12368,
+                "cacheCriacao": 62315,
+                "cacheLeitura": 1017182
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-12-3",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.5954439,
+              "turnos": 28,
+              "duracaoMs": 954607,
+              "inicio": 1794157164122,
+              "fim": 1794158118738,
+              "tokens": {
+                "entrada": 50,
+                "saida": 12359,
+                "cacheCriacao": 74015,
+                "cacheLeitura": 1756939
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            }
+          ]
         },
         {
           "numero": 13,
@@ -2240,7 +2408,7 @@
     "etapa": 12,
     "inicio": "2026-11-08T16:51:17.824Z",
     "commitInicial": "91cc31d372cd768029b836ff3353992e5911156e",
-    "passoAtual": 2,
+    "passoAtual": 6,
     "passos": [
       {
         "id": "propor",
@@ -2260,62 +2428,66 @@
       },
       {
         "id": "commitProposta",
+        "situacao": "ok",
+        "duracaoMs": 370,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "382a54f · 5 arquivo(s)"
+      },
+      {
+        "id": "aplicar",
+        "situacao": "ok",
+        "duracaoMs": 1400042,
+        "custo": 1.3616073,
+        "tentativas": 1,
+        "detalhe": "21/21 tarefas · 3 sessão(ões)"
+      },
+      {
+        "id": "verificar",
+        "situacao": "pulado",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "arquivar",
+        "situacao": "ok",
+        "duracaoMs": 4,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\12-config-observabilidade"
+      },
+      {
+        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
-      },
-      {
-        "id": "aplicar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "verificar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "arquivar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
       }
     ],
     "titulo": "Revisa a spec de config e observabilidade (SPEC-11) contra a entrega da etapa 11",
     "comparacao": "A pasta já tinha proposta.md e tarefas.md antecipados. Revisei os dois contra o código atual e os completei, sem recriar.\nConfirmei as lacunas da SPEC-11. O actuator expõe `health,info,metrics`. Não há grupos liveness/readiness nem show-details. A porta usa `PORT` em vez de `SERVER_PORT`. O `pom.xml` não tem springdoc, só a liberação no `SecurityConfig`. Faltam os testes de readiness com banco parado, de 404 da UI e de formato do log JSON.\nOs eventos de negócio já são logados com e-mail mascarado. Por isso a tarefa 3.3 passou a ser conferência.\nA etapa 11 (painel) não alterou configuração nem observabilidade. Atualizei a proposta com isso e com `SERVER_PORT`, `LOG_LEVEL_ROOT` e `LOG_FORMAT` ausentes do `.env.example`.\nA spec tem 21 tarefas em 6 grupos. A decisão [REVISAR] continua: `/actuator/metrics` não é exposto, para seguir a SPEC-11 e o limite de não usar stack externa."
   },
   "totais": {
-    "duracaoMs": 8023321,
-    "custo": 25.797175399999997,
+    "duracaoMs": 9423737,
+    "custo": 27.416878399999995,
     "execucoes": 2,
     "iteracoes": 12,
     "entregues": 11,
-    "sessoes": 66,
-    "turnos": 916,
+    "sessoes": 70,
+    "turnos": 978,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 5,
     "recuperacoesResolvidas": 4,
     "falhas": 0,
-    "commits": 22,
+    "commits": 23,
     "tokens": {
-      "entrada": 1324,
-      "saida": 633566,
-      "cacheCriacao": 3706840,
-      "cacheLeitura": 41796000
+      "entrada": 1436,
+      "saida": 668828,
+      "cacheCriacao": 3937639,
+      "cacheLeitura": 45232630
     }
   },
   "ultimaExecucao": {
