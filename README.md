@@ -2,7 +2,7 @@
 
 Monorepo do **Autorizador de Procedimentos Médicos**: cadastro de procedimentos, solicitação e consulta de autorizações (com critérios de idade e sexo do paciente) e painel com indicadores.
 
-> 🚧 **Em construção.** O repositório está sendo modernizado por etapas, seguindo as especificações em [`.specs/`](.specs/INDEX.md). O backend (`api-autorizador-processo`) já tem a fundação pronta (esqueleto, ArchUnit e Modulith); o frontend (`app-autorizador-processo`) ainda não existe. O que está marcado como "em construção" abaixo nasce nas próximas etapas.
+> 🚧 **Em construção.** O repositório está sendo modernizado por etapas, seguindo as especificações em [`.specs/`](.specs/INDEX.md). O backend (`api-autorizador-processo`) já tem a fundação pronta (esqueleto, ArchUnit e Modulith); o frontend (`app-autorizador-processo`) tem a fundação pronta (shell Angular 21, testes e lint). O que está marcado como "em construção" abaixo nasce nas próximas etapas.
 
 ## Visão
 
@@ -15,7 +15,7 @@ Monorepo do **Autorizador de Procedimentos Médicos**: cadastro de procedimentos
 ```text
 .
 ├─ api-autorizador-processo/   backend Spring Boot 4 · Java 25 · Maven            fundação pronta
-├─ app-autorizador-processo/   frontend Angular 21 · Tailwind                     🚧 em construção
+├─ app-autorizador-processo/   frontend Angular 21 · Tailwind                     fundação pronta
 ├─ tools/parity/               casos e replay de paridade com a versão original   🚧 em construção
 ├─ .github/workflows/          CI independente por projeto                        🚧 em construção
 ├─ compose.yaml · .env.example integração local                                   (existentes; ajustados nas próximas etapas)

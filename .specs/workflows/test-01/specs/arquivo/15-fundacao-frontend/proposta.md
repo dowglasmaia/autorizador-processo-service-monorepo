@@ -39,3 +39,4 @@ Gerar o projeto `app-autorizador-processo` (Angular 21, TypeScript estrito, SCSS
 - **Testes após o scaffold:** a regra da skill de não rodar testes vale para o gerador; os testes da SPEC-14 T4 rodam depois, como etapa separada.
 - **Sem proxy:** mantido conforme a SPEC-14; CORS fica a cargo do backend (perfil `local`).
 - **Revisão da proposta antecipada:** conferida contra o repositório; escopo e tarefas mantidos. A SPEC-14 indica `angular-architect` para T4–T7; será usada junto com `angular-frontend-scaffold`. O `.gitignore` da raiz já ignora `node_modules/` e `build/`; falta conferir `dist` do frontend (tarefa 4.4).
+- **Dependências de teste/lint (lote 1):** `vitest` e `jsdom` (executor de testes) e `angular-eslint`/`eslint`/`typescript-eslint` (lint), previstas na spec. `ng add angular-eslint` instalou a v22 por padrão; foi fixada a v21 com `ng add @angular-eslint/schematics@21`.

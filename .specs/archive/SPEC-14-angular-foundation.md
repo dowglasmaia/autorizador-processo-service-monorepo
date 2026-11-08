@@ -40,4 +40,13 @@ Criar o projeto Angular 21 com o gerador canônico da skill (TypeScript estrito,
 - Definition of Done: projeto gerado pelo script oficial, testes executáveis, ambiente configurado, sem dependências além do previsto.
 
 ## 6. Resultado
-_Preencher ao concluir._
+**Status: concluída** em 2026-11-08 (etapa 15 do loop `test-01`).
+
+**Evidência:**
+- `scaffold.mjs --output . --project-name app-autorizador-processo` + `validate.mjs` → build de produção OK.
+- `strict` e `strictTemplates` ativos; zoneless; `OnPush` por schematic e regra de lint; `npm start` = `ng serve --port 4200`.
+- Testes: Vitest via `@angular/build:unit-test` (`npm test` = `ng test --no-watch`), 3 testes (shell, rota inicial e `API_BASE_URL`).
+- Lint: `angular-eslint` 21 (`npm run lint` passa).
+- Ambiente: `environment.ts` (`/api/v1`) e `environment.development.ts` (`http://localhost:8080/api/v1`) com `fileReplacements`; token `API_BASE_URL` lê o environment, sem requisições.
+- `npm ci`, `npm run lint`, `npm run build`, `npm test` verdes; `npm start` serviu HTTP 200 na porta 4200 e o processo foi encerrado.
+- Desvio: `.specs/06-execution-plan/` citada no índice não existe.

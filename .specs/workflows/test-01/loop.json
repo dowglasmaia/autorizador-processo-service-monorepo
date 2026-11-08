@@ -2546,7 +2546,154 @@
           "descricao": "Executa a SPEC-14: gera `app-autorizador-processo` (Angular 21, Tailwind, modo estrito, porta fixa) com a skill `angular-frontend-scaffold`.\nReferências: `TARGET_ARCHITECTURE.md`.\nLimite: apenas o shell mínimo.",
           "spec": "15-fundacao-frontend",
           "specPronta": false,
-          "status": "pendente"
+          "status": "entregue",
+          "entregueEm": "2026-11-08T17:42:42.287Z",
+          "iteracao": 15,
+          "duracaoMs": 600442,
+          "custo": 0.9570509,
+          "passos": [
+            {
+              "id": "propor",
+              "situacao": "ok",
+              "duracaoMs": 39350,
+              "custo": 0.20215080000000002,
+              "tentativas": 1,
+              "detalhe": "15 tarefas"
+            },
+            {
+              "id": "partida",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "commitProposta",
+              "situacao": "ok",
+              "duracaoMs": 849,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "df2188e · 4 arquivo(s)"
+            },
+            {
+              "id": "aplicar",
+              "situacao": "ok",
+              "duracaoMs": 560239,
+              "custo": 0.7549001,
+              "tentativas": 1,
+              "detalhe": "15/15 tarefas · 2 sessão(ões)"
+            },
+            {
+              "id": "verificar",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "arquivar",
+              "situacao": "ok",
+              "duracaoMs": 4,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\15-fundacao-frontend"
+            },
+            {
+              "id": "commitEntrega",
+              "situacao": "ok",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1
+            }
+          ],
+          "sessoes": [
+            {
+              "rotulo": "propor-15",
+              "passo": "propor",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.20215080000000002,
+              "turnos": 7,
+              "duracaoMs": 39332,
+              "inicio": 1794159161742,
+              "fim": 1794159201085,
+              "tokens": {
+                "entrada": 12,
+                "saida": 2165,
+                "cacheCriacao": 38704,
+                "cacheLeitura": 256608
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "antecipar-16",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2328654,
+              "turnos": 7,
+              "duracaoMs": 54738,
+              "inicio": 1794159201989,
+              "fim": 1794159256736,
+              "tokens": {
+                "entrada": 10,
+                "saida": 4661,
+                "cacheCriacao": 41484,
+                "cacheLeitura": 202994
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-15-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.44955339999999994,
+              "turnos": 23,
+              "duracaoMs": 428758,
+              "inicio": 1794159203446,
+              "fim": 1794159632214,
+              "tokens": {
+                "entrada": 44,
+                "saida": 9370,
+                "cacheCriacao": 56599,
+                "cacheLeitura": 1293694
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-15-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.3053467,
+              "turnos": 13,
+              "duracaoMs": 129991,
+              "inicio": 1794159632220,
+              "fim": 1794159762220,
+              "tokens": {
+                "entrada": 22,
+                "saida": 6012,
+                "cacheCriacao": 47274,
+                "cacheLeitura": 560867
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            }
+          ]
         },
         {
           "numero": 16,
@@ -2705,7 +2852,7 @@
     "etapa": 15,
     "inicio": "2026-11-08T17:32:41.725Z",
     "commitInicial": "9423251e6602034787e43f4c46fd882fe14c2cb9",
-    "passoAtual": 2,
+    "passoAtual": 6,
     "passos": [
       {
         "id": "propor",
@@ -2725,62 +2872,66 @@
       },
       {
         "id": "commitProposta",
+        "situacao": "ok",
+        "duracaoMs": 849,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "df2188e · 4 arquivo(s)"
+      },
+      {
+        "id": "aplicar",
+        "situacao": "ok",
+        "duracaoMs": 560239,
+        "custo": 0.7549001,
+        "tentativas": 1,
+        "detalhe": "15/15 tarefas · 2 sessão(ões)"
+      },
+      {
+        "id": "verificar",
+        "situacao": "pulado",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "arquivar",
+        "situacao": "ok",
+        "duracaoMs": 4,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\15-fundacao-frontend"
+      },
+      {
+        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
-      },
-      {
-        "id": "aplicar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "verificar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "arquivar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
       }
     ],
     "titulo": "Propõe a spec da fundação do frontend Angular (SPEC-14)",
     "comparacao": "A pasta da spec já tinha `proposta.md` e `tarefas.md`, antecipados na etapa 14. Revisei os dois contra o repositório e mantive o escopo e as 15 tarefas, em 5 grupos.\n`app-autorizador-processo/` ainda não existe. A raiz tem só `api-autorizador-processo/`, `tools/`, `compose.yaml` e `README.md`, então o scaffold roda sem conflito. A etapa 14 (SPEC-50) foi arquivada sem tocar no frontend.\nO Node é v24.14.0, acima do mínimo de 20.19. A skill `angular-frontend-scaffold` tem `scaffold.mjs` e `validate.mjs`. A SPEC-14 continua em `.specs/03-frontend/`.\nO `.gitignore` da raiz já cobre `node_modules/` e `build/`, mas não vi `dist` do frontend; ficou como a tarefa 4.4. A pasta `06-execution-plan/` citada no `INDEX.md` não existe, e o desvio fica para a evidência da execução.\nSó atualizei o cabeçalho e a seção \"Decisões tomadas sem consulta\" da proposta. Nenhum código foi alterado."
   },
   "totais": {
-    "duracaoMs": 10505370,
-    "custo": 29.707300599999993,
+    "duracaoMs": 11066462,
+    "custo": 30.695066099999995,
     "execucoes": 2,
     "iteracoes": 15,
     "entregues": 14,
-    "sessoes": 79,
-    "turnos": 1066,
+    "sessoes": 82,
+    "turnos": 1109,
     "verificacoes": 0,
     "correcoes": 0,
     "recuperacoes": 5,
     "recuperacoesResolvidas": 4,
     "falhas": 0,
-    "commits": 28,
+    "commits": 29,
     "tokens": {
-      "entrada": 1580,
-      "saida": 705810,
-      "cacheCriacao": 4330996,
-      "cacheLeitura": 48701492
+      "entrada": 1656,
+      "saida": 725853,
+      "cacheCriacao": 4476353,
+      "cacheLeitura": 50759047
     }
   },
   "ultimaExecucao": {

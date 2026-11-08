@@ -336,3 +336,15 @@
 {"em":1794159201101,"nivel":"passo","texto":"Verificar ponto de partida","etapa":15,"passo":"partida"}
 {"em":1794159201110,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":15,"passo":"partida"}
 {"em":1794159201117,"nivel":"passo","texto":"Commit da proposta","etapa":15,"passo":"commitProposta"}
+{"em":1794159201967,"nivel":"ok","texto":"df2188e · 4 arquivo(s) · docs(test-01): proposta da etapa 15 · Fundação do frontend","etapa":15,"passo":"commitProposta"}
+{"em":1794159201976,"nivel":"ok","texto":"Commit da proposta: ok · df2188e · 4 arquivo(s)","etapa":15,"passo":"commitProposta"}
+{"em":1794159201981,"nivel":"passo","texto":"Aplicar a spec","etapa":15,"passo":"aplicar"}
+{"em":1794159201987,"nivel":"info","texto":"proposta antecipada da etapa 16 em paralelo","etapa":15,"passo":"aplicar"}
+{"em":1794159256743,"nivel":"ok","texto":"proposta antecipada da etapa 16 pronta","etapa":15,"passo":"aplicar"}
+{"em":1794159762231,"nivel":"ok","texto":"Aplicar a spec: ok · 15/15 tarefas · 2 sessão(ões)","etapa":15,"passo":"aplicar"}
+{"em":1794159762238,"nivel":"passo","texto":"Verificar a mudança","etapa":15,"passo":"verificar"}
+{"em":1794159762254,"nivel":"info","texto":"Verificar a mudança: pulado · sem verificações configuradas","etapa":15,"passo":"verificar"}
+{"em":1794159762262,"nivel":"passo","texto":"Arquivar a spec","etapa":15,"passo":"arquivar"}
+{"em":1794159762269,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\15-fundacao-frontend → .specs\\workflows\\test-01\\specs\\arquivo\\15-fundacao-frontend","etapa":15,"passo":"arquivar"}
+{"em":1794159762276,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\15-fundacao-frontend","etapa":15,"passo":"arquivar"}
+{"em":1794159762281,"nivel":"passo","texto":"Commit da entrega","etapa":15,"passo":"commitEntrega"}
