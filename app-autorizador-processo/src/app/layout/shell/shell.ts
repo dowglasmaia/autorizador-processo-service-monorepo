@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { AuthService } from '../../core/auth/auth.service';
 import { ApiStatusService } from '../../core/api-status/api-status.service';
 import { ErrorDialog } from '../../core/feedback/error-dialog';
 import { LoadingOverlay } from '../../core/feedback/loading-overlay';
@@ -100,6 +101,40 @@ export const NAV_ITEMS: readonly NavItem[] = [
         }
       </nav>
 
+      <div class="relative mb-3">
+        @if (menuUsuarioAberto()) {
+          <div
+            id="menu-usuario"
+            role="group"
+            aria-label="Menu do usuário"
+            class="absolute inset-x-0 bottom-full mb-2 rounded-input bg-surface p-2 text-content shadow-lg"
+          >
+            <p class="break-all px-3 py-2 text-sm text-content-muted">
+              {{ auth.usuario()?.email }}
+            </p>
+            <button
+              type="button"
+              class="flex min-h-11 w-full items-center gap-2 rounded-input px-3 py-2 font-semibold hover:bg-neutral-100"
+              (click)="sair()"
+            >
+              <app-icon name="sign-out" />
+              Sair
+            </button>
+          </div>
+        }
+        <button
+          type="button"
+          class="flex min-h-11 w-full items-center gap-2 rounded-input px-3 py-2 text-left font-semibold hover:bg-white/10 focus-visible:outline-white"
+          aria-haspopup="true"
+          aria-controls="menu-usuario"
+          [attr.aria-expanded]="menuUsuarioAberto()"
+          (click)="menuUsuarioAberto.set(!menuUsuarioAberto())"
+        >
+          <app-icon name="user-circle" />
+          <span class="truncate">{{ auth.usuario()?.email }}</span>
+        </button>
+      </div>
+
       <p class="px-2 text-sm" role="status">
         API:
         @switch (apiStatus.status()) {
@@ -124,13 +159,15 @@ export const NAV_ITEMS: readonly NavItem[] = [
     <app-loading-overlay />
     <app-error-dialog />
   `,
-  host: { '(document:keydown.escape)': 'drawerOpen.set(false)' },
+  host: { '(document:keydown.escape)': 'fecharPaineis()' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Shell {
   protected readonly items = NAV_ITEMS;
   protected readonly apiStatus = inject(ApiStatusService);
+  protected readonly auth = inject(AuthService);
   protected readonly drawerOpen = signal(false);
+  protected readonly menuUsuarioAberto = signal(false);
 
   constructor() {
     this.apiStatus.check();
@@ -139,6 +176,17 @@ export class Shell {
         filter((e) => e instanceof NavigationEnd),
         takeUntilDestroyed(),
       )
-      .subscribe(() => this.drawerOpen.set(false));
+      .subscribe(() => this.fecharPaineis());
+  }
+
+  protected fecharPaineis(): void {
+    this.drawerOpen.set(false);
+    this.menuUsuarioAberto.set(false);
+  }
+
+  /** Encerra a sessão (limpa o estado em memória) e navega ao login. */
+  protected sair(): void {
+    this.fecharPaineis();
+    this.auth.sair();
   }
 }

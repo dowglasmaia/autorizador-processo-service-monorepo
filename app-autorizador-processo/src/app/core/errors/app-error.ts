@@ -9,6 +9,8 @@ export interface AppError {
   /** Violações por campo (`errors[]` do problem+json), indexadas pelo nome do campo. */
   readonly campos?: Readonly<Record<string, string>>;
   readonly status?: number;
+  /** Segundos de espera informados por `Retry-After` em respostas `429`. */
+  readonly retryAfter?: number;
 }
 
 export function isAppError(valor: unknown): valor is AppError {

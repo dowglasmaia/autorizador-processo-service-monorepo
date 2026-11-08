@@ -22,7 +22,7 @@ Frontend do **Autorizador de Procedimentos Médicos**: Angular 21, TypeScript es
 ## Estrutura
 ```
 src/app/
-├─ core/        infraestrutura transversal (fronteira HTTP, erros da API)
+├─ core/        infraestrutura transversal (fronteira HTTP, erros da API, autenticação)
 ├─ features/    uma pasta por funcionalidade (rotas, páginas, doc.md)
 ├─ app.config.ts, app.routes.ts, app.ts
 src/environments/
@@ -35,3 +35,10 @@ src/environments/
 - **TypeScript estrito** e `strictTemplates` ativos.
 - Textos de UI, mensagens e documentação em português.
 - Tipos da API virão **gerados** do contrato OpenAPI do backend; não duplique DTOs à mão.
+
+## Autenticação
+- **Fluxo:** `/login` (e-mail e senha) → `POST /auth/login` → `AuthService` guarda o `TokenResponse`. O `authInterceptor` anexa `Authorization: Bearer` somente a URLs sob `apiBaseUrl`; o `authGuard` (`canMatch`) protege `painel`, `procedimentos`, `solicitar` e `autorizacoes`, e o `guestGuard` leva quem já entrou ao painel. O destino pós-login vem de `?retorno=`, validado por `retornoSeguro` (recusa `//x`, `http://`, `javascript:` e barra invertida).
+- **Armazenamento:** a sessão fica em `sessionStorage` (some ao fechar a aba) e é restaurada no reload; o logout é agendado no `exp` do token (decodificação só para UX). Nada em armazenamento persistente, URL ou log.
+- **Logout:** menu do usuário no shell ("Sair"); também ocorre em `401` fora do login, com o aviso "Sua sessão expirou. Entre novamente.".
+- **Riscos aceitos:** token em `sessionStorage` é legível por XSS (cookie `HttpOnly` exigiria mudança no backend); sem refresh token (PEN-09/PEN-10); a validade real é sempre decidida pelo servidor.
+- Detalhes: `src/app/core/auth/doc.md` e `src/app/features/login/doc.md`.

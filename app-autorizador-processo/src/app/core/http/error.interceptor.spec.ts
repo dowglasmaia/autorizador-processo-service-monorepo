@@ -100,4 +100,38 @@ describe('errorInterceptor', () => {
     expect(erro.kind).toBe('validacao');
     expect(erro.campos).toEqual({ codigo: 'obrigatório' });
   });
+
+  it('429 preserva Retry-After em segundos', () => {
+    const erro = falha((r) =>
+      r.flush(
+        { code: 'MUITAS_TENTATIVAS', detail: 'Aguarde' },
+        { status: 429, statusText: 'Too Many', headers: { 'Retry-After': '30' } },
+      ),
+    );
+    expect(erro).toMatchObject({ code: 'MUITAS_TENTATIVAS', retryAfter: 30 });
+  });
+
+  it('429 sem Retry-After ou com valor inválido não define retryAfter', () => {
+    const semCabecalho = falha((r) =>
+      r.flush({ code: 'MUITAS_TENTATIVAS' }, { status: 429, statusText: 'x' }),
+    );
+    expect(semCabecalho.retryAfter).toBeUndefined();
+    const invalido = falha((r) =>
+      r.flush(
+        { code: 'MUITAS_TENTATIVAS' },
+        { status: 429, statusText: 'x', headers: { 'Retry-After': 'abc' } },
+      ),
+    );
+    expect(invalido.retryAfter).toBeUndefined();
+  });
+
+  it('Retry-After em outros status é ignorado', () => {
+    const erro = falha((r) =>
+      r.flush(
+        { code: 'ERRO_INTERNO' },
+        { status: 500, statusText: 'x', headers: { 'Retry-After': '5' } },
+      ),
+    );
+    expect(erro.retryAfter).toBeUndefined();
+  });
 });

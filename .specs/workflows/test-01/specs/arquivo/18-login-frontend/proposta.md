@@ -46,3 +46,10 @@ Entregar a tela `/login` (e-mail e senha), o serviço de autenticação JWT, o a
 - **Rotas existentes:** `_ds` e `**` ficam sem guard; só as quatro rotas de funcionalidade são protegidas. [REVISAR]
 - **Aviso de sessão expirada:** passado por parâmetro de rota/estado do serviço (sem texto livre na URL), para não permitir injeção de mensagem.
 - **Pasta `06-execution-plan/`:** inexistente; ignorada e registrada.
+- **Estrutura de rotas (lote 1):** `App` passou a ter só `<router-outlet />`; `Shell` virou rota-pai (`path: ''`) das quatro funcionalidades, de `_ds` e de `**`, e `/login` (com `guestGuard`) fica fora dele. `app.spec.ts` e `shell.spec.ts` foram ajustados (sessão semeada em `sessionStorage` e navegação explícita). [REVISAR]
+- **`retornoSeguro`:** devolve sempre uma string (`/painel` quando inválido) e também recusa `/login`, para evitar laço; o guard preserva o destino completo (com query) via `extractedUrl`.
+- **Aviso de expiração:** signal `sessaoExpirada` no `AuthService` (sem texto na URL); o 401 fora do login com sessão ativa o liga. `sair()` navega ao login; a página de login do lote 1 só tem o formulário básico — estados, mensagens por `code`, modal e `doc.md` ficam para 3.2–3.4.
+- **Lote 2 — modal de erro no login:** `/login` fica fora do `Shell`, então a página inclui o próprio `<app-error-dialog />` (estado compartilhado em `ErrorDialogService`); "Tentar novamente" reenvia o formulário.
+- **Lote 2 — menu do usuário:** botão com `aria-expanded`/`aria-controls` no rodapé da sidebar (também na gaveta móvel), abre grupo com e-mail e "Sair"; Esc e navegação fecham. Sem foco preso (não é diálogo modal). [REVISAR]
+- **Lote 2 — mostrar senha:** rótulo fixo "Mostrar senha" com `aria-pressed`, em vez de trocar o texto do rótulo.
+- **Lote 2 — testes:** usam `environment.apiBaseUrl` (ambiente de teste é `http://localhost:8080/api/v1`). Contadores de solicitações seguem inexistentes; o logout executa as limpezas registradas por `registrarLimpeza`.

@@ -13,6 +13,13 @@ function eProblema(corpo: unknown): corpo is Partial<ProblemDetail> {
   return typeof corpo === 'object' && corpo !== null && !Array.isArray(corpo);
 }
 
+/** Lê `Retry-After` (segundos inteiros não negativos); ignora valores inválidos. */
+function lerRetryAfter(erro: HttpErrorResponse): number | undefined {
+  const bruto = erro.headers?.get('Retry-After')?.trim();
+  if (!bruto || !/^\d+$/.test(bruto)) return undefined;
+  return Number(bruto);
+}
+
 /** Converte qualquer falha HTTP em `AppError`, sem expor detalhes técnicos. */
 export function paraAppError(erro: unknown): AppError {
   if (isAppError(erro)) return erro;
@@ -23,7 +30,9 @@ export function paraAppError(erro: unknown): AppError {
     if (erro.ok || !eProblema(erro.error)) {
       return { kind: 'servidor', detail: MENSAGEM_SERVIDOR, status: erro.status };
     }
-    return mapProblem(erro.error, erro.status);
+    const erroMapeado = mapProblem(erro.error, erro.status);
+    const retryAfter = erro.status === 429 ? lerRetryAfter(erro) : undefined;
+    return retryAfter === undefined ? erroMapeado : { ...erroMapeado, retryAfter };
   }
   return { kind: 'servidor', detail: MENSAGEM_SERVIDOR };
 }

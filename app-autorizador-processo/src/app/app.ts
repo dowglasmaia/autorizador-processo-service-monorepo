@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Shell } from './layout/shell/shell';
+import { RouterOutlet } from '@angular/router';
 
+/** Raiz: apenas o outlet. O `Shell` é a rota-pai das funcionalidades; `/login` fica fora dele. */
 @Component({
   selector: 'app-root',
-  imports: [Shell],
-  template: '<app-shell />',
+  imports: [RouterOutlet],
+  template: '<router-outlet />',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App {}

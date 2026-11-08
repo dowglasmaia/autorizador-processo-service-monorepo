@@ -402,3 +402,18 @@
 {"em":1794160739605,"nivel":"passo","texto":"Verificar ponto de partida","etapa":18,"passo":"partida"}
 {"em":1794160739615,"nivel":"info","texto":"Verificar ponto de partida: pulado · sem verificações configuradas","etapa":18,"passo":"partida"}
 {"em":1794160739620,"nivel":"passo","texto":"Commit da proposta","etapa":18,"passo":"commitProposta"}
+{"em":1794160740000,"nivel":"ok","texto":"0887a9b · 5 arquivo(s) · docs(test-01): proposta da etapa 18 · Login no frontend","etapa":18,"passo":"commitProposta"}
+{"em":1794160740009,"nivel":"ok","texto":"Commit da proposta: ok · 0887a9b · 5 arquivo(s)","etapa":18,"passo":"commitProposta"}
+{"em":1794160740017,"nivel":"passo","texto":"Aplicar a spec","etapa":18,"passo":"aplicar"}
+{"em":1794160740023,"nivel":"info","texto":"proposta antecipada da etapa 19 em paralelo","etapa":18,"passo":"aplicar"}
+{"em":1794160802365,"nivel":"ok","texto":"proposta antecipada da etapa 19 pronta","etapa":18,"passo":"aplicar"}
+{"em":1794161272198,"nivel":"aviso","texto":"a sessão terminou sem marcar tarefas (1 de 2 continuações)","etapa":18,"passo":"aplicar"}
+{"em":1794161272199,"nivel":"erro","texto":"Aplicar a spec: .specs\\workflows\\test-01\\specs\\18-login-frontend/tarefas.md não tem tarefas","etapa":18,"passo":"aplicar"}
+{"em":1794161272201,"nivel":"passo","texto":"Recuperação 1 · Aplicar a spec","etapa":18,"passo":"aplicar"}
+{"em":1794161303553,"nivel":"ok","texto":"recuperação 1 resolveu: A sessão de aplicar a spec já tinha movido (git mv) a pasta da spec 18 para .specs/archive/. Por isso o devkit não achou tarefas.md no caminho esperado e acusou \"não tem tarefas\".","etapa":18,"passo":"aplicar"}
+{"em":1794161303561,"nivel":"passo","texto":"Verificar a mudança","etapa":18,"passo":"verificar"}
+{"em":1794161303578,"nivel":"info","texto":"Verificar a mudança: pulado · sem verificações configuradas","etapa":18,"passo":"verificar"}
+{"em":1794161303586,"nivel":"passo","texto":"Arquivar a spec","etapa":18,"passo":"arquivar"}
+{"em":1794161303595,"nivel":"ok","texto":".specs\\workflows\\test-01\\specs\\18-login-frontend → .specs\\workflows\\test-01\\specs\\arquivo\\18-login-frontend","etapa":18,"passo":"arquivar"}
+{"em":1794161303602,"nivel":"ok","texto":"Arquivar a spec: ok · .specs\\workflows\\test-01\\specs\\arquivo\\18-login-frontend","etapa":18,"passo":"arquivar"}
+{"em":1794161303609,"nivel":"passo","texto":"Commit da entrega","etapa":18,"passo":"commitEntrega"}

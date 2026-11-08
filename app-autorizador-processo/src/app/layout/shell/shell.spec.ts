@@ -11,10 +11,20 @@ import { App } from '../../app';
  * verificada pelas classes de breakpoint (mobile-first) e pelo comportamento da gaveta.
  */
 describe('Shell', () => {
+  afterEach(() => sessionStorage.clear());
+
   let fixture: ReturnType<typeof TestBed.createComponent<App>>;
   let el: HTMLElement;
 
   beforeEach(async () => {
+    sessionStorage.setItem(
+      'autorizador.sessao',
+      JSON.stringify({
+        token: 't',
+        usuario: { id: 1, email: 'ana@exemplo.com' },
+        expiraEm: Date.now() + 3_600_000,
+      }),
+    );
     TestBed.configureTestingModule({
       providers: [
         provideZonelessChangeDetection(),
@@ -25,6 +35,7 @@ describe('Shell', () => {
     });
     fixture = TestBed.createComponent(App);
     el = fixture.nativeElement;
+    await TestBed.inject(Router).navigateByUrl('/painel');
     await fixture.whenStable();
     TestBed.inject(HttpTestingController).expectOne('/actuator/health').flush({ status: 'UP' });
     await fixture.whenStable();
@@ -81,6 +92,6 @@ describe('Shell', () => {
   });
 
   it('galeria /_ds existe em desenvolvimento', () => {
-    expect(routes.some((r) => r.path === '_ds')).toBe(true);
+    expect(routes.some((r) => r.children?.some((c) => c.path === '_ds'))).toBe(true);
   });
 });

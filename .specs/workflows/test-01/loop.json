@@ -3059,7 +3059,208 @@
           "descricao": "Executa a SPEC-23: tela de login, guarda de rotas, armazenamento do token e logout.\nReferências: SPEC-22 e o design system.\nLimite: sem cadastro e sem recuperação de senha.",
           "spec": "18-login-frontend",
           "specPronta": false,
-          "status": "pendente"
+          "status": "entregue",
+          "entregueEm": "2026-11-08T18:08:23.617Z",
+          "iteracao": 18,
+          "duracaoMs": 583416,
+          "custo": 2.1497340999999994,
+          "passos": [
+            {
+              "id": "propor",
+              "situacao": "ok",
+              "duracaoMs": 50858,
+              "custo": 0.2727032,
+              "tentativas": 1,
+              "detalhe": "19 tarefas"
+            },
+            {
+              "id": "partida",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "commitProposta",
+              "situacao": "ok",
+              "duracaoMs": 378,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "0887a9b · 5 arquivo(s)"
+            },
+            {
+              "id": "aplicar",
+              "situacao": "aviso",
+              "duracaoMs": 532176,
+              "custo": 1.8770308999999996,
+              "tentativas": 1,
+              "detalhe": "recuperado",
+              "recuperacoes": [
+                {
+                  "numero": 1,
+                  "erro": ".specs\\workflows\\test-01\\specs\\18-login-frontend/tarefas.md não tem tarefas",
+                  "resolvida": true,
+                  "custo": 0.21680849999999996,
+                  "em": "2026-11-08T18:07:52.203Z",
+                  "causa": "A sessão de aplicar a spec já tinha movido (git mv) a pasta da spec 18 para .specs/archive/. Por isso o devkit não achou tarefas.md no caminho esperado e acusou \"não tem tarefas\".",
+                  "oQueFez": "Devolvi proposta.md e tarefas.md para .specs/workflows/test-01/specs/18-login-frontend/ com git mv e removi a pasta vazia em .specs/archive/. O tarefas.md tem 19 tarefas marcadas [x] e nenhuma pendente. Não alterei o conteúdo. O passo de arquivar da etapa fará o arquivamento depois.",
+                  "precisaPessoa": false
+                }
+              ]
+            },
+            {
+              "id": "verificar",
+              "situacao": "pulado",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": "sem verificações configuradas"
+            },
+            {
+              "id": "arquivar",
+              "situacao": "ok",
+              "duracaoMs": 4,
+              "custo": 0,
+              "tentativas": 1,
+              "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\18-login-frontend"
+            },
+            {
+              "id": "commitEntrega",
+              "situacao": "ok",
+              "duracaoMs": 0,
+              "custo": 0,
+              "tentativas": 1
+            }
+          ],
+          "sessoes": [
+            {
+              "rotulo": "propor-18",
+              "passo": "propor",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2727032,
+              "turnos": 8,
+              "duracaoMs": 50839,
+              "inicio": 1794160688739,
+              "fim": 1794160739589,
+              "tokens": {
+                "entrada": 14,
+                "saida": 4364,
+                "cacheCriacao": 49103,
+                "cacheLeitura": 326232
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "antecipar-19",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.24054589999999998,
+              "turnos": 6,
+              "duracaoMs": 62326,
+              "inicio": 1794160740026,
+              "fim": 1794160802360,
+              "tokens": {
+                "entrada": 10,
+                "saida": 4972,
+                "cacheCriacao": 42576,
+                "cacheLeitura": 205019
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-18-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.6421844999999997,
+              "turnos": 27,
+              "duracaoMs": 208715,
+              "inicio": 1794160741505,
+              "fim": 1794160950232,
+              "tokens": {
+                "entrada": 42,
+                "saida": 19373,
+                "cacheCriacao": 74925,
+                "cacheLeitura": 1486705
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-18-2",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.7692093,
+              "turnos": 24,
+              "duracaoMs": 248317,
+              "inicio": 1794160950238,
+              "fim": 1794161198565,
+              "tokens": {
+                "entrada": 42,
+                "saida": 26423,
+                "cacheCriacao": 86904,
+                "cacheLeitura": 1572793
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "aplicar-18-3",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.24882859999999998,
+              "turnos": 7,
+              "duracaoMs": 73611,
+              "inicio": 1794161198572,
+              "fim": 1794161272192,
+              "tokens": {
+                "entrada": 12,
+                "saida": 4701,
+                "cacheCriacao": 43627,
+                "cacheLeitura": 272866
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            },
+            {
+              "rotulo": "recuperar-aplicar-1",
+              "passo": "aplicar",
+              "tentativa": 1,
+              "ok": true,
+              "custo": 0.2168085,
+              "turnos": 4,
+              "duracaoMs": 31205,
+              "inicio": 1794161272319,
+              "fim": 1794161303534,
+              "tokens": {
+                "entrada": 6,
+                "saida": 1377,
+                "cacheCriacao": 48604,
+                "cacheLeitura": 86105
+              },
+              "modelo": "claude-sonnet-5-5",
+              "modeloPedido": "claude-sonnet-5-5",
+              "origem": "provider",
+              "esforco": "medium"
+            }
+          ]
         },
         {
           "numero": 19,
@@ -3191,7 +3392,7 @@
     "etapa": 18,
     "inicio": "2026-11-08T17:58:08.717Z",
     "commitInicial": "3a529893ff10aacd33cb2d528b31b4253709c141",
-    "passoAtual": 2,
+    "passoAtual": 6,
     "passos": [
       {
         "id": "propor",
@@ -3211,62 +3412,78 @@
       },
       {
         "id": "commitProposta",
+        "situacao": "ok",
+        "duracaoMs": 378,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "0887a9b · 5 arquivo(s)"
+      },
+      {
+        "id": "aplicar",
+        "situacao": "aviso",
+        "duracaoMs": 532176,
+        "custo": 1.8770308999999996,
+        "tentativas": 1,
+        "recuperacoes": [
+          {
+            "numero": 1,
+            "erro": ".specs\\workflows\\test-01\\specs\\18-login-frontend/tarefas.md não tem tarefas",
+            "resolvida": true,
+            "custo": 0.21680849999999996,
+            "em": "2026-11-08T18:07:52.203Z",
+            "causa": "A sessão de aplicar a spec já tinha movido (git mv) a pasta da spec 18 para .specs/archive/. Por isso o devkit não achou tarefas.md no caminho esperado e acusou \"não tem tarefas\".",
+            "oQueFez": "Devolvi proposta.md e tarefas.md para .specs/workflows/test-01/specs/18-login-frontend/ com git mv e removi a pasta vazia em .specs/archive/. O tarefas.md tem 19 tarefas marcadas [x] e nenhuma pendente. Não alterei o conteúdo. O passo de arquivar da etapa fará o arquivamento depois.",
+            "precisaPessoa": false
+          }
+        ],
+        "detalhe": "recuperado"
+      },
+      {
+        "id": "verificar",
+        "situacao": "pulado",
+        "duracaoMs": 0,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": "sem verificações configuradas"
+      },
+      {
+        "id": "arquivar",
+        "situacao": "ok",
+        "duracaoMs": 4,
+        "custo": 0,
+        "tentativas": 1,
+        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\18-login-frontend"
+      },
+      {
+        "id": "commitEntrega",
         "situacao": "rodando",
         "duracaoMs": 0,
         "custo": 0,
         "tentativas": 1
-      },
-      {
-        "id": "aplicar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "verificar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "arquivar",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "pendente",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 0
       }
     ],
     "titulo": "Revisa a spec do login no frontend (SPEC-23) contra o núcleo HTTP entregue",
     "comparacao": "A pasta já tinha proposta.md e tarefas.md, escritos antes da etapa 17. Revisei os dois contra o código atual e mantive escopo, tarefas e critérios da SPEC-23.\nA etapa 17 entregou AppError, errorInterceptor, ApiClient e os tipos LoginRequest, TokenResponse e Usuario, que a proposta já presumia. Atualizei os nomes reais e a ordem dos interceptors: authInterceptor vem antes do errorInterceptor.\nO errorInterceptor descarta os cabeçalhos, então o Retry-After do 429 se perde. Acrescentei o ajuste mínimo de um campo retryAfter no AppError, como tarefa 1.1 e decisão [REVISAR].\nO apiBaseUrl é relativo (/api/v1), então a regra do Bearer cobre URL relativa e absoluta. SessaoSolicitacoes não existe ainda, então o logout limpa só o estado de core/auth, com ponto de extensão.\nNão há core/auth, guards nem rota /login, e o shell não tem menu de usuário. São 20 tarefas em 5 grupos, e não alterei código da aplicação."
   },
   "totais": {
-    "duracaoMs": 12043172,
-    "custo": 34.763937999999996,
+    "duracaoMs": 12575730,
+    "custo": 36.8815148,
     "execucoes": 2,
     "iteracoes": 18,
     "entregues": 17,
-    "sessoes": 93,
-    "turnos": 1257,
+    "sessoes": 98,
+    "turnos": 1325,
     "verificacoes": 0,
     "correcoes": 0,
-    "recuperacoes": 5,
-    "recuperacoesResolvidas": 4,
+    "recuperacoes": 6,
+    "recuperacoesResolvidas": 5,
     "falhas": 0,
-    "commits": 34,
+    "commits": 35,
     "tokens": {
-      "entrada": 1870,
-      "saida": 837285,
-      "cacheCriacao": 5065603,
-      "cacheLeitura": 56730286
+      "entrada": 1982,
+      "saida": 894131,
+      "cacheCriacao": 5362239,
+      "cacheLeitura": 60353774
     }
   },
   "ultimaExecucao": {
