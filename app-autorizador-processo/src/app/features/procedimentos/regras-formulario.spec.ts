@@ -1,39 +1,15 @@
 import {
   ambosParaSexos,
-  faixaParaIdades,
-  validarFaixa,
+  alternarFaixa,
   validarQuantidadePeriodo,
 } from './regras-formulario';
 
-describe('faixaParaIdades', () => {
-  it('expande a faixa inclusiva', () => {
-    expect(faixaParaIdades(18, 20)).toEqual([18, 19, 20]);
-    expect(faixaParaIdades(5, 5)).toEqual([5]);
-  });
-  it('aceita os limites 0 e 150', () => {
-    expect(faixaParaIdades(0, 0)).toEqual([0]);
-    expect(faixaParaIdades(0, 150)).toHaveLength(151);
-  });
-  it('devolve vazio para faixa invertida, fora do limite ou incompleta', () => {
-    expect(faixaParaIdades(20, 18)).toEqual([]);
-    expect(faixaParaIdades(-1, 5)).toEqual([]);
-    expect(faixaParaIdades(0, 151)).toEqual([]);
-    expect(faixaParaIdades(10, null)).toEqual([]);
-    expect(faixaParaIdades(null, null)).toEqual([]);
-  });
-});
-
-describe('validarFaixa', () => {
-  it('aceita vazia e válida', () => {
-    expect(validarFaixa(null, null)).toBeNull();
-    expect(validarFaixa(0, 150)).toBeNull();
-  });
-  it('rejeita incompleta, invertida, fora do limite e fracionária', () => {
-    expect(validarFaixa(1, null)).toContain('inicial e a final');
-    expect(validarFaixa(20, 18)).toContain('maior');
-    expect(validarFaixa(0, 151)).toContain('entre 0 e 150');
-    expect(validarFaixa(-1, 10)).toContain('entre 0 e 150');
-    expect(validarFaixa(1.5, 3)).toContain('inteiras');
+describe('alternarFaixa', () => {
+  it('adiciona e remove mantendo a ordem do contrato', () => {
+    expect(alternarFaixa([], 'IDOSO')).toEqual(['IDOSO']);
+    expect(alternarFaixa(['IDOSO'], 'CRIANCA')).toEqual(['CRIANCA', 'IDOSO']);
+    expect(alternarFaixa(['CRIANCA', 'IDOSO'], 'CRIANCA')).toEqual(['IDOSO']);
+    expect(alternarFaixa(['ADULTO'], 'ADULTO')).toEqual([]);
   });
 });
 

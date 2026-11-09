@@ -12,11 +12,11 @@ const URL = `${environment.apiBaseUrl.replace(/\/+$/, '')}/painel/resumo`;
 const resumo: ResumoPainel = {
   totalProcedimentos: 3,
   totalAutorizacoes: 0,
-  idadesCobertas: 3,
-  coberturaPorIdade: [
-    { idade: 10, quantidade: 2 },
-    { idade: 20, quantidade: 2 },
-    { idade: 30, quantidade: 1 },
+  faixasCobertas: 3,
+  coberturaPorFaixa: [
+    { faixa: 'CRIANCA', quantidade: 2 },
+    { faixa: 'ADOLESCENTE', quantidade: 2 },
+    { faixa: 'ADULTO', quantidade: 1 },
   ],
   distribuicaoSexos: { masculino: 2, feminino: 3 },
   ultimasAutorizacoes: [],

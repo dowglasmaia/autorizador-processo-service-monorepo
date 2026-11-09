@@ -16,7 +16,7 @@ const pagina = (n: number): PaginaAutorizacoes => ({
       id: 1,
       numProcedimento: 4567,
       sexos: ['M', 'F'],
-      idades: [20, 30],
+      faixasEtarias: ['ADOLESCENTE', 'ADULTO'],
       criadoEm: '2026-01-01T00:00:00Z',
     },
     permitido: true,

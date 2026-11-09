@@ -10,7 +10,7 @@ Princípio: **teste incremental por spec**; nenhuma spec fecha sem executar suas
 | Contrato | Aplicação sobe e responde conforme o OpenAPI (validação de resposta); interfaces geradas compilam | Tipos gerados = contrato (SPEC-32) |
 | Arquitetura | **ArchUnit obrigatório** (`ArchitectureTest`, 10 regras de `TARGET_ARCHITECTURE.md` §2.1) + `ApplicationModules.verify()` | Limites de importação entre `features` (lint/ts paths) |
 | Funcional / e2e | Paridade com baseline (SPEC-31) | Playwright sobre `docker compose` (SPEC-30): cadastrar → solicitar (autorizado/negado/inexistente) → histórico → painel |
-| Regressão | Suíte completa a cada spec + `tools/parity` | `ng build` produção + testes + e2e em CI |
+| Regressão | Suíte completa a cada spec + `.specs/workflows/ferramentas/parity` | `ng build` produção + testes + e2e em CI |
 | Não funcional | Smoke de desempenho (SPEC-42), health, logs sem vazamento | Lighthouse a11y/performance smoke, responsividade 320/768/1280 |
 
 ## 2. Cenários de aceitação de negócio (Given/When/Then) — fonte única

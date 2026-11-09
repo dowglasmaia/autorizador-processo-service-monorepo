@@ -26,18 +26,19 @@ import {
   ROTULO_CATEGORIA,
   ROTULO_COBERTURA,
   ROTULO_ESPECIALIDADE,
+  ROTULO_FAIXA,
+  INTERVALO_FAIXA,
+  FAIXAS_ETARIAS,
   ROTULO_PERIODO,
   type Categoria,
   type Especialidade,
+  type FaixaEtaria,
   type Periodo,
   type TipoCobertura,
 } from '../rotulos';
 import {
-  IDADE_MAXIMA,
-  IDADE_MINIMA,
   ambosParaSexos,
-  faixaParaIdades,
-  validarFaixa,
+  alternarFaixa,
   validarQuantidadePeriodo,
 } from '../regras-formulario';
 
@@ -62,13 +63,13 @@ const ETAPA_DO_CAMPO: Readonly<Record<string, number>> = {
   tipoCobertura: 1,
   quantidadeMaxima: 1,
   periodo: 1,
-  idades: 2,
+  faixasEtarias: 2,
   sexos: 2,
   exigeAutorizacaoPrevia: 3,
   exigeJustificativaMedica: 3,
 };
 
-/** Nome do campo sem índice (`idades[0]` → `idades`). */
+/** Nome do campo sem índice (`faixasEtarias[0]` → `faixasEtarias`). */
 function nomeDoCampo(campo: string): string {
   return campo.replace(/\[.*$/, '');
 }
@@ -189,50 +190,34 @@ function nomeDoCampo(campo: string): string {
         @case (2) {
           <div formGroupName="elegibilidade" class="grid gap-5">
             <fieldset class="grid gap-3">
-              <legend class="mb-1.5 text-sm font-semibold text-content">Faixa de idade</legend>
-              <div class="grid gap-3 sm:grid-cols-[1fr_1fr_auto] sm:items-end">
-                <app-field label="Idade inicial">
-                  <input
-                    appFieldControl
-                    type="number"
-                    inputmode="numeric"
-                    formControlName="idadeMin"
-                    [min]="idadeMinima"
-                    [max]="idadeMaxima"
-                  />
-                </app-field>
-                <app-field label="Idade final">
-                  <input
-                    appFieldControl
-                    type="number"
-                    inputmode="numeric"
-                    formControlName="idadeMax"
-                    [min]="idadeMinima"
-                    [max]="idadeMaxima"
-                  />
-                </app-field>
-                <button app-button variant="secondary" (click)="aplicarFaixa()">
-                  Aplicar faixa
-                </button>
-              </div>
-              @if (erroFaixa() ?? erroServidor('idades'); as e) {
+              <legend class="mb-1.5 text-sm font-semibold text-content">Faixas etárias aceitas</legend>
+              <ul class="grid gap-3 sm:grid-cols-2">
+                @for (f of faixasDisponiveis; track f) {
+                  <li>
+                    <button
+                      type="button"
+                      class="flex min-h-11 w-full items-center justify-between gap-3 rounded-card border px-4 py-3 text-left transition-[transform,background-color,border-color] duration-150 ease-out active:scale-[0.98] motion-reduce:transition-none"
+                      [class]="
+                        faixaSelecionada(f)
+                          ? 'border-accent-700 bg-accent-100 text-accent-800'
+                          : 'border-divider bg-surface text-content hover:bg-neutral-100'
+                      "
+                      [attr.aria-pressed]="faixaSelecionada(f)"
+                      (click)="alternarFaixaEtaria(f)"
+                    >
+                      <span class="grid">
+                        <span class="font-semibold">{{ rotuloFaixa[f] }}</span>
+                        <span class="text-sm">{{ intervaloFaixa[f] }}</span>
+                      </span>
+                      @if (faixaSelecionada(f)) {
+                        <span aria-hidden="true" class="font-bold">✓</span>
+                      }
+                    </button>
+                  </li>
+                }
+              </ul>
+              @if (erroServidor('faixasEtarias'); as e) {
                 <p class="text-sm font-semibold text-danger" role="alert">{{ e }}</p>
-              }
-              @if (idades().length > 0) {
-                <ul class="flex flex-wrap gap-2" aria-label="Idades aceitas">
-                  @for (idade of idades(); track idade) {
-                    <li>
-                      <button
-                        type="button"
-                        class="inline-flex min-h-11 items-center gap-2 rounded-pill border border-accent-700 bg-accent-100 px-3 py-1 text-sm font-semibold text-accent-800"
-                        [attr.aria-label]="'Remover idade ' + idade"
-                        (click)="removerIdade(idade)"
-                      >
-                        {{ idade }} <span aria-hidden="true">×</span>
-                      </button>
-                    </li>
-                  }
-                </ul>
               }
             </fieldset>
 
@@ -251,7 +236,7 @@ function nomeDoCampo(campo: string): string {
                 class="rounded-card border border-divider bg-neutral-100 p-4 text-sm text-content"
                 role="status"
               >
-                Sem idade ou sexo definidos, nenhuma solicitação será autorizada para este
+                Sem faixa etária ou sexo definidos, nenhuma solicitação será autorizada para este
                 procedimento. Você pode continuar assim mesmo.
               </p>
             }
@@ -279,8 +264,8 @@ function nomeDoCampo(campo: string): string {
               </label>
               <p class="text-sm text-content-muted">
                 Cobertura, quantidade máxima, autorização prévia e justificativa médica são
-                informativas e não alteram o resultado da autorização, que depende só de idade e
-                sexo.
+                informativas e não alteram o resultado da autorização, que depende só da faixa etária e
+                do sexo.
               </p>
             </fieldset>
 
@@ -327,8 +312,9 @@ export class ProcedimentoNovoPage {
   protected readonly rotuloEspecialidade = ROTULO_ESPECIALIDADE;
   protected readonly rotuloCobertura = ROTULO_COBERTURA;
   protected readonly rotuloPeriodo = ROTULO_PERIODO;
-  protected readonly idadeMinima = IDADE_MINIMA;
-  protected readonly idadeMaxima = IDADE_MAXIMA;
+  protected readonly faixasDisponiveis = FAIXAS_ETARIAS;
+  protected readonly rotuloFaixa = ROTULO_FAIXA;
+  protected readonly intervaloFaixa = INTERVALO_FAIXA;
   protected readonly opcoesSexo: readonly SegmentedOption[] = [
     { value: 'AMBOS', label: 'Ambos' },
     { value: 'M', label: 'Masculino' },
@@ -363,8 +349,6 @@ export class ProcedimentoNovoPage {
       periodo: new FormControl<Periodo | ''>('', { nonNullable: true }),
     }),
     elegibilidade: new FormGroup({
-      idadeMin: new FormControl<number | null>(null),
-      idadeMax: new FormControl<number | null>(null),
     }),
     utilizacao: new FormGroup({
       exigeAutorizacaoPrevia: new FormControl(true, { nonNullable: true }),
@@ -373,9 +357,8 @@ export class ProcedimentoNovoPage {
   });
 
   protected readonly etapa = signal(0);
-  protected readonly idades = signal<readonly number[]>([]);
+  protected readonly faixas = signal<readonly FaixaEtaria[]>([]);
   protected readonly sexo = signal<EscolhaSexo>('AMBOS');
-  protected readonly erroFaixa = signal<string | null>(null);
   protected readonly salvando = signal(false);
   /** Mensagens do servidor por campo (`PROCEDIMENTO_DUPLICADO`, `VALIDACAO_INVALIDA`). */
   private readonly errosServidor = signal<Readonly<Record<string, string>>>({});
@@ -412,11 +395,9 @@ export class ProcedimentoNovoPage {
     const cob = this.form.controls.cobertura.getRawValue();
     const uti = this.form.controls.utilizacao.getRawValue();
     const sim = (b: boolean): string => (b ? 'Sim' : 'Não');
-    const idades = this.idades();
-    const textoIdades =
-      idades.length === 0
-        ? 'Nenhuma'
-        : `${idades.length} ${idades.length === 1 ? 'idade' : 'idades'} (${idades[0]} a ${idades[idades.length - 1]})`;
+    const faixas = this.faixas();
+    const textoFaixas =
+      faixas.length === 0 ? 'Nenhuma' : faixas.map((f) => ROTULO_FAIXA[f]).join(', ');
     return [
       { rotulo: 'Número', valor: id.numProcedimento === null ? '—' : String(id.numProcedimento) },
       { rotulo: 'Nome', valor: id.nome.trim() || '—' },
@@ -437,7 +418,7 @@ export class ProcedimentoNovoPage {
             ? `${cob.quantidadeMaxima} por ${ROTULO_PERIODO[cob.periodo].toLowerCase()}`
             : 'Não informada',
       },
-      { rotulo: 'Idades', valor: textoIdades },
+      { rotulo: 'Faixas etárias', valor: textoFaixas },
       {
         rotulo: 'Sexo',
         valor: this.opcoesSexo.find((o) => o.value === this.sexo())?.label ?? '—',
@@ -469,7 +450,7 @@ export class ProcedimentoNovoPage {
       exigeAutorizacaoPrevia: uti.exigeAutorizacaoPrevia,
       exigeJustificativaMedica: uti.exigeJustificativaMedica,
       sexos,
-      idades: [...this.idades()],
+      faixasEtarias: [...this.faixas()],
     };
   }
 
@@ -537,7 +518,7 @@ export class ProcedimentoNovoPage {
   }
 
   protected avisoRn9(): boolean {
-    return this.idades().length === 0 || this.sexo() === 'NENHUM';
+    return this.faixas().length === 0 || this.sexo() === 'NENHUM';
   }
 
   protected erro(caminho: string): string {
@@ -572,17 +553,12 @@ export class ProcedimentoNovoPage {
     this.sexo.set(valor as EscolhaSexo);
   }
 
-  protected aplicarFaixa(): void {
-    const { idadeMin, idadeMax } = this.form.controls.elegibilidade.getRawValue();
-    const mensagem = validarFaixa(idadeMin, idadeMax);
-    this.erroFaixa.set(mensagem);
-    if (mensagem !== null) return;
-    const novas = faixaParaIdades(idadeMin, idadeMax);
-    this.idades.set([...new Set([...this.idades(), ...novas])].sort((a, b) => a - b));
+  protected faixaSelecionada(faixa: FaixaEtaria): boolean {
+    return this.faixas().includes(faixa);
   }
 
-  protected removerIdade(idade: number): void {
-    this.idades.update((lista) => lista.filter((i) => i !== idade));
+  protected alternarFaixaEtaria(faixa: FaixaEtaria): void {
+    this.faixas.update((atuais) => alternarFaixa(atuais, faixa));
   }
 
   /** Valida a etapa e marca os campos para exibir os erros. */
@@ -595,12 +571,6 @@ export class ProcedimentoNovoPage {
         return this.form.controls.identificacao.valid;
       case 1:
         return Object.keys(this.errosCobertura()).length === 0;
-      case 2: {
-        const { idadeMin, idadeMax } = this.form.controls.elegibilidade.getRawValue();
-        const mensagem = validarFaixa(idadeMin, idadeMax);
-        this.erroFaixa.set(mensagem);
-        return mensagem === null;
-      }
       default:
         return true;
     }

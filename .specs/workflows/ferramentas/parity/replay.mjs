@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 // Replay dos golden cases (B01-B17 + adicionais) contra a versão original ou a v1.
 // Node >= 20, sem dependências. Uso:
-//   node tools/parity/replay.mjs --target original --base-url http://localhost:18080 [--only grupo]
-//   node tools/parity/replay.mjs --target v1 --base-url http://localhost:8080 --email e --senha s
+//   node .specs/workflows/ferramentas/parity/replay.mjs --target original --base-url http://localhost:18080 [--only grupo]
+//   node .specs/workflows/ferramentas/parity/replay.mjs --target v1 --base-url http://localhost:8080 --email e --senha s
 
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
 const GRUPOS = ['procedimento', 'autorizacao', 'infra'];
-const AJUDA = `Uso: node tools/parity/replay.mjs --target original|v1 --base-url <url> [--only procedimento|autorizacao|infra] [--email <e> --senha <s>]
+const AJUDA = `Uso: node .specs/workflows/ferramentas/parity/replay.mjs --target original|v1 --base-url <url> [--only procedimento|autorizacao|infra] [--email <e> --senha <s>]
   --target    original (sem autenticação) ou v1 (login em /api/v1/auth/login, Bearer)
   --base-url  URL base, ex.: http://localhost:18080
   --only      executa só um grupo de casos

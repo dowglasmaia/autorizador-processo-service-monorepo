@@ -4,7 +4,7 @@
 # Não toca no .env do desenvolvedor nem nos contêineres do projeto "autorizador-processo".
 # Requisitos: Docker com Compose (plugin `docker compose` ou `docker-compose`) e Node >= 20.
 set -euo pipefail
-RAIZ="$(cd "$(dirname "$0")/../.." && pwd)"
+RAIZ="$(cd "$(dirname "$0")/../../../.." && pwd)"
 TMP="$(mktemp -d)"
 PROJETO="sondagem-seguranca"
 API_PORT=18090
@@ -39,6 +39,6 @@ compose up -d --build --wait --wait-timeout 300
 compose exec -T postgres psql -U autorizador -d autorizador -v ON_ERROR_STOP=1 -c \
   "insert into usuario (email, senha_hash, ativo) select '$EMAIL_INATIVO', senha_hash, false from usuario where email = '$EMAIL_ADMIN'" >/dev/null
 
-node "$RAIZ/tools/security/sondagem.mjs" \
+node "$RAIZ/.specs/workflows/ferramentas/security/sondagem.mjs" \
   --api "http://localhost:$API_PORT" --front "http://localhost:$APP_PORT" \
   --email "$EMAIL_ADMIN" --senha "$SENHA_ADMIN" --jwt-secret "$SEGREDO" --email-inativo "$EMAIL_INATIVO"

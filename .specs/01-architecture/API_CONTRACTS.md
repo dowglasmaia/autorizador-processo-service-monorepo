@@ -118,3 +118,8 @@ JWT: HS256; claims `iss=autorizador-processo`, `sub`=id, `email`, `iat`, `exp` (
 | `ACESSO_NEGADO` | 403 | reservado (sem papéis na v1; PEN-11) | "Você não tem permissão para esta ação." |
 Respostas `401` incluem `WWW-Authenticate: Bearer`. O frontend decide por `code`; `403` de negócio (`AUTORIZACAO_NEGADA`, `PROCEDIMENTO_DUPLICADO`) continua distinto de `ACESSO_NEGADO`.
 Variáveis: `JWT_SECRET` (obrigatória), `JWT_TTL_MINUTOS`, `AUTH_BOOTSTRAP_EMAIL`, `AUTH_BOOTSTRAP_SENHA`.
+
+## Atualização · faixas etárias (2026-11-09, ADR-19)
+- `ProcedimentoRequest`/`Procedimento`: `idades: int[]` foi substituído por `faixasEtarias: FaixaEtaria[]` (`CRIANCA` 0–12, `ADOLESCENTE` 13–20, `ADULTO` 21–59, `IDOSO` 60–150; lista pode ser vazia, RN9). Valor fora do enum → `400 CORPO_INVALIDO`.
+- `POST /autorizacoes` não muda: `idade` inteira 0..150; a faixa é calculada no servidor.
+- `GET /painel/resumo`: `idadesCobertas` → `faixasCobertas`; `coberturaPorIdade[{idade,quantidade}]` → `coberturaPorFaixa[{faixa,quantidade}]` (só faixas com ao menos um procedimento, da mais nova à mais velha).

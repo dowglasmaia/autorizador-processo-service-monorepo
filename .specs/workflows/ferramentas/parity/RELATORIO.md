@@ -67,6 +67,6 @@ Execução dos golden cases (`cases.json`) contra a v1 (`api-autorizador-process
 ```bash
 # .env descartável (fora do git) com API_PORT, POSTGRES_PASSWORD, JWT_SECRET, AUTH_BOOTSTRAP_EMAIL e AUTH_BOOTSTRAP_SENHA
 docker compose -p paridade --env-file <arquivo.env> up -d --build postgres api   # ou docker-compose
-node tools/parity/replay.mjs --target v1 --base-url http://localhost:<API_PORT> --email <e> --senha <s>
+node .specs/workflows/ferramentas/parity/replay.mjs --target v1 --base-url http://localhost:<API_PORT> --email <e> --senha <s>
 docker compose -p paridade --env-file <arquivo.env> down -v
 ```

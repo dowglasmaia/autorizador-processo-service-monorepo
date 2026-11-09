@@ -7,7 +7,7 @@
 > - **[CÓDIGO]** — comportamento lido diretamente do código.
 > - **[INFERIDO]** — dedução a partir do código/dependências, **não executada** (precisa de validação em runtime).
 > - **[SUGESTÃO]** — ideia de UX que **não** existe na API; marcada para não ser confundida com funcionalidade real.
-> **Nota de encerramento (SPEC-43):** este documento descreve a versão original. O comportamento hoje vigente é o do baseline executado: `tools/parity/` (23 casos reproduzidos com sucesso contra o novo backend), o contrato OpenAPI v1 e o `PERFORMANCE_REPORT.md`. Os pontos marcados como **[INFERIDO]** ficam **substituídos** pelo que o baseline observou em execução; em divergência, vale o baseline e o contrato, não este texto.
+> **Nota de encerramento (SPEC-43):** este documento descreve a versão original. O comportamento hoje vigente é o do baseline executado: `.specs/workflows/ferramentas/parity/` (23 casos reproduzidos com sucesso contra o novo backend), o contrato OpenAPI v1 e o `PERFORMANCE_REPORT.md`. Os pontos marcados como **[INFERIDO]** ficam **substituídos** pelo que o baseline observou em execução; em divergência, vale o baseline e o contrato, não este texto.
 
 ---
 

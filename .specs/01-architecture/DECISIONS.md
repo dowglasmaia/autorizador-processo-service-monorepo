@@ -63,3 +63,8 @@ Diferencia: **Fato** · **Inferência** · **Decisão** · **Recomendação** ·
 | Divergência contrato × frontend | SPEC-32 + CI |
 | Perda de regra ao reescrever | Baseline executável (SPEC-02) + paridade (SPEC-31) |
 | Abuso de credenciais / vazamento de JWT | SEC-13..SEC-20, `JWT_SECRET` obrigatório, limitador, revisão em SPEC-41; usar HTTPS na frente do Nginx |
+
+## ADR-19 · Regra de idade por faixa etária (2026-11-09)
+- **Decisão:** o procedimento aceita **faixas etárias** (`CRIANCA` 0–12, `ADOLESCENTE` 13–20 — de 12 anos e 1 dia até 20 —, `ADULTO` 21–59, `IDOSO` 60–150), não idades exatas. A solicitação mantém `idade` (0..150, anos completos); o domínio converte em faixa (`FaixaEtaria.de`) e autoriza se o sexo e a faixa forem aceitos (RN5–RN7).
+- **Por quê:** uma lista de números absolutos não expressa a regra de negócio e obriga a cadastrar cada idade.
+- **Consequências:** `idades` sai do contrato `/api/v1` (quebra intencional, aceita porque o único cliente é o frontend do monorepo; instantâneo do contrato atualizado); tabela `procedimento_idade` substituída por `procedimento_faixa_etaria` (migração V5, com conversão dos dados); painel mostra cobertura por faixa; paridade com a versão original registrada como DIV-09. Limites das faixas adulto/idoso (21–59/60+) são premissa do projeto: ajuste em `FaixaEtaria` se o negócio definir outros.

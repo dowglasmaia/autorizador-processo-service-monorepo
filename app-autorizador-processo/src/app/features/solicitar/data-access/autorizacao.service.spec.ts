@@ -13,7 +13,7 @@ const procedimento = {
   id: 1,
   numProcedimento: 4567,
   sexos: ['F' as const],
-  idades: [20],
+  faixasEtarias: ['ADOLESCENTE'],
   criadoEm: '2026-01-01T00:00:00Z',
 };
 

@@ -18,7 +18,7 @@ test('Cenário 1 · o painel mostra os totais da seed', async ({ page, request }
     expect(resumo).toMatchObject({
       totalProcedimentos: SEED.totalProcedimentos,
       totalAutorizacoes: SEED.totalAutorizacoes,
-      idadesCobertas: SEED.idadesCobertas,
+      faixasCobertas: SEED.faixasCobertas,
     });
   } else {
     expect(resumo.totalProcedimentos).toBeGreaterThanOrEqual(SEED.totalProcedimentos);
@@ -30,7 +30,7 @@ test('Cenário 1 · o painel mostra os totais da seed', async ({ page, request }
   await expect(valorDoIndicador(page, 'Autorizações')).toHaveText(
     String(resumo.totalAutorizacoes),
   );
-  await expect(valorDoIndicador(page, 'Idades cobertas')).toHaveText(
-    String(resumo.idadesCobertas),
+  await expect(valorDoIndicador(page, 'Faixas cobertas')).toHaveText(
+    String(resumo.faixasCobertas),
   );
 });

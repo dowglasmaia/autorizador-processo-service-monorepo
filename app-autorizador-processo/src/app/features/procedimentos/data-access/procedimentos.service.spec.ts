@@ -14,7 +14,7 @@ const pagina = (n: number): PaginaProcedimentos => ({
     id: i + 1,
     numProcedimento: 100 + i,
     sexos: ['M', 'F'] as ('M' | 'F')[],
-    idades: [18, 19],
+    faixasEtarias: ['ADOLESCENTE'],
     criadoEm: '2026-01-01T00:00:00Z',
   })),
   pagina: 0,
@@ -90,7 +90,7 @@ describe('ProcedimentosService', () => {
         nome: 'X',
         categoria: 'CONSULTAS',
         sexos: ['M'],
-        idades: [1],
+        faixasEtarias: ['CRIANCA'],
       })
       .subscribe((p) => (id = p.id));
     const req = http.expectOne(URL);

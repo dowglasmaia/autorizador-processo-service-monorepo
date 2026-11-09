@@ -54,3 +54,6 @@ Não há evidência de dados de produção (dev `create-drop`, teste H2 semeado)
 
 ## 5. Testes de persistência
 PostgreSQL 16 real via Testcontainers (nunca H2): migração limpa, UNIQUE, FKs, CHECKs, round-trip do adaptador, auditoria, consultas do painel com dados conhecidos.
+
+## V5 · Faixa etária (2026-11-09)
+`procedimento_faixa_etaria (procedimento_id, faixa)` com PK composta, FK em cascata e `check faixa in ('CRIANCA','ADOLESCENTE','ADULTO','IDOSO')`, mais `procedimento_faixa_etaria_audit` (Envers). Os dados de `procedimento_idade` são convertidos pela faixa que contém cada idade (0–12, 13–20, 21–59, 60+) e a tabela é removida; `procedimento_idade_audit` permanece como histórico sem uso. Seed local: 1234 = CRIANCA+ADOLESCENTE, 4567 = ADOLESCENTE+ADULTO, 6789 = CRIANCA.

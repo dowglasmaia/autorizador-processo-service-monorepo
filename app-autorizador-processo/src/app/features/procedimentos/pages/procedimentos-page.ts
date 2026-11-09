@@ -12,7 +12,7 @@ import {
 import type { DataTableColumn } from '../../../shared/ui';
 import type { ProcedimentoDto } from '../../../shared/api';
 import { ProcedimentosService } from '../data-access/procedimentos.service';
-import { ROTULO_CATEGORIA, ROTULO_SEXO } from '../rotulos';
+import { ROTULO_CATEGORIA, ROTULO_FAIXA, ROTULO_SEXO, type FaixaEtaria } from '../rotulos';
 import { MENSAGENS } from '../../../core/i18n/mensagens';
 
 /** Lista de procedimentos: esqueleto, erro, vazio com CTA e tabela responsiva. */
@@ -108,7 +108,7 @@ export class ProcedimentosPage implements OnInit {
       value: (p) => (p.categoria ? ROTULO_CATEGORIA[p.categoria] : null),
     },
     { key: 'sexos', label: MENSAGENS.procedimentos.colunas.sexos },
-    { key: 'idades', label: MENSAGENS.procedimentos.colunas.idades, value: (p) => resumoIdades(p.idades) },
+    { key: 'faixas', label: MENSAGENS.procedimentos.colunas.faixas, value: (p) => resumoFaixas(p.faixasEtarias) },
     { key: 'id', label: MENSAGENS.procedimentos.colunas.id },
     { key: 'acoes', label: MENSAGENS.procedimentos.colunas.acao },
   ];
@@ -126,12 +126,7 @@ export class ProcedimentosPage implements OnInit {
   }
 }
 
-/** "18 a 20 anos" para faixa contínua; lista curta caso contrário. */
-export function resumoIdades(idades: readonly number[]): string {
-  if (idades.length === 0) return '—';
-  const min = idades[0];
-  const max = idades[idades.length - 1];
-  const continua = max - min + 1 === idades.length;
-  if (idades.length === 1) return `${min} anos`;
-  return continua ? `${min} a ${max} anos` : `${idades.length} idades (${min}–${max})`;
+/** "Criança, Adulto"; sem faixas, "—". */
+export function resumoFaixas(faixas: readonly FaixaEtaria[]): string {
+  return faixas.length === 0 ? '—' : faixas.map((f) => ROTULO_FAIXA[f]).join(', ');
 }

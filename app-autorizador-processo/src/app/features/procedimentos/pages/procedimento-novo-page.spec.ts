@@ -72,50 +72,37 @@ describe('ProcedimentoNovoPage', () => {
     expect(t.el.querySelector('[aria-current="step"]')?.textContent).toContain('Elegibilidade');
   });
 
-  it('aplica a faixa, remove uma idade e mostra o aviso RN9 sem sexo', async () => {
+  it('seleciona faixas etárias, desmarca uma e mostra o aviso RN9 sem sexo', async () => {
     const t = montar();
     await ate2(t);
     t.botao('Avançar').click();
     await t.fixture.whenStable();
     expect(t.el.textContent).toContain('nenhuma solicitação será autorizada');
+    expect(t.el.textContent).toContain('13 a 20 anos');
+    expect(t.el.textContent).toContain('60 anos ou mais');
 
-    await t.digitar('Idade inicial', '18');
-    await t.digitar('Idade final', '20');
-    t.botao('Aplicar faixa').click();
+    t.botao('Adolescente').click();
     await t.fixture.whenStable();
-    expect(t.el.querySelectorAll('ul[aria-label="Idades aceitas"] li').length).toBe(3);
+    t.botao('Idoso').click();
+    await t.fixture.whenStable();
+    expect(t.el.querySelectorAll('fieldset ul button[aria-pressed="true"]').length).toBe(2);
     expect(t.el.textContent).not.toContain('nenhuma solicitação será autorizada');
 
-    t.botao('18').click();
+    t.botao('Idoso').click();
     await t.fixture.whenStable();
-    expect(t.el.querySelectorAll('ul[aria-label="Idades aceitas"] li').length).toBe(2);
+    expect(t.el.querySelectorAll('fieldset ul button[aria-pressed="true"]').length).toBe(1);
 
     t.botao('Nenhum').click();
     await t.fixture.whenStable();
     expect(t.el.textContent).toContain('nenhuma solicitação será autorizada');
   });
 
-  it('rejeita faixa invertida', async () => {
-    const t = montar();
-    await ate2(t);
-    t.botao('Avançar').click();
-    await t.fixture.whenStable();
-    await t.digitar('Idade inicial', '20');
-    await t.digitar('Idade final', '18');
-    t.botao('Aplicar faixa').click();
-    await t.fixture.whenStable();
-    expect(t.el.textContent).toContain('não pode ser maior');
-    expect(t.el.querySelector('ul[aria-label="Idades aceitas"]')).toBeNull();
-  });
-
-  /** Preenche tudo (18–20 anos, Ambos) e chega à etapa 4. */
+  /** Preenche tudo (Adolescente, Ambos) e chega à etapa 4. */
   async function ate4(t: ReturnType<typeof montar>): Promise<void> {
     await ate2(t);
     t.botao('Avançar').click(); // cobertura → elegibilidade
     await t.fixture.whenStable();
-    await t.digitar('Idade inicial', '18');
-    await t.digitar('Idade final', '20');
-    t.botao('Aplicar faixa').click();
+    t.botao('Adolescente').click();
     await t.fixture.whenStable();
     t.botao('Avançar').click();
     await t.fixture.whenStable();
@@ -137,7 +124,7 @@ describe('ProcedimentoNovoPage', () => {
       'Ressonância',
     );
     expect(t.el.querySelector('section[aria-labelledby="titulo-resumo"]')?.textContent).toContain(
-      '3 idades (18 a 20)',
+      'Adolescente',
     );
   });
 
@@ -156,7 +143,7 @@ describe('ProcedimentoNovoPage', () => {
       exigeAutorizacaoPrevia: true,
       exigeJustificativaMedica: true,
       sexos: ['M', 'F'],
-      idades: [18, 19, 20],
+      faixasEtarias: ['ADOLESCENTE'],
     });
     req.flush(
       { id: 1, numProcedimento: 9999, criadoEm: '2026-01-01T00:00:00Z' },

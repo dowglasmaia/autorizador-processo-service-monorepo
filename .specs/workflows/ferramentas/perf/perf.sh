@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # Smoke de desempenho (SPEC-42): sobe um Compose DESCARTÁVEL (postgres + api, projeto/portas/.env próprios, segredos
 # aleatórios), carrega os dados sintéticos, roda a carga e derruba tudo com o volume, mesmo em falha.
-# Uso: tools/perf/perf.sh [dados|carga]   (dados = só carrega e confere contagens; carga = padrão, inclui dados)
+# Uso: .specs/workflows/ferramentas/perf/perf.sh [dados|carga]   (dados = só carrega e confere contagens; carga = padrão, inclui dados)
 # Variáveis: CONEXOES (20), SEGUNDOS (60), AQUECIMENTO (5), SAIDA (arquivo JSON opcional).
 # Requisitos: Docker com Compose e Node >= 20. Não toca no .env do desenvolvedor.
 set -euo pipefail
 MODO="${1:-carga}"
-RAIZ="$(cd "$(dirname "$0")/../.." && pwd)"
+RAIZ="$(cd "$(dirname "$0")/../../../.." && pwd)"
 TMP="$(mktemp -d)"
 PROJETO="smoke-desempenho"
 API_PORT=18091
@@ -41,11 +41,11 @@ if [ "$MODO" = "web" ]; then
   exit 0
 fi
 compose up -d --build --wait --wait-timeout 300 postgres api
-psql < "$RAIZ/tools/perf/dados.sql" >/dev/null
+psql < "$RAIZ/.specs/workflows/ferramentas/perf/dados.sql" >/dev/null
 echo "Contagens (procedimentos | autorizações):"
 psql -At -c "select (select count(*) from procedimento), (select count(*) from autorizacao)"
 # Reexecutar o script não duplica:
-psql < "$RAIZ/tools/perf/dados.sql" >/dev/null
+psql < "$RAIZ/.specs/workflows/ferramentas/perf/dados.sql" >/dev/null
 psql -At -c "select 'após reexecução: ' || (select count(*) from procedimento) || ' | ' || (select count(*) from autorizacao)"
 [ "$MODO" = "dados" ] && exit 0
 
@@ -90,5 +90,5 @@ SQL
   exit 0
 fi
 
-node "$RAIZ/tools/perf/carga.mjs" --api "http://localhost:$API_PORT" --email "$EMAIL_ADMIN" --senha "$SENHA_ADMIN" \
+node "$RAIZ/.specs/workflows/ferramentas/perf/carga.mjs" --api "http://localhost:$API_PORT" --email "$EMAIL_ADMIN" --senha "$SENHA_ADMIN" \
   --conexoes "${CONEXOES:-20}" --segundos "${SEGUNDOS:-60}" --aquecimento "${AQUECIMENTO:-5}" ${SAIDA:+--saida "$SAIDA"}

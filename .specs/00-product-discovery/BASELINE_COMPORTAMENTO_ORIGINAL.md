@@ -56,6 +56,7 @@ Cada DIV é **decisão registrada** — ver `01-architecture/DECISIONS.md` (ADR/
 | DIV-06 | Sem validação de conteúdo | `numProcedimento > 0`; `idade` inteira `0..150`; `sexos ⊆ {M,F}`; listas vazias **continuam permitidas** (RN9) | integridade mínima; limite 150 é premissa PRM-05 |
 | DIV-08 | `sexo` fora de `M/F` (ex.: "Masculino") na solicitação → negação `403` | `400 VALIDACAO_INVALIDA` (aceita `m`/`f` minúsculos, RN7) | o campo é tipado; "nunca casa" deixa de ser um resultado silencioso |
 | DIV-07 | Listas sem paginação | Listas paginadas (`page`,`size`, padrão 20, máx. 200) e ordenação estável por `numProcedimento` / `id` | determinismo e escala |
+| DIV-09 | Regra de idade por **idades exatas** (`idades: [10, 20]`; só autoriza exatamente essas idades) | Regra por **faixa etária**: `CRIANCA` 0–12, `ADOLESCENTE` 13–20, `ADULTO` 21–59, `IDOSO` 60–150; o procedimento guarda `faixasEtarias` e a solicitação segue enviando `idade` | decisão do responsável: número absoluto não representa a regra de negócio. Migração V5 converte cada idade gravada na faixa que a contém. Painel passa a `coberturaPorFaixa`/`faixasCobertas`. O resultado muda só para idades que estavam fora do conjunto exato, mas dentro da faixa |
 
 **Preservado integralmente:** RN1–RN10 (ver `PRODUCT_CONTEXT.md` §7): unicidade do número e `403` na duplicidade; autorização exige sexo **E** idade por **igualdade exata**; sexo case-insensitive; só concedidas são gravadas; várias autorizações por procedimento; auditoria Envers das duas entidades; `403` para negativa de negócio.
 

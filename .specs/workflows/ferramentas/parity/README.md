@@ -27,10 +27,10 @@ Ao terminar: `docker rm -f baseline-original` e apague o diretório temporário.
 
 ```bash
 # contra a original
-node tools/parity/replay.mjs --target original --base-url http://localhost:18080
+node .specs/workflows/ferramentas/parity/replay.mjs --target original --base-url http://localhost:18080
 
 # contra a v1 (faz login em /api/v1/auth/login e usa o Bearer)
-node tools/parity/replay.mjs --target v1 --base-url http://localhost:8080 --email <e> --senha <s>
+node .specs/workflows/ferramentas/parity/replay.mjs --target v1 --base-url http://localhost:8080 --email <e> --senha <s>
 ```
 
 Opções: `--only procedimento|autorizacao|infra` limita a um grupo; `--email`/`--senha` também
@@ -74,7 +74,7 @@ Repetindo sem reiniciar o contêiner: `AVISO: a base não está limpa ...`, B01/
 ```bash
 # .env descartável (fora do git): API_PORT, POSTGRES_PASSWORD, JWT_SECRET, AUTH_BOOTSTRAP_EMAIL, AUTH_BOOTSTRAP_SENHA
 docker compose -p paridade --env-file <arquivo.env> up -d --build --wait postgres api   # ou docker-compose
-node tools/parity/replay.mjs --target v1 --base-url http://localhost:<API_PORT> --email <e> --senha <s>
+node .specs/workflows/ferramentas/parity/replay.mjs --target v1 --base-url http://localhost:<API_PORT> --email <e> --senha <s>
 docker compose -p paridade --env-file <arquivo.env> down -v
 ```
 

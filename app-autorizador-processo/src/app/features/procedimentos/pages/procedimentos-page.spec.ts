@@ -6,7 +6,7 @@ import { Router, provideRouter } from '@angular/router';
 import { errorInterceptor } from '../../../core/http/error.interceptor';
 import { environment } from '../../../../environments/environment';
 import type { PaginaProcedimentos } from '../../../shared/api';
-import { ProcedimentosPage, resumoIdades } from './procedimentos-page';
+import { ProcedimentosPage, resumoFaixas } from './procedimentos-page';
 
 const URL = `${environment.apiBaseUrl.replace(/\/+$/, '')}/procedimentos`;
 
@@ -18,12 +18,11 @@ const pagina = (itens: PaginaProcedimentos['itens']): PaginaProcedimentos => ({
   totalPaginas: itens.length === 0 ? 0 : 1,
 });
 
-describe('resumoIdades', () => {
-  it('resume faixa, idade única, lista e vazio', () => {
-    expect(resumoIdades([])).toBe('—');
-    expect(resumoIdades([30])).toBe('30 anos');
-    expect(resumoIdades([18, 19, 20])).toBe('18 a 20 anos');
-    expect(resumoIdades([10, 30])).toBe('2 idades (10–30)');
+describe('resumoFaixas', () => {
+  it('resume as faixas etárias e vazio', () => {
+    expect(resumoFaixas([])).toBe('—');
+    expect(resumoFaixas(['IDOSO'])).toBe('Idoso');
+    expect(resumoFaixas(['CRIANCA', 'ADULTO'])).toBe('Criança, Adulto');
   });
 });
 
@@ -96,10 +95,10 @@ describe('ProcedimentosPage', () => {
             nome: 'Ressonância',
             categoria: 'EXAMES_IMAGEM',
             sexos: ['M', 'F'],
-            idades: [18, 19, 20],
+            faixasEtarias: ['ADOLESCENTE'],
             criadoEm: '2026-01-01T00:00:00Z',
           },
-          { id: 2, numProcedimento: 10, sexos: [], idades: [], criadoEm: '2026-01-01T00:00:00Z' },
+          { id: 2, numProcedimento: 10, sexos: [], faixasEtarias: [], criadoEm: '2026-01-01T00:00:00Z' },
         ]),
       );
     await fixture.whenStable();
@@ -107,7 +106,7 @@ describe('ProcedimentosPage', () => {
     expect(tabela.querySelectorAll('tbody tr').length).toBe(2);
     expect(tabela.textContent).toContain('Ressonância');
     expect(tabela.textContent).toContain('Exames de imagem');
-    expect(tabela.textContent).toContain('18 a 20 anos');
+    expect(tabela.textContent).toContain('Adolescente');
     expect(tabela.textContent).toContain('Sem nome');
     const links = Array.from(tabela.querySelectorAll('a'));
     expect(links.map((a) => a.textContent?.trim())).toEqual(['Solicitar →', 'Solicitar →']);

@@ -32,10 +32,8 @@ test('Cenário 2 · cadastra um procedimento completo em 4 etapas e o vê na lis
   await avancar(page);
 
   // 3 · Elegibilidade
-  await page.getByLabel('Idade inicial').fill('18');
-  await page.getByLabel('Idade final').fill('20');
-  await page.getByRole('button', { name: 'Aplicar faixa' }).click();
-  await expect(page.getByRole('button', { name: 'Remover idade 19' })).toBeVisible();
+  await page.getByRole('button', { name: /^Adolescente/ }).click();
+  await expect(page.getByRole('button', { name: /^Adolescente/ })).toHaveAttribute('aria-pressed', 'true');
   await page.getByRole('group', { name: 'Sexo' }).getByRole('button', { name: 'Feminino' }).click();
   await avancar(page);
 

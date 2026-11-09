@@ -1,6 +1,6 @@
 # Relatório de desempenho (SPEC-42)
 
-Smoke de desempenho do Autorizador, medido de verdade (sem estimativas) no Compose descartável de `tools/perf/perf.sh`.
+Smoke de desempenho do Autorizador, medido de verdade (sem estimativas) no Compose descartável de `.specs/workflows/ferramentas/perf/perf.sh`.
 Não é teste de carga pesado: serve para detectar regressões grosseiras e validar as metas provisórias NFR-02..04.
 
 ## Ambiente
@@ -11,8 +11,8 @@ Não é teste de carga pesado: serve para detectar regressões grosseiras e vali
 - Compose descartável (projeto `smoke-desempenho`, portas próprias, segredos aleatórios, `down -v` em `trap`).
 
 ## Parâmetros
-- Dados sintéticos fictícios (`tools/perf/dados.sql`): 1.000 procedimentos e 10.000 autorizações (idempotente).
-- Carga (`tools/perf/carga.mjs`): 20 conexões, 60 s por endpoint, 5 s de aquecimento, páginas de 20 itens; um único login com
+- Dados sintéticos fictícios (`.specs/workflows/ferramentas/perf/dados.sql`): 1.000 procedimentos e 10.000 autorizações (idempotente).
+- Carga (`.specs/workflows/ferramentas/perf/carga.mjs`): 20 conexões, 60 s por endpoint, 5 s de aquecimento, páginas de 20 itens; um único login com
   o token reutilizado e chamadas direto à porta da API (sem o `limit_req` do login nem o `LimitadorTentativasAdapter`).
 - O `POST /autorizacoes` roda por último e acrescenta ~36 mil linhas, sem afetar as leituras já medidas.
 
@@ -31,7 +31,7 @@ Nenhum ajuste foi necessário para NFR-02.
 
 ## SQL por requisição — NFR-03
 Contagem pelo log do PostgreSQL (`log_statement=all`, sem `BEGIN/COMMIT`), com 1.000/10.000 registros
-(`tools/perf/perf.sh consultas`):
+(`.specs/workflows/ferramentas/perf/perf.sh consultas`):
 
 | Rota | size=5 | size=20 | size=100 | size=200 |
 |---|---|---|---|---|
@@ -85,5 +85,5 @@ medido não o justifica. Pontos de atenção para escala maior: a página de aut
 - Resultados variam entre execuções; use-os como ordem de grandeza e para detectar regressões, não como SLA.
 
 ## Como reproduzir
-`tools/perf/perf.sh` (baseline), `tools/perf/perf.sh consultas` (SQL por requisição e `EXPLAIN`), `tools/perf/perf.sh web`
-(LCP). Ver `tools/perf/README.md`.
+`.specs/workflows/ferramentas/perf/perf.sh` (baseline), `.specs/workflows/ferramentas/perf/perf.sh consultas` (SQL por requisição e `EXPLAIN`), `.specs/workflows/ferramentas/perf/perf.sh web`
+(LCP). Ver `.specs/workflows/ferramentas/perf/README.md`.

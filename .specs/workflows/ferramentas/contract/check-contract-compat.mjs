@@ -1,19 +1,19 @@
-// Verifica compatibilidade do contrato OpenAPI atual com o instantâneo base (tools/contract/baseline).
+// Verifica compatibilidade do contrato OpenAPI atual com o instantâneo base (.specs/workflows/ferramentas/contract/baseline).
 // Falha (código 1) em mudança incompatível dentro de /api/v1: remoção de operação, parâmetro, propriedade,
 // resposta ou valor de enum; mudança de tipo; e nova obrigatoriedade. Mudanças aditivas opcionais passam.
-// Uso: node scripts/check-contract-compat.mjs [--base <pasta>] [--atual <pasta>] [--atualizar-base]
+// Uso: node .specs/workflows/ferramentas/contract/check-contract-compat.mjs [--base <pasta>] [--atual <pasta>] [--atualizar-base]
 import { cpSync, existsSync, readFileSync, rmSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const raiz = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const raiz = resolve(dirname(fileURLToPath(import.meta.url)), '../../../..');
 // js-yaml já é instalado pelo app (dependência transitiva do toolchain do openapi-typescript); evita nova ferramenta.
 const { load } = createRequire(resolve(raiz, 'app-autorizador-processo/package.json'))('js-yaml');
 
 const args = process.argv.slice(2);
 const opcao = (nome, padrao) => (args.includes(nome) ? resolve(args[args.indexOf(nome) + 1]) : padrao);
-const pastaBase = opcao('--base', resolve(raiz, 'tools/contract/baseline'));
+const pastaBase = opcao('--base', resolve(raiz, '.specs/workflows/ferramentas/contract/baseline'));
 const pastaAtual = opcao('--atual', resolve(raiz, 'api-autorizador-processo/src/main/resources/openapi'));
 
 if (args.includes('--atualizar-base')) {
@@ -138,11 +138,11 @@ for (const [chave, { op: opAntiga, parametros: pAntigos }] of base) {
 }
 
 if (problemas.length > 0) {
-  console.error(`FALHA: ${problemas.length} mudança(s) incompatível(is) em /api/v1 em relação a tools/contract/baseline:`);
+  console.error(`FALHA: ${problemas.length} mudança(s) incompatível(is) em /api/v1 em relação a .specs/workflows/ferramentas/contract/baseline:`);
   for (const p of problemas) console.error(`  - ${p}`);
   console.error(
     'Se a mudança é intencional, publique uma nova versão da API. Mudança aditiva aprovada: ' +
-      'rode "node scripts/check-contract-compat.mjs --atualizar-base" e versione o instantâneo.',
+      'rode "node .specs/workflows/ferramentas/contract/check-contract-compat.mjs --atualizar-base" e versione o instantâneo.',
   );
   process.exit(1);
 }

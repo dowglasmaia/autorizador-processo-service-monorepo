@@ -5,12 +5,12 @@ on:
   push:
     paths:
       - "api-autorizador-processo/**"
-      - "tools/parity/**"
+      - ".specs/workflows/ferramentas/parity/**"
       - ".github/workflows/backend-ci.yml"
   pull_request:
     paths:
       - "api-autorizador-processo/**"
-      - "tools/parity/**"
+      - ".specs/workflows/ferramentas/parity/**"
       - ".github/workflows/backend-ci.yml"
   workflow_dispatch:
 
@@ -103,7 +103,7 @@ jobs:
       - name: Replay dos golden cases (v1)
         run: |
           set -a; . "$RUNNER_TEMP/paridade.env"; set +a
-          node tools/parity/replay.mjs --target v1 --base-url "http://localhost:${API_PORT}" \
+          node .specs/workflows/ferramentas/parity/replay.mjs --target v1 --base-url "http://localhost:${API_PORT}" \
             --email "$AUTH_BOOTSTRAP_EMAIL" --senha "$AUTH_BOOTSTRAP_SENHA"
       - name: Logs da API em caso de falha
         if: failure()

@@ -306,6 +306,12 @@ export namespace Autorizacao {
            * @enum {string}
            */
           Sexo: "M" | "F";
+          /**
+           * @description Faixa etária pela idade em anos completos: CRIANCA (0 a 12), ADOLESCENTE (13 a 20, isto é, de 12 anos e 1 dia
+           *     até 20 anos), ADULTO (21 a 59) e IDOSO (60 a 150).
+           * @enum {string}
+           */
+          FaixaEtaria: "CRIANCA" | "ADOLESCENTE" | "ADULTO" | "IDOSO";
           Procedimento: {
               /** Format: int64 */
               id: number;
@@ -324,8 +330,8 @@ export namespace Autorizacao {
               exigeJustificativaMedica?: boolean;
               /** @description Sexos aceitos, na ordem M, F. */
               sexos: components["schemas"]["Sexo"][];
-              /** @description Idades aceitas, em ordem crescente. */
-              idades: number[];
+              /** @description Faixas etárias aceitas, da mais nova para a mais velha. */
+              faixasEtarias: components["schemas"]["FaixaEtaria"][];
               /**
                * Format: date-time
                * @description Data de criação em UTC.
@@ -504,12 +510,11 @@ export namespace Painel {
   export type webhooks = Record<string, never>;
   export interface components {
       schemas: {
-          CoberturaIdade: {
-              /** Format: int32 */
-              idade: number;
+          CoberturaFaixa: {
+              faixa: components["schemas"]["FaixaEtaria"];
               /**
                * Format: int32
-               * @description Número de procedimentos que aceitam a idade.
+               * @description Número de procedimentos que aceitam a faixa etária.
                */
               quantidade: number;
           };
@@ -531,13 +536,19 @@ export namespace Painel {
               /** Format: int32 */
               totalAutorizacoes: number;
               /** Format: int32 */
-              idadesCobertas: number;
-              /** @description Ordenada por idade ascendente. */
-              coberturaPorIdade: components["schemas"]["CoberturaIdade"][];
+              faixasCobertas: number;
+              /** @description Só as faixas com ao menos um procedimento, da mais nova para a mais velha. */
+              coberturaPorFaixa: components["schemas"]["CoberturaFaixa"][];
               distribuicaoSexos: components["schemas"]["DistribuicaoSexos"];
               /** @description Até 4 autorizações mais recentes. */
               ultimasAutorizacoes: components["schemas"]["Autorizacao"][];
           };
+          /**
+           * @description Faixa etária pela idade em anos completos: CRIANCA (0 a 12), ADOLESCENTE (13 a 20, isto é, de 12 anos e 1 dia
+           *     até 20 anos), ADULTO (21 a 59) e IDOSO (60 a 150).
+           * @enum {string}
+           */
+          FaixaEtaria: "CRIANCA" | "ADOLESCENTE" | "ADULTO" | "IDOSO";
           /**
            * @description Categoria do procedimento (lista do protótipo).
            * @enum {string}
@@ -581,8 +592,8 @@ export namespace Painel {
               exigeJustificativaMedica?: boolean;
               /** @description Sexos aceitos, na ordem M, F. */
               sexos: components["schemas"]["Sexo"][];
-              /** @description Idades aceitas, em ordem crescente. */
-              idades: number[];
+              /** @description Faixas etárias aceitas, da mais nova para a mais velha. */
+              faixasEtarias: components["schemas"]["FaixaEtaria"][];
               /**
                * Format: date-time
                * @description Data de criação em UTC.
@@ -739,6 +750,12 @@ export namespace Procedimento {
            */
           Sexo: "M" | "F";
           /**
+           * @description Faixa etária pela idade em anos completos: CRIANCA (0 a 12), ADOLESCENTE (13 a 20, isto é, de 12 anos e 1 dia
+           *     até 20 anos), ADULTO (21 a 59) e IDOSO (60 a 150).
+           * @enum {string}
+           */
+          FaixaEtaria: "CRIANCA" | "ADOLESCENTE" | "ADULTO" | "IDOSO";
+          /**
            * @description Categoria do procedimento (lista do protótipo).
            * @enum {string}
            */
@@ -783,8 +800,8 @@ export namespace Procedimento {
               exigeJustificativaMedica?: boolean;
               /** @description Sexos aceitos; pode ser vazio. */
               sexos?: components["schemas"]["Sexo"][];
-              /** @description Idades aceitas; pode ser vazio. */
-              idades?: number[];
+              /** @description Faixas etárias aceitas; pode ser vazio (nenhuma idade é autorizada). */
+              faixasEtarias?: components["schemas"]["FaixaEtaria"][];
           };
           Procedimento: {
               /** Format: int64 */
@@ -804,8 +821,8 @@ export namespace Procedimento {
               exigeJustificativaMedica?: boolean;
               /** @description Sexos aceitos, na ordem M, F. */
               sexos: components["schemas"]["Sexo"][];
-              /** @description Idades aceitas, em ordem crescente. */
-              idades: number[];
+              /** @description Faixas etárias aceitas, da mais nova para a mais velha. */
+              faixasEtarias: components["schemas"]["FaixaEtaria"][];
               /**
                * Format: date-time
                * @description Data de criação em UTC.

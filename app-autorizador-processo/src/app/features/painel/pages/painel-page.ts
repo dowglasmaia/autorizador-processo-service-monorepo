@@ -71,10 +71,10 @@ import { MENSAGENS } from '../../../core/i18n/mensagens';
           [loading]="carregando()"
         />
         <app-kpi-card
-          [label]="m.kpiIdades"
+          [label]="m.kpiFaixas"
           icon="users"
-          [hint]="m.kpiIdadesDica"
-          [value]="resumo()?.idadesCobertas ?? 0"
+          [hint]="m.kpiFaixasDica"
+          [value]="resumo()?.faixasCobertas ?? 0"
           [loading]="carregando()"
         />
         <app-kpi-card
@@ -90,10 +90,10 @@ import { MENSAGENS } from '../../../core/i18n/mensagens';
           <h2 class="text-lg font-bold text-content">{{ m.coberturaTitulo }}</h2>
           <div class="mt-4">
             @if (resumo(); as r) {
-              @if (r.coberturaPorIdade.length === 0) {
+              @if (r.coberturaPorFaixa.length === 0) {
                 <p class="text-content-muted">{{ m.coberturaVazia }}</p>
               } @else {
-                <app-barra-cobertura [dados]="r.coberturaPorIdade" />
+                <app-barra-cobertura [dados]="r.coberturaPorFaixa" />
               }
             } @else {
               <div class="grid gap-3" role="status" [attr.aria-label]="m.coberturaCarregando">

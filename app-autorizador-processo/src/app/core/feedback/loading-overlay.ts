@@ -11,10 +11,10 @@ import { LoadingService } from './loading.service';
       <div
         role="alert"
         aria-busy="true"
-        class="fixed inset-0 z-[60] flex items-center justify-center bg-scrim"
+        class="fixed inset-0 z-[60] flex animate-overlay items-center justify-center bg-scrim"
       >
         <div
-          class="flex items-center gap-3 rounded-pill bg-surface px-6 py-3 font-semibold text-content shadow-card"
+          class="flex animate-painel-in items-center gap-3 rounded-pill bg-surface px-6 py-3 font-semibold text-content shadow-card [animation-delay:150ms]"
         >
           <app-icon name="circle-notch" class="animate-spin motion-reduce:animate-none" />
           Processando…

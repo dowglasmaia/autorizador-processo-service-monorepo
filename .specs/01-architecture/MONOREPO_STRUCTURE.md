@@ -13,7 +13,7 @@ autorizador-processo/                      (raiz do repositório)
 ├─ app-autorizador-processo/               Angular 21 · Tailwind (gerado por angular-frontend-scaffold)
 │  ├─ package.json · angular.json · Dockerfile · nginx/default.conf.template  (SPEC-13)
 │  └─ src/app/{core,layout,shared,features}
-├─ tools/parity/                           cases.json + replay.mjs (SPEC-02/31) — executável contra qualquer base URL
+├─ .specs/workflows/ferramentas/parity/                           cases.json + replay.mjs (SPEC-02/31) — executável contra qualquer base URL
 ├─ compose.yaml · .env.example             integração local (existentes; ajustados em SPEC-10/13)
 ├─ .github/workflows/                      CI independente por projeto (SPEC-40): backend-ci.yml · frontend-ci.yml · integracao-ci.yml (cada um só dispara por mudança no seu caminho)
 ├─ README.md                               visão do monorepo, como subir, links

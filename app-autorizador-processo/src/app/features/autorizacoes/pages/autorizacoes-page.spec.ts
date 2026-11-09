@@ -18,7 +18,7 @@ const aut = (id: number, criadaEm?: string | null): AutorizacaoDto =>
       numProcedimento: 4567,
       nome: id === 2 ? 'Ressonância' : undefined,
       sexos: ['M', 'F'],
-      idades: [20, 30],
+      faixasEtarias: ['ADOLESCENTE', 'ADULTO'],
       criadoEm: '2026-01-01T00:00:00Z',
     },
     permitido: true,

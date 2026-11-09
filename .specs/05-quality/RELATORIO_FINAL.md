@@ -5,7 +5,7 @@ Encerramento do loop `test-01` (31 etapas, derivadas das SPEC-01 a SPEC-43; SPEC
 ## 1. Entrega
 - `api-autorizador-processo/`: Spring Boot 4.1.2, Java 25, PostgreSQL 16, Flyway, Hexagonal Pragmática (`procedimento`, `autorizacao`, `painel`, `shared`), contrato OpenAPI 3.1 primeiro, erros RFC 9457, JWT por e-mail e senha, `ArchitectureTest` (ArchUnit).
 - `app-autorizador-processo/`: Angular 21, TypeScript estrito, Tailwind, standalone, zoneless, Signals, Reactive Forms tipados, tipos gerados do OpenAPI.
-- Raiz: `compose.yaml`, `.env.example`, `scripts/` (checks de contrato), `tools/` (`contract`, `parity`, `perf`, `security`), CI independente por projeto em `.github/workflows/`.
+- Raiz: `compose.yaml`, `.env.example`, `scripts/` (checks de contrato), `.specs/workflows/ferramentas/` (`contract`, `parity`, `perf`, `security`; nada de `tools/` na raiz), CI independente por projeto em `.github/workflows/`.
 - Código original preservado pela tag `v0-original`; protótipo movido para `.specs/design/prototype/`.
 
 ## 2. Verificação global (HEAD 35f1529, checkout limpo, mesma sessão)
@@ -16,8 +16,8 @@ Encerramento do loop `test-01` (31 etapas, derivadas das SPEC-01 a SPEC-43; SPEC
 | `npm test` | 32 arquivos, 226 testes passando |
 | `docker-compose up -d --build --wait` | `postgres`, `api` e `app` saudáveis |
 | `npm run e2e` | 30 passaram (desktop e móvel) |
-| `node tools/parity/replay.mjs --target v1` | 23/23 OK |
-| `scripts/check-contract.mjs` / `check-contract-compat.mjs` | ok / ok (8 operações) |
+| `node .specs/workflows/ferramentas/parity/replay.mjs --target v1` | 23/23 OK |
+| `.specs/workflows/ferramentas/contract/check-contract.mjs` / `check-contract-compat.mjs` | ok / ok (8 operações) |
 | Encerramento | `down -v`, clone temporário removido; sem contêineres, volumes ou processos remanescentes do projeto |
 
 Varreduras: "legado/legacy" só na regra do ArchUnit e no README que a descreve (e na opção `enableI18nLegacyMessageIdFormat` do Angular, frontend); nenhum segredo versionado (só `.env.example`); nenhum `TODO`/`FIXME`/`TODO(domain)`; nenhuma dependência comprovadamente sem uso.

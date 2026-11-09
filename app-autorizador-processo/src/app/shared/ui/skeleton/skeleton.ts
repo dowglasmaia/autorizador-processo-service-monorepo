@@ -1,11 +1,14 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-/** Bloco de carregamento. Defina o tamanho com classes (`h-9 w-24`). */
+/**
+ * Bloco de carregamento com brilho (shimmer, só transform). Defina o tamanho com classes
+ * (`h-9 w-24`). Com movimento reduzido fica estático.
+ */
 @Component({
   selector: 'app-skeleton',
-  template: '',
+  template: '<span class="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/60 to-transparent motion-reduce:hidden"></span>',
   host: {
-    class: 'block animate-pulse rounded-input bg-neutral-200 motion-reduce:animate-none',
+    class: 'relative block overflow-hidden rounded-input bg-neutral-200',
     'aria-hidden': 'true',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -16,7 +16,7 @@ const proc = (numProcedimento: number, nome?: string) => ({
   numProcedimento,
   ...(nome ? { nome } : {}),
   sexos: ['F', 'M'],
-  idades: [20],
+  faixasEtarias: ['ADOLESCENTE'],
   criadoEm: '2026-01-01T00:00:00Z',
 });
 

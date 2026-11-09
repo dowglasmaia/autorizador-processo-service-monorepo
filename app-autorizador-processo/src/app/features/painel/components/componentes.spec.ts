@@ -13,7 +13,7 @@ const aut = (id: number): AutorizacaoDto =>
       id: 1,
       numProcedimento: 4567,
       sexos: ['M', 'F'],
-      idades: [20, 30],
+      faixasEtarias: ['ADOLESCENTE', 'ADULTO'],
       criadoEm: '2026-01-01T00:00:00Z',
     },
     permitido: true,
@@ -30,16 +30,16 @@ describe('componentes do painel', () => {
   it('BarraCobertura: larguras proporcionais ao maior valor e tabela textual', async () => {
     const f = TestBed.createComponent(BarraCobertura);
     f.componentRef.setInput('dados', [
-      { idade: 10, quantidade: 2 },
-      { idade: 20, quantidade: 2 },
-      { idade: 30, quantidade: 1 },
+      { faixa: 'CRIANCA', quantidade: 2 },
+      { faixa: 'ADOLESCENTE', quantidade: 2 },
+      { faixa: 'ADULTO', quantidade: 1 },
     ]);
     await f.whenStable();
     const el = f.nativeElement as HTMLElement;
     const barras = Array.from(el.querySelectorAll<HTMLElement>('[data-testid="barra"]'));
     expect(barras.map((b) => b.style.width)).toEqual(['100%', '100%', '50%']);
     expect(el.querySelectorAll('table tbody tr').length).toBe(3);
-    expect(el.textContent).toContain('30 anos');
+    expect(el.textContent).toContain('Adulto');
   });
 
   it('RoscaSexos: M=2 F=3, total 5 e role=img', async () => {

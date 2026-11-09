@@ -3,7 +3,7 @@
   "nome": "test-01",
   "titulo": "Refatoração do backend e criação completa do frontend do Autorizador",
   "criadoEm": "2026-11-08T14:16:30.455Z",
-  "status": "executando",
+  "status": "concluido",
   "origem": "objetivo",
   "objetivo": "o Objetivo e ter todas as specs executadas sem invervenção humana e com o refectory do backend e a criação do front por compelto.",
   "config": {
@@ -5549,83 +5549,19 @@
               "origem": "provider",
               "esforco": "medium"
             }
-          ]
+          ],
+          "commit": "b926650"
         }
       ]
     }
   ],
-  "iteracao": {
-    "numero": 31,
-    "etapa": 31,
-    "inicio": "2026-11-08T21:06:14.194Z",
-    "commitInicial": "82fbb51f130ae7a871d6593ad0c1600c543ff7ea",
-    "passoAtual": 6,
-    "passos": [
-      {
-        "id": "propor",
-        "situacao": "ok",
-        "duracaoMs": 89233,
-        "custo": 0.37363179999999996,
-        "tentativas": 1,
-        "detalhe": "22 tarefas"
-      },
-      {
-        "id": "partida",
-        "situacao": "pulado",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "commitProposta",
-        "situacao": "ok",
-        "duracaoMs": 1006,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "35f1529 · 5 arquivo(s)"
-      },
-      {
-        "id": "aplicar",
-        "situacao": "ok",
-        "duracaoMs": 1038797,
-        "custo": 1.4405088,
-        "tentativas": 1,
-        "detalhe": "22/22 tarefas · 3 sessão(ões)"
-      },
-      {
-        "id": "verificar",
-        "situacao": "pulado",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": "sem verificações configuradas"
-      },
-      {
-        "id": "arquivar",
-        "situacao": "ok",
-        "duracaoMs": 4,
-        "custo": 0,
-        "tentativas": 1,
-        "detalhe": ".specs\\workflows\\test-01\\specs\\arquivo\\31-finalizacao-documentacao"
-      },
-      {
-        "id": "commitEntrega",
-        "situacao": "rodando",
-        "duracaoMs": 0,
-        "custo": 0,
-        "tentativas": 1
-      }
-    ],
-    "titulo": "Propõe a spec de finalização e aceite (SPEC-43) revisada contra a base entregue",
-    "comparacao": "A pasta da spec estava vazia, então criei `proposta.md` e `tarefas.md` do zero (22 tarefas em 6 grupos).\n`.specs/06-execution-plan/` (STATE.md, DECISIONS.md) não existe. O relatório final vai para `.specs/05-quality/RELATORIO_FINAL.md` e para o `INDEX.md`, e isso está registrado como decisão a revisar.\nO `INDEX.md` está desatualizado: diz \"só documentação, nada implementado\" e lista só 4 specs concluídas, embora as etapas 1–30 estejam arquivadas.\nAinda estão fora de `.specs/archive/` as specs originais SPEC-01, 02, 03, 08, 09, 11, 12, 20, 21, 23, 42 e 43. A proposta só as arquiva se houver evidência nas etapas derivadas.\n\"legado/legacy\" no backend aparece só no README e na regra 9 do `ArchitectureTest`, que proíbem o termo, então a varredura precisa aceitá-los. O checkout limpo será um clone temporário do HEAD, porque o loop proíbe `git clean` e `checkout`."
-  },
+  "iteracao": null,
   "totais": {
-    "duracaoMs": 24339638,
+    "duracaoMs": 24341375,
     "custo": 61.2542433,
     "execucoes": 2,
     "iteracoes": 31,
-    "entregues": 30,
+    "entregues": 31,
     "sessoes": 161,
     "turnos": 2196,
     "verificacoes": 0,
@@ -5633,7 +5569,7 @@
     "recuperacoes": 7,
     "recuperacoesResolvidas": 6,
     "falhas": 0,
-    "commits": 61,
+    "commits": 62,
     "tokens": {
       "entrada": 3434,
       "saida": 1480105,
@@ -5642,6 +5578,9 @@
     }
   },
   "ultimaExecucao": {
-    "inicio": "2026-11-08T15:30:17.055Z"
+    "inicio": "2026-11-08T15:30:17.055Z",
+    "fim": "2026-11-08T21:25:05.135Z",
+    "desfecho": "concluido",
+    "motivo": "todas as etapas entregues"
   }
 }

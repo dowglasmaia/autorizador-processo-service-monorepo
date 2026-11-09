@@ -9,8 +9,8 @@ on:
       - "app-autorizador-processo/**"
       - "compose.yaml"
       - ".env.example"
-      - "scripts/check-contract*.mjs"
-      - "tools/contract/**"
+      - ".specs/workflows/ferramentas/contract/check-contract*.mjs"
+      - ".specs/workflows/ferramentas/contract/**"
       - ".github/workflows/integracao-ci.yml"
   pull_request:
     paths:
@@ -18,8 +18,8 @@ on:
       - "app-autorizador-processo/**"
       - "compose.yaml"
       - ".env.example"
-      - "scripts/check-contract*.mjs"
-      - "tools/contract/**"
+      - ".specs/workflows/ferramentas/contract/check-contract*.mjs"
+      - ".specs/workflows/ferramentas/contract/**"
       - ".github/workflows/integracao-ci.yml"
   workflow_dispatch:
 
@@ -47,9 +47,9 @@ jobs:
         run: npm ci
         working-directory: app-autorizador-processo
       - name: Tipos do frontend em dia com o contrato
-        run: node scripts/check-contract.mjs
+        run: node .specs/workflows/ferramentas/contract/check-contract.mjs
       - name: Compatibilidade com o instantâneo base
-        run: node scripts/check-contract-compat.mjs
+        run: node .specs/workflows/ferramentas/contract/check-contract-compat.mjs
 
   e2e:
     name: e2e (Compose completo + Playwright)

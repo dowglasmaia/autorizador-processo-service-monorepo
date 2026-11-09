@@ -4,15 +4,15 @@ import { expect, type APIRequestContext, type Page } from '@playwright/test';
 export const SEED = {
   totalProcedimentos: 3,
   totalAutorizacoes: 0,
-  idadesCobertas: 3,
-  /** 1234: F, idades 10/20 · 4567: M/F, idades 20/30 · 6789: M/F, idade 10. */
+  faixasCobertas: 3,
+  /** 1234: F, criança e adolescente · 4567: M/F, adolescente e adulto · 6789: M/F, criança. */
   procedimentos: [1234, 4567, 6789],
 } as const;
 
 export interface ResumoPainelApi {
   totalProcedimentos: number;
   totalAutorizacoes: number;
-  idadesCobertas: number;
+  faixasCobertas: number;
 }
 
 export function credenciais(): { email: string; senha: string } {

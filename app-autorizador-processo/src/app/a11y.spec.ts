@@ -30,8 +30,8 @@ const pagina = { itens: [], pagina: 0, tamanho: 20, totalItens: 0, totalPaginas:
 const resumo = {
   totalProcedimentos: 3,
   totalAutorizacoes: 1,
-  idadesCobertas: 3,
-  coberturaPorIdade: [{ idade: 10, quantidade: 2 }],
+  faixasCobertas: 3,
+  coberturaPorFaixa: [{ faixa: 'CRIANCA', quantidade: 2 }],
   distribuicaoSexos: { masculino: 2, feminino: 3 },
   ultimasAutorizacoes: [],
 };

@@ -4,8 +4,9 @@ import { Icon } from '../icon/icon';
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'icon';
 
 const BASE =
-  'inline-flex items-center justify-center gap-2 rounded-pill font-semibold transition-colors ' +
-  'disabled:cursor-not-allowed disabled:opacity-50 min-h-11';
+  'inline-flex items-center justify-center gap-2 rounded-pill font-semibold ' +
+  'transition-[transform,background-color] duration-150 ease-out active:scale-[0.97] ' +
+  'aria-busy:cursor-progress disabled:cursor-not-allowed disabled:opacity-50 min-h-11';
 
 const VARIANTS: Record<ButtonVariant, string> = {
   primary: 'bg-accent text-content px-5 py-2.5 hover:bg-accent-400',

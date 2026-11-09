@@ -14,7 +14,7 @@ export type AutorizacaoDto = Autorizacao.components['schemas']['Autorizacao'];
 export type PaginaAutorizacoes = Autorizacao.components['schemas']['PaginaAutorizacoes'];
 
 export type ResumoPainel = Painel.components['schemas']['ResumoPainel'];
-export type CoberturaIdade = Painel.components['schemas']['CoberturaIdade'];
+export type CoberturaFaixa = Painel.components['schemas']['CoberturaFaixa'];
 export type DistribuicaoSexos = Painel.components['schemas']['DistribuicaoSexos'];
 
 export type ProblemDetail = Procedimento.components['schemas']['ProblemDetail'];

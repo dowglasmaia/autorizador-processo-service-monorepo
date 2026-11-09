@@ -6,6 +6,7 @@ import { AuthService } from '../../core/auth/auth.service';
 import { ApiStatusService } from '../../core/api-status/api-status.service';
 import { ErrorDialog } from '../../core/feedback/error-dialog';
 import { LoadingOverlay } from '../../core/feedback/loading-overlay';
+import { BarraNavegacao } from './barra-navegacao';
 import { ToastHost } from '../../core/feedback/toast-host';
 import { Icon } from '../../shared/ui';
 import { MENSAGENS } from '../../core/i18n/mensagens';
@@ -36,6 +37,7 @@ export const NAV_ITEMS: readonly NavItem[] = [
     Icon,
     ToastHost,
     LoadingOverlay,
+    BarraNavegacao,
     ErrorDialog,
   ],
   template: `
@@ -156,6 +158,7 @@ export const NAV_ITEMS: readonly NavItem[] = [
       <router-outlet />
     </main>
 
+    <app-barra-navegacao />
     <app-toast-host />
     <app-loading-overlay />
     <app-error-dialog />
