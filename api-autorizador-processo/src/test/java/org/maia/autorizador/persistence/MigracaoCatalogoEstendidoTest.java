@@ -49,14 +49,14 @@ class MigracaoCatalogoEstendidoTest {
     void v4NaoPerdeLinhasENaoPreencheOsCamposNovos() {
         assertThat(contar("procedimento")).isEqualTo(3);
         assertThat(contar("procedimento_sexo")).isEqualTo(3);
-        assertThat(contar("procedimento_idade")).isEqualTo(3);
+        assertThat(contar("procedimento_faixa_etaria")).isEqualTo(3);
         assertThat(jdbc.queryForObject("""
                 select count(*) from procedimento where nome is null and codigo_tuss is null and categoria is null
                   and especialidade is null and tipo_cobertura is null and quantidade_maxima is null
                   and periodo is null and exige_autorizacao_previa is null and exige_justificativa_medica is null
                 """, Integer.class)).isEqualTo(3);
         assertThat(jdbc.queryForObject("select max(version::int) from flyway_schema_history", Integer.class))
-                .isEqualTo(4);
+                .isEqualTo(5);
     }
 
     @Test

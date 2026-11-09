@@ -37,13 +37,13 @@ class RestricoesBancoTest extends IntegrationTestBase {
     }
 
     @Test
-    void chavePrimariaCompostaRejeitaIdadeDuplicada() {
+    void chavePrimariaCompostaRejeitaFaixaDuplicada() {
         long id = criarProcedimento(1);
-        jdbc.update("insert into procedimento_idade (procedimento_id, idade) values (?, 10)", id);
+        jdbc.update("insert into procedimento_faixa_etaria (procedimento_id, faixa) values (?, 'CRIANCA')", id);
         assertThatThrownBy(() -> jdbc.update(
-                "insert into procedimento_idade (procedimento_id, idade) values (?, 10)", id))
+                "insert into procedimento_faixa_etaria (procedimento_id, faixa) values (?, 'CRIANCA')", id))
                 .isInstanceOf(DataIntegrityViolationException.class);
-        jdbc.update("insert into procedimento_idade (procedimento_id, idade) values (?, 11)", id);
+        jdbc.update("insert into procedimento_faixa_etaria (procedimento_id, faixa) values (?, 'IDOSO')", id);
     }
 
     @Test
@@ -55,16 +55,14 @@ class RestricoesBancoTest extends IntegrationTestBase {
     }
 
     @Test
-    void idadeDeveEstarEntre0E150() {
+    void faixaDeveSerUmaDasQuatroFaixasEtarias() {
         long id = criarProcedimento(1);
-        jdbc.update("insert into procedimento_idade (procedimento_id, idade) values (?, 0)", id);
-        jdbc.update("insert into procedimento_idade (procedimento_id, idade) values (?, 150)", id);
+        for (String faixa : new String[] {"CRIANCA", "ADOLESCENTE", "ADULTO", "IDOSO"}) {
+            jdbc.update("insert into procedimento_faixa_etaria (procedimento_id, faixa) values (?, ?)", id, faixa);
+        }
         assertThatThrownBy(() -> jdbc.update(
-                "insert into procedimento_idade (procedimento_id, idade) values (?, -1)", id))
+                "insert into procedimento_faixa_etaria (procedimento_id, faixa) values (?, 'BEBE')", id))
                 .isInstanceOf(DataIntegrityViolationException.class);
-        assertThatThrownBy(() -> jdbc.update(
-                "insert into procedimento_idade (procedimento_id, idade) values (?, 151)", id))
-                .isInstanceOf(DataIntegrityViolationException.class);
-        assertThat(jdbc.queryForObject("select count(*) from procedimento_idade", Integer.class)).isEqualTo(2);
+        assertThat(jdbc.queryForObject("select count(*) from procedimento_faixa_etaria", Integer.class)).isEqualTo(4);
     }
 }

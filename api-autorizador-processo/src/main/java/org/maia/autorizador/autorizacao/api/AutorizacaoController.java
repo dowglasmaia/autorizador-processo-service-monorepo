@@ -58,7 +58,9 @@ class AutorizacaoController implements AutorizacoesApi {
     private static AutorizacaoProcedimento paraProcedimento(Resultado r) {
         List<AutorizacaoProcedimento.SexosEnum> sexos = r.sexos().stream()
                 .map(AutorizacaoProcedimento.SexosEnum::fromValue).toList();
-        var p = new AutorizacaoProcedimento(r.id(), r.numProcedimento(), sexos, r.idades(),
+        List<AutorizacaoProcedimento.FaixasEtariasEnum> faixas = r.faixasEtarias().stream()
+                .map(AutorizacaoProcedimento.FaixasEtariasEnum::fromValue).toList();
+        var p = new AutorizacaoProcedimento(r.id(), r.numProcedimento(), sexos, faixas,
                 r.criadoEm().atOffset(ZoneOffset.UTC));
         Catalogo c = r.catalogo();
         p.setNome(c.nome());

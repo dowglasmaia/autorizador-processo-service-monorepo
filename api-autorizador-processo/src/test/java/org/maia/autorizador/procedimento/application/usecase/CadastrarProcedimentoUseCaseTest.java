@@ -15,12 +15,12 @@ class CadastrarProcedimentoUseCaseTest {
 
     @Test
     void cadastraEDevolveComIdEData() {
-        var criado = useCase.executar(9999, List.of("f", "M"), List.of(30, 18));
+        var criado = useCase.executar(9999, List.of("f", "M"), List.of("IDOSO", "CRIANCA"));
 
         assertThat(criado.id()).isNotNull();
         assertThat(criado.criadoEm()).isNotNull();
         assertThat(criado.sexos()).containsExactly("M", "F");
-        assertThat(criado.idades()).containsExactly(18, 30);
+        assertThat(criado.faixasEtarias()).containsExactly("CRIANCA", "IDOSO");
         assertThat(repositorio.buscarPorNumero(9999)).isPresent();
     }
 
@@ -29,14 +29,14 @@ class CadastrarProcedimentoUseCaseTest {
         var criado = useCase.executar(1, List.of(), List.of());
 
         assertThat(criado.sexos()).isEmpty();
-        assertThat(criado.idades()).isEmpty();
+        assertThat(criado.faixasEtarias()).isEmpty();
     }
 
     @Test
     void numeroRepetidoLancaDuplicado() {
-        useCase.executar(1234, List.of("M"), List.of(10));
+        useCase.executar(1234, List.of("M"), List.of("CRIANCA"));
 
-        assertThatThrownBy(() -> useCase.executar(1234, List.of("F"), List.of(20)))
+        assertThatThrownBy(() -> useCase.executar(1234, List.of("F"), List.of("ADULTO")))
                 .isInstanceOf(ProcedimentoDuplicadoException.class)
                 .extracting("code").isEqualTo("PROCEDIMENTO_DUPLICADO");
     }
@@ -65,7 +65,7 @@ class CadastrarProcedimentoUseCaseTest {
 
     @Test
     void cadastroSemCatalogoTambemRecebePadroes() {
-        var criado = useCase.executar(21, List.of("M"), List.of(10));
+        var criado = useCase.executar(21, List.of("M"), List.of("CRIANCA"));
 
         assertThat(criado.catalogo().nome()).isNull();
         assertThat(criado.catalogo().tipoCobertura()).isEqualTo("PLANO");
@@ -97,7 +97,7 @@ class CadastrarProcedimentoUseCaseTest {
     void entradaInvalidaNaoGrava() {
         assertThatThrownBy(() -> useCase.executar(1, List.of("X"), List.of())).isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> useCase.executar(0, List.of(), List.of())).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> useCase.executar(1, List.of(), List.of(151)))
+        assertThatThrownBy(() -> useCase.executar(1, List.of(), List.of("BEBE")))
                 .isInstanceOf(IllegalArgumentException.class);
         assertThat(repositorio.listar(null, true, 0, 10).totalItens()).isZero();
     }

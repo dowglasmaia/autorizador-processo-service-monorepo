@@ -51,7 +51,7 @@ class ProcedimentoConcorrenciaDesempenhoTest extends IntegrationTestBase {
     @Test
     void duasInsercoesSimultaneasDoMesmoNumeroGeramUm201EUm403() throws Exception {
         String token = JwtTestSupport.cabecalhoBearer(1L, "teste@ex.com");
-        String json = "{\"nome\":\"Proc\",\"categoria\":\"CONSULTAS\",\"numProcedimento\":7777,\"sexos\":[\"M\"],\"idades\":[5]}";
+        String json = "{\"nome\":\"Proc\",\"categoria\":\"CONSULTAS\",\"numProcedimento\":7777,\"sexos\":[\"M\"],\"faixasEtarias\":[\"CRIANCA\"]}";
         int tentativas = 2;
         CountDownLatch largada = new CountDownLatch(1);
         ExecutorService pool = Executors.newFixedThreadPool(tentativas);
@@ -108,9 +108,9 @@ class ProcedimentoConcorrenciaDesempenhoTest extends IntegrationTestBase {
             var jdbc = new org.springframework.jdbc.core.JdbcTemplate(dataSource);
             jdbc.update("insert into procedimento (numero_procedimento) select g from generate_series(20000, 20249) g");
             jdbc.update("insert into procedimento_sexo (procedimento_id, sexo) select id, 'M' from procedimento where numero_procedimento >= 20000");
-            jdbc.update("insert into procedimento_idade (procedimento_id, idade) select id, 10 from procedimento where numero_procedimento >= 20000");
+            jdbc.update("insert into procedimento_faixa_etaria (procedimento_id, faixa) select id, 'CRIANCA' from procedimento where numero_procedimento >= 20000");
             long comPaginaCheia = sqlDaListagem(estatisticas, 200);
-            // página + count + sexos + idades (em lote); sem N+1 mesmo na página máxima
+            // página + count + sexos + faixas (em lote); sem N+1 mesmo na página máxima
             assertThat(comPaginaCheia).as("sem N+1 na página de 200 itens").isEqualTo(4);
         } finally {
             estatisticas.setStatisticsEnabled(false);

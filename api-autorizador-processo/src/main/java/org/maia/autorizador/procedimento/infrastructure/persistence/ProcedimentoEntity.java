@@ -23,12 +23,13 @@ import org.hibernate.type.SqlTypes;
 import org.maia.autorizador.procedimento.domain.model.Categoria;
 import org.maia.autorizador.procedimento.domain.model.DadosCatalogo;
 import org.maia.autorizador.procedimento.domain.model.Especialidade;
+import org.maia.autorizador.procedimento.domain.model.FaixaEtaria;
 import org.maia.autorizador.procedimento.domain.model.Periodo;
 import org.maia.autorizador.procedimento.domain.model.Sexo;
 import org.maia.autorizador.procedimento.domain.model.TipoCobertura;
 
 /**
- * Mapeamento JPA das tabelas {@code procedimento}, {@code procedimento_sexo} e {@code procedimento_idade} (V1).
+ * Mapeamento JPA das tabelas {@code procedimento}, {@code procedimento_sexo} e {@code procedimento_faixa_etaria} (V1, V5).
  * Auditada pelo Envers nas tabelas {@code *_audit} da V2 (RN10). As coleções são preguiçosas e carregadas em lote
  * ({@code @BatchSize}) para evitar N+1 na listagem.
  */
@@ -86,16 +87,16 @@ class ProcedimentoEntity {
     private Set<Sexo> sexos = new HashSet<>();
 
     @ElementCollection
-    @CollectionTable(name = "procedimento_idade", joinColumns = @JoinColumn(name = "procedimento_id"))
-    @Column(name = "idade", nullable = false)
-    @JdbcTypeCode(SqlTypes.SMALLINT)
+    @CollectionTable(name = "procedimento_faixa_etaria", joinColumns = @JoinColumn(name = "procedimento_id"))
+    @Column(name = "faixa", nullable = false, length = 12)
+    @Enumerated(EnumType.STRING)
     @BatchSize(size = 200)
-    private Set<Integer> idades = new HashSet<>();
+    private Set<FaixaEtaria> faixasEtarias = new HashSet<>();
 
     protected ProcedimentoEntity() {
     }
 
-    ProcedimentoEntity(int numeroProcedimento, Collection<Sexo> sexos, Collection<Integer> idades,
+    ProcedimentoEntity(int numeroProcedimento, Collection<Sexo> sexos, Collection<FaixaEtaria> faixasEtarias,
             DadosCatalogo catalogo) {
         this.numeroProcedimento = numeroProcedimento;
         this.nome = catalogo.nome();
@@ -108,7 +109,7 @@ class ProcedimentoEntity {
         this.exigeAutorizacaoPrevia = catalogo.exigeAutorizacaoPrevia();
         this.exigeJustificativaMedica = catalogo.exigeJustificativaMedica();
         this.sexos.addAll(sexos);
-        this.idades.addAll(idades);
+        this.faixasEtarias.addAll(faixasEtarias);
         // O PostgreSQL guarda microssegundos; truncar mantém o valor devolvido igual ao gravado.
         this.criadoEm = Instant.now().truncatedTo(ChronoUnit.MICROS);
     }
@@ -135,7 +136,7 @@ class ProcedimentoEntity {
         return sexos;
     }
 
-    Set<Integer> getIdades() {
-        return idades;
+    Set<FaixaEtaria> getFaixasEtarias() {
+        return faixasEtarias;
     }
 }

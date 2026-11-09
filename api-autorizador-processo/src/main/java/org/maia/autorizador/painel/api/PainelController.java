@@ -4,7 +4,7 @@ import java.time.ZoneOffset;
 import java.util.List;
 import org.maia.autorizador.autorizacao.application.usecase.ListarAutorizacoesUseCase.Item;
 import org.maia.autorizador.generated.painel.api.PainelApi;
-import org.maia.autorizador.generated.painel.model.CoberturaIdade;
+import org.maia.autorizador.generated.painel.model.CoberturaFaixa;
 import org.maia.autorizador.generated.painel.model.DistribuicaoSexos;
 import org.maia.autorizador.generated.painel.model.ResumoPainel;
 import org.maia.autorizador.generated.painel.model.ResumoPainelUltimasAutorizacoesInner;
@@ -31,11 +31,11 @@ class PainelController implements PainelApi {
     @Override
     public ResponseEntity<ResumoPainel> obterResumoPainel() {
         Resumo r = obterResumo.executar();
-        List<CoberturaIdade> cobertura = r.coberturaPorIdade().stream()
-                .map(c -> new CoberturaIdade(c.idade(), c.quantidade())).toList();
+        List<CoberturaFaixa> cobertura = r.coberturaPorFaixa().stream()
+                .map(c -> new CoberturaFaixa(CoberturaFaixa.FaixaEnum.fromValue(c.faixa()), c.quantidade())).toList();
         List<ResumoPainelUltimasAutorizacoesInner> ultimas = r.ultimasAutorizacoes().stream()
                 .map(PainelController::paraAutorizacao).toList();
-        return ResponseEntity.ok(new ResumoPainel(r.totalProcedimentos(), r.totalAutorizacoes(), r.idadesCobertas(),
+        return ResponseEntity.ok(new ResumoPainel(r.totalProcedimentos(), r.totalAutorizacoes(), r.faixasCobertas(),
                 cobertura, new DistribuicaoSexos(r.distribuicaoSexos().masculino(), r.distribuicaoSexos().feminino()),
                 ultimas));
     }
@@ -49,7 +49,9 @@ class PainelController implements PainelApi {
     private static ResumoPainelUltimasAutorizacoesInnerProcedimento paraProcedimento(Resultado r) {
         var sexos = r.sexos().stream().map(ResumoPainelUltimasAutorizacoesInnerProcedimento.SexosEnum::fromValue)
                 .toList();
-        var p = new ResumoPainelUltimasAutorizacoesInnerProcedimento(r.id(), r.numProcedimento(), sexos, r.idades(),
+        var faixas = r.faixasEtarias().stream()
+                .map(ResumoPainelUltimasAutorizacoesInnerProcedimento.FaixasEtariasEnum::fromValue).toList();
+        var p = new ResumoPainelUltimasAutorizacoesInnerProcedimento(r.id(), r.numProcedimento(), sexos, faixas,
                 r.criadoEm().atOffset(ZoneOffset.UTC));
         Catalogo c = r.catalogo();
         p.setNome(c.nome());

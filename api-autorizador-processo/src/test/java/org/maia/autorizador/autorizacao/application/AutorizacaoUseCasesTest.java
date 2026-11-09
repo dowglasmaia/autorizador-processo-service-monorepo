@@ -20,6 +20,7 @@ import org.maia.autorizador.procedimento.application.port.ProcedimentoRepository
 import org.maia.autorizador.procedimento.application.usecase.ObterProcedimentoUseCase;
 import org.maia.autorizador.procedimento.domain.exception.ProcedimentoNaoEncontradoException;
 import org.maia.autorizador.procedimento.domain.model.Procedimento;
+import org.maia.autorizador.procedimento.domain.model.FaixaEtaria;
 import org.maia.autorizador.procedimento.domain.model.Sexo;
 
 /** Casos de uso de autorização com repositórios em memória (sem Spring nem banco). */
@@ -32,8 +33,8 @@ class AutorizacaoUseCasesTest {
     private final ListarAutorizacoesUseCase listar = new ListarAutorizacoesUseCase(autorizacoes, obter);
 
     AutorizacaoUseCasesTest() {
-        procedimentos.adicionar(1, 4567, List.of(Sexo.M, Sexo.F), List.of(10, 20, 30));
-        procedimentos.adicionar(2, 1234, List.of(Sexo.F), List.of(10, 20));
+        procedimentos.adicionar(1, 4567, List.of(Sexo.M, Sexo.F), List.of(FaixaEtaria.CRIANCA, FaixaEtaria.ADOLESCENTE, FaixaEtaria.ADULTO));
+        procedimentos.adicionar(2, 1234, List.of(Sexo.F), List.of(FaixaEtaria.CRIANCA, FaixaEtaria.ADOLESCENTE));
         procedimentos.adicionar(3, 7, List.of(), List.of());
     }
 
@@ -124,8 +125,8 @@ class AutorizacaoUseCasesTest {
         private final List<Procedimento> itens = new ArrayList<>();
         int consultasEmLote;
 
-        void adicionar(long id, int numero, List<Sexo> sexos, List<Integer> idades) {
-            itens.add(Procedimento.restore(id, numero, sexos, idades, Instant.now()));
+        void adicionar(long id, int numero, List<Sexo> sexos, List<FaixaEtaria> faixas) {
+            itens.add(Procedimento.restore(id, numero, sexos, faixas, Instant.now()));
         }
 
         @Override

@@ -60,24 +60,24 @@ class ProcedimentoControllerTest {
         return mvc.perform(post(BASE).contentType(MediaType.APPLICATION_JSON).content(json));
     }
 
-    private static Resultado salvo(long id, int numero, List<String> sexos, List<Integer> idades) {
-        return new Resultado(id, numero, sexos, idades, Instant.parse("2026-01-02T03:04:05Z"));
+    private static Resultado salvo(long id, int numero, List<String> sexos, List<String> faixas) {
+        return new Resultado(id, numero, sexos, faixas, Instant.parse("2026-01-02T03:04:05Z"));
     }
 
     @Test
     void cadastroRetorna201ComCorpoELocation() throws Exception {
         when(cadastrar.executar(eq(9999), any(), any(), any()))
-                .thenReturn(salvo(42, 9999, List.of("M", "F"), List.of(18, 30)));
+                .thenReturn(salvo(42, 9999, List.of("M", "F"), List.of("ADOLESCENTE", "ADULTO")));
 
-        postar("{\"nome\":\"Proc\",\"categoria\":\"CONSULTAS\",\"numProcedimento\":9999,\"sexos\":[\"F\",\"M\"],\"idades\":[30,18]}")
+        postar("{\"nome\":\"Proc\",\"categoria\":\"CONSULTAS\",\"numProcedimento\":9999,\"sexos\":[\"F\",\"M\"],\"faixasEtarias\":[\"ADULTO\",\"ADOLESCENTE\"]}")
                 .andExpect(status().isCreated())
                 .andExpect(header().string("Location", "/api/v1/procedimentos/42"))
                 .andExpect(jsonPath("$.id").value(42))
                 .andExpect(jsonPath("$.numProcedimento").value(9999))
                 .andExpect(jsonPath("$.sexos[0]").value("M"))
                 .andExpect(jsonPath("$.sexos[1]").value("F"))
-                .andExpect(jsonPath("$.idades[0]").value(18))
-                .andExpect(jsonPath("$.idades[1]").value(30))
+                .andExpect(jsonPath("$.faixasEtarias[0]").value("ADOLESCENTE"))
+                .andExpect(jsonPath("$.faixasEtarias[1]").value("ADULTO"))
                 .andExpect(jsonPath("$.criadoEm").exists());
     }
 
@@ -85,7 +85,7 @@ class ProcedimentoControllerTest {
     void sexosEmMinusculasSaoAceitos() throws Exception {
         when(cadastrar.executar(eq(10), any(), any(), any())).thenReturn(salvo(1, 10, List.of("M", "F"), List.of()));
 
-        postar("{\"nome\":\"Proc\",\"categoria\":\"CONSULTAS\",\"numProcedimento\":10,\"sexos\":[\"m\",\"f\"],\"idades\":[]}").andExpect(status().isCreated());
+        postar("{\"nome\":\"Proc\",\"categoria\":\"CONSULTAS\",\"numProcedimento\":10,\"sexos\":[\"m\",\"f\"],\"faixasEtarias\":[]}").andExpect(status().isCreated());
         verify(cadastrar).executar(eq(10), eq(List.of("M", "F")), any(), any());
     }
 
@@ -94,21 +94,21 @@ class ProcedimentoControllerTest {
         when(cadastrar.executar(eq(11), any(), any(), any())).thenReturn(salvo(2, 11, List.of(), List.of()));
 
         postar("{\"nome\":\"Proc\",\"categoria\":\"CONSULTAS\",\"numProcedimento\":11}").andExpect(status().isCreated())
-                .andExpect(jsonPath("$.sexos").isEmpty()).andExpect(jsonPath("$.idades").isEmpty());
+                .andExpect(jsonPath("$.sexos").isEmpty()).andExpect(jsonPath("$.faixasEtarias").isEmpty());
     }
 
     @Test
     void entradaInvalidaRetorna400SemChamarOCasoDeUso() throws Exception {
-        postar("{\"numProcedimento\":1,\"sexos\":[\"X\"],\"idades\":[1]}").andExpect(status().isBadRequest())
+        postar("{\"numProcedimento\":1,\"sexos\":[\"X\"],\"faixasEtarias\":[\"CRIANCA\"]}").andExpect(status().isBadRequest())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_PROBLEM_JSON))
                 .andExpect(jsonPath("$.code").value("CORPO_INVALIDO"));
-        postar("{\"numProcedimento\":0,\"sexos\":[\"M\"],\"idades\":[1]}").andExpect(status().isBadRequest())
+        postar("{\"numProcedimento\":0,\"sexos\":[\"M\"],\"faixasEtarias\":[\"CRIANCA\"]}").andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value("VALIDACAO_INVALIDA"));
         postar("{\"sexos\":[\"M\"]}").andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value("VALIDACAO_INVALIDA"));
-        postar("{\"numProcedimento\":1,\"idades\":[151]}").andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.code").value("VALIDACAO_INVALIDA"));
-        postar("{\"numProcedimento\":1,\"idades\":[-1]}").andExpect(status().isBadRequest());
+        postar("{\"numProcedimento\":1,\"faixasEtarias\":[\"BEBE\"]}").andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value("CORPO_INVALIDO"));
+        postar("{\"numProcedimento\":1,\"faixasEtarias\":[\"-1\"]}").andExpect(status().isBadRequest());
         postar("{\"numProcedimento\":1,\"sexos\":[null]}").andExpect(status().isBadRequest());
         postar("{\"numProcedimento\":").andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value("CORPO_INVALIDO"));
@@ -223,17 +223,17 @@ class ProcedimentoControllerTest {
 
     @Test
     void obterExistenteRetorna200() throws Exception {
-        when(obter.executar(5)).thenReturn(salvo(5, 1234, List.of("F"), List.of(10, 20)));
+        when(obter.executar(5)).thenReturn(salvo(5, 1234, List.of("F"), List.of("CRIANCA", "ADOLESCENTE")));
 
         mvc.perform(get(BASE + "/5")).andExpect(status().isOk())
                 .andExpect(jsonPath("$.numProcedimento").value(1234))
-                .andExpect(jsonPath("$.idades[1]").value(20));
+                .andExpect(jsonPath("$.faixasEtarias[1]").value("ADOLESCENTE"));
     }
 
     @Test
     void listagemUsaPadroesEOrdenacaoDescendente() throws Exception {
         when(listar.executar(any(), anyBoolean(), anyInt(), anyInt())).thenReturn(
-                new PaginaResultado(List.of(salvo(1, 6789, List.of("M"), List.of(10))), 0, 20, 1, 1));
+                new PaginaResultado(List.of(salvo(1, 6789, List.of("M"), List.of("CRIANCA"))), 0, 20, 1, 1));
 
         mvc.perform(get(BASE)).andExpect(status().isOk())
                 .andExpect(jsonPath("$.itens[0].numProcedimento").value(6789))

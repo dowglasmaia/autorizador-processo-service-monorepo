@@ -8,10 +8,12 @@ import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.maia.autorizador.procedimento.domain.model.Categoria;
 import org.maia.autorizador.procedimento.domain.model.DadosCatalogo;
 import org.maia.autorizador.procedimento.domain.model.Especialidade;
+import org.maia.autorizador.procedimento.domain.model.FaixaEtaria;
 import org.maia.autorizador.procedimento.domain.model.Periodo;
 import org.maia.autorizador.procedimento.domain.model.Procedimento;
 import org.maia.autorizador.procedimento.domain.model.TipoCobertura;
@@ -20,13 +22,14 @@ import org.maia.autorizador.procedimento.domain.model.Sexo;
 class ProcedimentoTest {
 
     @Test
-    void criaComSexosEmOrdemMFEIdadesAscendentes() {
-        Procedimento p = Procedimento.create(10101, List.of(Sexo.F, Sexo.M), List.of(30, 18, 0));
+    void criaComSexosEmOrdemMFEFaixasDaMaisNovaParaAMaisVelha() {
+        Procedimento p = Procedimento.create(10101, List.of(Sexo.F, Sexo.M),
+                List.of(FaixaEtaria.IDOSO, FaixaEtaria.CRIANCA));
 
         assertThat(p.id()).isNull();
         assertThat(p.numProcedimento()).isEqualTo(10101);
         assertThat(p.sexos()).containsExactly(Sexo.M, Sexo.F);
-        assertThat(p.idades()).containsExactly(0, 18, 30);
+        assertThat(p.faixasEtarias()).containsExactly(FaixaEtaria.CRIANCA, FaixaEtaria.IDOSO);
     }
 
     @Test
@@ -34,34 +37,30 @@ class ProcedimentoTest {
         Procedimento p = Procedimento.create(1, List.of(), List.of());
 
         assertThat(p.sexos()).isEmpty();
-        assertThat(p.idades()).isEmpty();
+        assertThat(p.faixasEtarias()).isEmpty();
         assertThat(p.avaliar(10, Sexo.M)).isFalse();
     }
 
     @ParameterizedTest
     @ValueSource(ints = {0, -1})
     void rejeitaNumeroMenorQueUm(int numero) {
-        assertThatThrownBy(() -> Procedimento.create(numero, List.of(Sexo.M), List.of(1)))
+        assertThatThrownBy(() -> Procedimento.create(numero, List.of(Sexo.M), List.of(FaixaEtaria.ADULTO)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {-1, 151})
-    void rejeitaIdadeForaDaFaixa(int idade) {
-        assertThatThrownBy(() -> Procedimento.create(1, List.of(Sexo.M), List.of(idade)))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
+    void avaliarRejeitaIdadeForaDe0a150(int idade) {
+        Procedimento p = Procedimento.create(1, List.of(Sexo.M), List.of(FaixaEtaria.values()));
 
-    @Test
-    void aceitaOsLimitesDaFaixaDeIdade() {
-        assertThat(Procedimento.create(1, List.of(), List.of(0, 150)).idades()).containsExactly(0, 150);
+        assertThatThrownBy(() -> p.avaliar(idade, Sexo.M)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void rejeitaDuplicatas() {
         assertThatThrownBy(() -> Procedimento.create(1, List.of(Sexo.M, Sexo.M), List.of()))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> Procedimento.create(1, List.of(), List.of(5, 5)))
+        assertThatThrownBy(() -> Procedimento.create(1, List.of(), List.of(FaixaEtaria.ADULTO, FaixaEtaria.ADULTO)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -72,18 +71,35 @@ class ProcedimentoTest {
     }
 
     @Test
-    void avaliaExigindoSexoEIdade() {
-        Procedimento p = Procedimento.create(1, List.of(Sexo.M), List.of(18, 30));
+    void avaliaExigindoSexoEFaixaEtaria() {
+        Procedimento p = Procedimento.create(1, List.of(Sexo.M), List.of(FaixaEtaria.ADOLESCENTE, FaixaEtaria.IDOSO));
 
-        assertThat(p.avaliar(18, Sexo.M)).isTrue();
-        assertThat(p.avaliar(18, Sexo.F)).isFalse();
-        assertThat(p.avaliar(19, Sexo.M)).isFalse();
-        assertThat(p.avaliar(19, Sexo.F)).isFalse();
+        assertThat(p.avaliar(15, Sexo.M)).isTrue();
+        assertThat(p.avaliar(15, Sexo.F)).isFalse();
+        assertThat(p.avaliar(30, Sexo.M)).isFalse();
+        assertThat(p.avaliar(30, Sexo.F)).isFalse();
+        assertThat(p.avaliar(70, Sexo.M)).isTrue();
+    }
+
+    @ParameterizedTest
+    @CsvSource({"0,CRIANCA", "12,CRIANCA", "13,ADOLESCENTE", "20,ADOLESCENTE", "21,ADULTO", "59,ADULTO",
+        "60,IDOSO", "150,IDOSO"})
+    void faixaEtariaTemLimitesInclusivosEContiguos(int idade, FaixaEtaria esperada) {
+        assertThat(FaixaEtaria.de(idade)).isEqualTo(esperada);
+        assertThat(esperada.contem(idade)).isTrue();
+    }
+
+    @Test
+    void cadaIdadePertenceAExatamenteUmaFaixa() {
+        for (int idade = 0; idade <= 150; idade++) {
+            int i = idade;
+            assertThat(java.util.Arrays.stream(FaixaEtaria.values()).filter(f -> f.contem(i))).hasSize(1);
+        }
     }
 
     @Test
     void avaliaSexoSemDiferencaDeCaixa() {
-        Procedimento p = Procedimento.create(1, List.of(Sexo.F), List.of(40));
+        Procedimento p = Procedimento.create(1, List.of(Sexo.F), List.of(FaixaEtaria.ADULTO));
 
         assertThat(p.avaliar(40, "f")).isTrue();
         assertThat(p.avaliar(40, "F")).isTrue();
@@ -92,7 +108,7 @@ class ProcedimentoTest {
 
     @Test
     void avaliarComSexoInvalidoFalha() {
-        Procedimento p = Procedimento.create(1, List.of(Sexo.F), List.of(40));
+        Procedimento p = Procedimento.create(1, List.of(Sexo.F), List.of(FaixaEtaria.ADULTO));
 
         assertThatThrownBy(() -> p.avaliar(40, "X")).isInstanceOf(IllegalArgumentException.class);
     }
@@ -100,20 +116,22 @@ class ProcedimentoTest {
     @Test
     void restauraSemRevalidarIdentidade() {
         Instant agora = Instant.parse("2026-01-01T00:00:00Z");
-        Procedimento p = Procedimento.restore(7L, 99, Set.of(Sexo.F, Sexo.M), Set.of(3, 1), agora);
+        Procedimento p = Procedimento.restore(7L, 99, Set.of(Sexo.F, Sexo.M),
+                Set.of(FaixaEtaria.IDOSO, FaixaEtaria.CRIANCA), agora);
 
         assertThat(p.id()).isEqualTo(7L);
         assertThat(p.sexos()).containsExactly(Sexo.M, Sexo.F);
-        assertThat(p.idades()).containsExactly(1, 3);
+        assertThat(p.faixasEtarias()).containsExactly(FaixaEtaria.CRIANCA, FaixaEtaria.IDOSO);
         assertThat(p.criadoEm()).isEqualTo(agora);
     }
 
     @Test
     void colecoesExpostasSaoImutaveis() {
-        Procedimento p = Procedimento.create(1, List.of(Sexo.M), List.of(1));
+        Procedimento p = Procedimento.create(1, List.of(Sexo.M), List.of(FaixaEtaria.CRIANCA));
 
         assertThatThrownBy(() -> p.sexos().add(Sexo.F)).isInstanceOf(UnsupportedOperationException.class);
-        assertThatThrownBy(() -> p.idades().add(2)).isInstanceOf(UnsupportedOperationException.class);
+        assertThatThrownBy(() -> p.faixasEtarias().add(FaixaEtaria.IDOSO))
+                .isInstanceOf(UnsupportedOperationException.class);
     }
 
     private static DadosCatalogo catalogo(String nome, Integer quantidade, Periodo periodo) {
@@ -123,7 +141,7 @@ class ProcedimentoTest {
 
     @Test
     void criaComDadosDeCatalogoEAparaONome() {
-        Procedimento p = Procedimento.create(1, List.of(Sexo.M), List.of(20),
+        Procedimento p = Procedimento.create(1, List.of(Sexo.M), List.of(FaixaEtaria.ADULTO),
                 catalogo("  Ressonância  ", 2, Periodo.ANO));
 
         assertThat(p.catalogo().nome()).isEqualTo("Ressonância");
@@ -197,7 +215,7 @@ class ProcedimentoTest {
 
     @Test
     void restauraComCatalogo() {
-        Procedimento p = Procedimento.restore(7L, 99, Set.of(Sexo.M), Set.of(1), Instant.EPOCH,
+        Procedimento p = Procedimento.restore(7L, 99, Set.of(Sexo.M), Set.of(FaixaEtaria.CRIANCA), Instant.EPOCH,
                 catalogo("Eco", 1, Periodo.MES));
 
         assertThat(p.catalogo().nome()).isEqualTo("Eco");
@@ -207,18 +225,18 @@ class ProcedimentoTest {
 
     @Test
     void avaliarIgnoraTodosOsCamposDeCatalogo() {
-        Procedimento sem = Procedimento.create(1, List.of(Sexo.F), List.of(40));
-        Procedimento com = Procedimento.create(1, List.of(Sexo.F), List.of(40),
+        Procedimento sem = Procedimento.create(1, List.of(Sexo.F), List.of(FaixaEtaria.ADULTO));
+        Procedimento com = Procedimento.create(1, List.of(Sexo.F), List.of(FaixaEtaria.ADULTO),
                 DadosCatalogo.validado("Nome", "T", Categoria.CIRURGIAS, Especialidade.NEUROLOGIA,
                         TipoCobertura.NAO_COBERTO, 1, Periodo.MES, true, true));
 
-        for (int idade : new int[] {39, 40, 41}) {
+        for (int idade : new int[] {20, 21, 59, 60}) {
             for (Sexo sexo : Sexo.values()) {
                 assertThat(com.avaliar(idade, sexo)).isEqualTo(sem.avaliar(idade, sexo));
             }
         }
         assertThat(com.avaliar(40, Sexo.F)).isTrue();
         assertThat(com.avaliar(40, "m")).isFalse();
-        assertThat(com.avaliar(41, Sexo.F)).isFalse();
+        assertThat(com.avaliar(60, Sexo.F)).isFalse();
     }
 }

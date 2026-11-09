@@ -6,6 +6,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.maia.autorizador.procedimento.application.port.ProcedimentoRepository;
 import org.maia.autorizador.procedimento.domain.model.Procedimento;
+import org.maia.autorizador.procedimento.domain.model.FaixaEtaria;
 import org.maia.autorizador.procedimento.domain.model.Sexo;
 import org.maia.autorizador.support.IntegrationTestBase;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ class AuditoriaTest extends IntegrationTestBase {
 
     @Test
     void insertGeraRevisaoEAuditoriaComAsColecoes() {
-        Procedimento salvo = procedimentos.salvar(Procedimento.create(4321, List.of(Sexo.M, Sexo.F), List.of(10, 20, 30)));
+        Procedimento salvo = procedimentos.salvar(Procedimento.create(4321, List.of(Sexo.M, Sexo.F), List.of(FaixaEtaria.CRIANCA, FaixaEtaria.ADOLESCENTE, FaixaEtaria.ADULTO)));
 
         assertThat(jdbc.queryForObject("select count(*) from revinfo", Integer.class)).isEqualTo(1);
         assertThat(jdbc.queryForObject("""
@@ -29,7 +30,7 @@ class AuditoriaTest extends IntegrationTestBase {
                 "select count(*) from procedimento_sexo_audit where procedimento_id = ? and revtype = 0",
                 Integer.class, salvo.id())).isEqualTo(2);
         assertThat(jdbc.queryForObject(
-                "select count(*) from procedimento_idade_audit where procedimento_id = ? and revtype = 0",
+                "select count(*) from procedimento_faixa_etaria_audit where procedimento_id = ? and revtype = 0",
                 Integer.class, salvo.id())).isEqualTo(3);
     }
 }

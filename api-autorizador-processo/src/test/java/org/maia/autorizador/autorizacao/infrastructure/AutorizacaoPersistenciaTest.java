@@ -11,6 +11,7 @@ import org.maia.autorizador.autorizacao.domain.exception.AutorizacaoNegadaExcept
 import org.maia.autorizador.autorizacao.domain.model.Autorizacao;
 import org.maia.autorizador.procedimento.application.port.ProcedimentoRepository;
 import org.maia.autorizador.procedimento.domain.model.Procedimento;
+import org.maia.autorizador.procedimento.domain.model.FaixaEtaria;
 import org.maia.autorizador.procedimento.domain.model.Sexo;
 import org.maia.autorizador.support.IntegrationTestBase;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ class AutorizacaoPersistenciaTest extends IntegrationTestBase {
     SolicitarAutorizacaoUseCase solicitar;
 
     private Procedimento procedimento(int numero) {
-        return procedimentos.salvar(Procedimento.create(numero, List.of(Sexo.F), List.of(20)));
+        return procedimentos.salvar(Procedimento.create(numero, List.of(Sexo.F), List.of(FaixaEtaria.ADOLESCENTE)));
     }
 
     @Test

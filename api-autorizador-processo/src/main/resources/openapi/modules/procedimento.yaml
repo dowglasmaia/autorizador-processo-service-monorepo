@@ -2,7 +2,7 @@ openapi: 3.1.0
 info:
   title: Autorizador — módulo procedimento
   version: 1.0.0
-  description: Cadastro e consulta de procedimentos com os sexos e idades aceitos.
+  description: Cadastro e consulta de procedimentos com os sexos e as faixas etárias aceitos.
 servers:
   - url: /api/v1
 tags:
@@ -126,6 +126,12 @@ components:
       type: string
       description: Sexo aceito pelo procedimento. A entrada também aceita minúsculas; a saída é sempre M ou F.
       enum: [M, F]
+    FaixaEtaria:
+      type: string
+      description: |
+        Faixa etária pela idade em anos completos: CRIANCA (0 a 12), ADOLESCENTE (13 a 20, isto é, de 12 anos e 1 dia
+        até 20 anos), ADULTO (21 a 59) e IDOSO (60 a 150).
+      enum: [CRIANCA, ADOLESCENTE, ADULTO, IDOSO]
     Categoria:
       type: string
       description: Categoria do procedimento (lista do protótipo).
@@ -185,18 +191,15 @@ components:
           uniqueItems: true
           items:
             $ref: '#/components/schemas/Sexo'
-        idades:
+        faixasEtarias:
           type: array
-          description: Idades aceitas; pode ser vazio.
+          description: Faixas etárias aceitas; pode ser vazio (nenhuma idade é autorizada).
           uniqueItems: true
           items:
-            type: integer
-            format: int32
-            minimum: 0
-            maximum: 150
+            $ref: '#/components/schemas/FaixaEtaria'
     Procedimento:
       type: object
-      required: [id, numProcedimento, sexos, idades, criadoEm]
+      required: [id, numProcedimento, sexos, faixasEtarias, criadoEm]
       properties:
         id:
           type: integer
@@ -229,12 +232,11 @@ components:
           description: Sexos aceitos, na ordem M, F.
           items:
             $ref: '#/components/schemas/Sexo'
-        idades:
+        faixasEtarias:
           type: array
-          description: Idades aceitas, em ordem crescente.
+          description: Faixas etárias aceitas, da mais nova para a mais velha.
           items:
-            type: integer
-            format: int32
+            $ref: '#/components/schemas/FaixaEtaria'
         criadoEm:
           type: string
           format: date-time

@@ -65,8 +65,8 @@ class ProcedimentoApiTest extends IntegrationTestBase {
                 .andExpect(jsonPath("$.totalPaginas").value(1))
                 .andExpect(jsonPath("$.itens[0].numProcedimento").value(1234))
                 .andExpect(jsonPath("$.itens[0].sexos[0]").value("F"))
-                .andExpect(jsonPath("$.itens[0].idades[0]").value(10))
-                .andExpect(jsonPath("$.itens[0].idades[1]").value(20))
+                .andExpect(jsonPath("$.itens[0].faixasEtarias[0]").value("CRIANCA"))
+                .andExpect(jsonPath("$.itens[0].faixasEtarias[1]").value("ADOLESCENTE"))
                 .andExpect(jsonPath("$.itens[1].numProcedimento").value(4567))
                 .andExpect(jsonPath("$.itens[1].sexos[0]").value("M"))
                 .andExpect(jsonPath("$.itens[1].sexos[1]").value("F"))
@@ -88,13 +88,13 @@ class ProcedimentoApiTest extends IntegrationTestBase {
 
     @Test
     void cadastroSeguidoDeConsultaDevolveOMesmoProcedimento() throws Exception {
-        String json = cadastrar("{\"nome\":\"Proc\",\"categoria\":\"CONSULTAS\",\"numProcedimento\":9999,\"sexos\":[\"f\",\"M\"],\"idades\":[30,18]}")
+        String json = cadastrar("{\"nome\":\"Proc\",\"categoria\":\"CONSULTAS\",\"numProcedimento\":9999,\"sexos\":[\"f\",\"M\"],\"faixasEtarias\":[\"ADULTO\",\"ADOLESCENTE\"]}")
                 .andExpect(status().isCreated())
                 .andExpect(header().string("Location", org.hamcrest.Matchers.startsWith(BASE + "/")))
                 .andExpect(jsonPath("$.sexos[0]").value("M"))
                 .andExpect(jsonPath("$.sexos[1]").value("F"))
-                .andExpect(jsonPath("$.idades[0]").value(18))
-                .andExpect(jsonPath("$.idades[1]").value(30))
+                .andExpect(jsonPath("$.faixasEtarias[0]").value("ADOLESCENTE"))
+                .andExpect(jsonPath("$.faixasEtarias[1]").value("ADULTO"))
                 .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
         int id = com.jayway.jsonpath.JsonPath.read(json, "$.id");
 
@@ -102,7 +102,7 @@ class ProcedimentoApiTest extends IntegrationTestBase {
                 .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.numProcedimento").value(9999))
                 .andExpect(jsonPath("$.sexos[1]").value("F"))
-                .andExpect(jsonPath("$.idades[1]").value(30))
+                .andExpect(jsonPath("$.faixasEtarias[1]").value("ADULTO"))
                 .andExpect(jsonPath("$.criadoEm").exists());
         listar().andExpect(jsonPath("$.totalItens").value(4));
     }
@@ -113,7 +113,7 @@ class ProcedimentoApiTest extends IntegrationTestBase {
                 {"numProcedimento":8888,"nome":"  Ressonância  ","codigoTuss":"40101010",
                  "categoria":"EXAMES_IMAGEM","especialidade":"NEUROLOGIA","tipoCobertura":"REGRAS",
                  "quantidadeMaxima":2,"periodo":"ANO","exigeAutorizacaoPrevia":true,
-                 "sexos":["F"],"idades":[40]}""")
+                 "sexos":["F"],"faixasEtarias":["ADULTO"]}""")
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.nome").value("Ressonância"))
                 .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
@@ -175,33 +175,34 @@ class ProcedimentoApiTest extends IntegrationTestBase {
         assertThat(seed.avaliar(10, org.maia.autorizador.procedimento.domain.model.Sexo.F)).isTrue();
         assertThat(seed.avaliar(20, org.maia.autorizador.procedimento.domain.model.Sexo.F)).isTrue();
         assertThat(seed.avaliar(10, org.maia.autorizador.procedimento.domain.model.Sexo.M)).isFalse();
-        assertThat(seed.avaliar(15, org.maia.autorizador.procedimento.domain.model.Sexo.F)).isFalse();
+        assertThat(seed.avaliar(15, org.maia.autorizador.procedimento.domain.model.Sexo.F)).isTrue();
+        assertThat(seed.avaliar(30, org.maia.autorizador.procedimento.domain.model.Sexo.F)).isFalse();
     }
 
     @Test
     void cadastroComListasVaziasEhAceito() throws Exception {
-        cadastrar("{\"nome\":\"Proc\",\"categoria\":\"CONSULTAS\",\"numProcedimento\":55,\"sexos\":[],\"idades\":[]}").andExpect(status().isCreated())
+        cadastrar("{\"nome\":\"Proc\",\"categoria\":\"CONSULTAS\",\"numProcedimento\":55,\"sexos\":[],\"faixasEtarias\":[]}").andExpect(status().isCreated())
                 .andExpect(jsonPath("$.sexos", hasSize(0)))
-                .andExpect(jsonPath("$.idades", hasSize(0)));
+                .andExpect(jsonPath("$.faixasEtarias", hasSize(0)));
     }
 
     @Test
     void numeroRepetidoRetorna403DuplicadoESeedContinuaIntacto() throws Exception {
-        cadastrar("{\"nome\":\"Proc\",\"categoria\":\"CONSULTAS\",\"numProcedimento\":1234,\"sexos\":[\"M\"],\"idades\":[1]}").andExpect(status().isForbidden())
+        cadastrar("{\"nome\":\"Proc\",\"categoria\":\"CONSULTAS\",\"numProcedimento\":1234,\"sexos\":[\"M\"],\"faixasEtarias\":[\"CRIANCA\"]}").andExpect(status().isForbidden())
                 .andExpect(jsonPath("$.code").value("PROCEDIMENTO_DUPLICADO"));
         cadastrar("{\"nome\":\"Proc\",\"categoria\":\"CONSULTAS\",\"numProcedimento\":9999}").andExpect(status().isCreated());
         cadastrar("{\"nome\":\"Proc\",\"categoria\":\"CONSULTAS\",\"numProcedimento\":9999}").andExpect(status().isForbidden())
                 .andExpect(jsonPath("$.code").value("PROCEDIMENTO_DUPLICADO"));
 
         listar().andExpect(jsonPath("$.totalItens").value(4));
-        mvc.perform(comToken(get(BASE)).param("q", "1234")).andExpect(jsonPath("$.itens[0].idades[1]").value(20));
+        mvc.perform(comToken(get(BASE)).param("q", "1234")).andExpect(jsonPath("$.itens[0].faixasEtarias[1]").value("ADOLESCENTE"));
     }
 
     @Test
     void entradaInvalidaRetorna400SemQuebrarAListagem() throws Exception {
         cadastrar("{\"numProcedimento\":1,\"sexos\":[\"X\"]}").andExpect(status().isBadRequest());
         cadastrar("{\"numProcedimento\":0}").andExpect(status().isBadRequest());
-        cadastrar("{\"numProcedimento\":1,\"idades\":[151]}").andExpect(status().isBadRequest());
+        cadastrar("{\"numProcedimento\":1,\"faixasEtarias\":[\"BEBE\"]}").andExpect(status().isBadRequest());
         cadastrar("{\"numProcedimento\":").andExpect(status().isBadRequest());
 
         listar().andExpect(status().isOk()).andExpect(jsonPath("$.totalItens").value(3));

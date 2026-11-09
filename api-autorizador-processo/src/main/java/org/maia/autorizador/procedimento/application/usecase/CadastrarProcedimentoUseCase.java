@@ -8,6 +8,7 @@ import org.maia.autorizador.procedimento.domain.exception.ProcedimentoDuplicadoE
 import org.maia.autorizador.procedimento.domain.model.Categoria;
 import org.maia.autorizador.procedimento.domain.model.DadosCatalogo;
 import org.maia.autorizador.procedimento.domain.model.Especialidade;
+import org.maia.autorizador.procedimento.domain.model.FaixaEtaria;
 import org.maia.autorizador.procedimento.domain.model.Periodo;
 import org.maia.autorizador.procedimento.domain.model.Procedimento;
 import org.maia.autorizador.procedimento.domain.model.Sexo;
@@ -30,19 +31,22 @@ public class CadastrarProcedimentoUseCase {
     }
 
     /** Cadastro sem dados de catálogo; os padrões de catálogo são aplicados mesmo assim. */
-    public Resultado executar(int numProcedimento, Collection<String> sexos, Collection<Integer> idades) {
-        return executar(numProcedimento, sexos, idades, Catalogo.VAZIO);
+    public Resultado executar(int numProcedimento, Collection<String> sexos,
+            Collection<String> faixasEtarias) {
+        return executar(numProcedimento, sexos, faixasEtarias, Catalogo.VAZIO);
     }
 
     /**
      * Cadastra com os dados de catálogo. Omitidos, o tipo de cobertura vira {@code PLANO} e os indicadores
      * {@code exigeAutorizacaoPrevia} e {@code exigeJustificativaMedica} viram {@code false}.
      *
-     * @param sexos {@code M} ou {@code F}, sem diferença de caixa; valor inválido lança {@link IllegalArgumentException}
+     * @param sexos {@code M} ou {@code F}, sem diferença de caixa; valor inválido lança {@link IllegalArgumentException}; idem para {@code faixasEtarias}
      */
-    public Resultado executar(int numProcedimento, Collection<String> sexos, Collection<Integer> idades,
+    public Resultado executar(int numProcedimento, Collection<String> sexos,
+            Collection<String> faixasEtarias,
             Catalogo catalogo) {
-        Procedimento novo = Procedimento.create(numProcedimento, sexos.stream().map(Sexo::parse).toList(), idades,
+        Procedimento novo = Procedimento.create(numProcedimento, sexos.stream().map(Sexo::parse).toList(),
+                faixasEtarias.stream().map(FaixaEtaria::valueOf).toList(),
                 paraDominio(catalogo));
         if (procedimentos.buscarPorNumero(numProcedimento).isPresent()) {
             throw new ProcedimentoDuplicadoException(numProcedimento);

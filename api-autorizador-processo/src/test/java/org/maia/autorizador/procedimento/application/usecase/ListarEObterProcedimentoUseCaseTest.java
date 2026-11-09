@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.maia.autorizador.procedimento.domain.exception.ProcedimentoNaoEncontradoException;
 import org.maia.autorizador.procedimento.domain.model.Procedimento;
+import org.maia.autorizador.procedimento.domain.model.FaixaEtaria;
 import org.maia.autorizador.procedimento.domain.model.Sexo;
 
 class ListarEObterProcedimentoUseCaseTest {
@@ -19,7 +20,7 @@ class ListarEObterProcedimentoUseCaseTest {
     @BeforeEach
     void semear() {
         for (int numero : new int[] {4567, 1234, 6789, 12}) {
-            repositorio.salvar(Procedimento.create(numero, List.of(Sexo.M), List.of(20)));
+            repositorio.salvar(Procedimento.create(numero, List.of(Sexo.M), List.of(FaixaEtaria.ADULTO)));
         }
     }
 

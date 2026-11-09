@@ -11,6 +11,7 @@ import org.maia.autorizador.procedimento.domain.model.DadosCatalogo;
 import org.maia.autorizador.procedimento.domain.model.Especialidade;
 import org.maia.autorizador.procedimento.domain.model.Periodo;
 import org.maia.autorizador.procedimento.domain.model.Procedimento;
+import org.maia.autorizador.procedimento.domain.model.FaixaEtaria;
 import org.maia.autorizador.procedimento.domain.model.Sexo;
 import org.maia.autorizador.procedimento.domain.model.TipoCobertura;
 import org.maia.autorizador.support.IntegrationTestBase;
@@ -26,7 +27,7 @@ class AuditoriaCatalogoTest extends IntegrationTestBase {
     void insertRegistraOsNovosCamposNaAuditoria() {
         DadosCatalogo catalogo = DadosCatalogo.validado("Ressonância magnética", "40101010", Categoria.EXAMES_IMAGEM,
                 Especialidade.NEUROLOGIA, TipoCobertura.REGRAS, 2, Periodo.ANO, true, false);
-        Procedimento salvo = procedimentos.salvar(Procedimento.create(4322, List.of(Sexo.M), List.of(30), catalogo));
+        Procedimento salvo = procedimentos.salvar(Procedimento.create(4322, List.of(Sexo.M), List.of(FaixaEtaria.ADULTO), catalogo));
 
         Map<String, Object> linha = jdbc.queryForMap("""
                 select nome, codigo_tuss, categoria, especialidade, tipo_cobertura, quantidade_maxima, periodo,
@@ -47,7 +48,7 @@ class AuditoriaCatalogoTest extends IntegrationTestBase {
 
     @Test
     void procedimentoSemCatalogoGravaAuditoriaComNovosCamposNulos() {
-        Procedimento salvo = procedimentos.salvar(Procedimento.create(4323, List.of(Sexo.F), List.of(10)));
+        Procedimento salvo = procedimentos.salvar(Procedimento.create(4323, List.of(Sexo.F), List.of(FaixaEtaria.CRIANCA)));
 
         assertThat(jdbc.queryForObject("""
                 select count(*) from procedimento_audit

@@ -25,17 +25,16 @@ paths:
           $ref: '../common/responses.yaml#/components/responses/InternalServerErrorResponse'
 components:
   schemas:
-    CoberturaIdade:
+    CoberturaFaixa:
       type: object
-      required: [idade, quantidade]
+      required: [faixa, quantidade]
       properties:
-        idade:
-          type: integer
-          format: int32
+        faixa:
+          $ref: 'procedimento.yaml#/components/schemas/FaixaEtaria'
         quantidade:
           type: integer
           format: int32
-          description: Número de procedimentos que aceitam a idade.
+          description: Número de procedimentos que aceitam a faixa etária.
     DistribuicaoSexos:
       type: object
       required: [masculino, feminino]
@@ -50,7 +49,7 @@ components:
           description: Procedimentos que aceitam o sexo feminino.
     ResumoPainel:
       type: object
-      required: [totalProcedimentos, totalAutorizacoes, idadesCobertas, coberturaPorIdade, distribuicaoSexos, ultimasAutorizacoes]
+      required: [totalProcedimentos, totalAutorizacoes, faixasCobertas, coberturaPorFaixa, distribuicaoSexos, ultimasAutorizacoes]
       properties:
         totalProcedimentos:
           type: integer
@@ -58,14 +57,14 @@ components:
         totalAutorizacoes:
           type: integer
           format: int32
-        idadesCobertas:
+        faixasCobertas:
           type: integer
           format: int32
-        coberturaPorIdade:
+        coberturaPorFaixa:
           type: array
-          description: Ordenada por idade ascendente.
+          description: Só as faixas com ao menos um procedimento, da mais nova para a mais velha.
           items:
-            $ref: '#/components/schemas/CoberturaIdade'
+            $ref: '#/components/schemas/CoberturaFaixa'
         distribuicaoSexos:
           $ref: '#/components/schemas/DistribuicaoSexos'
         ultimasAutorizacoes:

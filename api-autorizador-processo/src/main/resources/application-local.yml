@@ -5,6 +5,8 @@ spring:
   flyway:
     # A seed de desenvolvimento só existe no perfil local (ADR-14).
     locations: classpath:db/migration,classpath:db/seed
+    # Bancos locais antigos recebem migrações novas mesmo com a seed (V1000) já aplicada; ver FlywayLocalConfig.
+    out-of-order: true
 app:
   cors:
     allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:4200}

@@ -11,8 +11,9 @@ import org.junit.jupiter.api.Test;
 import org.maia.autorizador.autorizacao.application.usecase.ListarAutorizacoesUseCase.Item;
 import org.maia.autorizador.painel.application.usecase.ObterResumoPainelUseCase;
 import org.maia.autorizador.painel.application.usecase.ObterResumoPainelUseCase.Resumo;
-import org.maia.autorizador.painel.application.model.CoberturaIdade;
+import org.maia.autorizador.painel.application.model.CoberturaFaixa;
 import org.maia.autorizador.painel.application.model.DistribuicaoSexos;
+import org.maia.autorizador.procedimento.domain.model.FaixaEtaria;
 import org.maia.autorizador.procedimento.application.usecase.ObterProcedimentoUseCase.Resultado;
 import org.maia.autorizador.shared.web.GlobalExceptionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +39,10 @@ class PainelControllerTest {
 
     @Test
     void devolve200ComCorpoCompleto() throws Exception {
-        var procedimento = new Resultado(1, 4567, List.of("M", "F"), List.of(20, 30),
+        var procedimento = new Resultado(1, 4567, List.of("M", "F"), List.of("ADOLESCENTE", "ADULTO"),
                 Instant.parse("2026-01-02T03:04:05Z"));
         when(obterResumo.executar()).thenReturn(new Resumo(3, 2, 3,
-                List.of(new CoberturaIdade(10, 2), new CoberturaIdade(20, 2), new CoberturaIdade(30, 1)),
+                List.of(new CoberturaFaixa("CRIANCA", 2), new CoberturaFaixa("ADOLESCENTE", 2), new CoberturaFaixa("ADULTO", 1)),
                 new DistribuicaoSexos(2, 3),
                 List.of(new Item(9, procedimento, true, Instant.parse("2026-03-04T05:06:07Z")),
                         new Item(8, procedimento, true, null))));
@@ -49,9 +50,9 @@ class PainelControllerTest {
         mvc.perform(get("/api/v1/painel/resumo")).andExpect(status().isOk())
                 .andExpect(jsonPath("$.totalProcedimentos").value(3))
                 .andExpect(jsonPath("$.totalAutorizacoes").value(2))
-                .andExpect(jsonPath("$.idadesCobertas").value(3))
-                .andExpect(jsonPath("$.coberturaPorIdade[0].idade").value(10))
-                .andExpect(jsonPath("$.coberturaPorIdade[2].quantidade").value(1))
+                .andExpect(jsonPath("$.faixasCobertas").value(3))
+                .andExpect(jsonPath("$.coberturaPorFaixa[0].faixa").value("CRIANCA"))
+                .andExpect(jsonPath("$.coberturaPorFaixa[2].quantidade").value(1))
                 .andExpect(jsonPath("$.distribuicaoSexos.masculino").value(2))
                 .andExpect(jsonPath("$.distribuicaoSexos.feminino").value(3))
                 .andExpect(jsonPath("$.ultimasAutorizacoes[0].id").value(9))
@@ -68,7 +69,7 @@ class PainelControllerTest {
 
         mvc.perform(get("/api/v1/painel/resumo")).andExpect(status().isOk())
                 .andExpect(jsonPath("$.totalProcedimentos").value(0))
-                .andExpect(jsonPath("$.coberturaPorIdade").isEmpty())
+                .andExpect(jsonPath("$.coberturaPorFaixa").isEmpty())
                 .andExpect(jsonPath("$.ultimasAutorizacoes").isEmpty());
     }
 }

@@ -39,7 +39,7 @@ class SeedLocalTest {
     }
 
     @Test
-    void seedCriaTresProcedimentosComSexosEIdades() {
+    void seedCriaTresProcedimentosComSexosEFaixasEtarias() {
         assertThat(jdbc.queryForList("select numero_procedimento from procedimento order by 1", Integer.class))
                 .containsExactly(1234, 4567, 6789);
 
@@ -49,12 +49,13 @@ class SeedLocalTest {
                 """)).containsEntry(1234, "F").containsEntry(4567, "F,M").containsEntry(6789, "F,M");
 
         assertThat(agrupar("""
-                select p.numero_procedimento as numero, string_agg(i.idade::text, ',' order by i.idade) as valores
-                from procedimento p join procedimento_idade i on i.procedimento_id = p.id group by 1
-                """)).containsEntry(1234, "10,20").containsEntry(4567, "20,30").containsEntry(6789, "10");
+                select p.numero_procedimento as numero, string_agg(f.faixa, ',' order by f.faixa) as valores
+                from procedimento p join procedimento_faixa_etaria f on f.procedimento_id = p.id group by 1
+                """)).containsEntry(1234, "ADOLESCENTE,CRIANCA").containsEntry(4567, "ADOLESCENTE,ADULTO")
+                .containsEntry(6789, "CRIANCA");
 
         List<String> versoes = jdbc.queryForList(
                 "select version from flyway_schema_history order by installed_rank", String.class);
-        assertThat(versoes).containsExactly("1", "2", "3", "4", "1000");
+        assertThat(versoes).containsExactly("1", "2", "3", "4", "5", "1000");
     }
 }

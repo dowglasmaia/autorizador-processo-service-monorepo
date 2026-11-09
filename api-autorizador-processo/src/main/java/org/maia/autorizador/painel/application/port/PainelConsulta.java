@@ -1,7 +1,7 @@
 package org.maia.autorizador.painel.application.port;
 
 import java.util.List;
-import org.maia.autorizador.painel.application.model.CoberturaIdade;
+import org.maia.autorizador.painel.application.model.CoberturaFaixa;
 import org.maia.autorizador.painel.application.model.DistribuicaoSexos;
 import org.maia.autorizador.autorizacao.application.usecase.ListarAutorizacoesUseCase.Item;
 
@@ -12,8 +12,8 @@ public interface PainelConsulta {
 
     int totalAutorizacoes();
 
-    /** Ordenada por idade ascendente. */
-    List<CoberturaIdade> coberturaPorIdade();
+    /** Só as faixas com ao menos um procedimento, da mais nova para a mais velha. */
+    List<CoberturaFaixa> coberturaPorFaixa();
 
     /** Zero para o sexo ausente. */
     DistribuicaoSexos distribuicaoSexos();

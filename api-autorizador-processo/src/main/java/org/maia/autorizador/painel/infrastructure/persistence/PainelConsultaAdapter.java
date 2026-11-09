@@ -4,7 +4,8 @@ import java.util.List;
 import org.maia.autorizador.autorizacao.application.usecase.ListarAutorizacoesUseCase;
 import org.maia.autorizador.autorizacao.application.usecase.ListarAutorizacoesUseCase.Item;
 import org.maia.autorizador.painel.application.port.PainelConsulta;
-import org.maia.autorizador.painel.application.model.CoberturaIdade;
+import org.maia.autorizador.painel.application.model.CoberturaFaixa;
+import org.maia.autorizador.procedimento.domain.model.FaixaEtaria;
 import org.maia.autorizador.painel.application.model.DistribuicaoSexos;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Component;
@@ -37,9 +38,11 @@ class PainelConsultaAdapter implements PainelConsulta {
     }
 
     @Override
-    public List<CoberturaIdade> coberturaPorIdade() {
-        return jdbc.sql("select idade, count(*) as quantidade from procedimento_idade group by idade order by idade")
-                .query((rs, n) -> new CoberturaIdade(rs.getInt("idade"), rs.getInt("quantidade"))).list();
+    public List<CoberturaFaixa> coberturaPorFaixa() {
+        return jdbc.sql("select faixa, count(*) as quantidade from procedimento_faixa_etaria group by faixa")
+                .query((rs, n) -> new CoberturaFaixa(rs.getString("faixa"), rs.getInt("quantidade")))
+                .list().stream()
+                .sorted(java.util.Comparator.comparing(c -> FaixaEtaria.valueOf(c.faixa()).ordinal())).toList();
     }
 
     @Override

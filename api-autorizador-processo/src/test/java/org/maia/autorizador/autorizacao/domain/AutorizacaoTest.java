@@ -9,13 +9,14 @@ import org.junit.jupiter.api.Test;
 import org.maia.autorizador.autorizacao.domain.exception.AutorizacaoNegadaException;
 import org.maia.autorizador.autorizacao.domain.model.Autorizacao;
 import org.maia.autorizador.procedimento.domain.model.Procedimento;
+import org.maia.autorizador.procedimento.domain.model.FaixaEtaria;
 import org.maia.autorizador.procedimento.domain.model.Sexo;
 import org.maia.autorizador.shared.error.BusinessRuleException;
 
 class AutorizacaoTest {
 
     private static Procedimento gravado() {
-        return Procedimento.restore(7L, 4567, List.of(Sexo.F), List.of(20), Instant.parse("2026-01-01T00:00:00Z"));
+        return Procedimento.restore(7L, 4567, List.of(Sexo.F), List.of(FaixaEtaria.ADOLESCENTE), Instant.parse("2026-01-01T00:00:00Z"));
     }
 
     @Test
@@ -30,7 +31,7 @@ class AutorizacaoTest {
 
     @Test
     void concederExigeProcedimentoJaGravado() {
-        Procedimento novo = Procedimento.create(1, List.of(Sexo.M), List.of(10));
+        Procedimento novo = Procedimento.create(1, List.of(Sexo.M), List.of(FaixaEtaria.CRIANCA));
 
         assertThatThrownBy(() -> Autorizacao.conceder(novo)).isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> Autorizacao.conceder(null)).isInstanceOf(NullPointerException.class);

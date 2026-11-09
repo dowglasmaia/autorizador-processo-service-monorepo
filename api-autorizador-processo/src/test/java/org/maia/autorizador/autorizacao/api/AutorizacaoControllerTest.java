@@ -52,7 +52,7 @@ class AutorizacaoControllerTest {
     }
 
     private static Resultado procedimento() {
-        return new Resultado(1, 4567, List.of("M", "F"), List.of(10, 20), Instant.parse("2026-01-02T03:04:05Z"));
+        return new Resultado(1, 4567, List.of("M", "F"), List.of("CRIANCA", "ADOLESCENTE"), Instant.parse("2026-01-02T03:04:05Z"));
     }
 
     @Test
@@ -67,7 +67,7 @@ class AutorizacaoControllerTest {
                 .andExpect(jsonPath("$.criadaEm").value("2026-03-04T05:06:07Z"))
                 .andExpect(jsonPath("$.procedimento.numProcedimento").value(4567))
                 .andExpect(jsonPath("$.procedimento.sexos[0]").value("M"))
-                .andExpect(jsonPath("$.procedimento.idades[1]").value(20));
+                .andExpect(jsonPath("$.procedimento.faixasEtarias[1]").value("ADOLESCENTE"));
     }
 
     @Test

@@ -39,18 +39,19 @@ public class ObterProcedimentoUseCase {
         }
     }
 
-    /** Visão do procedimento para as bordas: sexos na ordem M, F e idades em ordem crescente. */
-    public record Resultado(long id, int numProcedimento, List<String> sexos, List<Integer> idades,
+    /** Visão do procedimento para as bordas: sexos na ordem M, F e faixas etárias da mais nova para a mais velha. */
+    public record Resultado(long id, int numProcedimento, List<String> sexos, List<String> faixasEtarias,
             Instant criadoEm, Catalogo catalogo) {
 
         /** Sem dados de catálogo (procedimento anterior ao catálogo estendido). */
-        public Resultado(long id, int numProcedimento, List<String> sexos, List<Integer> idades, Instant criadoEm) {
-            this(id, numProcedimento, sexos, idades, criadoEm, Catalogo.VAZIO);
+        public Resultado(long id, int numProcedimento, List<String> sexos, List<String> faixasEtarias,
+                Instant criadoEm) {
+            this(id, numProcedimento, sexos, faixasEtarias, criadoEm, Catalogo.VAZIO);
         }
 
         public static Resultado de(Procedimento p) {
             return new Resultado(p.id(), p.numProcedimento(), p.sexos().stream().map(Enum::name).toList(),
-                    List.copyOf(p.idades()), p.criadoEm(), Catalogo.de(p.catalogo()));
+                    p.faixasEtarias().stream().map(Enum::name).toList(), p.criadoEm(), Catalogo.de(p.catalogo()));
         }
     }
 

@@ -6,86 +6,80 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.TreeSet;
 
 /**
- * Procedimento autorizável: o número é imutável e as listas de sexos e idades aceitos podem ser vazias (RN9).
+ * Procedimento autorizável: o número é imutável e as listas de sexos e faixas etárias aceitos podem ser vazias (RN9).
  * Construído por {@link #create} (aplica as invariantes) ou {@link #restore} (reidrata o já gravado); sem setters.
  */
 public final class Procedimento {
 
-    public static final int IDADE_MINIMA = 0;
-    public static final int IDADE_MAXIMA = 150;
-
     private final Long id;
     private final int numProcedimento;
     private final Set<Sexo> sexos;
-    private final Set<Integer> idades;
+    private final Set<FaixaEtaria> faixasEtarias;
     private final Instant criadoEm;
     private final DadosCatalogo catalogo;
 
-    private Procedimento(Long id, int numProcedimento, Set<Sexo> sexos, Set<Integer> idades, Instant criadoEm,
-            DadosCatalogo catalogo) {
+    private Procedimento(Long id, int numProcedimento, Set<Sexo> sexos, Set<FaixaEtaria> faixasEtarias,
+            Instant criadoEm, DadosCatalogo catalogo) {
         this.id = id;
         this.numProcedimento = numProcedimento;
         this.sexos = Collections.unmodifiableSet(sexos);
-        this.idades = Collections.unmodifiableSet(idades);
+        this.faixasEtarias = Collections.unmodifiableSet(faixasEtarias);
         this.criadoEm = criadoEm;
         this.catalogo = catalogo;
     }
 
     /** Novo procedimento, ainda sem identificador nem data (atribuídos na persistência). */
-    public static Procedimento create(int numProcedimento, Collection<Sexo> sexos, Collection<Integer> idades) {
-        return create(numProcedimento, sexos, idades, DadosCatalogo.VAZIO);
+    public static Procedimento create(int numProcedimento, Collection<Sexo> sexos, Collection<FaixaEtaria> faixasEtarias) {
+        return create(numProcedimento, sexos, faixasEtarias, DadosCatalogo.VAZIO);
     }
 
     /** Novo procedimento com os dados de catálogo (NEW-01), que não influenciam {@link #avaliar}. */
-    public static Procedimento create(int numProcedimento, Collection<Sexo> sexos, Collection<Integer> idades,
+    public static Procedimento create(int numProcedimento, Collection<Sexo> sexos, Collection<FaixaEtaria> faixasEtarias,
             DadosCatalogo catalogo) {
         Objects.requireNonNull(catalogo, "catalogo");
         if (numProcedimento < 1) {
             throw new IllegalArgumentException("O número do procedimento deve ser maior ou igual a 1.");
         }
         Objects.requireNonNull(sexos, "sexos");
-        Objects.requireNonNull(idades, "idades");
+        Objects.requireNonNull(faixasEtarias, "faixasEtarias");
         Set<Sexo> sexosOrdenados = EnumSet.noneOf(Sexo.class);
         for (Sexo sexo : sexos) {
             if (!sexosOrdenados.add(Objects.requireNonNull(sexo, "sexo"))) {
                 throw new IllegalArgumentException("Sexos duplicados.");
             }
         }
-        Set<Integer> idadesOrdenadas = new TreeSet<>();
-        for (Integer idade : idades) {
-            Objects.requireNonNull(idade, "idade");
-            if (idade < IDADE_MINIMA || idade > IDADE_MAXIMA) {
-                throw new IllegalArgumentException(
-                        "Idade fora da faixa " + IDADE_MINIMA + ".." + IDADE_MAXIMA + ": " + idade);
-            }
-            if (!idadesOrdenadas.add(idade)) {
-                throw new IllegalArgumentException("Idades duplicadas.");
+        Set<FaixaEtaria> faixasOrdenadas = EnumSet.noneOf(FaixaEtaria.class);
+        for (FaixaEtaria faixa : faixasEtarias) {
+            if (!faixasOrdenadas.add(Objects.requireNonNull(faixa, "faixa"))) {
+                throw new IllegalArgumentException("Faixas etárias duplicadas.");
             }
         }
-        return new Procedimento(null, numProcedimento, sexosOrdenados, idadesOrdenadas, null, catalogo);
+        return new Procedimento(null, numProcedimento, sexosOrdenados, faixasOrdenadas, null, catalogo);
     }
 
     /** Reidrata um procedimento gravado (sem reaplicar a criação). */
     public static Procedimento restore(long id, int numProcedimento, Collection<Sexo> sexos,
-            Collection<Integer> idades, Instant criadoEm) {
-        return restore(id, numProcedimento, sexos, idades, criadoEm, DadosCatalogo.VAZIO);
+            Collection<FaixaEtaria> faixasEtarias, Instant criadoEm) {
+        return restore(id, numProcedimento, sexos, faixasEtarias, criadoEm, DadosCatalogo.VAZIO);
     }
 
     /** Reidrata um procedimento gravado com seus dados de catálogo (nulos nas linhas anteriores). */
     public static Procedimento restore(long id, int numProcedimento, Collection<Sexo> sexos,
-            Collection<Integer> idades, Instant criadoEm, DadosCatalogo catalogo) {
+            Collection<FaixaEtaria> faixasEtarias, Instant criadoEm, DadosCatalogo catalogo) {
         Set<Sexo> sexosOrdenados = EnumSet.noneOf(Sexo.class);
         sexosOrdenados.addAll(sexos);
-        return new Procedimento(id, numProcedimento, sexosOrdenados, new TreeSet<>(idades), criadoEm,
+        Set<FaixaEtaria> faixasOrdenadas = EnumSet.noneOf(FaixaEtaria.class);
+        faixasOrdenadas.addAll(faixasEtarias);
+        return new Procedimento(id, numProcedimento, sexosOrdenados, faixasOrdenadas, criadoEm,
                 catalogo == null ? DadosCatalogo.VAZIO : catalogo);
     }
 
-    /** RN5–RN7: autoriza quando o sexo está entre os aceitos E a idade está entre as aceitas. */
+    /** RN5–RN7: autoriza quando o sexo está entre os aceitos E a faixa etária da idade está entre as aceitas. */
     public boolean avaliar(int idade, Sexo sexo) {
-        return sexos.contains(Objects.requireNonNull(sexo, "sexo")) && idades.contains(idade);
+        Objects.requireNonNull(sexo, "sexo");
+        return faixasEtarias.contains(FaixaEtaria.de(idade)) && sexos.contains(sexo);
     }
 
     /** Aceita o sexo em texto, sem diferença de caixa; valor inválido lança {@link IllegalArgumentException}. */
@@ -107,9 +101,9 @@ public final class Procedimento {
         return sexos;
     }
 
-    /** Idades aceitas, em ordem crescente; somente leitura. */
-    public Set<Integer> idades() {
-        return idades;
+    /** Faixas etárias aceitas, da mais nova para a mais velha; somente leitura. */
+    public Set<FaixaEtaria> faixasEtarias() {
+        return faixasEtarias;
     }
 
     /** Nulo enquanto o procedimento não foi gravado. */

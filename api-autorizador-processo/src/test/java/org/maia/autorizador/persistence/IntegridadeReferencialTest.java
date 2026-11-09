@@ -32,14 +32,14 @@ class IntegridadeReferencialTest extends IntegrationTestBase {
     }
 
     @Test
-    void apagarProcedimentoRemoveSexosEIdadesEmCascata() {
+    void apagarProcedimentoRemoveSexosEFaixasEmCascata() {
         long id = criarProcedimento(1234);
         jdbc.update("insert into procedimento_sexo (procedimento_id, sexo) values (?, 'M'), (?, 'F')", id, id);
-        jdbc.update("insert into procedimento_idade (procedimento_id, idade) values (?, 10), (?, 20)", id, id);
+        jdbc.update("insert into procedimento_faixa_etaria (procedimento_id, faixa) values (?, 'CRIANCA'), (?, 'IDOSO')", id, id);
 
         jdbc.update("delete from procedimento where id = ?", id);
 
         assertThat(jdbc.queryForObject("select count(*) from procedimento_sexo", Integer.class)).isZero();
-        assertThat(jdbc.queryForObject("select count(*) from procedimento_idade", Integer.class)).isZero();
+        assertThat(jdbc.queryForObject("select count(*) from procedimento_faixa_etaria", Integer.class)).isZero();
     }
 }

@@ -9,6 +9,7 @@ import org.maia.autorizador.generated.procedimento.api.ProcedimentosApi;
 import org.maia.autorizador.generated.procedimento.model.PaginaProcedimentos;
 import org.maia.autorizador.generated.procedimento.model.Categoria;
 import org.maia.autorizador.generated.procedimento.model.Especialidade;
+import org.maia.autorizador.generated.procedimento.model.FaixaEtaria;
 import org.maia.autorizador.generated.procedimento.model.Periodo;
 import org.maia.autorizador.generated.procedimento.model.Procedimento;
 import org.maia.autorizador.generated.procedimento.model.ProcedimentoRequest;
@@ -49,12 +50,12 @@ class ProcedimentoController implements ProcedimentosApi {
     @Override
     public ResponseEntity<Procedimento> cadastrarProcedimento(ProcedimentoRequest corpo) {
         Set<Sexo> sexos = corpo.getSexos() == null ? Set.of() : corpo.getSexos();
-        Set<Integer> idades = corpo.getIdades() == null ? Set.of() : corpo.getIdades();
-        if (sexos.stream().anyMatch(Objects::isNull) || idades.stream().anyMatch(Objects::isNull)) {
-            throw new IllegalArgumentException("Sexos e idades não aceitam valores nulos.");
+        Set<FaixaEtaria> faixas = corpo.getFaixasEtarias() == null ? Set.of() : corpo.getFaixasEtarias();
+        if (sexos.stream().anyMatch(Objects::isNull) || faixas.stream().anyMatch(Objects::isNull)) {
+            throw new IllegalArgumentException("Sexos e faixas etárias não aceitam valores nulos.");
         }
         var criado = cadastrar.executar(corpo.getNumProcedimento(), sexos.stream().map(Sexo::getValue).toList(),
-                idades, paraCatalogo(corpo));
+                faixas.stream().map(FaixaEtaria::getValue).toList(), paraCatalogo(corpo));
         return ResponseEntity.created(URI.create(PREFIXO_RECURSO + criado.id())).body(paraResposta(criado));
     }
 
@@ -111,7 +112,8 @@ class ProcedimentoController implements ProcedimentosApi {
 
     private static Procedimento paraResposta(ObterProcedimentoUseCase.Resultado r) {
         List<Sexo> sexos = r.sexos().stream().map(Sexo::fromValue).toList();
-        var resposta = new Procedimento(r.id(), r.numProcedimento(), sexos, r.idades(),
+        List<FaixaEtaria> faixas = r.faixasEtarias().stream().map(FaixaEtaria::fromValue).toList();
+        var resposta = new Procedimento(r.id(), r.numProcedimento(), sexos, faixas,
                 r.criadoEm().atOffset(ZoneOffset.UTC));
         Catalogo c = r.catalogo();
         resposta.setNome(c.nome());

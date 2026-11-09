@@ -37,8 +37,8 @@ class PainelDesempenhoTest extends IntegrationTestBase {
         jdbc.update("insert into procedimento_sexo (procedimento_id, sexo) select id, 'M' from procedimento");
         jdbc.update("insert into procedimento_sexo (procedimento_id, sexo) select id, 'F' from procedimento "
                 + "where id % 2 = 0");
-        jdbc.update("insert into procedimento_idade (procedimento_id, idade) select id, 10 + (g * 10) "
-                + "from procedimento, generate_series(0, 4) g");
+        jdbc.update("insert into procedimento_faixa_etaria (procedimento_id, faixa) "
+                + "select id, f from procedimento, unnest(array['CRIANCA','ADOLESCENTE','ADULTO','IDOSO']) f");
         jdbc.update("insert into autorizacao (procedimento_id, permitido, criada_em) "
                 + "select 1 + (g % 1000), true, now() - (g * interval '1 second') from generate_series(1, 10000) g");
 
@@ -66,7 +66,7 @@ class PainelDesempenhoTest extends IntegrationTestBase {
                 JwtTestSupport.cabecalhoBearer(1L, "t@ex.com"))).andExpect(status().isOk())
                 .andExpect(jsonPath("$.totalProcedimentos").value(1000))
                 .andExpect(jsonPath("$.totalAutorizacoes").value(10000))
-                .andExpect(jsonPath("$.idadesCobertas").value(5))
+                .andExpect(jsonPath("$.faixasCobertas").value(4))
                 .andExpect(jsonPath("$.distribuicaoSexos.masculino").value(1000))
                 .andExpect(jsonPath("$.distribuicaoSexos.feminino").value(500));
     }

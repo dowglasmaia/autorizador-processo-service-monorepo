@@ -142,7 +142,7 @@ class ContratoRespostasApiTest extends IntegrationTestBase {
         String completo = """
                 {"numProcedimento":9001,"nome":"Ressonância","codigoTuss":"40101010","categoria":"EXAMES_IMAGEM",
                  "especialidade":"NEUROLOGIA","tipoCobertura":"PLANO","quantidadeMaxima":2,"periodo":"ANO",
-                 "exigeAutorizacaoPrevia":true,"exigeJustificativaMedica":false,"sexos":["f","M"],"idades":[30,18]}""";
+                 "exigeAutorizacaoPrevia":true,"exigeJustificativaMedica":false,"sexos":["f","M"],"faixasEtarias":["ADULTO","ADOLESCENTE"]}""";
         chamar(autenticado(json(post("/api/v1/procedimentos"), completo)), "post", "/procedimentos", 201, null);
         chamar(autenticado(json(post("/api/v1/procedimentos"),
                 "{\"numProcedimento\":9002,\"nome\":\"Consulta\",\"categoria\":\"CONSULTAS\"}")), "post",
